@@ -1,3 +1,10 @@
+# INSTRUKSI INSTALASI
+## CodeIgniter 4
+setelah melakukan clone, jalankan 'composer update' di terminal untuk mendowload dependencies yang digunakan, kemudian 'php spark serve' untuk menjalankan program di local
+
+## Tailwind CSS
+buka terminal baru, lalu pastikan directory ada di public, jalankan 'npm install', kemudian 'npm run dev' untuk menjalankan Tailwind
+
 # CodeIgniter 4 Application Starter
 
 ## What is CodeIgniter?
