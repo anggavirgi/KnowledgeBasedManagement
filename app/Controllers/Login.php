@@ -12,4 +12,13 @@ class Login extends BaseController
 
     return view('login/login', $data);
   }
+
+  public function register()
+  {
+    $data = [
+      'title' => 'Register'
+    ];
+
+    return view('login/register', $data);
+  }
 }

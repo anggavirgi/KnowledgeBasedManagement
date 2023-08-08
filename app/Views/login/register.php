@@ -24,8 +24,8 @@
 
     <!-- LOGIN CARD -->
     <div class="absolute w-[38%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white h-auto py-10 px-10 rounded-3xl drop-shadow-lg">
-      <div class="text-base">Welcome, please login to your account.</div>
-      <div class="text-[#18A8D8] text-[2.35rem] font-bold">Sign in</div>
+      <div class="text-base">Welcome, please register first.</div>
+      <div class="text-[#18A8D8] text-[2.35rem] font-bold">Sign up</div>
       <form action="" method="" class="flex flex-col mt-7">
         <label for="username">Enter your username or email address</label>
         <input type="text" name="username" id="username" placeholder="Username or email address" class="mt-2 mb-5 px-4 py-3 rounded-md border border-gray-400 outline-[#18A8D8]">
@@ -38,10 +38,9 @@
           </svg>
         </div>
         <div class="flex justify-between mt-2 text-sm">
-          <div> Not have account? <a href="<?php echo base_url(); ?>login/register" class="text-[#18A8D8]">Register here.</a></div>
-          <a href="" class="text-sm text-red-600">Forgot Password?</a>
+          <div> Not have account? <a href="<?php echo base_url(); ?>login" class="text-[#18A8D8]">Login here.</a></div>
         </div>
-        <button class="mt-5 py-3 text-center text-white rounded-md bg-[#115da5] hover:bg-[#0c5091]">Sign in</button>
+        <button class="mt-5 py-3 text-center text-white rounded-md bg-[#115da5] hover:bg-[#0c5091]">Sign up</button>
         <div class="my-5 text-gray-400 text-center">OR</div>
         <button class="flex justify-center py-3 rounded-md bg-[#FFF4E3] hover:bg-[#f7ead5]">
           <div class="mr-3"><img src="<?php echo base_url(); ?>src/images/google.png" alt=""></div>
