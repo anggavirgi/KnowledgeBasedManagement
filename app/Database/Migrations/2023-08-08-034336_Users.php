@@ -36,6 +36,10 @@ class Users extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '256',
             ],
+            'level' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '128',
+            ],
             'status' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '128',
