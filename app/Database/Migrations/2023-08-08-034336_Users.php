@@ -24,6 +24,10 @@ class Users extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '128',
             ],
+            'email' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '128',
+            ],
             'username' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '128',
