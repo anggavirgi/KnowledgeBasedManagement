@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Article extends Migration
+class Konten extends Migration
 {
     public function up()
     {
@@ -14,11 +14,6 @@ class Article extends Migration
                 'constraint'     => 11,
                 'unsigned'       => true,
                 'auto_increment' => true,
-            ],
-            'id_projek' => [
-                'type'           => 'INT',
-                'constraint'     => 11,
-                'unsigned'       => true,
             ],
             'id_category' => [
                 'type'           => 'INT',
@@ -65,16 +60,14 @@ class Article extends Migration
                 'null'       => true
             ]
         ]);
-
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('id_projek', 'projek', 'id');
         $this->forge->addForeignKey('id_category', 'categories', 'id');
         $this->forge->addForeignKey('id_sub_category', 'sub_category', 'id');
-        $this->forge->createTable('article');
+        $this->forge->createTable('konten');
     }
 
     public function down()
     {
-        $this->forge->dropTable('article');
+        $this->forge->dropTable('konten');
     }
 }

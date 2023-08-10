@@ -78,17 +78,22 @@ DESAIN DB
 	- slug
 	- created_at
 	- updated_at
--> Artikel
+-> Konten
 	- id
 	- id_kategori
 	- id_subkategori
-	- id_projek
 	- judul
 	- konten
 	- good_insight
 	- bad_insight
 	- slug
 	- visibility (enum: open / close)
+	- created_at
+	- updated_at
+-> Artikel 
+	- id
+	- id_konten
+	- id_projek
 	- created_at
 	- updated_at
 -> Komplains
@@ -98,7 +103,6 @@ DESAIN DB
 	- email
 	- deskripsi
 	- file
-	- createdate
 	- reply
 	- replydate
 	- status (enum: solved / not_solved)
