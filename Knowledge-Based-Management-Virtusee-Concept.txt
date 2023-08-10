@@ -29,6 +29,7 @@ ADMIN
 - Dashboard
 	-> nampilin card (misal: jumlah kategori berapa dll)
 - User
+	-> Hanya mempunyai 1 projek
 - Kategori -> Subkategori (CRUD)
 	-> search, limit per page 10
 	-> nampilin kategori, aksi edit, hapus, subkategori
@@ -38,6 +39,7 @@ ADMIN
 	-> nampilin judul, kategori, subkategori, aksi edit, detail, hapus
 		-> detail, nampilin artikel lengkap + ada opsi buat edit artikel
 - Komplain
+	-> Komunikasi komplain melalui dashboard dan terkirim di email sebagai notifikasi
 	-> ada filter by date, search, limit artikel per page 10
 	-> nampilin email sama komplain, aksi reply (kalo komplainnya panjang, kasih titik-titik (..))
 		-> nampilin komplain lengkap + form reply
@@ -101,11 +103,13 @@ DESAIN DB
 	- id_user
 	- id_projek
 	- email
+	- subjek
 	- deskripsi
 	- file
 	- reply
 	- replydate
-	- status (enum: solved / not_solved)
+	- is_read (enum: 1 / 0)
+	- status (enum: pending / On Progress / solved)
 	- visibility (enum: open / close)
 	- created_at
 	- updated_at
