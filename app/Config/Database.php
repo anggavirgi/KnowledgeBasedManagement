@@ -31,7 +31,7 @@ class Database extends Config
         'password' => '',
         'database' => '',
         'DBDriver' => 'MySQLi',
-        'DBPrefix' => 'virtusee',
+        'DBPrefix' => '',
         'pConnect' => false,
         'DBDebug'  => true,
         'charset'  => 'utf8',
