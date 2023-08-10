@@ -22,7 +22,7 @@ class Login extends BaseController
     return view('login/register', $data);
   }
 
-  public function forgetpassword()
+  public function forgotpassword()
   {
     $data = [
       'title' => 'Register'
