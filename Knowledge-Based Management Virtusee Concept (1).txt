@@ -59,6 +59,7 @@ DESAIN DB
 	- email
 	- username
 	- password
+	- status
 	- created_at
 	- updated_at	
 -> Kategori
