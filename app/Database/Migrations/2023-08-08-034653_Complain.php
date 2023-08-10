@@ -20,6 +20,11 @@ class Complain extends Migration
                 'constraint'     => 11,
                 'unsigned'       => true,
             ],
+            'id_projek' => [
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => true,
+            ],
             'email' => [
                 'type'           => 'VARCHAR',
                 'constraint'     => '128',
@@ -58,6 +63,7 @@ class Complain extends Migration
 
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('id_user', 'users', 'id');
+        $this->forge->addForeignKey('id_projek', 'projek', 'id');
         $this->forge->createTable('complain');
     }
 

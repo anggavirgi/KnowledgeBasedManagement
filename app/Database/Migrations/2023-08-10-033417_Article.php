@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Users extends Migration
+class Article extends Migration
 {
     public function up()
     {
@@ -15,34 +15,15 @@ class Users extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'id_projek' => [
+            'id_konten' => [
                 'type'           => 'INT',
                 'constraint'     => 11,
                 'unsigned'       => true,
             ],
-            'nama' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '128',
-            ],
-            'email' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '128',
-            ],
-            'username' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '128',
-            ],
-            'password' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '256',
-            ],
-            'level' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '128',
-            ],
-            'is_active' => [
-                'type'       => 'INT',
-                'constraint' => '11',
+            'id_projek' => [
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => true,
             ],
             'created_at' => [
                 'type'       => 'DATETIME',
@@ -53,13 +34,15 @@ class Users extends Migration
                 'null'       => true
             ]
         ]);
+
         $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('id_konten', 'konten', 'id');
         $this->forge->addForeignKey('id_projek', 'projek', 'id');
-        $this->forge->createTable('users');
+        $this->forge->createTable('article');
     }
 
     public function down()
     {
-        $this->forge->dropTable('users');
+        $this->forge->dropTable('article');
     }
 }
