@@ -15,7 +15,7 @@ class Article extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'id_project' => [
+            'id_projek' => [
                 'type'           => 'INT',
                 'constraint'     => 11,
                 'unsigned'       => true,
@@ -67,7 +67,7 @@ class Article extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('id_project', 'project', 'id');
+        $this->forge->addForeignKey('id_projek', 'projek', 'id');
         $this->forge->addForeignKey('id_category', 'categories', 'id');
         $this->forge->addForeignKey('id_sub_category', 'sub_category', 'id');
         $this->forge->createTable('article');
