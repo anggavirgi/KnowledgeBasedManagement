@@ -41,7 +41,7 @@
         
         <div class="flex justify-between mt-2">
           <div> Don't have an account? <a href="<?php echo base_url(); ?>login/register" class="text-[#18A8D8]">Register here.</a></div>
-          <a href="<?php echo base_url(); ?>login/forgetpassword" class="text-red-600">Forgot Password?</a>
+          <a href="<?php echo base_url(); ?>login/forgotpassword" class="text-red-600">Forgot Password?</a>
         </div>
 
         <button class="mt-4 py-2 text-center text-white rounded-md bg-[#115da5] hover:bg-[#0c5091]">Sign in</button>
