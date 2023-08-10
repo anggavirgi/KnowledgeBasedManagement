@@ -1,0 +1,112 @@
+
+COLOR BASED ON VIRTUSEE
+
+Flow :
+- Harus punya akun dulu utk komplain
+- customer & KB terhubung ke projek
+- Open & Close utk KB
+- Solved & not solved utk komplain
+- register, jika cust lama tampil list projek
+- Halaman utk nampilin komplain scr umum
+
+ONSITE
+- Search field
+- Kategori
+- FAQ
+- Contact / Email
+
+- subkategori
+- artikel
+- respon artikel (misal: apakah website ini membantu? opsi ya / tidak) 
+
+USER
+- Dashboard
+- Artikel
+- Komplain
+
+ADMIN
+- Halaman Login Ke admin
+- Dashboard
+	-> nampilin card (misal: jumlah kategori berapa dll)
+- User
+- Kategori -> Subkategori (CRUD)
+	-> search, limit per page 10
+	-> nampilin kategori, aksi edit, hapus, subkategori
+		-> subkategori (CRUD), nampilin subkategori apa aja yang ada di kategori tsb
+- Artikel (CRUD)
+	-> ada filter by kategori dan subkategori, search, limit per page 10
+	-> nampilin judul, kategori, subkategori, aksi edit, detail, hapus
+		-> detail, nampilin artikel lengkap + ada opsi buat edit artikel
+- Komplain
+	-> ada filter by date, search, limit artikel per page 10
+	-> nampilin email sama komplain, aksi reply (kalo komplainnya panjang, kasih titik-titik (..))
+		-> nampilin komplain lengkap + form reply
+	-> Ada button pindah ke halaman laporan komplain
+		-> nampilin komplain
+		-> ada filter by date
+		-> btn print
+
+DESAIN DB
+
+-> Projek
+	- id
+	- nama_projek
+	- created_at
+	- updated_at
+-> User
+	- id
+	- id_projek
+	- nama
+	- email
+	- username
+	- password
+	- level
+	- is_active
+	- created_at
+	- updated_at	
+-> Kategori
+	- id
+	- nama_kategori
+	- slug
+	- ikon
+	- created_at
+	- updated_at
+-> Subkategori
+	- id
+	- id_kategori
+	- nama_subkategori
+	- slug
+	- created_at
+	- updated_at
+-> Konten
+	- id
+	- id_kategori
+	- id_subkategori
+	- judul
+	- konten
+	- good_insight
+	- bad_insight
+	- slug
+	- visibility (enum: open / close)
+	- created_at
+	- updated_at
+-> Artikel 
+	- id
+	- id_konten
+	- id_projek
+	- created_at
+	- updated_at
+-> Komplains
+	- id
+	- id_user
+	- id_projek
+	- email
+	- deskripsi
+	- file
+	- reply
+	- replydate
+	- status (enum: solved / not_solved)
+	- visibility (enum: open / close)
+	- created_at
+	- updated_at
+
