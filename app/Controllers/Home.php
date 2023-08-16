@@ -4,8 +4,11 @@ namespace App\Controllers;
 
 class Home extends BaseController
 {
-    public function index(): string
+    public function index()
     {
-        return view('customer/home/index');
+        $data = [
+            'title' => 'Virtusee | Knowledge Based'
+        ];
+        return view('customer/index', $data);
     }
 }
