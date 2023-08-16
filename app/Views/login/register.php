@@ -14,16 +14,16 @@
   <!-- WARNA BG SEBELAH KIRI -->
   <div class="h-screen flex justify-end">
     <div class="flex items-center justify-end w-1/2 bg-gradient-to-r from-[#18A8D8] to-[#18A8D8]">
-      <img src="<?php echo base_url(); ?>src/images/pana.png" alt="" class="mr-[6%]">
+      <img src="<?php echo base_url(); ?>src/images/pana.png" alt="" class="hidden xl:block mr-[6%]">
     </div>
 
     <!-- NAVBAR -->
     <div class="absolute inset-0">
-      <img src="<?php echo base_url(); ?>src/images/logo.png" alt="" class="w-44 m-5">
+      <img src="<?php echo base_url(); ?>src/images/logo.png" alt="" class="lg:w-44 w-32 m-5">
     </div>
 
     <!-- LOGIN CARD -->
-    <div class="absolute w-[38%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white h-auto py-6 px-10 rounded-3xl drop-shadow-lg">
+    <div class="absolute w-[80%] md:w-[56%] lg:w-[45%] xl:w-[38%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white h-auto py-6 px-10 rounded-3xl drop-shadow-lg">
       <div>Welcome, please register first.</div>
       <div class="text-[#18A8D8] text-[2.1rem] font-bold mt-2 mb-5">Sign up</div>
       <form action="" method="" class="flex flex-col">
@@ -77,7 +77,7 @@
         </div>
 
         <div class="flex justify-between">
-          <div> Already have an account? <a href="<?php echo base_url(); ?>login" class="text-[#18A8D8]">Login here.</a></div>
+          <div> Already have an account? <a href="<?php echo base_url(); ?>kb/login" class="text-[#18A8D8]">Login here.</a></div>
         </div>
 
         <button class="mt-4 py-2 text-center text-white rounded-md bg-[#115da5] hover:bg-[#0c5091]">Sign up</button>
