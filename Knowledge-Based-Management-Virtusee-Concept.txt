@@ -50,15 +50,15 @@ ADMIN
 
 DESAIN DB
 
--> Projek
+-> Project
 	- id
-	- nama_projek
+	- name_projek
 	- created_at
 	- updated_at
--> User
+-> Users
 	- id
-	- id_projek
-	- nama
+	- id_project
+	- name
 	- email
 	- username
 	- password
@@ -66,51 +66,58 @@ DESAIN DB
 	- is_active
 	- created_at
 	- updated_at	
--> Kategori
+-> Categories
 	- id
-	- nama_kategori
+	- name_categori
 	- slug
-	- ikon
+	- icon
 	- created_at
 	- updated_at
--> Subkategori
+-> Subcategori
 	- id
-	- id_kategori
-	- nama_subkategori
+	- id_categori
+	- name_subcategori
 	- slug
 	- created_at
 	- updated_at
--> Konten
+-> Content
 	- id
-	- id_kategori
-	- id_subkategori
-	- judul
-	- konten
+	- id_categori
+	- id_subcategori
+	- title
+	- content
 	- good_insight
 	- bad_insight
 	- slug
 	- visibility (enum: open / close)
 	- created_at
 	- updated_at
--> Artikel 
+-> Article 
 	- id
-	- id_konten
-	- id_projek
+	- id_content
+	- id_project
 	- created_at
 	- updated_at
--> Komplains
+-> Complains
 	- id
 	- id_user
-	- id_projek
+	- id_project
 	- email
-	- subjek
-	- deskripsi
+	- subject
+	- description
 	- file
-	- reply
-	- replydate
 	- is_read (enum: 1 / 0)
 	- status (enum: pending / On Progress / solved)
 	- visibility (enum: open / close)
+	- created_at
+	- updated_at
+
+-> complain_reply
+	- id
+	- id_komplain
+	- id_user
+	- deskripsi
+	- is_read
 	- created_at
 	- updated_at
 

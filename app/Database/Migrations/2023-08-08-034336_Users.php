@@ -15,12 +15,12 @@ class Users extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'id_projek' => [
+            'id_project' => [
                 'type'           => 'INT',
                 'constraint'     => 11,
                 'unsigned'       => true,
             ],
-            'nama' => [
+            'name' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '128',
             ],
@@ -54,7 +54,7 @@ class Users extends Migration
             ]
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('id_projek', 'projek', 'id');
+        $this->forge->addForeignKey('id_project', 'project', 'id');
         $this->forge->createTable('users');
     }
 

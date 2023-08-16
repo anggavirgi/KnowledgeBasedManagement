@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Konten extends Migration
+class Complains extends Migration
 {
     public function up()
     {
@@ -15,41 +15,39 @@ class Konten extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'id_category' => [
+            'id_user' => [
                 'type'           => 'INT',
                 'constraint'     => 11,
                 'unsigned'       => true,
             ],
-            'id_sub_category' => [
+            'id_project' => [
                 'type'           => 'INT',
                 'constraint'     => 11,
                 'unsigned'       => true,
             ],
-            'judul' => [
+            'email' => [
+                'type'           => 'VARCHAR',
+                'constraint'     => '128',
+            ],
+            'description' => [
+                'type'       => 'TEXT',
+            ],
+            'file' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '128',
             ],
-            'slug' => [
+            'is_read' => [
+                'type'      => 'INT',
+                'default'   => 0
+            ],
+            'status' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '128',
-            ],
-            'konten' => [
-                'type'       => 'LONGTEXT',
-            ],
-            'good_insight' => [
-                'type'       => 'INT',
-                'constraint' => 11,
-                'default'    => 0
-            ],
-            'bad_insight' => [
-                'type'       => 'INT',
-                'constraint' => 11,
-                'default'    => 0
             ],
             'visibility' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '128',
-                'defaul'    => 'closed'
+                'default'    => 'closed'
             ],
             'created_at' => [
                 'type'       => 'DATETIME',
@@ -60,14 +58,15 @@ class Konten extends Migration
                 'null'       => true
             ]
         ]);
+
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('id_category', 'categories', 'id');
-        $this->forge->addForeignKey('id_sub_category', 'sub_category', 'id');
-        $this->forge->createTable('konten');
+        $this->forge->addForeignKey('id_user', 'users', 'id');
+        $this->forge->addForeignKey('id_project', 'project', 'id');
+        $this->forge->createTable('complains');
     }
 
     public function down()
     {
-        $this->forge->dropTable('konten');
+        $this->forge->dropTable('complains');
     }
 }
