@@ -1,0 +1,123 @@
+
+COLOR BASED ON VIRTUSEE
+
+Flow :
+- Harus punya akun dulu utk komplain
+- customer & KB terhubung ke projek
+- Open & Close utk KB
+- Solved & not solved utk komplain
+- register, jika cust lama tampil list projek
+- Halaman utk nampilin komplain scr umum
+
+ONSITE
+- Search field
+- Kategori
+- FAQ
+- Contact / Email
+
+- subkategori
+- artikel
+- respon artikel (misal: apakah website ini membantu? opsi ya / tidak) 
+
+USER
+- Dashboard
+- Artikel
+- Komplain
+
+ADMIN
+- Halaman Login Ke admin
+- Dashboard
+	-> nampilin card (misal: jumlah kategori berapa dll)
+- User
+	-> Hanya mempunyai 1 projek
+- Kategori -> Subkategori (CRUD)
+	-> search, limit per page 10
+	-> nampilin kategori, aksi edit, hapus, subkategori
+		-> subkategori (CRUD), nampilin subkategori apa aja yang ada di kategori tsb
+- Artikel (CRUD)
+	-> ada filter by kategori dan subkategori, search, limit per page 10
+	-> nampilin judul, kategori, subkategori, aksi edit, detail, hapus
+		-> detail, nampilin artikel lengkap + ada opsi buat edit artikel
+- Komplain
+	-> Komunikasi komplain melalui dashboard dan terkirim di email sebagai notifikasi
+	-> ada filter by date, search, limit artikel per page 10
+	-> nampilin email sama komplain, aksi reply (kalo komplainnya panjang, kasih titik-titik (..))
+		-> nampilin komplain lengkap + form reply
+	-> Ada button pindah ke halaman laporan komplain
+		-> nampilin komplain
+		-> ada filter by date
+		-> btn print
+
+DESAIN DB
+
+-> Project
+	- id
+	- name_projek
+	- created_at
+	- updated_at
+-> Users
+	- id
+	- id_project
+	- name
+	- email
+	- username
+	- password
+	- level
+	- is_active
+	- created_at
+	- updated_at	
+-> Categories
+	- id
+	- name_categori
+	- slug
+	- icon
+	- created_at
+	- updated_at
+-> Subcategori
+	- id
+	- id_categori
+	- name_subcategori
+	- slug
+	- created_at
+	- updated_at
+-> Content
+	- id
+	- id_categori
+	- id_subcategori
+	- title
+	- content
+	- good_insight
+	- bad_insight
+	- slug
+	- visibility (enum: open / close)
+	- created_at
+	- updated_at
+-> Article 
+	- id
+	- id_content
+	- id_project
+	- created_at
+	- updated_at
+-> Complains
+	- id
+	- id_user
+	- id_project
+	- email
+	- subject
+	- description
+	- file
+	- is_read (enum: 1 / 0)
+	- status (enum: pending / On Progress / solved)
+	- visibility (enum: open / close)
+	- created_at
+	- updated_at
+
+-> complain_reply
+	- id
+	- id_komplain
+	- id_user
+	- deskripsi
+	- is_read
+	- created_at
+	- updated_at
+

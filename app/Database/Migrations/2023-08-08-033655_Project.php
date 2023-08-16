@@ -15,7 +15,7 @@ class Project extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'nama_project' => [
+            'name_project' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '128',
             ],

@@ -15,7 +15,7 @@ class Categories extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'nama_category' => [
+            'name_category' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '128',
             ],

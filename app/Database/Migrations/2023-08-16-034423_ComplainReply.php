@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class SubCategory extends Migration
+class ComplainReply extends Migration
 {
     public function up()
     {
@@ -15,18 +15,22 @@ class SubCategory extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'id_category' => [
+            'id_complain' => [
                 'type'           => 'INT',
                 'constraint'     => 11,
                 'unsigned'       => true,
             ],
-            'name_subcategory' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '128',
+            'id_user' => [
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => true,
             ],
-            'slug' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '128',
+            'description' => [
+                'type'          => 'TEXT'
+            ],
+            'is_read' => [
+                'type'      => 'INT',
+                'default'   => 0
             ],
             'created_at' => [
                 'type'       => 'DATETIME',
@@ -39,12 +43,13 @@ class SubCategory extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('id_category', 'categories', 'id');
-        $this->forge->createTable('sub_category');
+        $this->forge->addForeignKey('id_complain', 'complains', 'id');
+        $this->forge->addForeignKey('id_user', 'users', 'id');
+        $this->forge->createTable('complain_reply');
     }
 
     public function down()
     {
-        $this->forge->dropTable('sub_category');
+        $this->forge->dropTable('complain_reply');
     }
 }

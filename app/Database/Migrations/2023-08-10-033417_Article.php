@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class SubCategory extends Migration
+class Article extends Migration
 {
     public function up()
     {
@@ -15,18 +15,15 @@ class SubCategory extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'id_category' => [
+            'id_content' => [
                 'type'           => 'INT',
                 'constraint'     => 11,
                 'unsigned'       => true,
             ],
-            'name_subcategory' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '128',
-            ],
-            'slug' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '128',
+            'id_project' => [
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => true,
             ],
             'created_at' => [
                 'type'       => 'DATETIME',
@@ -39,12 +36,13 @@ class SubCategory extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('id_category', 'categories', 'id');
-        $this->forge->createTable('sub_category');
+        $this->forge->addForeignKey('id_content', 'content', 'id');
+        $this->forge->addForeignKey('id_project', 'project', 'id');
+        $this->forge->createTable('article');
     }
 
     public function down()
     {
-        $this->forge->dropTable('sub_category');
+        $this->forge->dropTable('article');
     }
 }

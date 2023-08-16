@@ -20,7 +20,7 @@ class Users extends Migration
                 'constraint'     => 11,
                 'unsigned'       => true,
             ],
-            'nama' => [
+            'name' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '128',
             ],
@@ -40,9 +40,9 @@ class Users extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '128',
             ],
-            'status' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '128',
+            'is_active' => [
+                'type'       => 'INT',
+                'constraint' => '11',
             ],
             'created_at' => [
                 'type'       => 'DATETIME',
