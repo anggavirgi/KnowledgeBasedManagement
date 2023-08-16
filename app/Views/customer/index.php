@@ -120,7 +120,8 @@
                 <div class="border-solid border-2 border-[#919191] rounded-[15px] p-5 ps-10 mb-3">
                     <div class="flex justify-between">
                         <p class="text-[16px]" id="title1">How I can buy the programs ? </p>
-                        <p class="text-md cursor-pointer collapsible" data-target="collapse1" data-title="title1"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down icon" viewBox="0 0 16 16">
+                        <p class="text-md cursor-pointer collapsible" data-target="collapse1" data-title="title1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down icon" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
                             </svg>
                         </p>
@@ -132,7 +133,8 @@
                 <div class="border-solid border-2 border-[#919191] rounded-[15px] p-5 ps-10 mb-3">
                     <div class="flex justify-between">
                         <p class="text-[16px]" id="title2">How I can buy the programs ? </p>
-                        <p class="text-md cursor-pointer collapsible" data-target="collapse2" data-title="title2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down icon" viewBox="0 0 16 16">
+                        <p class="text-md cursor-pointer collapsible" data-target="collapse2" data-title="title2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down icon" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
                             </svg>
                         </p>
@@ -144,7 +146,8 @@
                 <div class="border-solid border-2 border-[#919191] rounded-[15px] p-5 ps-10 mb-3">
                     <div class="flex justify-between">
                         <p class="text-[16px]" id="title3">How I can buy the programs ? </p>
-                        <p class="text-md cursor-pointer collapsible" data-target="collapse3" data-title="title3"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down icon" viewBox="0 0 16 16">
+                        <p class="text-md cursor-pointer collapsible" data-target="collapse3" data-title="title3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down icon" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
                             </svg>
                         </p>
@@ -156,7 +159,8 @@
                 <div class="border-solid border-2 border-[#919191] rounded-[15px] p-5 ps-10 mb-3">
                     <div class="flex justify-between">
                         <p class="text-[16px]" id="title4">How I can buy the programs ? </p>
-                        <p class="text-md cursor-pointer collapsible" data-target="collapse4" data-title="title4"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down icon" viewBox="0 0 16 16">
+                        <p class="text-md cursor-pointer collapsible" data-target="collapse4" data-title="title4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down icon" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
                             </svg>
                         </p>
@@ -168,7 +172,8 @@
                 <div class="border-solid border-2 border-[#919191] rounded-[15px] p-5 ps-10 mb-3">
                     <div class="flex justify-between">
                         <p class="text-[16px]" id="title5">How I can buy the programs ? </p>
-                        <p class="text-md cursor-pointer collapsible" data-target="collapse5" data-title="title5"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down icon" viewBox="0 0 16 16">
+                        <p class="text-md cursor-pointer collapsible" data-target="collapse5" data-title="title5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down icon" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
                             </svg>
                         </p>
