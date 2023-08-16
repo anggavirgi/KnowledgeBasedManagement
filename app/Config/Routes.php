@@ -34,6 +34,7 @@ $routes->get('/', 'Home::index');
 // Route Login
 $routes->get('/kb/login', 'Login::index');
 $routes->get('/kb/register/', 'Login::register');
+$routes->get('/kb/forgot-password/', 'Login::forgotpassword');
 
 /*
  * --------------------------------------------------------------------
