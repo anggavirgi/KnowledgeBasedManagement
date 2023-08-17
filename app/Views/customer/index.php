@@ -166,8 +166,8 @@
             <div id="customer_complain" class="mb-2 p-5 w-10/12">
                 <h4 class="font-bold text-4xl text-center mb-10">General Complain User</h4>
                 <div class="grid lg:grid-cols-2 md:grid-cols-1 gap-12 gap-y-4">
-                    <div class="border-solid border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
-                        <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-24px] bg-[#F8F8F8]">
+                    <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
+                        <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
                             <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
                             <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
                         </svg>
@@ -185,8 +185,8 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at</p>
                         </div>
                     </div>
-                    <div class="border-solid border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
-                        <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-24px] bg-[#F8F8F8]">
+                    <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
+                        <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
                             <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
                             <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
                         </svg>
@@ -204,8 +204,8 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at.</p>
                         </div>
                     </div>
-                    <div class="border-solid border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
-                        <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-24px] bg-[#F8F8F8]">
+                    <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
+                        <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
                             <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
                             <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
                         </svg>
@@ -223,8 +223,8 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at</p>
                         </div>
                     </div>
-                    <div class="border-solid border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
-                        <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-24px] bg-[#F8F8F8]">
+                    <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
+                        <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
                             <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
                             <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
                         </svg>
@@ -242,8 +242,8 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at.</p>
                         </div>
                     </div>
-                    <div class="border-solid border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
-                        <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-24px] bg-[#F8F8F8]">
+                    <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
+                        <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
                             <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
                             <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
                         </svg>
@@ -261,8 +261,8 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at</p>
                         </div>
                     </div>
-                    <div class="border-solid border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
-                        <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-24px] bg-[#F8F8F8]">
+                    <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
+                        <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
                             <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
                             <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
                         </svg>
