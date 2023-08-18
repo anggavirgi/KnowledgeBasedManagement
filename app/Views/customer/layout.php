@@ -7,15 +7,16 @@
     <link rel="shortcut icon" href="<?php echo base_url(); ?>src/images/favicon.png" type="image/x-icon">
     <title><?php echo $title; ?></title>
     <link rel="stylesheet" href="<?php echo base_url(); ?>src/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 
 <body>
-    <section class="navbar bg-white py-5 px-[100px] drop-shadow-md">
+    <section class="navbar bg-white py-5 sm:px-[100px] px-[10px] drop-shadow-md">
         <div class="flex justify-between">
             <img src="<?php echo base_url(); ?>src/images/logo.png" alt="" class="nav-brand w-40">
             <div class="buttons grid grid-cols-2 gap-2">
-                <a href="/kb/login" class="p-2">Sign In</a>
-                <a href="/kb/register" class="bg-main text-white rounded-md p-2">Sign Up</a>
+                <a href="/kb/login" class="p-2 whitespace-nowrap">Sign In</a>
+                <a href="/kb/register" class="bg-[#18A8D8] text-white rounded-md p-2 whitespace-nowrap">Sign Up</a>
             </div>
         </div>
     </section>
@@ -88,7 +89,7 @@
             </button>
         </div>
     </section>
-    
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="<?php echo base_url(); ?>/src/js/script.js"></script>
 

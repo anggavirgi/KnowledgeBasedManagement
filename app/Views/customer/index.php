@@ -10,16 +10,16 @@
                 </h1>
                 <div class="relative flex justify-center items-center" id="search">
                     <form action="">
-                        <input type="text" name="email" id="email" placeholder="Search Your question, answer, etc" class="w-[30rem] mt-2 mb-5 px-7 mt-[30px] py-3 rounded-[15px] border border-gray-400 outline-[#18A8D8]">
+                        <input type="text" name="email" id="email" placeholder="Search Your question, answer, etc" class="sm:w-[30rem] w-[25rem] mt-2 mb-5 px-7 mt-[30px] py-3 rounded-[15px] border border-gray-400 outline-[#18A8D8]">
                         <button>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search absolute left-[450px] top-[47px] cursor-pointer text-[#919191]" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search absolute sm:left-[450px] left-[370px] top-[47px] cursor-pointer text-[#919191]" viewBox="0 0 16 16">
                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                         </button>
                         </svg>
                     </form>
                 </div>
-                <div class="flex justify-center">
-                    <div class="w-[30rem]">
+                <div class="flex justify-center sm:mt-0 mt-[-10px]">
+                    <div class="sm:w-[30rem] w-[25rem] ">
                         <p class="text-sm"><span class="text-[#18A8D8]">Search what you want,</span> we will answer your question and you can search anything
                             about the Virtusee Progran or technical </p>
                     </div>
@@ -34,7 +34,7 @@
                             <i class="bi bi-cart-fill text-4xl"></i>
                         </div>
                         <div>
-                            <h4>Categories 1</h4>
+                            <h4 class="whitespace-nowrap">Categories 1</h4>
                         </div>
                     </div>
                     <div class="bg-[#D9D9D9] px-[4rem] py-5 rounded-[10px]">
@@ -42,7 +42,7 @@
                             <i class="bi bi-cart-fill text-4xl"></i>
                         </div>
                         <div>
-                            <h4>Categories 1</h4>
+                            <h4 class="whitespace-nowrap">Categories 1</h4>
                         </div>
                     </div>
                     <div class="bg-[#D9D9D9] px-[4rem] py-5 rounded-[10px]">
@@ -50,7 +50,7 @@
                             <i class="bi bi-cart-fill text-4xl"></i>
                         </div>
                         <div>
-                            <h4>Categories 1</h4>
+                            <h4 class="whitespace-nowrap">Categories 1</h4>
                         </div>
                     </div>
                     <div class="bg-[#D9D9D9] px-[4rem] py-5 rounded-[10px]">
@@ -58,7 +58,7 @@
                             <i class="bi bi-cart-fill text-4xl"></i>
                         </div>
                         <div>
-                            <h4>Categories 1</h4>
+                            <h4 class="whitespace-nowrap">Categories 1</h4>
                         </div>
                     </div>
                     <div class="bg-[#D9D9D9] px-[4rem] py-5 rounded-[10px]">
@@ -66,7 +66,7 @@
                             <i class="bi bi-cart-fill text-4xl"></i>
                         </div>
                         <div>
-                            <h4>Categories 1</h4>
+                            <h4 class="whitespace-nowrap">Categories 1</h4>
                         </div>
                     </div>
                     <div class="bg-[#D9D9D9] px-[4rem] py-5 rounded-[10px]">
@@ -74,7 +74,7 @@
                             <i class="bi bi-cart-fill text-4xl"></i>
                         </div>
                         <div>
-                            <h4>Categories 1</h4>
+                            <h4 class="whitespace-nowrap">Categories 1</h4>
                         </div>
                     </div>
                     <div class="bg-[#D9D9D9] px-[4rem] py-5 rounded-[10px]">
@@ -82,7 +82,7 @@
                             <i class="bi bi-cart-fill text-4xl"></i>
                         </div>
                         <div>
-                            <h4>Categories 1</h4>
+                            <h4 class="whitespace-nowrap">Categories 1</h4>
                         </div>
                     </div>
                     <div class="bg-[#D9D9D9] px-[4rem] py-5 rounded-[10px]">
@@ -90,14 +90,14 @@
                             <i class="bi bi-cart-fill text-4xl"></i>
                         </div>
                         <div>
-                            <h4>Categories 1</h4>
+                            <h4 class="whitespace-nowrap">Categories 1</h4>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div id="general_questio" class="flex justify-center w-full">
-            <div id="general_question" class="mt-7 p-5 xl:w-8/12 lg:w-10/12 w-full">
+            <div id="general_question" class="mt-7 p-5 xl:w-9/12 lg:w-10/12 w-full">
                 <div class="max-w-md sm:max-w-lg mb-7">
                     <h4 class="text-[#18A8D8] font-bold text-3xl">General Question</h4>
                     <div class="flex">
