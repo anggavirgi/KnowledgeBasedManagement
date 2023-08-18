@@ -14,7 +14,7 @@
   <!-- WARNA BG SEBELAH KIRI -->
   <div class="h-screen flex justify-end">
     <div class="flex items-center justify-end w-1/2 bg-gradient-to-r from-[#18A8D8] to-[#18A8D8]">
-      <img src="<?php echo base_url(); ?>src/images/pana.png" alt="" class="mr-[6%]">
+      <img src="<?php echo base_url(); ?>src/images/pana.png" alt="" class="hidden xl:block mr-[6%]">
     </div>
 
     <!-- NAVBAR -->
@@ -23,7 +23,7 @@
     </div>
 
     <!-- LOGIN CARD -->
-    <div class="absolute w-[38%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white h-auto py-10 px-10 rounded-3xl drop-shadow-lg">
+    <div class="absolute w-[80%] md:w-[55%] lg:w-[43%] xl:w-[38%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white h-auto py-10 px-10 rounded-3xl drop-shadow-lg">
       <div>we will send email for reset password</div>
       <div class="text-[#18A8D8] text-[2.1rem] font-bold mt-2 mb-5">Forgot password</div>
       <form action="" method="" class="flex flex-col">
@@ -31,7 +31,7 @@
         <input type="email" name="email" id="email" placeholder="Email address" class="mt-2 px-4 py-2 rounded-md border border-gray-400 outline-[#18A8D8]">
         
         <div class="flex justify-between mt-2">
-          <div> Don't have an account? <a href="<?php echo base_url(); ?>login/register" class="text-[#18A8D8]">Register here.</a></div>
+          <div> Don't have an account? <a href="<?php echo base_url(); ?>kb/register" class="text-[#18A8D8]">Register here.</a></div>
         </div>
         
         <button class="mt-4 py-2 text-center text-white rounded-md bg-[#115da5] hover:bg-[#0c5091]">Send</button>
