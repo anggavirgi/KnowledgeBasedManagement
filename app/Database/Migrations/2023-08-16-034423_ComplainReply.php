@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Complain extends Migration
+class ComplainReply extends Migration
 {
     public function up()
     {
@@ -15,41 +15,22 @@ class Complain extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
+            'id_complain' => [
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => true,
+            ],
             'id_user' => [
                 'type'           => 'INT',
                 'constraint'     => 11,
                 'unsigned'       => true,
             ],
-            'id_projek' => [
-                'type'           => 'INT',
-                'constraint'     => 11,
-                'unsigned'       => true,
+            'description' => [
+                'type'          => 'TEXT'
             ],
-            'email' => [
-                'type'           => 'VARCHAR',
-                'constraint'     => '128',
-            ],
-            'deskripsi' => [
-                'type'       => 'TEXT',
-            ],
-            'file' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '128',
-            ],
-            'reply' => [
-                'type'       => 'TEXT',
-            ],
-            'reply_date' => [
-                'type'       => 'DATETIME',
-            ],
-            'status' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '128',
-            ],
-            'visibility' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '128',
-                'default'    => 'closed'
+            'is_read' => [
+                'type'      => 'INT',
+                'default'   => 0
             ],
             'created_at' => [
                 'type'       => 'DATETIME',
@@ -62,13 +43,13 @@ class Complain extends Migration
         ]);
 
         $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('id_complain', 'complains', 'id');
         $this->forge->addForeignKey('id_user', 'users', 'id');
-        $this->forge->addForeignKey('id_projek', 'projek', 'id');
-        $this->forge->createTable('complain');
+        $this->forge->createTable('complain_reply');
     }
 
     public function down()
     {
-        $this->forge->dropTable('complain');
+        $this->forge->dropTable('complain_reply');
     }
 }
