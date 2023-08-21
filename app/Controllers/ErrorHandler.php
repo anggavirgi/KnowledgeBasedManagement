@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 class ErrorHandler extends BaseController
 {
-    public function error404()
+    public function index()
     {
         $data = [
             'title' => '404 Not Found'
