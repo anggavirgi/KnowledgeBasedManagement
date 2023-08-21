@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"> -->
 </head>
 
-<body class="m-0 p-0 h-full">
+<body class="m-0 p-0 h-full text-sm">
   <!-- WARNA BG SEBELAH KIRI -->
   <div class="h-screen flex justify-end">
     <div class="flex items-center justify-end w-1/2 bg-gradient-to-r from-[#18A8D8] to-[#18A8D8]">
