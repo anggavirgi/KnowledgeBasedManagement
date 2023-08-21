@@ -36,8 +36,8 @@ $routes->get('/kb/login', 'Login::index');
 $routes->get('/kb/register/', 'Login::register');
 $routes->get('/kb/forgot-password/', 'Login::forgotpassword');
 
-
 $routes->match(['get', 'post'], '404', 'Custom404::index');
+
 
 /*
  * --------------------------------------------------------------------
