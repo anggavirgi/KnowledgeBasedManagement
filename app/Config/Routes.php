@@ -34,6 +34,15 @@ $routes->get('/', 'Home::index');
 // Route Login
 $routes->get('/kb/login', 'Login::index');
 $routes->get('/kb/register/', 'Login::register');
+$routes->get('/kb/forgot-password/', 'Login::forgotpassword');
+
+
+$routes->set404Override(function () {
+    $data = [
+        'title' => '404 Not Found'
+    ];
+    return view('errors/html/error_404', $data);
+});
 
 /*
  * --------------------------------------------------------------------

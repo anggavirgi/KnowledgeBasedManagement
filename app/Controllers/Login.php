@@ -25,7 +25,7 @@ class Login extends BaseController
   public function forgotpassword()
   {
     $data = [
-      'title' => 'Register'
+      'title' => 'Forgot Password'
     ];
 
     return view('login/forgotpassword', $data);
