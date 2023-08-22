@@ -31,11 +31,20 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
-// Route Login
+// ROUTE LOGIN
 $routes->get('/kb/login', 'Login::index');
 $routes->get('/kb/register/', 'Login::register');
 $routes->get('/kb/forgot-password/', 'Login::forgotpassword');
 
+// ROUTE ADMIN
+$routes->get('/kb/admin/', 'Admin\Admin::index');
+$routes->get('/kb/user/', 'Admin\User::index');
+$routes->get('/kb/category/', 'Admin\Category::index');
+$routes->get('/kb/article/', 'Admin\Article::index');
+$routes->get('/kb/complain/', 'Admin\Complain::index');
+
+
+// ROUTE ERROR
 $routes->match(['get', 'post'], '404', 'Custom404::index');
 
 
