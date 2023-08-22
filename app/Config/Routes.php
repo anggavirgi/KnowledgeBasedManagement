@@ -15,7 +15,7 @@ $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-// The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
+// TheAu to Ruoting (Legacy) is very dangerous. It is easy to create vulnerable apps
 // where controller filters or CSRF protection are bypassed.
 // If you don't want to define all routes, please use the Auto Routing (Improved).
 // Set `$autoRoutesImproved` to true in `app/Config/Feature.php` and set the following to true.
@@ -31,9 +31,22 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
-// Route Login
+// ROUTE LOGIN
 $routes->get('/kb/login', 'Login::index');
 $routes->get('/kb/register/', 'Login::register');
+$routes->get('/kb/forgot-password/', 'Login::forgotpassword');
+
+// ROUTE ADMIN
+$routes->get('/kb/admin/', 'Admin\Admin::index');
+$routes->get('/kb/user/', 'Admin\User::index');
+$routes->get('/kb/category/', 'Admin\Category::index');
+$routes->get('/kb/article/', 'Admin\Article::index');
+$routes->get('/kb/complain/', 'Admin\Complain::index');
+
+
+// ROUTE ERROR
+$routes->match(['get', 'post'], '404', 'Custom404::index');
+
 
 /*
  * --------------------------------------------------------------------
