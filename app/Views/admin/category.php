@@ -2,7 +2,7 @@
 
 <?php echo $this->section('content'); ?>
 
-<div class="border-2 border-gray-200 bg-white py-7 px-6">
+<div class="border-2 border-gray-200 bg-white p-7 rounded shadow-md">
   <h2 class="font-bold text-xl">List Category</h2>
   <div class="flex justify-between items-center my-5">
     <form method="" class="relative flex justify-end items-center">
@@ -23,33 +23,33 @@
   <table class="w-full text-center text-sm">
     <thead class="border-b">
       <tr>
-        <th class="py-3">
+        <th class="p-3">
           <input type="checkbox" name="" id="">
         </th>
-        <th class="py-3 relative flex justify-center items-center">
+        <th class="p-3 relative flex justify-center items-center">
           <span>No</span> 
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 absolute right-0 cursor-pointer">
             <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v13.19l5.47-5.47a.75.75 0 111.06 1.06l-6.75 6.75a.75.75 0 01-1.06 0l-6.75-6.75a.75.75 0 111.06-1.06l5.47 5.47V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
           </svg>
         </th>
-        <th class="py-3 w-64">Name</th>
-        <th class="py-3">Icon</th>
-        <th class="py-3">Total Sub-Category</th>
-        <th class="py-3">Action</th>
+        <th class="p-3 w-64">Name</th>
+        <th class="p-3">Icon</th>
+        <th class="p-3">Total Sub-Category</th>
+        <th class="p-3">Action</th>
       </tr>
     </thead>
     <tbody class="border-b">
-      <tr>
-        <td class="py-3">
+      <tr class="border-b hover:bg-gray-50">
+        <td class="p-3">
           <input type="checkbox" name="" id="">
         </td>
-        <td class="py-3">1</td>
-        <td class="py-3">Fitur</td>
-        <td class="py-3">
+        <td class="p-3">1</td>
+        <td class="p-3">Fitur</td>
+        <td class="p-3">
           <img src="<?php echo base_url() ?>src/images/icon-category.png" alt="" class="mx-auto">
         </td>
-        <td class="py-3">15</td>
-        <td class="py-3 flex justify-center gap-4">
+        <td class="p-3">15</td>
+        <td class="p-3 flex justify-center gap-4">
           <a href="">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"  class="w-6 h-6 stroke-secondary hover:stroke-yellow-600">
               <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
@@ -65,6 +65,33 @@
     </tbody>
   </table>
 
+  <div class="flex justify-center mt-5">
+    <nav aria-label="Page navigation example">
+      <ul class="inline-flex -space-x-px text-sm">
+        <li>
+          <a href="#" class="flex items-center justify-center px-3 h-8 ml-0 leading-tight  bg-white border rounded-l-lg hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">Previous</a>
+        </li>
+        <li>
+          <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight  bg-white border hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">1</a>
+        </li>
+        <li>
+          <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight  bg-white border hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">2</a>
+        </li>
+        <li>
+          <a href="#" aria-current="page" class="flex items-center justify-center px-3 h-8 text-white border bg-blue-50 hover:text-blue-700 border-white dark:bg-main dark:hover:text-white">3</a>
+        </li>
+        <li>
+          <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight  bg-white border hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">4</a>
+        </li>
+        <li>
+          <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight  bg-white border hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">5</a>
+        </li>
+        <li>
+          <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight  bg-white border rounded-r-lg hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
 </div>
 
 <?php echo $this->endSection(); ?>
