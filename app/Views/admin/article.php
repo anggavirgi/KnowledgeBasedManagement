@@ -85,7 +85,7 @@
                             Apple MacBook Pro 17"
                         </th>
                         <td class="px-6 py-4">
-                            Silver
+                            Silverr
                         </td>
                         <td class="px-6 py-4">
                             Laptop
