@@ -2,7 +2,7 @@
 
 <?php echo $this->section('content'); ?>
 
-<div class="border-2 border-gray-200 bg-white p-7 rounded shadow-md">
+<div class="border-2 border-gray-200 bg-white p-7 rounded shadow-md text-sm">
   <h2 class="font-bold text-xl">List Category</h2>
   <div class="flex justify-between items-center my-5">
     <form method="" class="relative flex justify-end items-center">
@@ -14,13 +14,13 @@
       </button>
     </form>
     <a href="#" class="border border-gray-400 px-6 py-2 rounded-2xl hover:border-green-400 cursor-pointer">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" width="24" height="24">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" width="20" height="20">
         <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z" />
       </svg>
     </a>
   </div>
   
-  <table class="w-full text-center text-sm">
+  <table class="w-full text-center">
     <thead class="border-b">
       <tr>
         <th class="p-3">
