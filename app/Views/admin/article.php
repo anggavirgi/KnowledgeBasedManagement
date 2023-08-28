@@ -107,9 +107,6 @@
                                 <option value="10" class="block px-4 py-5">Close</option>
                                 <option value="25">Open</option>
                             </select>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <polygon points="12 2 2 22 22 22 12 2" fill="blue" />
-                            </svg>
                         </td>
                     </tr>
 
