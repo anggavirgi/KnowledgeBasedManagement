@@ -2,7 +2,7 @@
 
 <?php echo $this->section('content'); ?>
 
-<div class="border-2 border-gray-200 bg-white p-7 rounded shadow-md">
+<div class="border-2 border-gray-200 bg-white p-7 rounded shadow-md text-sm">
     <div class="font-bold text-xl">User List</div>
     <div class="flex justify-between items-center my-5">
         <form method="" class="relative flex justify-end items-center">
@@ -14,14 +14,14 @@
         </button>
         </form>
         <a href="#" class="border border-gray-400 px-6 py-2 rounded-2xl hover:border-green-400 cursor-pointer">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 cursor-pointer">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
             </svg>
         </a>
     </div>
 
-    <table class="w-full text-sm text-left">
-        <thead class="text-sm">
+    <table class="w-full text-left">
+        <thead class="border-b">
             <tr>
                 <th class="p-3">
                     <input type="checkbox" name="" id="">
