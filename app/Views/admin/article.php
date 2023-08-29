@@ -106,6 +106,14 @@
                         </select>
                     </td>
                 </tr>
+                        </td>
+                        <td class="px-6 py-4 ">
+                            <select id="entries" class=" appearance-none py-2 px-7 cursor-pointer rounded-[15px] text-gray-700 focus:outline-none focus:border-blue-500">
+                                <option value="10" class="block px-4 py-5">Close</option>
+                                <option value="25">Open</option>
+                            </select>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
