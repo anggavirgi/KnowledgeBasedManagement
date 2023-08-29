@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"> -->
 </head>
+
 <body class="m-0 p-0 h-full text-sm">
   <!-- WARNA BG SEBELAH KIRI -->
   <div class="h-screen flex justify-end">
@@ -30,7 +31,7 @@
       <form action="" method="" class="flex flex-col">
         <label for="username">Enter your username or email address</label>
         <input type="text" name="username" id="username" placeholder="Username or email address" class="mt-2 mb-4 px-4 py-2 rounded-md border border-gray-400 outline-[#18A8D8]">
-        
+
         <label for="password">Enter your password</label>
         <div class="relative flex items-center justify-end">
           <input type="password" name="password" id="password" placeholder="Password" class="w-full mt-2 px-4 py-2 rounded-md border border-gray-400 outline-[#18A8D8]">
@@ -50,7 +51,7 @@
           <span>OR</span>
           <hr class="h-[1px] w-full ml-4">
         </div>
-        
+
         <button class="flex justify-center py-2 rounded-md bg-[#FFF4E3] hover:bg-[#f7ead5]">
           <div class="mr-2"><img src="<?php echo base_url(); ?>src/images/google.png" alt="" class="w-[83%]"></div>
           <div>Sign in with Google</div>
