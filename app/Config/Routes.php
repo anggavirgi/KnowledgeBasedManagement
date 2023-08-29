@@ -31,33 +31,39 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->get('/kb', 'Home::index');
-$routes->get('/kb/categories', function () {
-    $data = [
-        'title' => 'Virtusee | Categories'
-    ];
-    return view('customer/categories', $data);
+$routes->group('kb', static function ($routes) {
+
+    $routes->get('categories', function () {
+        $data = [
+            'title' => 'Virtusee | Categories'
+        ];
+        return view('customer/categories', $data);
+    });
+
+    // ROUTE LOGIN
+    $routes->get('login', 'Login::index');
+    $routes->get('register/', 'Login::register');
+    $routes->get('forgot-password/', 'Login::forgotpassword');
 });
 
-// ROUTE LOGIN
-$routes->get('/kb/login', 'Login::index');
-$routes->get('/kb/register/', 'Login::register');
-$routes->get('/kb/forgot-password/', 'Login::forgotpassword');
-
 // ROUTE ADMIN
-$routes->get('/kb/admin/', 'Admin\Admin::index');
+$routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], static function ($routes) {
 
-$routes->get('/kb/user/', 'Admin\User::index');
+    $routes->get('admin', 'Admin::index');
+    $routes->get('user', 'User::index');
+    $routes->get('category/', 'Category::index');
+    $routes->get('category/addcategory/', 'Category::add');
+    $routes->get('category/editcategory/', 'Category::edit');
 
-$routes->get('/kb/category/', 'Admin\Category::index');
-$routes->get('/kb/category/addcategory/', 'Admin\Category::add');
-$routes->get('/kb/category/editcategory/', 'Admin\Category::edit');
+    $routes->get('article/', 'Article::index');
+    $routes->get('article/addarticle', 'Article::add');
+    $routes->get('article/editarticle', 'Article::edit');
 
-$routes->get('/kb/article/', 'Admin\Article::index');
-$routes->get('/kb/article/addarticle', 'Admin\Article::add');
-$routes->get('/kb/article/editarticle', 'Admin\Article::edit');
+    $routes->get('complain/', 'Complain::index');
+    $routes->get('complain/reply', 'Complain::reply');
+});
 
-$routes->get('/kb/complain/', 'Admin\Complain::index');
-$routes->get('/kb/complain/reply', 'Admin\Complain::reply');
+
 
 // ROUTE ERROR
 $routes->match(['get', 'post'], '404', 'Custom404::index');
