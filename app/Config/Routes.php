@@ -45,10 +45,19 @@ $routes->get('/kb/forgot-password/', 'Login::forgotpassword');
 
 // ROUTE ADMIN
 $routes->get('/kb/admin/', 'Admin\Admin::index');
+
 $routes->get('/kb/user/', 'Admin\User::index');
+
 $routes->get('/kb/category/', 'Admin\Category::index');
+$routes->get('/kb/category/addcategory/', 'Admin\Category::add');
+$routes->get('/kb/category/editcategory/', 'Admin\Category::edit');
+
 $routes->get('/kb/article/', 'Admin\Article::index');
+$routes->get('/kb/article/addarticle', 'Admin\Article::add');
+$routes->get('/kb/article/editarticle', 'Admin\Article::edit');
+
 $routes->get('/kb/complain/', 'Admin\Complain::index');
+$routes->get('/kb/complain/reply', 'Admin\Complain::reply');
 
 // ROUTE ERROR
 $routes->match(['get', 'post'], '404', 'Custom404::index');

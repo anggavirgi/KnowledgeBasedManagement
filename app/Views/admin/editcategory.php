@@ -12,7 +12,7 @@
     <div class="font-medium">
       <a href="<?php echo base_url(); ?>kb/category" class="text-main hover:text-sky-600">Category</a>
       <span> / </span>
-      <span>Add Category</span>
+      <span>Edit Category</span>
     </div>
   </div>
 

@@ -14,4 +14,22 @@ class Article extends BaseController
     
     return view('admin/article', $data);
   }
+
+  public function add()
+  {
+    $data = [
+      'title' => 'Add Article'
+    ];
+    
+    return view('admin/addarticle', $data);
+  }
+
+  public function edit()
+  {
+    $data = [
+      'title' => 'Edit Article'
+    ];
+    
+    return view('admin/editarticle', $data);
+  }
 }
