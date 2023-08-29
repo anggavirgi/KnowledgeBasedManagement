@@ -7,8 +7,7 @@ module.exports = {
         'main': '#18A8D8',
         'secondary': '#FFC700',
         'form': '#666666',
-      
-      },
+        },
     },
   },
   plugins: [],

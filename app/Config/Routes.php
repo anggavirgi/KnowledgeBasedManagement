@@ -52,6 +52,8 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     $routes->get('admin', 'Admin::index');
 
     $routes->get('user', 'User::index');
+    $routes->get('user/adduser', 'User::add');
+
 
     $routes->get('category/', 'Category::index');
     $routes->get('category/addcategory/', 'Category::add');
