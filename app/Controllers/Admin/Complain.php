@@ -14,4 +14,14 @@ class Complain extends BaseController
     
     return view('admin/complain', $data);
   }
+  
+  public function reply()
+  {
+    $data = [
+      'title' => 'Reply Complain'
+    ];
+    
+    return view('admin/replycomplain', $data);
+  }
+
 }
