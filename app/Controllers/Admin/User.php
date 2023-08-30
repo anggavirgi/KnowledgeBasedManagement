@@ -11,7 +11,21 @@ class User extends BaseController
     $data = [
       'title' => 'User'
     ];
-    
+
     return view('admin/user', $data);
+  }
+
+  public function add()
+  {
+    $data = [
+      'title' => 'Add User'
+    ];
+
+    return view('admin/adduser', $data);
+  }
+
+  public function save()
+  {
+    dd($this->request->getVar());
   }
 }
