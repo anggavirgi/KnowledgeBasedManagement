@@ -25,7 +25,7 @@ $(document).ready(function() {
   // LAYOUT ADMIN
   $('.burger-icon').click(function() {
     $('.sidebar').toggleClass('hidden');
-    $('.right-side').toggleClass('md:ml-[22%] xl:ml-[18%] 2xl:ml-[14%]');
+    $('.right-side').toggleClass('md:ml-[22%] xl:ml-[18%] 2xl:ml-[14%] md:w-[78%] xl:w-[82%] 2xl:w-[86%]');
   });
   
 });
