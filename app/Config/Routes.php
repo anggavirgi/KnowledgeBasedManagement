@@ -19,7 +19,7 @@ $routes->set404Override();
 // where controller filters or CSRF protection are bypassed.
 // If you don't want to define all routes, please use the Auto Routing (Improved).
 // Set `$autoRoutesImproved` to true in `app/Config/Feature.php` and set the following to true.
-$routes->setAutoRoute(true);
+$routes->setAutoRoute(false);
 
 /*
  * --------------------------------------------------------------------
@@ -53,6 +53,11 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
 
     $routes->get('user', 'User::index');
     $routes->get('user/adduser', 'User::add');
+<<<<<<< HEAD
+=======
+    $routes->post('user/save', 'User::save');
+
+>>>>>>> Edo
 
 
     $routes->get('category/', 'Category::index');

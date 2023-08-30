@@ -23,4 +23,12 @@ class User extends BaseController
 
     return view('admin/adduser', $data);
   }
+<<<<<<< HEAD
+=======
+
+  public function save()
+  {
+    dd($this->request->getVar());
+  }
+>>>>>>> Edo
 }
