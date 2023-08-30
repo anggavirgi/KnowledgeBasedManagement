@@ -50,7 +50,11 @@ $routes->group('kb', static function ($routes) {
 $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], static function ($routes) {
 
     $routes->get('admin', 'Admin::index');
+
     $routes->get('user', 'User::index');
+    $routes->get('user/adduser', 'User::add');
+
+
     $routes->get('category/', 'Category::index');
     $routes->get('category/addcategory/', 'Category::add');
     $routes->get('category/editcategory/', 'Category::edit');
