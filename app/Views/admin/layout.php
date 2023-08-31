@@ -61,10 +61,10 @@
     </section>
 
     <!-- RIGHT SIDE -->
-    <div class="md:ml-[22%] xl:ml-[18%] 2xl:ml-[14%] w-full right-side">
+    <div class="md:ml-[22%] xl:ml-[18%] 2xl:ml-[14%] md:w-[78%] xl:w-[82%] 2xl:w-[86%] w-full right-side">
       <!-- NAVBAR -->
       <section class="flex justify-between items-center h-16">
-        <div class="ml-4 burger" id="burger">
+        <div class="ml-4 burger cursor-pointer" id="burger">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 burger-icon" id="burger-icon">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
@@ -87,7 +87,7 @@
       </section>
 
       <!-- MAIN -->
-      <section class="pt-5 px-10">
+      <section class="pt-5 pb-16 px-10">
 
         <?php echo $this->renderSection('content'); ?>
 

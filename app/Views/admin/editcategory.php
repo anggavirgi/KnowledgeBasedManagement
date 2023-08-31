@@ -3,7 +3,7 @@
 <?php echo $this->section('content'); ?>
 
 <div class="border-2 border-gray-200 bg-white p-7 rounded shadow-md text-sm">
-  <div class="flex justify-between items-center mb-16">
+  <div class="flex justify-between items-center">
     <a href="<?php echo base_url(); ?>kb/administrator/category">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 hover:stroke-neutral-700">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -15,9 +15,9 @@
       <span>Edit Category</span>
     </div>
   </div>
-  <form class="ms-7 mb-20">
+  <form class="ms-7 my-10">
     <div class="mb-5">
-      <label for="email" class="block mb-1 text-sm font-medium text-gray-800">Category name</label>
+      <label for="email" class="block mb-2 text-sm font-medium text-gray-800">Category name</label>
       <input type="email" id="email" class="bg-gray-50 border text-gray-800 text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-2/4 p-4  " placeholder="Category name" required>
     </div>
     <div class="mb-11">
