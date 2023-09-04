@@ -3,7 +3,19 @@
 <?php echo $this->section('content'); ?>
 
 <div class="border-2 border-gray-200 bg-white p-7 rounded shadow-md text-sm">
-  <h2 class="font-bold text-xl">List Category</h2>
+  <div class="flex justify-between items-center">
+    <a href="<?php echo base_url(); ?>kb/administrator/category">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 hover:stroke-neutral-700">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+      </svg>
+    </a>
+    <div class="font-medium">
+      <a href="<?php echo base_url(); ?>kb/administrator/category" class="text-main hover:text-sky-600">Category</a>
+      <span> / </span>
+      <span>Sub-Category</span>
+    </div>
+  </div>
+  <h2 class="font-bold text-xl mt-6">List Sub-Category</h2>
   <div class="flex justify-between items-center my-5">
     <form method="" class="relative flex justify-end items-center">
       <input type="text" placeholder="search" class="px-5 py-2 w-64 rounded-2xl border border-gray-400 outline-main">
@@ -13,7 +25,7 @@
         </svg>
       </button>
     </form>
-    <a href="<?php echo base_url(); ?>kb/administrator/category/addcategory" class="border border-gray-400 px-6 py-2 rounded-2xl hover:border-green-400 cursor-pointer">
+    <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory/addsubcategory" class="border border-gray-400 px-6 py-2 rounded-2xl hover:border-green-400 cursor-pointer">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" width="20" height="20">
         <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z" />
       </svg>
@@ -32,9 +44,7 @@
             <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v13.19l5.47-5.47a.75.75 0 111.06 1.06l-6.75 6.75a.75.75 0 01-1.06 0l-6.75-6.75a.75.75 0 111.06-1.06l5.47 5.47V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
           </svg>
         </th>
-        <th class="p-3 w-64">Name</th>
-        <th class="p-3">Icon</th>
-        <th class="p-3">Total Sub-Category</th>
+        <th class="p-3 w-64">Name Sub-Category</th>
         <th class="p-3">Action</th>
       </tr>
     </thead>
@@ -45,17 +55,8 @@
         </td>
         <td class="p-3">1</td>
         <td class="p-3">Fitur</td>
-        <td class="p-3">
-          <img src="<?php echo base_url() ?>src/images/icon-category.png" alt="" class="mx-auto">
-        </td>
-        <td class="p-3">15</td>
         <td class="p-3 text-center">
-          <a href="<?php echo base_url() ?>kb/administrator/category/subcategory" class="px-2 inline-block" title="sub-category">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 stroke-main hover:stroke-blue-700">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402M6.75 21A3.75 3.75 0 013 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 003.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008z" />
-            </svg>
-          </a>
-          <a href="<?php echo base_url(); ?>kb/administrator/category/editcategory" class="px-2 inline-block" title="edit">
+          <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory/editsubcategory" class="px-2 inline-block" title="edit">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-5 h-5 stroke-secondary hover:stroke-yellow-600">
               <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
             </svg>

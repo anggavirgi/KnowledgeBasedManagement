@@ -36,8 +36,8 @@
                 <input type="password" name="password" id="password" class="bg-gray-50 text-sm rounded-lg block w-full p-3.5  placeholder-gray-400 text-black border border-[#CCCCCC]" placeholder="Password" required>
             </div>
             <div class="mb-4 relative">
-                <label for="countries" class="block mb-2 text-sm font-medium text-form">Status user</label>
-                <select id="countries" name="user-status" class="bg-gray-50 border appearance-none border-gray-300 text-sm rounded-lg block w-full p-2.5 placeholder-gray-400 text-form">
+                <label for="status" class="block mb-2 text-sm font-medium text-form">Status user</label>
+                <select id="status" name="user-status" class="bg-gray-50 border appearance-none border-gray-300 text-sm rounded-lg block w-full p-2.5 placeholder-gray-400 text-form">
                     <option selected>Choose user status</option>
                     <option value="new">New user</option>
                     <option value="old">Old user</option>
@@ -49,8 +49,8 @@
                 </div>
             </div>
             <div class="mb-4 relative">
-                <label for="countries" class="block mb-2 text-sm font-medium text-form">Id Project</label>
-                <select id="countries" name="project-id" class="bg-gray-50 border appearance-none border-gray-300 text-sm rounded-lg block w-full p-2.5 placeholder-gray-400 text-form">
+                <label for="project" class="block mb-2 text-sm font-medium text-form">Id Project</label>
+                <select id="project" name="project-id" class="bg-gray-50 border appearance-none border-gray-300 text-sm rounded-lg block w-full p-2.5 placeholder-gray-400 text-form">
                     <option selected>Choose project id</option>
                     <option value="P001">P001</option>
                     <option value="P002">P002</option>
