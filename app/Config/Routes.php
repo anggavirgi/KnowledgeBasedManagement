@@ -48,7 +48,7 @@ $routes->group('kb', static function ($routes) {
 
 // ROUTE ADMIN
 $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], static function ($routes) {
-
+    
     $routes->get('admin', 'Admin::index');
 
     $routes->get('user', 'User::index');
@@ -56,19 +56,21 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
 <<<<<<< HEAD
 =======
     $routes->post('user/save', 'User::save');
+    $routes->get('user/edituser', 'User::edit');
 
->>>>>>> Edo
+    $routes->get('category', 'Category::index');
+    $routes->get('category/addcategory', 'Category::add');
+    $routes->get('category/editcategory', 'Category::edit');
+    $routes->get('category/subcategory', 'Category::subcategory');
+    $routes->get('category/subcategory/addsubcategory', 'Category::addsub');
+    $routes->get('category/subcategory/editsubcategory', 'Category::editsub');
 
-
-    $routes->get('category/', 'Category::index');
-    $routes->get('category/addcategory/', 'Category::add');
-    $routes->get('category/editcategory/', 'Category::edit');
-
-    $routes->get('article/', 'Article::index');
+    $routes->get('article', 'Article::index');
     $routes->get('article/addarticle', 'Article::add');
     $routes->get('article/editarticle', 'Article::edit');
+    $routes->get('article/detailarticle', 'Article::detail');
 
-    $routes->get('complain/', 'Complain::index');
+    $routes->get('complain', 'Complain::index');
     $routes->get('complain/reply', 'Complain::reply');
 });
 

@@ -15,10 +15,10 @@
       <span>Edit Category</span>
     </div>
   </div>
-  <form class="ms-7 mb-20">
+  <form class="ms-7 my-10">
     <div class="mb-5">
-      <label for="email" class="block mb-1 text-sm font-medium text-gray-800">Category name</label>
-      <input type="email" id="email" class="bg-gray-50 border text-gray-800 text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-2/4 p-4  " placeholder="Category name" required>
+      <label for="category" class="block mb-2 text-sm font-medium text-gray-800">Category name</label>
+      <input type="category" id="category" class="bg-gray-50 border text-gray-800 text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-2/4 p-4  " placeholder="Category name" required>
     </div>
     <div class="mb-11">
       <div class="flex items-center justify-start ">

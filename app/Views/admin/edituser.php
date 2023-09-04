@@ -12,7 +12,7 @@
         <div class="font-medium">
             <a href="<?php echo base_url(); ?>kb/administrator/user" class="text-main hover:text-sky-600">User</a>
             <span> / </span>
-            <span>Add User</span>
+            <span>Edit User</span>
         </div>
     </div>
 
@@ -21,23 +21,23 @@
         <div class="grid grid-cols-2 gap-4 py-10">
             <div class="mb-4">
                 <label for="name" class="block mb-2 text-sm font-medium text-form">Name</label>
-                <input type="name" name="name" id="name" class="bg-gray-50 text-sm rounded-lg block w-full p-3.5  placeholder-gray-400 text-black border border-[#CCCCCC] focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Name" required>
+                <input type="name" name="name" id="name" class="bg-gray-50 text-sm rounded-lg block w-full p-3.5  placeholder-gray-400 text-black border border-[#CCCCCC]" placeholder="Name" required>
             </div>
             <div class="mb-4">
                 <label for="username" class="block mb-2 text-sm font-medium text-form">Username</label>
-                <input type="username" name="username" id="username" class="bg-gray-50 text-sm rounded-lg block w-full p-3.5  placeholder-gray-400 text-black border border-[#CCCCCC] focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Username" required>
+                <input type="username" name="username" id="username" class="bg-gray-50 text-sm rounded-lg block w-full p-3.5  placeholder-gray-400 text-black border border-[#CCCCCC]" placeholder="Username" required>
             </div>
             <div class="mb-4">
                 <label for="email" class="block mb-2 text-sm font-medium text-form">Email</label>
-                <input type="email" name="email" id="email" class="bg-gray-50 text-sm rounded-lg block w-full p-3.5  placeholder-gray-400 text-black border border-[#CCCCCC] focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Email" required>
+                <input type="email" name="email" id="email" class="bg-gray-50 text-sm rounded-lg block w-full p-3.5  placeholder-gray-400 text-black border border-[#CCCCCC]" placeholder="Email" required>
             </div>
             <div class="mb-4">
                 <label for="password" class="block mb-2 text-sm font-medium text-form">Password</label>
-                <input type="password" name="password" id="password" class="bg-gray-50 text-sm rounded-lg block w-full p-3.5  placeholder-gray-400 text-black border border-[#CCCCCC] focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Password" required>
+                <input type="password" name="password" id="password" class="bg-gray-50 text-sm rounded-lg block w-full p-3.5  placeholder-gray-400 text-black border border-[#CCCCCC]" placeholder="Password" required>
             </div>
             <div class="mb-4 relative">
                 <label for="status" class="block mb-2 text-sm font-medium text-form">Status user</label>
-                <select id="status" name="user-status" class="cursor-pointer bg-gray-50 border appearance-none border-gray-300 text-sm rounded-lg block w-full p-3.5 placeholder-gray-400 text-form focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                <select id="status" name="user-status" class="bg-gray-50 border appearance-none border-gray-300 text-sm rounded-lg block w-full p-2.5 placeholder-gray-400 text-form">
                     <option selected>Choose user status</option>
                     <option value="new">New user</option>
                     <option value="old">Old user</option>
@@ -50,7 +50,7 @@
             </div>
             <div class="mb-4 relative">
                 <label for="project" class="block mb-2 text-sm font-medium text-form">Id Project</label>
-                <select id="project" name="project-id" class="cursor-pointer bg-gray-50 border appearance-none border-gray-300 text-sm rounded-lg block w-full p-3.5 placeholder-gray-400 text-form focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                <select id="project" name="project-id" class="bg-gray-50 border appearance-none border-gray-300 text-sm rounded-lg block w-full p-2.5 placeholder-gray-400 text-form">
                     <option selected>Choose project id</option>
                     <option value="P001">P001</option>
                     <option value="P002">P002</option>
