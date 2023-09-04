@@ -54,18 +54,17 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     $routes->get('user', 'User::index');
     $routes->get('user/adduser', 'User::add');
     $routes->post('user/save', 'User::save');
+    $routes->get('user/edituser', 'User::edit');
 
+    $routes->get('category', 'Category::index');
+    $routes->get('category/addcategory', 'Category::add');
+    $routes->get('category/editcategory', 'Category::edit');
 
-
-    $routes->get('category/', 'Category::index');
-    $routes->get('category/addcategory/', 'Category::add');
-    $routes->get('category/editcategory/', 'Category::edit');
-
-    $routes->get('article/', 'Article::index');
+    $routes->get('article', 'Article::index');
     $routes->get('article/addarticle', 'Article::add');
     $routes->get('article/editarticle', 'Article::edit');
 
-    $routes->get('complain/', 'Complain::index');
+    $routes->get('complain', 'Complain::index');
     $routes->get('complain/reply', 'Complain::reply');
 });
 

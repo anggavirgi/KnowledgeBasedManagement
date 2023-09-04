@@ -27,5 +27,19 @@ $(document).ready(function() {
     $('.sidebar').toggleClass('hidden');
     $('.right-side').toggleClass('md:ml-[22%] xl:ml-[18%] 2xl:ml-[14%] md:w-[78%] xl:w-[82%] 2xl:w-[86%]');
   });
+
+  // SIDEBAR MENU ACTIVE
+  const activePage = window.location.pathname
+  const parts = activePage.split('/');
+  const menuPart = '/' + parts[3];
+
+  const navLink = document.querySelectorAll('.navbar a').forEach(link => {
+    console.log('oke');
+    if(link.href.includes(activePage)){
+      link.classList.add('bg-main')
+      link.classList.add('text-white')
+      link.classList.add('rounded-md')
+    }
+  })
   
 });
