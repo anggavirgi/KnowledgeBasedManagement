@@ -32,4 +32,31 @@ class Category extends BaseController
     
     return view('admin/editcategory', $data);
   }
+
+  public function subcategory()
+  {
+    $data = [
+      'title' => 'Sub-Category'
+    ];
+    
+    return view('admin/subcategory', $data);
+  }
+
+  public function addsub()
+  {
+    $data = [
+      'title' => 'Add Sub-Category'
+    ];
+    
+    return view('admin/addsubcategory', $data);
+  }
+
+  public function editsub()
+  {
+    $data = [
+      'title' => 'Edit Sub-Category'
+    ];
+    
+    return view('admin/editsubcategory', $data);
+  }
 }

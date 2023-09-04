@@ -32,4 +32,13 @@ class Article extends BaseController
     
     return view('admin/editarticle', $data);
   }
+
+  public function detail()
+  {
+    $data = [
+      'title' => 'Detail Article'
+    ];
+    
+    return view('admin/detailarticle', $data);
+  }
 }

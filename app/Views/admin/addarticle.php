@@ -23,7 +23,7 @@
     <div class="flex justify-between gap-5">
       <div class="select-category w-full">
         <label for="default" class="block mb-2 font-medium text-gray-800">Category</label>
-        <select id="default" class="bg-gray-50 border border-gray-300 text-gray-800 mb-6 rounded-lg focus:ring-main focus:outline-none focus:border-main block w-full p-3">
+        <select id="default" class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-800 mb-6 rounded-lg focus:ring-main focus:outline-none focus:border-main block w-full p-3">
           <option selected>Select category</option>
           <option value="category-1">category-1</option>
           <option value="category-2">category-2</option>
@@ -33,7 +33,7 @@
       </div>
       <div class="select-category w-full">
         <label for="default" class="block mb-2 font-medium text-gray-800">Select sub category</label>
-        <select id="default" class="bg-gray-50 border border-gray-300 text-gray-800 mb-6 rounded-lg focus:ring-main focus:outline-none focus:border-main block w-full p-3">
+        <select id="default" class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-800 mb-6 rounded-lg focus:ring-main focus:outline-none focus:border-main block w-full p-3">
           <option selected>Select Sub category</option>
           <option value="category-1">Sub category-1</option>
           <option value="category-2">Sub category-2</option>
@@ -43,7 +43,7 @@
       </div>
       <div class="select-category w-full">
         <label for="default" class="block mb-2 font-medium text-gray-800">Select project</label>
-        <select id="default" class="bg-gray-50 border border-gray-300 text-gray-800 mb-6 rounded-lg focus:ring-main focus:outline-none focus:border-main block w-full p-3">
+        <select id="default" class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-800 mb-6 rounded-lg focus:ring-main focus:outline-none focus:border-main block w-full p-3">
           <option selected>Select project</option>
           <option value="category-1">Project-1</option>
           <option value="category-2">Project-2</option>
