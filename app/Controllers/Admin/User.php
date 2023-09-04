@@ -28,4 +28,13 @@ class User extends BaseController
   {
     dd($this->request->getVar());
   }
+
+  public function edit()
+  {
+    $data = [
+      'title' => 'Edit User'
+    ];
+
+    return view('admin/edituser', $data);
+  }
 }
