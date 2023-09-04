@@ -41,6 +41,13 @@ $(document).ready(function() {
     }
   })
 
+  // CKEDITOR 5 CLASSIC
+  ClassicEditor
+    .create( document.querySelector( '#editor' ) )
+    .catch( error => {
+        console.error( error );
+    } );
+
   // Changing Status Complain
   var initialValue = $('#status-entries').val();
   const statusComplainElement = $('#status-entries')
@@ -51,6 +58,7 @@ $(document).ready(function() {
   }else{
     $(statusComplainElement).removeClass('bg-pending-status text-pending-status-text').removeClass('bg-progress-status text-progress-status-text').addClass('bg-solved-status text-solved-status-text');
   }
+
   
   statusComplainElement.change(function() {
     initialValue = $(this).val();

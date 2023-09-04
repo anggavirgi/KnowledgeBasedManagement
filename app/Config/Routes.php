@@ -48,7 +48,7 @@ $routes->group('kb', static function ($routes) {
 
 // ROUTE ADMIN
 $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], static function ($routes) {
-
+    
     $routes->get('admin', 'Admin::index');
 
     $routes->get('user', 'User::index');
