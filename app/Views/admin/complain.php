@@ -102,7 +102,7 @@
                         System eror bang
                     </td>
                     <td class="p-3 text-center relative">
-                        <select id="status-entries" name="status_entries" class="py-2 ps-3 pe-6 appearance-none cursor-pointer rounded-[15px] text-gray-700 focus:outline-none focus:border-blue-500 ">
+                        <select id="status-entries" name="status_entries" class="py-2 ps-3 pe-6 appearance-none cursor-pointer rounded-[15px] text-gray-700 focus:outline-none focus:border-blue-500">
                             <option value="pending" class=" bg-white text-black">Pending</option>
                             <option value="progress" class="bg-white text-black">In progres</option>
                             <option value="solved" class="bg-white text-black">Solved</option>
