@@ -98,7 +98,7 @@
                     <td class="p-3 font-medium text-gray-900 whitespace-nowrap">
                         Aviarianss32@gmail.com
                     </td>
-                    <td class="p-3 flex justify-start">
+                    <td class="p-3">
                         System eror bang
                     </td>
                     <td class="p-3 text-center">

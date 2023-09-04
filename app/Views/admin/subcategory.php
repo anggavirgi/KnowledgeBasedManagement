@@ -15,6 +15,7 @@
       <span>Sub-Category</span>
     </div>
   </div>
+  
   <h2 class="font-bold text-xl mt-6">List Sub-Category</h2>
   <div class="flex justify-between items-center my-5">
     <form method="" class="relative flex justify-end items-center">

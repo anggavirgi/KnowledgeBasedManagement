@@ -53,9 +53,13 @@
       </div>
     </div>
 
-    <div>
+    <!-- <div>
       <label for="message" class="block mb-2 font-medium text-gray-800 ">Your message</label>
       <textarea id="message" rows="8" class="block p-2.5 w-full mb-10 text-gray-800 bg-gray-50 rounded-lg border border-gray-300 focus:outline-none focus:ring-main focus:border-main " placeholder="Leave a comment..."></textarea>
+    </div> -->
+
+    <div class="mb-5">
+      <div id="editor"></div>
     </div>
 
     <button type="button" class="text-gray-800 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-main font-medium rounded-lg px-6 py-2.5 mr-8 ">Cancel</button>

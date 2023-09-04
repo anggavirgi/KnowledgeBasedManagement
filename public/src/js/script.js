@@ -34,12 +34,18 @@ $(document).ready(function() {
   const menuPart = '/' + parts[3];
 
   const navLink = document.querySelectorAll('.navbar a').forEach(link => {
-    console.log('oke');
     if(link.href.includes(activePage)){
       link.classList.add('bg-main')
       link.classList.add('text-white')
       link.classList.add('rounded-md')
     }
   })
+
+  // CKEDITOR 5 CLASSIC
+  ClassicEditor
+    .create( document.querySelector( '#editor' ) )
+    .catch( error => {
+        console.error( error );
+    } );
   
 });
