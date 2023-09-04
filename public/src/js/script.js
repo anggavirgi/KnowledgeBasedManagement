@@ -47,5 +47,39 @@ $(document).ready(function() {
     .catch( error => {
         console.error( error );
     } );
+
+  // Changing Status Complain
+  var initialValue = $('#status-entries').val();
+  const statusComplainElement = $('#status-entries')
+  if (initialValue === "pending") {
+    $(statusComplainElement).removeClass('bg-solved-status text-solved-status-text').removeClass('bg-progress-status text-progress-status-text').addClass('bg-pending-status text-pending-status-text');
+  } else if((initialValue === "progress")){
+    $(statusComplainElement).removeClass('bg-pending-status text-pending-status-text').removeClass('bg-solved-status text-solved-status-text').addClass('bg-progress-status text-progress-status-text');
+  }else{
+    $(statusComplainElement).removeClass('bg-pending-status text-pending-status-text').removeClass('bg-progress-status text-progress-status-text').addClass('bg-solved-status text-solved-status-text');
+  }
+
   
+  statusComplainElement.change(function() {
+    initialValue = $(this).val();
+    if (initialValue === "pending") {
+      $(statusComplainElement).removeClass('bg-solved-status text-solved-status-text').removeClass('bg-progress-status text-progress-status-text').addClass('bg-pending-status text-pending-status-text');
+    } else if((initialValue === "progress")){
+      $(statusComplainElement).removeClass('bg-pending-status text-pending-status-text').removeClass('bg-solved-status text-solved-status-text').addClass('bg-progress-status text-progress-status-text');
+    }else{
+      $(statusComplainElement).removeClass('bg-pending-status text-pending-status-text').removeClass('bg-progress-status text-progress-status-text').addClass('bg-solved-status text-solved-status-text');
+    }
+  });
+    
+
+
+  // Complain Details Row Selected
+  $(".clickable-row").click(function(event) {
+    if (!$(event.target).closest('select').length) {
+      // Only navigate if the clicked element is not a select dropdown
+      window.location = $(this).data("href");
+    }
+  });
+
+
 });
