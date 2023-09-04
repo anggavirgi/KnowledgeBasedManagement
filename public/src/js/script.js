@@ -51,6 +51,8 @@ $(document).ready(function() {
   // Changing Status Complain
   var initialValue = $('#status-entries').val();
   const statusComplainElement = $('#status-entries')
+  console.log(initialValue);
+  console.log(statusComplainElement);
   if (initialValue === "pending") {
     $(statusComplainElement).removeClass('bg-solved-status text-solved-status-text').removeClass('bg-progress-status text-progress-status-text').addClass('bg-pending-status text-pending-status-text');
   } else if((initialValue === "progress")){
