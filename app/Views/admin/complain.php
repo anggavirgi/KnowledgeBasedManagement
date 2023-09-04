@@ -91,22 +91,27 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="border-b hover:bg-gray-50 dark:hover:bg-sky-50">
+                <tr class="clickable-row cursor-pointer border-b hover:bg-gray-50 dark:hover:bg-sky-50" data-href="<?php echo base_url(); ?>kb/administrator/complain/reply">
                     <td class="p-3">
                         <input type="checkbox" name="" id="">
                     </td>
-                    <td class="p-3 font-medium text-gray-900 whitespace-nowrap">
+                    <td class="p-3 font-medium text-gray-900 whitespace-nowrap cursor-pointer">
                         Aviarianss32@gmail.com
                     </td>
-                    <td class="p-3 flex justify-start">
+                    <td class="p-3">
                         System eror bang
                     </td>
-                    <td class="p-3 text-center">
-                        <select id="entries" class="py-2 px-6 cursor-pointer rounded-[15px] text-gray-700 focus:outline-none focus:border-blue-500">
-                            <option value="10" class="block px-4 py-5">Pending</option>
-                            <option value="25">In progres</option>
-                            <option value="25">Solved</option>
+                    <td class="p-3 text-center relative">
+                        <select id="status-entries" name="status_entries" class="py-2 ps-3 pe-6 appearance-none cursor-pointer rounded-[15px] text-gray-700 focus:outline-none focus:border-blue-500 ">
+                            <option value="pending" class=" bg-white text-black">Pending</option>
+                            <option value="progress" class="bg-white text-black">In progres</option>
+                            <option value="solved" class="bg-white text-black">Solved</option>
                         </select>
+                        <div id="dd-icon" class="absolute inset-y-0 right-16 flex items-center pointer-events-none">
+                            <svg class="w-2 h-2 text-gray-400" width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6.97607 0.81897L4.055 5.13429L1.00017 0.9126L6.97607 0.81897Z" fill="#CD6200" stroke="#CD6200" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
                     </td>
                     <td class="p-3 text-center">
                         <select id="entries" class="py-2 px-7 cursor-pointer rounded-[15px] text-gray-700 focus:outline-none focus:border-blue-500">
