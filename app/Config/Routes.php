@@ -33,12 +33,8 @@ $routes->get('/', 'Home::index');
 $routes->get('/kb', 'Home::index');
 $routes->group('kb', static function ($routes) {
 
-    $routes->get('categories', function () {
-        $data = [
-            'title' => 'Virtusee | Categories'
-        ];
-        return view('customer/categories', $data);
-    });
+    $routes->get('categories', 'Home::categories');
+    $routes->get('complain', 'Home::complain');
 
     // ROUTE LOGIN
     $routes->get('login', 'Login::index');
@@ -48,13 +44,12 @@ $routes->group('kb', static function ($routes) {
 
 // ROUTE ADMIN
 $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], static function ($routes) {
-    
+
     $routes->get('admin', 'Admin::index');
 
     $routes->get('user', 'User::index');
     $routes->get('user/adduser', 'User::add');
-<<<<<<< HEAD
-=======
+
     $routes->post('user/save', 'User::save');
     $routes->get('user/edituser', 'User::edit');
 

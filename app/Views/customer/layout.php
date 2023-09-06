@@ -13,15 +13,48 @@
 <body>
     <section class="navbar bg-white py-5 sm:px-[100px] px-[10px] drop-shadow-md">
         <div class="flex justify-between">
-            <img src="<?php echo base_url(); ?>src/images/logo.png" alt="" class="nav-brand w-40">
-            <div class="buttons grid grid-cols-2 gap-2">
-                <?php if (logged_in()) : ?>
-                    <a href="/logout" class="p-2 px-0 whitespace-nowrap">Sign out</a>
-                <?php else : ?>
-                    <a href="/kb/login" class="p-2 whitespace-nowrap">Sign In</a>
-                    <a href="/kb/register" class="bg-main text-white rounded-md p-2 whitespace-nowrap">Sign Up</a>
-                <?php endif; ?>
+            <img src="<?php echo base_url(); ?>src/images/logo.png" alt="" class="nav-brand w-40 h-fit self-center">
+
+            <form method="" class="relative flex justify-end items-center">
+                <input type="text" placeholder="search" class="px-5 py-2 w-96 rounded-2xl border border-gray-400 outline-main">
+                <button class="absolute right-5 cursor-pointer align-middle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search text-gray-400" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg>
+                </button>
+            </form>
+
+
+            <button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName" class="flex items-center text-sm font-medium text-form hover:text-black hover:text-blue-500 md:mr-0 focus:ring-4 focus:ring-gray-100 focus:ring-gray-100 rounded-full text-form " type="button">
+                <span class="sr-only">Open user menu</span>
+                <img class="w-12 h-12 mr-2 rounded-full" src="<?php echo base_url(); ?>src/images/profilepic.png" alt="user photo">
+                <div class="flex flex-col text-left ">
+                    Bonnie Green
+                    <span class="text-form text-xs truncate w-36">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus dignissimos excepturi molestias mollitia nobis voluptas?</span>
+                </div>
+            </button>
+
+            <!-- Element After Login -->
+            <!-- Dropdown Profile -->
+            <div id="dropdownAvatarName" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 ">
+                <ul class="py-2 text-sm text-black" aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
+                    <li>
+                        <a href="<?php echo base_url(); ?>kb/complain" class="block px-4 py-2 bg-white hover:bg-gray-300 text-black">Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-4 py-2 bg-white hover:bg-gray-300 text-black">Article</a>
+                    </li>
+                </ul>
+                <div class="py-2">
+                    <a href="#" class="block px-4 py-2 text-sm text-red-700 hover:bg-gray-300">Logout</a>
+                </div>
             </div>
+
+            <!-- Element Before Login -->
+            <!-- <div class="buttons grid grid-cols-2 gap-2">
+                <a href="/kb/login" class="p-2 whitespace-nowrap">Sign In</a>
+                <a href="/kb/register" class="bg-main text-white rounded-md p-2 whitespace-nowrap">Sign Up</a>
+            </div> -->
         </div>
     </section>
 
@@ -96,6 +129,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="<?php echo base_url(); ?>/src/js/script.js"></script>
+    <script src="<?php echo base_url(); ?>node_modules/flowbite/dist/flowbite.min.js"></script>
 
 </body>
 
