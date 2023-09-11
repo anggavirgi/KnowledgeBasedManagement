@@ -27,4 +27,5 @@ class Home extends BaseController
         ];
         return view('customer/complain', $data);
     }
+
 }
