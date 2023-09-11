@@ -24,6 +24,7 @@ class User extends BaseController
     return view('admin/adduser', $data);
   }
 
+
   public function save()
   {
     dd($this->request->getVar());

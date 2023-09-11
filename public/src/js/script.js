@@ -33,8 +33,8 @@ $(document).ready(function() {
   const parts = activePage.split('/');
   const menuPart = '/' + parts[3];
 
-  const navLink = document.querySelectorAll('.sidebar-child a').forEach(link => {
-    if(link.href.includes(activePage)){
+  const navLink = document.querySelectorAll('.navbar a').forEach(link => {
+    if(link.href.includes(activePage) && !link.closest('#dropdownAvatarName')){
       link.classList.add('bg-main')
       link.classList.add('text-white')
       link.classList.add('rounded-md')
@@ -51,12 +51,20 @@ $(document).ready(function() {
   // Changing Status Complain
   var initialValue = $('#status-entries').val();
   const statusComplainElement = $('#status-entries')
+  const ddIconElement = $('#dd-icon svg path')
+  const ddIconPos = $('#dd-icon')
   if (initialValue === "pending") {
     $(statusComplainElement).removeClass('bg-solved-status text-solved-status-text').removeClass('bg-progress-status text-progress-status-text').addClass('bg-pending-status text-pending-status-text');
+    $(ddIconPos).addClass('right-[4.5rem]')
+    $(ddIconElement).attr('fill','#CD6200').attr('stroke','#CD6200')
   } else if((initialValue === "progress")){
     $(statusComplainElement).removeClass('bg-pending-status text-pending-status-text').removeClass('bg-solved-status text-solved-status-text').addClass('bg-progress-status text-progress-status-text');
+    $(ddIconPos).addClass('right-[3.5rem]')
+    $(ddIconElement).attr('fill','#1F9254').attr('stroke','#1F9254')
   }else{
     $(statusComplainElement).removeClass('bg-pending-status text-pending-status-text').removeClass('bg-progress-status text-progress-status-text').addClass('bg-solved-status text-solved-status-text');
+    $(ddIconPos).addClass('right-[4rem]')
+    $(ddIconElement).attr('fill','#047FA6').attr('stroke','#047FA6')
   }
 
   
@@ -64,13 +72,41 @@ $(document).ready(function() {
     initialValue = $(this).val();
     if (initialValue === "pending") {
       $(statusComplainElement).removeClass('bg-solved-status text-solved-status-text').removeClass('bg-progress-status text-progress-status-text').addClass('bg-pending-status text-pending-status-text');
+      $(ddIconPos).removeClass('right-[4.5rem]').removeClass('right-[4rem]').addClass('right-[4.5rem]')
+      $(ddIconElement).attr('fill','#CD6200').attr('stroke','#CD6200')
     } else if((initialValue === "progress")){
       $(statusComplainElement).removeClass('bg-pending-status text-pending-status-text').removeClass('bg-solved-status text-solved-status-text').addClass('bg-progress-status text-progress-status-text');
+      $(ddIconPos).removeClass('right-[4.5rem]').removeClass('right-[4rem]').addClass('right-[4rem]')
+      $(ddIconElement).attr('fill','#1F9254').attr('stroke','#1F9254')
     }else{
       $(statusComplainElement).removeClass('bg-pending-status text-pending-status-text').removeClass('bg-progress-status text-progress-status-text').addClass('bg-solved-status text-solved-status-text');
+      $(ddIconPos).removeClass('right-[4.5rem]').removeClass('right-[4rem]').addClass('right-[4.5rem]')
+      $(ddIconElement).attr('fill','#047FA6').attr('stroke','#047FA6')
     }
   });
-    
+
+  // Changing Status Case Complain
+  var initialCaseValue = $('#case-entries').val();
+  const statusCaseComplainElement = $('#case-entries')
+  const ddCaseIconElement = $('#dd-case-icon svg path')
+  if (initialCaseValue === "open") {
+    $(statusCaseComplainElement).removeClass('bg-close-status text-close-status-text').addClass('bg-solved-status text-solved-status-text');
+    $(ddCaseIconElement).attr('fill','#1F9254').attr('stroke','#1F9254')
+  }else{
+    $(statusCaseComplainElement).removeClass('bg-solved-status text-solved-status-text').addClass('bg-close-status text-close-status-text');
+    $(ddCaseIconElement).attr('fill','#A30D11').attr('stroke','#A30D11')
+  }
+
+  statusCaseComplainElement.change(function() {
+    initialCaseValue = $(this).val();
+    if (initialCaseValue === "open") {
+      $(statusCaseComplainElement).removeClass('bg-close-status text-close-status-text').addClass('bg-solved-status text-solved-status-text');
+      $(ddCaseIconElement).attr('fill','#1F9254').attr('stroke','#1F9254')
+    } else{
+      $(statusCaseComplainElement).removeClass('bg-solved-status text-solved-status-text').addClass('bg-close-status text-close-status-text');
+      $(ddCaseIconElement).attr('fill','#A30D11').attr('stroke','#A30D11')
+    }
+  });
 
 
   // Complain Details Row Selected

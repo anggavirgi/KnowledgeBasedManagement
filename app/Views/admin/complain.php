@@ -102,22 +102,27 @@
                         System eror bang
                     </td>
                     <td class="p-3 text-center relative">
-                        <select id="status-entries" name="status_entries" class="py-2 ps-3 pe-6 appearance-none cursor-pointer rounded-[15px] text-gray-700 focus:outline-none focus:border-blue-500">
+                        <select id="status-entries" name="status_entries" class="py-2 ps-4 pe-6 appearance-none cursor-pointer rounded-[15px] text-gray-700 focus:outline-none focus:border-blue-500">
                             <option value="pending" class=" bg-white text-black">Pending</option>
                             <option value="progress" class="bg-white text-black">In progres</option>
                             <option value="solved" class="bg-white text-black">Solved</option>
                         </select>
-                        <div id="dd-icon" class="absolute inset-y-0 right-16 flex items-center pointer-events-none">
+                        <div id="dd-icon" class="absolute inset-y-0 flex items-center pointer-events-none">
                             <svg class="w-2 h-2 text-gray-400" width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M6.97607 0.81897L4.055 5.13429L1.00017 0.9126L6.97607 0.81897Z" fill="#CD6200" stroke="#CD6200" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </div>
                     </td>
-                    <td class="p-3 text-center">
-                        <select id="entries" class="py-2 px-7 cursor-pointer rounded-[15px] text-gray-700 focus:outline-none focus:border-blue-500">
-                            <option value="10" class="block px-4 py-5">Close</option>
-                            <option value="25">Open</option>
+                    <td class="p-3 text-center relative">
+                        <select id="case-entries" name="status_case_entries" class="py-2 pe-9 ps-5 appearance-none cursor-pointer rounded-[15px] text-gray-700 focus:outline-none focus:border-blue-500>">
+                            <option value="close" class="block px-4 py-5 bg-white text-black">Close</option>
+                            <option value="open" class="block px-4 py-5 bg-white text-black">Open</option>
                         </select>
+                        <div id="dd-case-icon" class="absolute inset-y-0 right-[5rem] flex items-center pointer-events-none">
+                            <svg class="w-2 h-2 text-gray-400" width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6.97607 0.81897L4.055 5.13429L1.00017 0.9126L6.97607 0.81897Z" fill="#A30D11" stroke="#A30D11" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
                     </td>
                     <td class="p-3 text-center">
                         <a class="text-white font-semibold" href="<?php echo base_url(); ?>kb/administrator/complain/reply">

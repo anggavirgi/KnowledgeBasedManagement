@@ -87,11 +87,16 @@
                     <td class="p-3">
                         Laptop
                     </td>
-                    <td class="p-3 text-center">
-                        <select id="entries" class="appearance-none py-2 px-7 cursor-pointer rounded-[15px] text-gray-700 focus:outline-none focus:border-blue-500">
-                            <option value="10" class="block px-4 py-5">Close</option>
-                            <option value="25">Open</option>
+                    <td class="p-3 text-center relative">
+                        <select id="case-entries" name="status_case_entries" class="py-2 pe-9 ps-5 appearance-none cursor-pointer rounded-[15px] text-gray-700 focus:outline-none focus:border-blue-500>">
+                            <option value="close" class="block px-4 py-5 bg-white text-black">Close</option>
+                            <option value="open" class="block px-4 py-5 bg-white text-black">Open</option>
                         </select>
+                        <div id="dd-case-icon" class="absolute inset-y-0 right-[4.2rem] flex items-center pointer-events-none">
+                            <svg class="w-2 h-2 text-gray-400" width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6.97607 0.81897L4.055 5.13429L1.00017 0.9126L6.97607 0.81897Z" fill="#A30D11" stroke="#A30D11" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
                     </td>
                     <td class="p-3 text-center">
                         <a href="<?php echo base_url() ?>kb/administrator/article/detailarticle" class="px-2 inline-block" title="detail">
