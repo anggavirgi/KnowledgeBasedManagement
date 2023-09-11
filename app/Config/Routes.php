@@ -30,16 +30,18 @@ $routes->setAutoRoute(false);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->get('/kb', 'Home::index');
-$routes->group('kb', static function ($routes) {
 
-    $routes->get('categories', 'Home::categories');
-    $routes->get('complain', 'Home::complain');
+$routes->group('kb', static function ($routes) {
 
     // ROUTE LOGIN
     $routes->get('login', 'Login::index');
     $routes->get('register/', 'Login::register');
     $routes->get('forgot-password/', 'Login::forgotpassword');
+
+    //HOME
+    $routes->get('/', 'Home::index');
+    $routes->get('categories', 'Home::categories');
+
 });
 
 // ROUTE ADMIN
