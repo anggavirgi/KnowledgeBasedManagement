@@ -20,8 +20,8 @@
       <div>
         <img src="<?php echo base_url(); ?>src/images/logo.png" alt="" class="w-[78%] mx-auto py-5 mb-5">
       </div>
-      <div class="flex flex-col gap-2 px-7 navbar">
-        <a href="<?php echo base_url(); ?>kb/administrator/admin" class="flex items-center py-3 px-5 hover:rounded-md hover:bg-main hover:text-white">
+      <div class="flex flex-col gap-2 px-7 sidebar-child">
+        <a href="<?php echo base_url(); ?>kb/administrator/dashboard" class="flex items-center py-3 px-5 hover:rounded-md hover:bg-main hover:text-white">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
           </svg>

@@ -118,7 +118,7 @@
                             <option value="close" class="block px-4 py-5 bg-white text-black">Close</option>
                             <option value="open" class="block px-4 py-5 bg-white text-black">Open</option>
                         </select>
-                        <div id="dd-case-icon" class="absolute inset-y-0 flex items-center pointer-events-none">
+                        <div id="dd-case-icon" class="absolute inset-y-0 right-[5rem] flex items-center pointer-events-none">
                             <svg class="w-2 h-2 text-gray-400" width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M6.97607 0.81897L4.055 5.13429L1.00017 0.9126L6.97607 0.81897Z" fill="#A30D11" stroke="#A30D11" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>

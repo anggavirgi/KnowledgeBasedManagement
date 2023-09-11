@@ -34,7 +34,7 @@ $(document).ready(function() {
   const menuPart = '/' + parts[3];
 
   const navLink = document.querySelectorAll('.navbar a').forEach(link => {
-    if(link.href.includes(activePage)){
+    if(link.href.includes(activePage) && !link.closest('#dropdownAvatarName')){
       link.classList.add('bg-main')
       link.classList.add('text-white')
       link.classList.add('rounded-md')
@@ -51,6 +51,8 @@ $(document).ready(function() {
   // Changing Status Complain
   var initialValue = $('#status-entries').val();
   const statusComplainElement = $('#status-entries')
+  const ddIconElement = $('#dd-icon svg path')
+  const ddIconPos = $('#dd-icon')
   if (initialValue === "pending") {
     $(statusComplainElement).removeClass('bg-solved-status text-solved-status-text').removeClass('bg-progress-status text-progress-status-text').addClass('bg-pending-status text-pending-status-text');
     $(ddIconPos).addClass('right-[4.5rem]')
