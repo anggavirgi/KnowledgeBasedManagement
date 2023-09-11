@@ -12,5 +12,9 @@
   "license": "ISC",
   "devDependencies": {
     "tailwindcss": "^3.3.3"
+  },
+  "dependencies": {
+    "flowbite": "^1.8.1",
+    "tailwind-scrollbar-hide": "^1.1.7"
   }
 }
