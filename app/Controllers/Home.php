@@ -11,4 +11,12 @@ class Home extends BaseController
         ];
         return view('customer/index', $data);
     }
+
+    public function categories()
+    {
+        $data = [
+            'title' => 'Virtusee | Knowledge Based'
+        ];
+        return view('customer/categories', $data);
+    }
 }
