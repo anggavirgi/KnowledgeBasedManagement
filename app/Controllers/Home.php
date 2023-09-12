@@ -27,4 +27,20 @@ class Home extends BaseController
         ];
         return view('customer/complain', $data);
     }
+
+    public function history()
+    {
+        $data = [
+            'title' => 'Virtusee | history complain'
+        ];
+        return view('customer/historycomplain', $data);
+    }
+
+    public function details()
+    {
+        $data = [
+            'title' => 'Virtusee | article details'
+        ];
+        return view('customer/articledetails', $data);
+    }
 }

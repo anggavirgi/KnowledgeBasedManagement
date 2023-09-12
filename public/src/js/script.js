@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+  
+
   // LAYOUT CUSTOMER
   $('.collapsible').click(function() {
       var icon = $(this).find('.icon');
