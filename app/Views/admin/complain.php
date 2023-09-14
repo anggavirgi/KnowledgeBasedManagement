@@ -114,7 +114,7 @@
                         </div>
                     </td>
                     <td class="p-3 text-center relative">
-                        <select id="case-entries" name="status_case_entries" class="py-2 pe-9 ps-5 appearance-none cursor-pointer rounded-[15px] text-gray-700 focus:outline-none focus:border-blue-500>">
+                        <select id="case-entries" name="status_case_entries" class="py-2 pe-9 ps-5 appearance-none cursor-pointer rounded-[15px] text-gray-700 focus:outline-none focus:border-blue-500">
                             <option value="close" class="block px-4 py-5 bg-white text-black">Close</option>
                             <option value="open" class="block px-4 py-5 bg-white text-black">Open</option>
                         </select>
