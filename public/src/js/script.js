@@ -35,8 +35,10 @@ $(document).ready(function() {
   const parts = activePage.split('/');
   const menuPart = '/' + parts[3];
 
-  const navLink = document.querySelectorAll('.navbar a').forEach(link => {
-    if(link.href.includes(activePage) && !link.closest('#dropdownAvatarName') && !link.closest('#navbar-search')){
+  // const navLink = document.querySelectorAll('.navbar a').forEach(link => {
+  // if(link.href.includes(activePage) && !link.closest('#dropdownAvatarName') && !link.closest('#navbar-search')){
+  const navLink = document.querySelectorAll('.sidebar-child a').forEach(link => {
+    if(link.href.includes(activePage)){
       link.classList.add('bg-main')
       link.classList.add('text-white')
       link.classList.add('rounded-md')
