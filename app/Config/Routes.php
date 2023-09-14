@@ -33,7 +33,6 @@ $routes->get('/', 'Home::index');
 
 $routes->group('kb', static function ($routes) {
 
-
     // ROUTE LOGIN
     $routes->get('login', 'Login::index');
     $routes->get('register/', 'Login::register');
@@ -45,6 +44,7 @@ $routes->group('kb', static function ($routes) {
     $routes->get('complain', 'Home::complain');
     $routes->get('history', 'Home::history');
     $routes->get('article/articledetails', 'Home::details');
+
 });
 
 // ROUTE ADMIN
