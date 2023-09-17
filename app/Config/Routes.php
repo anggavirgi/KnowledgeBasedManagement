@@ -41,6 +41,9 @@ $routes->group('kb', static function ($routes) {
     //HOME
     $routes->get('/', 'Home::index');
     $routes->get('categories', 'Home::categories');
+    $routes->get('complain', 'Home::complain');
+    $routes->get('history', 'Home::history');
+    $routes->get('article/articledetails', 'Home::details');
 
 });
 
