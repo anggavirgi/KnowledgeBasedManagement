@@ -13,8 +13,9 @@
 <body>
     <section class="navbar bg-white py-5 sm:px-[100px] px-[10px] drop-shadow-md">
         <div class="flex justify-between">
-            <img src="<?php echo base_url(); ?>src/images/logo.png" alt="" class="nav-brand w-40 h-fit self-center">
-
+            <a href="<?php echo base_url() ?>kb">
+                <img src="<?php echo base_url(); ?>src/images/logo.png" alt="" class="nav-brand w-40 h-fit self-center">
+            </a>
             <form method="" class="relative flex justify-end items-center">
                 <input type="text" placeholder="search" class="px-5 py-2 w-96 rounded-2xl border border-gray-400 outline-main">
                 <button class="absolute right-5 cursor-pointer align-middle">
@@ -25,7 +26,7 @@
             </form>
 
 
-            <button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName" class="flex items-center text-sm font-medium text-form hover:text-black hover:text-blue-500 md:mr-0 focus:ring-4 focus:ring-gray-100 focus:ring-gray-100 rounded-full text-form " type="button">
+            <button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName" class="flex items-center text-sm font-medium text-form hover:text-blue-500 md:mr-0 focus:ring-4 focus:ring-gray-100 rounded-full " type="button">
                 <span class="sr-only">Open user menu</span>
                 <img class="w-12 h-12 mr-2 rounded-full" src="<?php echo base_url(); ?>src/images/profilepic.png" alt="user photo">
                 <div class="flex flex-col text-left ">
@@ -117,14 +118,14 @@
         </div>
         <div class="border-b-[1px] border-white my-8"></div>
         <div class="flex justify-between">
-            <a href="" class="text-white text-sm xl:mx-0 text-lg mx-auto">Copyright ©2023 PT. Virtusee Peta Sukses</a>
+            <a href="" class="text-white text-sm xl:mx-0 mx-auto">Copyright ©2023 PT. Virtusee Peta Sukses</a>
             <a href="" class="text-white text-sm xl:inline-block hidden">Kebijakan Privasi</a>
         </div>
     </section>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="<?php echo base_url(); ?>/src/js/script.js"></script>
     <script src="<?php echo base_url(); ?>node_modules/flowbite/dist/flowbite.min.js"></script>
+    <script src="<?php echo base_url(); ?>/src/js/script.js"></script>
 
 </body>
 
