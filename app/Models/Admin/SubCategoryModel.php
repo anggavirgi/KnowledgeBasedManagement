@@ -4,11 +4,11 @@ namespace App\Models\Admin;
 
 use CodeIgniter\Model;
 
-class ComplainModel extends Model
+class SubCategoryModel extends Model
 {
-    protected $table            = 'complains';
+    protected $table            = 'sub_category';
     protected $primaryKey       = 'id';
-    protected $allowedFields    = ['id_user','id_project','email','description','file','is_read','status','visibility'];
+    protected $allowedFields    = ['id_category','name_subcategory','slug'];
 
     // Dates
     protected $useTimestamps = false;
