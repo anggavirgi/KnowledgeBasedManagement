@@ -4,7 +4,7 @@
 <section id="main">
     <div class="container h-[40rem] overflow-y-scroll scrollbar-hide lg:w-8/12 mx-auto">
 
-        <div class="m-7 md:mx-12 mb-20">
+        <div class="m-7 md:mx-12 mb-20 ">
 
             <div class="flex justify-end">
 
@@ -19,7 +19,7 @@
                 <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 bottom-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto">
                     <!-- Modal content -->
                     <div class="absolute inset-0 bg-white flex items-center justify-center w-full md:w-[55%] lg:w-[40%] h-full md:h-[95%] md:rounded-md my-auto mx-auto">
-                        <button type="button" class="absolute top-3 flex justify-center right-2.5 text-gray-400 bg-transparent hover:bg-slate-200  rounded-lg text-sm w-8 h-8 ml-auto items-center hover:text-form" data-modal-hide="authentication-modal">
+                        <button type="button" class="absolute top-3 flex justify-center items-center right-2.5 text-gray-400 bg-transparent hover:bg-slate-200 rounded-lg text-sm w-8 h-8 ml-auto hover:text-form" data-modal-hide="authentication-modal">
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                             </svg>
@@ -77,26 +77,34 @@
 
             <div class="pb-12 flex flex-col">
                 <span class="border-b-2 pb-3 border-slate-200 font-semibold text-xl">August 2023</span>
-                <a href="" class="py-3 font-semibold text-xl text-orange-600">How to maintenance server down</a>
+                <div class="flex">
+                    <a href="" class="py-3 font-semibold text-xl text-orange-600">How to maintenance server down</a>
+                    <div class="font-medium ms-3 text-[10px] text-progress-status-text bg-progress-status w-fit h-fit self-center py-1 px-4 appearance-none cursor-pointer rounded-[15px] focus:outline-none focus:border-blue-500">Progress</div>
+                </div>
                 <span class="text-ellipsis text-sm overflow-hidden h-44 text-justify">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. At illum ab aspernatur voluptatem enim ipsa ex dolore, adipisci amet eius optio fugiat, dolorem magni aliquam nam, eum repellat rerum fuga! Laudantium aut dolorem itaque facere, dolore et, impedit similique laboriosam vel nesciunt excepturi corporis ab repellendus sint. Quibusdam velit error enim dolor exercitationem iste, debitis asperiores placeat facere, sint minima autem numquam! Deleniti, earum. Inventore magnam vel, tenetur non nam minus exercitationem odit odio libero reiciendis sapiente repellendus porro temporibus accusamus labore, laboriosam dolorum sint laudantium enim magni suscipit fugit pariatur consequatur incidunt. Eum, aspernatur consequuntur modi quisquam corporis assumenda!Deleniti, earum. Inventore magnam vel, tenetur non nam minus exercitationem odit odio libero reiciendis sapiente repellendus porro temporibus accusamus labore, laboriosam dolorum sint laudantium enim magni suscipit fugit pariatur consequatur incidunt. Eum, aspernatur consequuntur modi quisquam corporis assumenda!Deleniti, earum. Inventore magnam vel, tenetur non nam minus exercitationem odit odio libero reiciendis sapiente repellendus porro temporibus accusamus labore, laboriosam dolorum sint laudantium enim magni suscipit fugit pariatur consequatur incidunt. Eum, aspernatur consequuntur modi quisquam corporis assumenda!
                 </span>
             </div>
             <div class="pb-12 flex flex-col">
                 <span class="border-b-2 pb-3 border-slate-200 font-semibold text-xl">August 2023</span>
-                <a href="" class="py-3 font-semibold text-xl text-orange-600">How to maintenance server down</a>
+                <div class="flex">
+                    <a href="" class="py-3 font-semibold text-xl text-orange-600">How to maintenance server down</a>
+                    <div class="font-medium ms-3 text-[10px] text-solved-status-text bg-solved-status w-fit h-fit self-center py-1 px-4 appearance-none cursor-pointer rounded-[15px] focus:outline-none focus:border-blue-500 -z-50">Solved</div>
+                </div>
                 <span class="text-ellipsis text-sm overflow-hidden h-44 text-justify">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. At illum ab aspernatur voluptatem enim ipsa ex dolore, adipisci amet eius optio fugiat, dolorem magni aliquam nam, eum repellat rerum fuga! Laudantium aut dolorem itaque facere, dolore et, impedit similique laboriosam vel nesciunt excepturi corporis ab repellendus sint. Quibusdam velit error enim dolor exercitationem iste, debitis asperiores placeat facere, sint minima autem numquam! Deleniti, earum. Inventore magnam vel, tenetur non nam minus exercitationem odit odio libero reiciendis sapiente repellendus porro temporibus accusamus labore, laboriosam dolorum sint laudantium enim magni suscipit fugit pariatur consequatur incidunt. Eum, aspernatur consequuntur modi quisquam corporis assumenda!Deleniti, earum. Inventore magnam vel, tenetur non nam minus exercitationem odit odio libero reiciendis sapiente repellendus porro temporibus accusamus labore, laboriosam dolorum sint laudantium enim magni suscipit fugit pariatur consequatur incidunt. Eum, aspernatur consequuntur modi quisquam corporis assumenda!Deleniti, earum. Inventore magnam vel, tenetur non nam minus exercitationem odit odio libero reiciendis sapiente repellendus porro temporibus accusamus labore, laboriosam dolorum sint laudantium enim magni suscipit fugit pariatur consequatur incidunt. Eum, aspernatur consequuntur modi quisquam corporis assumenda!
                 </span>
             </div>
             <div class="pb-12 flex flex-col">
                 <span class="border-b-2 pb-3 border-slate-200 font-semibold text-xl">August 2023</span>
-                <a href="" class="py-3 font-semibold text-xl text-orange-600">How to maintenance server down</a>
+                <div class="flex">
+                    <a href="" class="py-3 font-semibold text-xl text-orange-600">How to maintenance server down</a>
+                    <div class="font-medium ms-3 text-[10px] text-pending-status-text bg-pending-status w-fit h-fit self-center py-1 px-4 appearance-none cursor-pointer rounded-[15px] focus:outline-none focus:border-blue-500">Pending</div>
+                </div>
                 <span class="text-ellipsis text-sm overflow-hidden h-44 text-justify">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. At illum ab aspernatur voluptatem enim ipsa ex dolore, adipisci amet eius optio fugiat, dolorem magni aliquam nam, eum repellat rerum fuga! Laudantium aut dolorem itaque facere, dolore et, impedit similique laboriosam vel nesciunt excepturi corporis ab repellendus sint. Quibusdam velit error enim dolor exercitationem iste, debitis asperiores placeat facere, sint minima autem numquam! Deleniti, earum. Inventore magnam vel, tenetur non nam minus exercitationem odit odio libero reiciendis sapiente repellendus porro temporibus accusamus labore, laboriosam dolorum sint laudantium enim magni suscipit fugit pariatur consequatur incidunt. Eum, aspernatur consequuntur modi quisquam corporis assumenda!Deleniti, earum. Inventore magnam vel, tenetur non nam minus exercitationem odit odio libero reiciendis sapiente repellendus porro temporibus accusamus labore, laboriosam dolorum sint laudantium enim magni suscipit fugit pariatur consequatur incidunt. Eum, aspernatur consequuntur modi quisquam corporis assumenda!Deleniti, earum. Inventore magnam vel, tenetur non nam minus exercitationem odit odio libero reiciendis sapiente repellendus porro temporibus accusamus labore, laboriosam dolorum sint laudantium enim magni suscipit fugit pariatur consequatur incidunt. Eum, aspernatur consequuntur modi quisquam corporis assumenda!
                 </span>
             </div>
-
 
 
         </div>
