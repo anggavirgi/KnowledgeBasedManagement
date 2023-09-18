@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <section class="navbar bg-white py-5 drop-shadow-md px-6 xl:px-24 ">
+    <section class="navbar bg-white py-5 drop-shadow-md px-6 xl:px-24 2xl:px-44">
 
         <div class="flex flex-wrap items-center justify-between md:px-10">
 
@@ -121,7 +121,7 @@
 
     <?php echo $this->renderSection('content'); ?>
 
-    <section id="footer" class="px-5 md:px-20 py-10 bg-[#1a2b31]">
+    <section id="footer" class="px-5 md:px-20 py-10 bg-[#1a2b31] text-sm">
         <img src="<?php echo base_url(); ?>src/images/logo-vsee.png" class="w-40 m-2 mb-4 ml-5" alt="">
         <div class="flex lg:flex-nowrap flex-wrap lg:justify-between p-5">
             <div class="w-full lg:w-5/12">
@@ -178,8 +178,8 @@
         </div>
         <div class="border-b-[1px] border-white my-8"></div>
         <div class="flex flex-col gap-5 xl:justify-between xl:flex-row xl:gap-0">
-            <a href="" class="text-white xl:mx-0 text-lg mx-auto">Copyright ©2023 PT. Virtusee Peta Sukses</a>
-            <a href="" class="text-white text-sm xl:mx-0 mx-auto">Kebijakan Privasi</a>
+            <a href="" class="text-white xl:mx-0 mx-auto">Copyright ©2023 PT. Virtusee Peta Sukses</a>
+            <a href="" class="text-white xl:mx-0 mx-auto">Kebijakan Privasi</a>
         </div>
     </section>
     <!-- <section id="footer" class="px-2 md:px-32 py-10 bg-[#1a2b31]">
