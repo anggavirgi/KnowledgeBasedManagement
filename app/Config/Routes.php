@@ -30,29 +30,33 @@ $routes->setAutoRoute(false);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->get('/kb', 'Home::index');
-$routes->group('kb', static function ($routes) {
 
-    $routes->get('categories', function () {
-        $data = [
-            'title' => 'Virtusee | Categories'
-        ];
-        return view('customer/categories', $data);
-    });
+$routes->group('kb', static function ($routes) {
 
     // ROUTE LOGIN
     $routes->get('login', 'Login::index');
     $routes->get('register/', 'Login::register');
     $routes->get('forgot-password/', 'Login::forgotpassword');
+
+    //HOME
+    $routes->get('/', 'Home::index');
+    $routes->get('generalarticle', 'Home::generalarticle');
+    $routes->get('generalarticle/generalarticledetail', 'Home::generalarticledetail');
+    $routes->get('complain', 'Home::complain');
+    $routes->get('history', 'Home::history');
+    $routes->get('personalarticle', 'Home::personalarticle');
+    $routes->get('personalarticle/personalarticledetail', 'Home::personalarticledetail');
+
 });
 
 // ROUTE ADMIN
 $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], static function ($routes) {
-    
-    $routes->get('admin', 'Admin::index');
+
+    $routes->get('dashboard', 'Admin::index');
 
     $routes->get('user', 'User::index');
     $routes->get('user/adduser', 'User::add');
+
     $routes->post('user/save', 'User::save');
     $routes->get('user/edituser', 'User::edit');
 
