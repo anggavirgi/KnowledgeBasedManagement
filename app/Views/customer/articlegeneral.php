@@ -1,7 +1,7 @@
     <?php echo $this->extend('customer/layout'); ?>
 
     <?php echo $this->section('content'); ?>
-    <section class="lg:px-20 xl:px-40 py-12 flex" id="main">
+    <section class="lg:px-20 xl:px-40 py-12 flex text-sm" id="main">
         <div class="w-1/4 pt-14 pe-8 2xl:px-24">
             <h2 class="font-bold text-lg mb-3">All Categories</h2>
             <div class="flex flex-col gap-2">
