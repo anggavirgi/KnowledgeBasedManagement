@@ -4,11 +4,11 @@ namespace App\Models\Admin;
 
 use CodeIgniter\Model;
 
-class ComplainModel extends Model
+class ComplainReplyModel extends Model
 {
-    protected $table            = 'complains';
+    protected $table            = 'complain_reply';
     protected $primaryKey       = 'id';
-    protected $allowedFields    = ['id_user','id_project','email','description','file','is_read','status','visibility'];
+    protected $allowedFields    = ['id_complain','id_user','description','is_read'];
 
     // Dates
     protected $useTimestamps = false;
