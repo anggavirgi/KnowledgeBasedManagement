@@ -2,7 +2,9 @@
 
     <?php echo $this->section('content'); ?>
     <section id="main">
-        <div id="faq" class="flex justify-center w-full">
+
+        <!-- FAQ SECTION -->
+        <!-- <div id="faq" class="flex justify-center w-full">
             <div class="grid justify-items-center mt-[40px]">
                 <h1 class="flex text-4xl font-bold">
                     <span class="text-main">FA</span>
@@ -25,8 +27,10 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div id="categories" class="flex justify-center w-full">
+        </div> -->
+
+        <!-- CATEGORIES SECTION -->
+        <!-- <div id="categories" class="flex justify-center w-full">
             <div class="grid justify-items-center mt-[40px]">
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-5 gap-6">
                     <div class="bg-[#D9D9D9] px-[4rem] py-5 rounded-[10px]">
@@ -95,69 +99,92 @@
                     </div>
                 </div>
             </div>
+        </div> -->
+
+
+        <!-- <div class="hero-section bg-main rounded-b-full min-h-[70vh]"> -->
+
+        <div id="faq" class="flex justify-center items-center min-h-[50vh] 2xl:min-h-[50vh] lg:min-h-[50vh] sm:min-h-[37vh] md:min-h-[50vh] relative">
+            <!-- <div class="hero-section bg-main rounded-b-full h-[40rem] w-full absolute z-[-1] top-[-rem]"></div> -->
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" class="w-full absolute z-[-1] top-0 h-[50rem]" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="1" d="M0,224L48,218.7C96,213,192,203,288,213.3C384,224,480,256,576,234.7C672,213,768,139,864,133.3C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg> -->
+            <img src="<?php echo base_url(); ?>src/images/waves-hero.png" class="w-[100%] h-[30rem] md:h-[33rem] sm:h-[32rem]  absolute z-[-1] top-0" alt="">
+            <div class="mt-12">
+                <h1 class="flex gap-3 justify-center text-4xl lg:text-5xl sm:text-5xl font-semibold">
+                    <span class="text-white">Help center</span>
+                    <span class="text-[#2562AE]">Virtu</span>
+                    <span class="text-[#FFC700]">see</span>
+                </h1>
+                <div class="flex" id="search">
+                    <form action="" class="relative">
+                        <input type="text" name="email" id="email" placeholder="Search Your question, answer, etc" class="sm:w-[30rem] w-[25rem]  mb-5 px-7 mt-[30px] py-3  border border-gray-400 outline-main">
+                        <button>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search absolute sm:left-[450px] left-[370px] top-[47px] cursor-pointer text-[#919191]" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+                <div class="flex justify-center sm:mt-0 mt-[5px]">
+                    <div class="sm:w-[30rem] w-[25rem] ">
+                        <p class="text-sm text-white"><span class="text-secondary font-semibold">Search what you want,</span> we will answer your question and you can search anything
+                            about the Virtusee Progran or technical </p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="general_questio" class="flex justify-center w-full">
-            <div id="general_question" class="mt-7 p-5 xl:w-9/12 lg:w-10/12 w-full">
-                <div class="max-w-md sm:max-w-lg mb-7">
-                    <h4 class="text-[#18A8D8] font-bold text-3xl">General Question</h4>
-                    <div class="flex">
-                        <div class="border-solid border-4 rounded-md border-[#18A8D8] w-[40%]"></div>
-                        <div class="border-dashed border-4 rounded-md border-[#FFC700] w-[8%]"></div>
-                    </div>
+        <!-- </div> -->
+        <div id="general_question" class="px-10 mt-36 sm:mt-64 md:mt-[17rem]">
+            <div class=" w-full mb-2 text-center">
+                <h4 class="text-[#18A8D8] font-bold text-3xl">General Question</h4>
+            </div>
+            <div class="flex justify-center">
+                <div class="lg:w-5/12 md:flex hidden">
+                    <img src="<?php echo base_url(); ?>src/images/Question.png" alt="Question.png" class="mx-auto w-[30rem] object-cover">
                 </div>
-                <div class="border-solid border-2 border-[#919191] rounded-[15px] p-5 ps-10 mb-3">
-                    <div class="flex justify-between">
-                        <p class="text-[16px]" id="title1">How I can buy the programs ? </p>
-                        <p class="text-xl cursor-pointer collapsible" data-target="collapse1" data-title="title1">
-                            <i class="bi bi-chevron-down icon"></i>
-                        </p>
+                <div id="question" class="mt-7 w-full lg:w-6/12 md:w-10/12 self-center">
+                    <div class="border-solid border-2 border-[#919191] rounded-md p-4 ps-10 mb-3">
+                        <div class="flex justify-between">
+                            <p class="text-md" id="title1">How I can buy the programs ? </p>
+                            <p class="text-xl cursor-pointer collapsible" data-target="collapse1" data-title="title1">
+                                <i class="bi bi-chevron-down icon"></i>
+                            </p>
+                        </div>
+                        <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse1">
+                            <p class="text-[14px]">Search what you want, we will answer your question and you can search anything about the Virtusee Progran or technical <a href="" class="text-[#18A8D8]">more .. </a></p>
+                        </div>
                     </div>
-                    <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse1">
-                        <p class="text-[14px]">Search what you want, we will answer your question and you can search anything about the Virtusee Progran or technical <a href="" class="text-[#18A8D8]">more .. </a></p>
+                    <div class="border-solid border-2 border-[#919191] rounded-[10px] p-4 ps-10 mb-3">
+                        <div class="flex justify-between">
+                            <p class="text-[16px]" id="title1">How I can buy the programs ? </p>
+                            <p class="text-xl cursor-pointer collapsible" data-target="collapse2" data-title="title1">
+                                <i class="bi bi-chevron-down icon"></i>
+                            </p>
+                        </div>
+                        <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse2">
+                            <p class="text-[14px]">Search what you want, we will answer your question and you can search anything about the Virtusee Progran or technical <a href="" class="text-[#18A8D8]">more .. </a></p>
+                        </div>
                     </div>
-                </div>
-                <div class="border-solid border-2 border-[#919191] rounded-[15px] p-5 ps-10 mb-3">
-                    <div class="flex justify-between">
-                        <p class="text-[16px]" id="title2">How I can buy the programs ? </p>
-                        <p class="text-xl cursor-pointer collapsible" data-target="collapse2" data-title="title2">
-                            <i class="bi bi-chevron-down icon"></i>
-                        </p>
+                    <div class="border-solid border-2 border-[#919191] rounded-[10px] p-4 ps-10 mb-3">
+                        <div class="flex justify-between">
+                            <p class="text-[16px]" id="title1">How I can buy the programs ? </p>
+                            <p class="text-xl cursor-pointer collapsible" data-target="collapse3" data-title="title1">
+                                <i class="bi bi-chevron-down icon"></i>
+                            </p>
+                        </div>
+                        <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse3">
+                            <p class="text-[14px]">Search what you want, we will answer your question and you can search anything about the Virtusee Progran or technical <a href="" class="text-[#18A8D8]">more .. </a></p>
+                        </div>
                     </div>
-                    <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse2">
-                        <p class="text-[14px]">Search what you want, we will answer your question and you can search anything about the Virtusee Progran or technical <a href="" class="text-[#18A8D8]">more .. </a></p>
-                    </div>
-                </div>
-                <div class="border-solid border-2 border-[#919191] rounded-[15px] p-5 ps-10 mb-3">
-                    <div class="flex justify-between">
-                        <p class="text-[16px]" id="title3">How I can buy the programs ? </p>
-                        <p class="text-xl cursor-pointer collapsible" data-target="collapse3" data-title="title3">
-                            <i class="bi bi-chevron-down icon"></i>
-                        </p>
-                    </div>
-                    <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse3">
-                        <p class="text-[14px]">Search what you want, we will answer your question and you can search anything about the Virtusee Progran or technical <a href="" class="text-[#18A8D8]">more .. </a></p>
-                    </div>
-                </div>
-                <div class="border-solid border-2 border-[#919191] rounded-[15px] p-5 ps-10 mb-3">
-                    <div class="flex justify-between">
-                        <p class="text-[16px]" id="title4">How I can buy the programs ? </p>
-                        <p class="text-xl cursor-pointer collapsible" data-target="collapse4" data-title="title4">
-                            <i class="bi bi-chevron-down icon"></i>
-                        </p>
-                    </div>
-                    <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse4">
-                        <p class="text-[14px]">Search what you want, we will answer your question and you can search anything about the Virtusee Progran or technical <a href="" class="text-[#18A8D8]">more .. </a></p>
-                    </div>
-                </div>
-                <div class="border-solid border-2 border-[#919191] rounded-[15px] p-5 ps-10 mb-3">
-                    <div class="flex justify-between">
-                        <p class="text-[16px]" id="title5">How I can buy the programs ? </p>
-                        <p class="text-xl cursor-pointer collapsible" data-target="collapse5" data-title="title5">
-                            <i class="bi bi-chevron-down icon"></i>
-                        </p>
-                    </div>
-                    <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse5">
-                        <p class="text-[14px]">Search what you want, we will answer your question and you can search anything about the Virtusee Progran or technical <a href="" class="text-[#18A8D8]">more .. </a></p>
+                    <div class="border-solid border-2 border-[#919191] rounded-[10px] p-4 ps-10 mb-3">
+                        <div class="flex justify-between">
+                            <p class="text-[16px]" id="title1">How I can buy the programs ? </p>
+                            <p class="text-xl cursor-pointer collapsible" data-target="collapse4" data-title="title1">
+                                <i class="bi bi-chevron-down icon"></i>
+                            </p>
+                        </div>
+                        <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse4">
+                            <p class="text-[14px]">Search what you want, we will answer your question and you can search anything about the Virtusee Progran or technical <a href="" class="text-[#18A8D8]">more .. </a></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -185,7 +212,7 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at</p>
                         </div>
                     </div>
-                    <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
+                    <div class="border-solid bg-white border-2 border-[#b4b1b1] rounded-[10px] p-5 pl-10 mb-7 relative">
                         <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
                             <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
                             <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
