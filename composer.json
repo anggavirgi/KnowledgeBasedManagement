@@ -12,11 +12,7 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "codeigniter4/framework": "^4.0",
-<<<<<<< HEAD
-        "google/apiclient": "2.15.0",
-=======
         "guzzlehttp/guzzle": "^7.8",
->>>>>>> main
         "myth/auth": "^1.2"
     },
     "require-dev": {

@@ -98,7 +98,7 @@
                         <img class="w-12 h-12 mr-2 rounded-full" src="<?php echo base_url(); ?>src/images/profilepic.png" alt="user photo">
                         <div class="flex flex-col text-left ">
                             Bonnie Green
-                            <span class="text-form text-xs truncate w-44">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus dignissimos excepturi molestias mollitia nobis voluptas?</span>
+                            <span class="text-form text-xs truncate w-32">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus dignissimos excepturi molestias mollitia nobis voluptas?</span>
                         </div>
                     </button>
                 </li>
