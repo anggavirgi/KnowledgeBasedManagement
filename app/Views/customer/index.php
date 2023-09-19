@@ -105,11 +105,12 @@
         <!-- <div class="hero-section bg-main rounded-b-full min-h-[70vh]"> -->
 
         <div id="faq" class="flex justify-center items-center w-full min-h-[60vh] relative mb-24">
-            <div class="hero-section bg-main rounded-b-full h-[40rem] w-full absolute z-[-1] top-[-10rem]"></div>
-
+            <!-- <div class="hero-section bg-main rounded-b-full h-[40rem] w-full absolute z-[-1] top-[-rem]"></div> -->
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" class="w-full absolute z-[-1] top-0 h-[50rem]" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="1" d="M0,224L48,218.7C96,213,192,203,288,213.3C384,224,480,256,576,234.7C672,213,768,139,864,133.3C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg> -->
+            <img src="<?php echo base_url(); ?>src/images/waves-hero.png" class="w-[100%] h-[35rem] absolute z-[-1] top-0" alt="">
             <div class="mt-12">
                 <h1 class="flex text-5xl font-bold">
-                    <div class="text-white">Help Center</div>
+                    <span class="text-white">Help Center</span>
                     <span class="text-[#2562AE]">Virtu</span>
                     <span class="text-[#FFC700]">see</span>
                 </h1>
@@ -136,17 +137,17 @@
             <div class=" w-full mb-7 text-center">
                 <h4 class="text-[#18A8D8] font-bold text-3xl">General Question</h4>
             </div>
-            <div class="flex justify-center border md:block ">
-                <div class="xl:w-6/12 lg:w-6/12  sm:w-11/12 flex justify-end border">
-                    <img src="<?php echo base_url(); ?>src/images/Question.png" alt="Question.png" class="h-[30rem]">
+            <div class="flex justify-center border">
+                <div class="lg:w-5/12 md:flex justify-end hidden">
+                    <img src="<?php echo base_url(); ?>src/images/Question.png" alt="Question.png" class="w-[30rem] object-cover" >
                 </div>
-                <div id="question" class="mt-7lg:w-6/12 md:w-10/12 sm:w-11/12  self-center">
+                <div id="question" class="mt-7 lg:w-6/12 md:w-10/12 self-center border">
                     <div class="border-solid border-2 border-[#919191] rounded-[10px] p-4 ps-10 mb-3">
                         <div class="flex justify-between">
                             <p class="text-[16px]" id="title1">How I can buy the programs ? </p>
                             <p class="text-xl cursor-pointer collapsible" data-target="collapse1" data-title="title1">
                                 <i class="bi bi-chevron-down icon"></i>
-                            </p>
+                            </p>    
                         </div>
                         <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse1">
                             <p class="text-[14px]">Search what you want, we will answer your question and you can search anything about the Virtusee Progran or technical <a href="" class="text-[#18A8D8]">more .. </a></p>

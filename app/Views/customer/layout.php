@@ -11,49 +11,12 @@
 </head>
 
 <body>
-<<<<<<< HEAD
     <section class="navbar bg-white py-5 sm:px-[100px] px-[10px] drop-shadow-md">
         <div class="flex justify-between">
             <img src="<?php echo base_url(); ?>src/images/logo.png" alt="" class="nav-brand w-40">
             <div class="buttons grid grid-cols-2 gap-2">
                     <a href="/kb/login" class="p-2 whitespace-nowrap">Sign In</a>
                     <a href="/kb/register" class="bg-main text-white rounded-md p-2 whitespace-nowrap">Sign Up</a>
-=======
-    <section class="navbar bg-white py-5 drop-shadow-md px-6 xl:px-24 2xl:px-44">
-
-        <div class="flex flex-wrap items-center justify-between md:px-10">
-
-            <a href="<?php echo base_url() ?>kb" class="bg-transparent">
-                <img src="<?php echo base_url(); ?>src/images/logo.png" alt="" class="nav-brand w-32 ml-3 md:w-40">
-            </a>
-
-            <div class="flex ">
-
-                <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search" aria-expanded="false" class="md:hidden text-gray-400 focus:outline-none focus:ring-4 focus:ring-gray-200  rounded-lg text-sm p-2.5 mr-1">
-                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                    </svg>
-                    <span class="sr-only">Search</span>
-                </button>
-
-                <div class="relative hidden md:block">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                        </svg>
-                        <span class="sr-only">Search icon</span>
-                    </div>
-                    <input type="text" id="search-navbar" class="block w-[18rem] lg:w-[30rem] p-2 pl-10 text-sm border border-gray-400 placeholder-gray-400 text-form rounded-2xl outline-main" placeholder="Search...">
-                </div>
-
-                <button data-collapse-toggle="navbar-search" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-gray-200 text-gray-400  " aria-controls="navbar-search" aria-expanded="false">
-                    <span class="sr-only">Open main menu</span>
-                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
-                    </svg>
-                </button>
-
->>>>>>> 8497bb9ec4468c3fa8803b657d012451165d148f
             </div>
 
             <button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName" class="items-center pe-2 text-sm font-medium text-form hover:text-blue-500 md:mr-0 focus:ring-4 focus:ring-gray-100 rounded-full hidden md:flex" type="button">
