@@ -1,29 +1,29 @@
     <?php echo $this->extend('customer/layout'); ?>
 
     <?php echo $this->section('content'); ?>
-    <section class="px-24 py-12 flex" id="main">
-        <div class="w-1/4 pt-14 pe-4">
-            <h2 class="font-semibold text-lg mb-3">All Categories</h2>
+    <section class="lg:px-20 xl:px-40 py-12 flex text-sm" id="main">
+        <div class="w-1/4 pt-14 pe-8 2xl:px-24">
+            <h2 class="font-bold text-lg mb-3">All Categories</h2>
             <div class="flex flex-col gap-2">
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-center font-semibold cursor-pointer hover:text-main">
                     <div id="title1">Product</div>
                     <div class="text-xl cursor-pointer collapsible" data-target="collapse1" data-title="title1">
                         <i class="bi bi-chevron-down icon text-sm"></i>
                     </div>
                 </div>
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-center font-semibold cursor-pointer hover:text-main">
                     <div id="title2">Error system</div>
                     <div class="text-xl cursor-pointer collapsible" data-target="collapse2" data-title="title2">
                         <i class="bi bi-chevron-down icon text-sm"></i>
                     </div>
                 </div>
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-center font-semibold cursor-pointer hover:text-main">
                     <div id="title3">Payment</div>
                     <div class="text-xl cursor-pointer collapsible" data-target="collapse3" data-title="title3">
                         <i class="bi bi-chevron-down icon text-sm"></i>
                     </div>
                 </div>
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-center font-semibold cursor-pointer hover:text-main">
                     <div id="title4">Services</div>
                     <div class="text-xl cursor-pointer collapsible" data-target="collapse4" data-title="title4">
                         <i class="bi bi-chevron-down icon text-sm"></i>
@@ -32,18 +32,31 @@
             </div>
         </div>
 
-        <div class="w-9/12 ps-6">
-            <div class="font-medium">
+        <div class="w-9/12 px-4 2xl:ps-4 2xl:pe-32">
+            <div class="font-medium px-3 text-sm">
                 <a href="<?php echo base_url(); ?>kb" class="text-main hover:text-sky-600">Home</a>
                 <span> / </span>
                 <span>Categories</span>
             </div>
 
-            <div class="mt-10">
-                <h4 class="text-lg font-bold">Product</h4>
-                <div>
-                    
-                </div>
+            <div class="mt-8">
+                <h4 class="text-3xl font-bold ps-3 mb-2">Product</h4>
+                <a href="<?Php echo base_url() ?>kb/generalarticle/generalarticledetail" class="block px-3 py-5 text-lg hover:bg-gray-100">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, ipsa?
+                </a>
+                <hr>
+                <a href="<?Php echo base_url() ?>kb/generalarticle/generalarticledetail" class="block px-3 py-5 text-lg hover:bg-gray-100">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, ipsa?
+                </a>
+                <hr>
+                <a href="<?Php echo base_url() ?>kb/generalarticle/generalarticledetail" class="block px-3 py-5 text-lg hover:bg-gray-100">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, ipsa?
+                </a>
+                <hr>
+                <a href="<?Php echo base_url() ?>kb/generalarticle/generalarticledetail" class="block px-3 py-5 text-lg hover:bg-gray-100">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, ipsa?
+                </a>
+                <hr>
             </div>
         </div>
         <!-- <div class="flex px-5" id="categories">

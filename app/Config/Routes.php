@@ -40,10 +40,13 @@ $routes->group('kb', static function ($routes) {
 
     //HOME
     $routes->get('/', 'Home::index');
-    $routes->get('categories', 'Home::categories');
+    $routes->get('generalarticle', 'Home::generalarticle');
+    $routes->get('generalarticle/generalarticledetail', 'Home::generalarticledetail');
     $routes->get('complain', 'Home::complain');
     $routes->get('history', 'Home::history');
-    $routes->get('article/articledetails', 'Home::details');
+    $routes->get('personalarticle', 'Home::personalarticle');
+    $routes->get('personalarticle/personalarticledetail', 'Home::personalarticledetail');
+
 });
 
 // ROUTE ADMIN
