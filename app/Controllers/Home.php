@@ -12,12 +12,20 @@ class Home extends BaseController
         return view('customer/index', $data);
     }
 
-    public function categories()
+    public function generalarticle()
     {
         $data = [
-            'title' => 'Virtusee | categories'
+            'title' => 'Virtusee | article'
         ];
-        return view('customer/categories', $data);
+        return view('customer/articlegeneral', $data);
+    }
+
+    public function generalarticledetail()
+    {
+        $data = [
+            'title' => 'Virtusee | article detail'
+        ];
+        return view('customer/articledetailgeneral', $data);
     }
 
     public function complain()
@@ -36,11 +44,19 @@ class Home extends BaseController
         return view('customer/historycomplain', $data);
     }
 
-    public function details()
+    public function personalarticle()
     {
         $data = [
-            'title' => 'Virtusee | article details'
+            'title' => 'Virtusee | article'
         ];
-        return view('customer/articledetails', $data);
+        return view('customer/articlepersonal', $data);
+    }
+
+    public function personalarticledetail()
+    {
+        $data = [
+            'title' => 'Virtusee | article detail'
+        ];
+        return view('customer/articledetailpersonal', $data);
     }
 }
