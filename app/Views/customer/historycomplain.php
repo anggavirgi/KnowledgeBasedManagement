@@ -2,7 +2,7 @@
 
 <?php echo $this->section('content'); ?>
 <section id="main">
-    <div class="container h-[40rem] overflow-y-scroll scrollbar-hide lg:w-8/12 mx-auto">
+    <div class="container lg:w-8/12 mx-auto">
 
         <div class="m-7 md:mx-12 mb-20 ">
 

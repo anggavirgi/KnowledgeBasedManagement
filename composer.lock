@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "b7c7f208124de5a250897e794ef8547e",
+=======
+    "content-hash": "d5660fb6478991d5ed6a44fbd26ab9a5",
+>>>>>>> Edo
     "packages": [
         {
             "name": "codeigniter4/framework",
@@ -81,6 +85,10 @@
             "time": "2023-09-05T00:46:08+00:00"
         },
         {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> Edo
             "name": "firebase/php-jwt",
             "version": "v6.8.1",
             "source": {
@@ -315,6 +323,11 @@
             "time": "2023-09-07T19:13:44+00:00"
         },
         {
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> main
+>>>>>>> Edo
             "name": "guzzlehttp/guzzle",
             "version": "7.8.0",
             "source": {
@@ -878,6 +891,10 @@
             "time": "2022-07-13T18:35:46+00:00"
         },
         {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> Edo
             "name": "paragonie/constant_time_encoding",
             "version": "v2.6.3",
             "source": {
@@ -1154,6 +1171,7 @@
             "time": "2021-02-03T23:26:27+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "psr/http-client",
             "version": "1.0.2",
             "source": {
@@ -1314,6 +1332,10 @@
             "time": "2023-04-04T09:54:51+00:00"
         },
         {
+=======
+=======
+>>>>>>> main
+>>>>>>> Edo
             "name": "psr/http-client",
             "version": "1.0.2",
             "source": {
