@@ -1,7 +1,7 @@
 <?php echo $this->extend('customer/layout'); ?>
 
 <?php echo $this->section('content'); ?>
-<section class="px-40 py-12 flex" id="main">
+<section class="px-40 py-12 flex text-sm" id="main">
     <div class="w-1/4 pt-14 pe-8 2xl:px-24">
         <h2 class="font-bold text-lg mb-3">All Categories</h2>
         <div class="flex flex-col gap-2">
@@ -42,7 +42,7 @@
         </div>
 
         <div class="flex flex-col mt-8">
-            <h4 class="text-3xl font-bold ps-3 mb-6">Lorem ipsum dolor sit amet.</h4>
+            <h4 class="text-2xl font-bold ps-3 mb-6">Lorem ipsum dolor sit amet.</h4>
             <div class="text-justify text-sm lg:text-base ps-6 mb-6">
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt, necessitatibus ipsa veritatis iste minima saepe aspernatur itaque quia modi, dolorum a. Id et hic qui nam inventore illo nisi suscipit praesentium deserunt cumque fugiat magnam, possimus aliquid. Quam delectus, nostrum enim illum quos distinctio eaque consectetur nisi consequuntur ut. Atque, dolorem dolor labore tenetur in placeat, quisquam ea incidunt at deleniti eum. Aliquam autem cum, architecto amet asperiores alias maiores excepturi sint id, repellendus, perferendis laudantium quisquam? Excepturi quas eligendi delectus. Illum maiores dolor sapiente dolorum, pariatur odit rem necessitatibus ab debitis, dolore facilis reprehenderit ipsum aliquid iste harum, ratione delectus fugit vero itaque natus quasi ut? Voluptate animi ullam, nesciunt voluptatibus amet facere tenetur necessitatibus laudantium hic enim nam praesentium adipisci, eveniet est quia ducimus quae unde provident debitis voluptatem iusto cum ut culpa inventore. Non ab iusto numquam. Nostrum numquam aspernatur quis incidunt velit cupiditate, libero eius mollitia ducimus repellat esse voluptatibus, alias quo omnis perspiciatis dolorem deserunt, sunt optio id voluptate nihil eum distinctio consectetur. Dignissimos, corrupti mollitia explicabo rem eligendi non, error recusandae alias vero veritatis ducimus pariatur repudiandae nihil aperiam voluptatem adipisci ipsa. Facere beatae ea assumenda velit fugit pariatur obcaecati, quod quae aperiam tempora atque eveniet explicabo labore sint! Qui nihil, iusto natus velit aliquam quia expedita rem reprehenderit ratione culpa consequatur, voluptatibus dolore dolor repellat nam nulla quaerat illo praesentium explicabo ullam soluta perferendis, doloribus tempore doloremque. Minus in impedit expedita beatae quidem voluptatem facilis deserunt, alias nesciunt perspiciatis sit ad veniam? Eum a molestias error rerum blanditiis rem nobis officiis atque ipsam facere at repudiandae molestiae similique, esse officia commodi ut fuga qui? Culpa esse alias minima maxime unde numquam nemo beatae illo ea, quas nesciunt? Atque earum, amet mollitia voluptates quos quae, numquam asperiores tempora eveniet, vero dolore accusamus explicabo reiciendis.
             </div>

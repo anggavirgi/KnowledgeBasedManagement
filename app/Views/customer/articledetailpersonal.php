@@ -2,7 +2,7 @@
 
 <?php echo $this->section('content'); ?>
 <section id="main">
-    <div class="container h-[40rem] overflow-y-scroll scrollbar-hide mx-auto">
+    <div class="container h-[40rem] overflow-y-scroll scrollbar-hide mx-auto text-sm">
         <div class="grid my-7 mx-10 lg:mx-32">
 
             <div class="pb-3 flex flex-col">
