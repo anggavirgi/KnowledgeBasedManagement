@@ -97,8 +97,61 @@
   </div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="<?php echo base_url(); ?>node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
   <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
   <script src="<?php echo base_url(); ?>/src/js/script.js"></script>
+
+  <!-- Alert notification CRUD -->
+  <script>
+    const flashSuccess = $('.flash-success').data('flashmessage');
+    const flashError = $('.flash-error').data('flashmessage');
+
+    if (flashSuccess) {
+
+      Swal.fire({
+        title: 'Berhasil',
+        text: flashSuccess,
+        showConfirmButton: false,
+        icon: 'success',
+        timer: '1200'
+      });
+    }
+
+    if (flashError) {
+      Swal.fire({
+        title: 'Failed',
+        text: flashSuccess,
+        showConfirmButton: false,
+        icon: 'error',
+        timer: '1500'
+      });
+    }
+
+    $('.btn-delete').on('click', function() {
+
+      const id = $(this).attr('data-id');
+      console.log(id);
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $.ajax({
+            type: 'GET',
+            url: '/kb/administrator/user/delete/' + id,
+          });
+
+          location.reload();
+        }
+      });
+    });
+  </script>
 
 </body>
 

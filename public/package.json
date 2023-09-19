@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "flowbite": "^1.8.1",
+    "sweetalert2": "^11.7.28",
     "tailwind-scrollbar-hide": "^1.1.7"
   }
 }
