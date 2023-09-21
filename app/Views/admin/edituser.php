@@ -94,7 +94,7 @@
         </div>
         <div class="flex justify-end grid-cols-2 gap-8 pt-12">
             <button type="reset" class="text-main font  -normal rounded-lg text-sm w-full sm:w-auto px-10 py-2.5 text-center border border-main hover:bg-slate-100">Clear</button>
-            <button type="submit" class="text-white bg-main font-normal rounded-lg text-sm w-full sm:w-auto px-10 py-2.5 text-center hover:bg-[#1592BC]">Add</button>
+            <button type="submit" class="text-white bg-main font-normal rounded-lg text-sm w-full sm:w-auto px-10 py-2.5 text-center hover:bg-[#1592BC]">Edit</button>
         </div>
     </form>
 

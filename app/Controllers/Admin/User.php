@@ -4,6 +4,8 @@ namespace App\Controllers\Admin;
 
 use App\Models\Admin\UserModel;
 use CodeIgniter\RESTful\ResourceController;
+use Exception;
+use Myth\Auth\Password;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -94,10 +96,11 @@ class User extends ResourceController
                 'level'         => $level,
                 'active'        => 1
             ];
-
-            $this->userModel->save($data);
-
-            return redirect()->to('kb/administrator/user')->with('success', "Data user berhasil ditambah");
+            if (!$this->userModel->save($data)) {
+                return redirect()->to('kb/administrator/user')->with('error', "Data user gagal ditambah");
+            } else {
+                return redirect()->to('kb/administrator/user')->with('success', "Data user berhasil ditambah");
+            }
         }
     }
 
@@ -125,7 +128,7 @@ class User extends ResourceController
     {
 
         $rules = [
-            'name'          => 'required|alpha_dash',
+            'name'          => 'required',
             'id_project'    => 'required',
             'level'         => 'required'
         ];
@@ -142,28 +145,36 @@ class User extends ResourceController
             $level = $this->request->getVar('level');
             $id_project = $this->request->getVar('id_project');
 
-
-
-            if (!empty($pass)) {
-                $password = password_hash($pass, PASSWORD_DEFAULT);
+            $cek_username = $this->userModel->select('*')->where('username', $username)->where('id !=', $id)->findAll();
+            if ($cek_username) {
+                return redirect()->to('kb/administrator/user/edit/' . $id)->withInput()->with('errors', ['username' => 'Username sudah terdaftar']);
             } else {
-                $password = $user['password_hash'];
+                $cek_email = $this->userModel->select('*')->where('email', $email)->where('id !=', $id)->findAll();
+                if ($cek_email) {
+                    return redirect()->to('kb/administrator/user/edit/' . $id)->withInput()->with('errors', ['email' => 'Alamat email sudah terdaftar']);
+                } else {
+                    if (!empty($pass)) {
+                        $password = Password::hash($pass);
+                    } else {
+                        $password = $user['password_hash'];
+                    }
+
+                    $data = [
+                        'id_project'    => $id_project,
+                        'name'          => $name,
+                        'email'         => $email,
+                        'username'      => $username,
+                        'password_hash' => $password,
+                        'level'         => $level
+                    ];
+
+                    // dd($data);
+
+                    $this->userModel->update($id, $data);
+
+                    return redirect()->route('kb/administrator/user')->with('success', "Data user berhasil diupdate");
+                }
             }
-
-            $data = [
-                'id_project'    => $id_project,
-                'name'          => $name,
-                'email'         => $email,
-                'username'      => $username,
-                'password_hash' => $password,
-                'level'         => $level
-            ];
-
-            // dd($data);
-
-            $this->userModel->update($id, $data);
-
-            return redirect()->route('kb/administrator/user')->with('success', "Data user berhasil diupdate");
         }
     }
 
@@ -175,6 +186,6 @@ class User extends ResourceController
     public function delete($id = null)
     {
         $this->userModel->delete($id);
-        return redirect()->route('kb/administrator/user')->with('success', "Data user berhasil dihapus");
+        return redirect()->to('kb/administrator/user')->with('success', "Data user berhasil dihapus");
     }
 }

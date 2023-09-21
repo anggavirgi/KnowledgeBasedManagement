@@ -58,7 +58,7 @@
             <div class="flex gap-2">
                 <div class="mb-4 relative w-full">
                     <label for="status_user" class="block mb-2 text-sm font-medium text-form">Status user</label>
-                    <select id="status_user" name="status_user" class="cursor-pointer bg-gray-50 border appearance-none border-gray-300 text-sm rounded-lg block w-full p-3.5 placeholder-gray-400 text-form focus:outline-none focus:ring-blue-500 focus:border-blue-500 <?php if (session('errors.password')) : ?>border-red-600<?php endif ?>">
+                    <select id="status_user" name="status_user" class="cursor-pointer bg-gray-50 border appearance-none border-gray-300 text-sm rounded-lg block w-full p-3.5 placeholder-gray-400 text-form focus:outline-none focus:ring-blue-500 focus:border-blue-500 <?php if (session('errors.status_user')) : ?>border-red-600<?php endif ?>">
                         <option value="">Choose user status</option>
                         <option value="new" <?php if (old('status_user') == 'new') echo "selected" ?>>New user</option>
                         <option value="old" <?php if (old('status_user') == 'old') echo "selected" ?>>Old user</option>
