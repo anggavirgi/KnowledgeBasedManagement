@@ -34,9 +34,9 @@ $routes->get('/', 'Home::index');
 $routes->group('kb', static function ($routes) {
 
     // ROUTE LOGIN
-    $routes->get('proses', 'Login::proses');
-    $routes->get('register/', 'Login::register');
-    $routes->get('forgot-password/', 'Login::forgotpassword');
+    // $routes->get('proses', 'Login::proses');
+    // $routes->get('register/', 'Login::register');
+    // $routes->get('forgot-password/', 'Login::forgotpassword');
 
     //HOME
     $routes->get('/', 'Home::index');
@@ -46,7 +46,6 @@ $routes->group('kb', static function ($routes) {
     $routes->get('history', 'Home::history');
     $routes->get('personalarticle', 'Home::personalarticle');
     $routes->get('personalarticle/personalarticledetail', 'Home::personalarticledetail');
-
 });
 
 // ROUTE ADMIN
@@ -56,10 +55,16 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
 
     $routes->get('user', 'User::index');
     $routes->get('user/detailuser', 'User::detail');
-    $routes->get('user/adduser', 'User::add');
+    $routes->get('user/new', 'User::new');
+    $routes->post('user', 'User::create');
+    $routes->get('user/edit/(:num)', 'User::edit/$1');
+    $routes->post('user/(:num)', 'User::update/$1');
+    $routes->get('user/delete/(:num)', 'User::delete/$1');
 
-    $routes->post('user/save', 'User::save');
-    $routes->get('user/edituser', 'User::edit');
+    // $routes->resource('user', ['controller' => 'User', 'only' => ['index', 'show', 'new', 'create', 'edit', 'update']]);
+
+    // $routes->post('user/save', 'User::save');
+    // $routes->get('user/edituser', 'User::edit');
 
     $routes->get('category', 'Category::index');
     $routes->get('category/addcategory', 'Category::add');

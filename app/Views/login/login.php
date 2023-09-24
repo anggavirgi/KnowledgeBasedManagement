@@ -32,7 +32,7 @@
         <p class="p-3 bg-[#CFF2DE] text-[#1F9254]"><?php echo session('message') ?></p>
       <?php endif; ?>
       <?php if (session()->has('error')) : ?>
-        <p class="p-3 bg-[#2C0B0E] text-[#EA7759] border-[#DD0606] rounded-md"><?php echo session('error') ?></p>
+        <p class="p-3 bg-[#F8D7DA] text-[#721C24] border-[#DD0606] rounded-md"><?php echo session('error') ?></p>
       <?php endif; ?>
       <form action="<?= url_to('login'); ?>" method="post" class="flex flex-col">
         <?= csrf_field() ?>
@@ -64,7 +64,7 @@
           <hr class="h-[1px] w-full ml-4">
         </div>
 
-        <a href="<?= $link; ?>" target="_blank" class="flex justify-center py-2 rounded-md bg-[#FFF4E3] hover:bg-[#f7ead5]">
+        <a href="" target="_blank" class="flex justify-center py-2 rounded-md bg-[#FFF4E3] hover:bg-[#f7ead5]">
           <div class="mr-2"><img src="<?php echo base_url(); ?>src/images/google.png" alt="" class="w-[83%]"></div>
           <div>Sign in with Google</div>
         </a>
