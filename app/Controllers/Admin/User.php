@@ -15,6 +15,15 @@ class User extends BaseController
     return view('admin/user', $data);
   }
 
+  public function detail()
+  {
+    $data = [
+      'title' => 'Detail User'
+    ];
+
+    return view('admin/detailuser', $data);
+  }
+
   public function add()
   {
     $data = [

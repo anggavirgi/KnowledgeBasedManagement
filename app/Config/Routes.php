@@ -55,6 +55,7 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     $routes->get('dashboard', 'Admin::index');
 
     $routes->get('user', 'User::index');
+    $routes->get('user/detailuser', 'User::detail');
     $routes->get('user/adduser', 'User::add');
 
     $routes->post('user/save', 'User::save');
