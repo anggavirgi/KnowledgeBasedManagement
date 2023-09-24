@@ -188,4 +188,5 @@ class User extends ResourceController
         $this->userModel->delete($id);
         return redirect()->to('kb/administrator/user')->with('success', "Data user berhasil dihapus");
     }
+
 }

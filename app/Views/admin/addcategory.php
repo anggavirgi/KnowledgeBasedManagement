@@ -31,7 +31,7 @@
             <p class="text-xs text-gray-500 block" id="formatsizetext">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
           </div>
           <input id="dropzone-file" type="file" class="hidden" name="icon" onchange="handleFileChange(this.files)"/>
-          <p id="selected-file-name" class="mb-2 text-sm font-semibold text-main"></p>
+          <p id="selected-file-name" class="mb-2 text-sm font-semibold text-center text-main"></p>
         </label>
       </div>
     </div>
