@@ -8,18 +8,12 @@ class CategoryModel extends Model
 {
     protected $table            = 'categories';
     protected $primaryKey       = 'id';
-    protected $allowedFields    = ['name_category','slug','icon'];
+    protected $allowedFields    = ['name_category','slug','icon','created_at', 'updated_at'];
 
     // Dates
     protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
-
-    // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
 
 }

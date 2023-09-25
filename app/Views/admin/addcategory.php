@@ -15,10 +15,16 @@
       <span>Add Category</span>
     </div>
   </div>
-  <form class="ms-7 my-10">
+  <form action="<?php echo base_url(); ?>kb/administrator/category" method="post" enctype="multipart/form-data" class="ms-7 my-10">
+    <?php echo csrf_field(); ?>
     <div class="mb-5">
       <label for="category" class="block mb-2 text-sm font-medium text-gray-800">Category name</label>
-      <input type="category" id="category" name="category" class="bg-gray-50 border text-gray-800 text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-2/4 p-4  " placeholder="Category name" required>
+      <input type="category" id="category" name="category" class="bg-gray-50 border text-gray-800 text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-2/4 p-4 " placeholder="Category name" value="<?= old('category'); ?>">
+      <?php if (session('errors.category')) : ?>
+          <div class="mt-1">
+              <small class=" text-red-600 text-sm"><?= session('errors.category'); ?></small>
+          </div>
+      <?php endif; ?>
     </div>
     <div class="mb-11">
       <div class="flex items-center justify-start ">
@@ -28,22 +34,20 @@
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
             </svg>
             <p class="mb-2 text-sm text-gray-500 block" id="dragdroptext"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-            <p class="text-xs text-gray-500 block" id="formatsizetext">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+            <p class="text-xs text-gray-500 block" id="formatsizetext">SVG, PNG, JPG, WEBP (MAX 1MB)</p>
           </div>
           <input id="dropzone-file" type="file" class="hidden" name="icon" onchange="handleFileChange(this.files)"/>
           <p id="selected-file-name" class="mb-2 text-sm font-semibold text-center text-main"></p>
         </label>
       </div>
+      <?php if (session('errors.icon')) : ?>
+          <div class="mt-1">
+              <small class=" text-red-600 text-sm"><?= session('errors.icon'); ?></small>
+          </div>
+      <?php endif; ?>
     </div>
 
-    <!-- INI FILE UPLOAD YANG BIASA -->
-    <!-- <div class="mb-6">
-      <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
-      <input class="block w-1/2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none p-3" aria-describedby="file_input_help" id="file_input" type="file">
-      <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG (MAX. 800x400px).</p>
-    </div> -->
-
-    <button type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-main font-medium rounded-lg text-sm px-6 py-2.5 mr-8 ">Cancel</button>
+    <a href="<?php echo base_url(); ?>kb/administrator/category" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-main font-medium rounded-lg text-sm px-6 py-2.5 mr-8 ">Cancel</a>
     <button type="submit" class="text-white bg-main hover:bg-main focus:ring-3 focus:outline-none font-medium rounded-lg text-sm sm:w-auto px-6 py-2.5 text-center">Submit</button>
   </form>
 </div>
