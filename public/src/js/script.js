@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  
   // LAYOUT CUSTOMER
   // DROPDOWN GENERAL QUESTION
   document.addEventListener("DOMContentLoaded", function () {
@@ -12,6 +13,7 @@ $(document).ready(function () {
     }
   });
 
+  
   $(".collapsible").click(function () {
     var icon = $(this).find(".icon");
     // console.log(icon);
@@ -20,13 +22,13 @@ $(document).ready(function () {
       icon.addClass("bi-chevron-up");
       var title = $(this).attr("data-title");
       var title = "#" + title;
-      $(title).addClass("text-main");
+      $(title).addClass("text-sky-700");
     } else if (icon.hasClass("bi-chevron-up")) {
       icon.removeClass("bi-chevron-up");
       icon.addClass("bi-chevron-down");
       var title = $(this).attr("data-title");
       var title = "#" + title;
-      $(title).removeClass("text-main");
+      $(title).removeClass("text-sky-700");
     }
     var target = $(this).attr("data-target");
     var id = "#" + target;
@@ -42,12 +44,12 @@ $(document).ready(function () {
       iconside.removeClass("bi-chevron-down").addClass("bi-chevron-up");
       var titlesidebar = $(this).attr("data-title");
       var titlesidebar = "#" + titlesidebar;
-      $(titlesidebar).addClass("text-main");
+      $(titlesidebar).addClass("text-sky-700");
     } else if (iconside.hasClass("bi-chevron-up")) {
       iconside.removeClass("bi-chevron-up").addClass("bi-chevron-down");
       var titlesidebar = $(this).attr("data-title");
       var titlesidebar = "#" + titlesidebar;
-      $(titlesidebar).removeClass("text-main");
+      $(titlesidebar).removeClass("text-sky-700");
     }
 
     var targetside = $(this).attr("data-target");
@@ -67,22 +69,7 @@ $(document).ready(function () {
   const parts = activePage.split("/");
   const menuPart = "/" + parts[3];
 
-  // const navLink = document.querySelectorAll('.navbar a').forEach(link => {
-  // if(link.href.includes(activePage) && !link.closest('#dropdownAvatarName') && !link.closest('#navbar-search')){
-  const navLink = document
-    .querySelectorAll(".sidebar-child a")
-    .forEach((link) => {
-      if (link.href.includes(activePage)) {
-        link.classList.add("bg-main");
-        link.classList.add("text-white");
-        link.classList.add("rounded-md");
-      }
-    });
-
-  // CKEDITOR 5 CLASSIC
-  ClassicEditor.create(document.querySelector("#editor")).catch((error) => {
-    console.error(error);
-  });
+  
 
   // Changing Status Complain
   var initialValue = $("#status-entries").val();
@@ -186,6 +173,55 @@ $(document).ready(function () {
     }
   });
 
+  // Sidebar Mobile Toggle Aside Expand
+  var toggleClose = `
+  <button type="button" data-drawer-hide="drawer-disabled-backdrop" aria-controls="drawer-disabled-backdrop" class="text-white bg-main rounded-lg text-sm w-14 h-10 absolute top-0 -right-12 inline-flex items-center justify-center">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-white">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+  </svg>
+  <span class="sr-only">Close menu</span>
+  </button>
+  `;
+  $("button[data-drawer-show='drawer-disabled-backdrop']").click(function () {
+    // Append the button to the aside element
+    $('#drawer-disabled-backdrop').append(toggleClose);
+  });
+  
+  const aside = $('#drawer-disabled-backdrop');
+  $(aside).on('click', "button[data-drawer-hide='drawer-disabled-backdrop']", function () {
+    $(aside).removeClass('transform-none')
+    $(aside).addClass('-translate-x-full')
+    $(this).remove()
+  });
+  
+});
+
+const navbarPage = window.location.pathname;
+  const navbarLayout = document.getElementById("navbar-layout");
+  if (navbarPage !== "/kb") {
+    navbarLayout.classList.add("md:block");
+    navbarLayout.classList;
+  } else {
+    navbarLayout.classList.remove("md:block");
+  }
+
+  // const navLink = document.querySelectorAll('.navbar a').forEach(link => {
+  // if(link.href.includes(activePage) && !link.closest('#dropdownAvatarName') && !link.closest('#navbar-search')){
+    const navLink = document
+    .querySelectorAll(".sidebar-child a")
+    .forEach((link) => {
+      if (link.href.includes(activePage)) {
+        link.classList.add("bg-main");
+        link.classList.add("text-white");
+        link.classList.add("rounded-md");
+      }
+    });
+
+  // CKEDITOR 5 CLASSIC
+  ClassicEditor.create(document.querySelector("#editor")).catch((error) => {
+    console.error(error);
+  });
+
   // Show file name in drag & drop box
   // Select the file input element by its id
   const fileInput = document.getElementById("dropzone-file");
@@ -264,4 +300,3 @@ $(document).ready(function () {
       formatsizetext.classList.add("block");
     }
   }
-});
