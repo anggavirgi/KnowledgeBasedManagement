@@ -61,6 +61,7 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     $routes->get('user/edit/(:num)', 'User::edit/$1');
     $routes->post('user/(:num)', 'User::update/$1');
     $routes->get('user/delete/(:num)', 'User::delete/$1');
+    $routes->get('user/detail/(:num)', 'User::detail/$1');
 
     // $routes->resource('user', ['controller' => 'User', 'only' => ['index', 'show', 'new', 'create', 'edit', 'update']]);
 
@@ -68,8 +69,12 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     // $routes->get('user/edituser', 'User::edit');
 
     $routes->get('category', 'Category::index');
-    $routes->get('category/addcategory', 'Category::add');
-    $routes->get('category/editcategory', 'Category::edit');
+    $routes->get('category/new', 'Category::new');
+    $routes->post('category', 'Category::create');
+    $routes->get('category/edit/(:num)', 'Category::edit/$1');
+    $routes->post('category/(:num)', 'Category::update/$1');
+    $routes->get('category/delete/(:num)', 'Category::delete/$1');
+
     $routes->get('category/subcategory', 'Category::subcategory');
     $routes->get('category/subcategory/addsubcategory', 'Category::addsub');
     $routes->post('category/subcategory/addsubcategory', 'Category::createSubCategory');

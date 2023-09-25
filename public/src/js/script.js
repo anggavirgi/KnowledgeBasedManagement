@@ -1,14 +1,16 @@
 $(document).ready(function () {
   // LAYOUT CUSTOMER
   // DROPDOWN GENERAL QUESTION
-  const navbarPage = window.location.pathname;
-  const navbarLayout = document.getElementById("navbar-layout");
-  if (navbarPage !== "/kb") {
-    navbarLayout.classList.add("md:block");
-    navbarLayout.classList;
-  } else {
-    navbarLayout.classList.remove("md:block");
-  }
+  document.addEventListener("DOMContentLoaded", function () {
+    const navbarPage = window.location.pathname;
+    const navbarLayout = document.getElementById("navbar-layout");
+
+    if (navbarPage !== "/kb" || navbarPage !== "/") {
+      navbarLayout.classList.add("md:block");
+    } else {
+      navbarLayout.classList.remove("md:block");
+    }
+  });
 
   $(".collapsible").click(function () {
     var icon = $(this).find(".icon");
@@ -252,6 +254,14 @@ $(document).ready(function () {
       dragdroptext.classList.add("hidden");
       formatsizetext.classList.add("hidden");
       fileInput.files = files; // Assign the selected files to the hidden input for form submission.
+    } else {
+      selectedFileName.textContent = "";
+      selectedFileName.classList.remove("-mt-8");
+      dragdroptext.classList.remove("hidden");
+      dropzone.classList.remove("border-main");
+      formatsizetext.classList.remove("hidden");
+      dragdroptext.classList.add("block");
+      formatsizetext.classList.add("block");
     }
   }
 });

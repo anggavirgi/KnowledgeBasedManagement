@@ -26,9 +26,11 @@ class User extends ResourceController
 
     public function index()
     {
+        $dataUser = $this->userModel->findAll();
+
         $data = [
             'title' => 'User',
-            'users' => $this->userModel->findAll()
+            'users' => $dataUser
         ];
 
         return view('admin/user', $data);
@@ -188,4 +190,17 @@ class User extends ResourceController
         $this->userModel->delete($id);
         return redirect()->to('kb/administrator/user')->with('success', "Data user berhasil dihapus");
     }
+
+    public function detail($id = null)
+    {
+        $dataUser = $this->userModel->find($id);
+
+        $data = [
+            'title' => 'Detail User',
+            'user' => $dataUser
+        ];
+
+        return view('admin/detailuser', $data);
+    }
+
 }

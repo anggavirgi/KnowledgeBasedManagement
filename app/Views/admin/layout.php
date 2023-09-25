@@ -109,7 +109,7 @@
     if (flashSuccess) {
 
       Swal.fire({
-        title: 'Berhasil',
+        title: 'Success',
         text: flashSuccess,
         showConfirmButton: false,
         icon: 'success',
