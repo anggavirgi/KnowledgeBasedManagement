@@ -21,7 +21,7 @@
         <div class="grid grid-cols-2 gap-4 py-10">
             <div class="mb-4">
                 <label for="name" class="block mb-2 text-sm font-medium text-form">Name</label>
-                <input type="name" name="name" id="name" class="bg-gray-50 text-sm rounded-lg block w-full p-3.5  placeholder-gray-400 text-black border border-[#CCCCCC] <?php if (session('errors.name')) : ?>border-red-600<?php endif ?>" placeholder="Name" value="<?= $user['name']; ?>" required>
+                <input type="name" name="name" id="name" class="bg-gray-50 text-sm rounded-lg block w-full p-3.5  placeholder-gray-400 text-black border border-[#CCCCCC] <?php if (session('errors.name')) : ?>border-red-600<?php endif ?>" placeholder="Name" value="<?= $user['name']; ?>">
                 <?php if (session('errors.name')) : ?>
                     <div class="mt-1">
                         <small class=" text-red-600 text-sm"><?= session('errors.name'); ?></small>
@@ -30,7 +30,7 @@
             </div>
             <div class="mb-4">
                 <label for="username" class="block mb-2 text-sm font-medium text-form">Username</label>
-                <input type="username" name="username" id="username" class="bg-gray-50 text-sm rounded-lg block w-full p-3.5  placeholder-gray-400 text-black border border-[#CCCCCC] <?php if (session('errors.username')) : ?>border-red-600<?php endif ?>" placeholder="Username" value="<?= $user['username']; ?>" required>
+                <input type="username" name="username" id="username" class="bg-gray-50 text-sm rounded-lg block w-full p-3.5  placeholder-gray-400 text-black border border-[#CCCCCC] <?php if (session('errors.username')) : ?>border-red-600<?php endif ?>" placeholder="Username" value="<?= $user['username']; ?>">
                 <?php if (session('errors.username')) : ?>
                     <div class="mt-1">
                         <small class=" text-red-600 text-sm"><?= session('errors.username'); ?></small>
@@ -39,7 +39,7 @@
             </div>
             <div class="mb-4">
                 <label for="email" class="block mb-2 text-sm font-medium text-form">Email</label>
-                <input type="email" name="email" id="email" class="bg-gray-50 text-sm rounded-lg block w-full p-3.5  placeholder-gray-400 text-black border border-[#CCCCCC] <?php if (session('errors.email')) : ?>border-red-600<?php endif ?>" placeholder="Email" value="<?= $user['email']; ?>" required>
+                <input type="email" name="email" id="email" class="bg-gray-50 text-sm rounded-lg block w-full p-3.5  placeholder-gray-400 text-black border border-[#CCCCCC] <?php if (session('errors.email')) : ?>border-red-600<?php endif ?>" placeholder="Email" value="<?= $user['email']; ?>">
                 <?php if (session('errors.email')) : ?>
                     <div class="mt-1">
                         <small class=" text-red-600 text-sm"><?= session('errors.email'); ?></small>
