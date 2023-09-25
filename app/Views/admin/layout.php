@@ -100,7 +100,70 @@
   <script src="<?php echo base_url(); ?>node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
   <script src="<?php echo base_url(); ?>node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
   <script src="<?php echo base_url(); ?>/src/js/script.js"></script>
+  
+<script>
+    $(".delete-checkbox").on("change", function() {
 
+      let checkbox = $(".delete-checkbox").length;
+      let checkboxChecked = $(".delete-checkbox:checked").length;
+      let checkboxCheckedItems = $(".delete-checkbox:checked").length > 0;
+      if (checkboxCheckedItems) {
+        if (checkboxChecked < checkbox) {
+
+          $(".delete-all-checkbox").prop("checked", false);
+        } else {
+          $(".delete-all-checkbox").prop("checked", true);
+        }
+        $(".delete-batch").show()
+      } else {
+        $(".delete-all-checkbox").prop("checked", false);
+        $(".delete-batch").hide()
+      }
+    });
+    $(".delete-all-checkbox").on("change", function() {
+
+      const checkAll = document.querySelector(".delete-all-checkbox");
+
+
+      if (checkAll.checked) {
+        $(".delete-checkbox").prop("checked", true);
+        $(".delete-batch").show()
+      } else {
+        $(".delete-checkbox").prop("checked", false);
+        $(".delete-batch").hide()
+      }
+    });
+
+    $(".delete-batch-btn").on("click", function() {
+      const url = $(this).attr('data-action')
+      let selectedItems = [];
+      $(".delete-checkbox:checked").each(function() {
+        selectedItems.push($(this).closest('td').data('id'));
+      });
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $.ajax({
+            type: "POST",
+            url: url,
+            data: {
+              ids: selectedItems
+            }
+          });
+
+          location.reload();
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
