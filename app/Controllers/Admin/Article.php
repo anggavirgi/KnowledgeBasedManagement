@@ -2,10 +2,22 @@
 
 namespace App\Controllers\Admin;
 
-use App\Controllers\BaseController;
+use App\Models\Admin\ArticleModel;
+use App\Models\Admin\ContentModel;
+use CodeIgniter\RESTful\ResourceController;
+use Exception;
 
-class Article extends BaseController
+class Article extends ResourceController
 {
+  protected $articleModel;
+  protected $contentModel;
+
+  public function __construct()
+  {
+    $this->articleModel = new ArticleModel();
+    $this->contentModel = new ContentModel();
+  }
+
   public function index()
   {
     $data = [
@@ -24,7 +36,7 @@ class Article extends BaseController
     return view('admin/addarticle', $data);
   }
 
-  public function edit()
+  public function edit($id=null)
   {
     $data = [
       'title' => 'Edit Article'
@@ -33,7 +45,7 @@ class Article extends BaseController
     return view('admin/editarticle', $data);
   }
 
-  public function detail()
+  public function detail($id=null)
   {
     $data = [
       'title' => 'Detail Article'

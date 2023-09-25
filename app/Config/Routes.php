@@ -84,9 +84,12 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     $routes->get('category/subcategory/delete/(:num)', 'Category::deleteSubCategory/$1');
 
     $routes->get('article', 'Article::index');
-    $routes->get('article/addarticle', 'Article::add');
-    $routes->get('article/editarticle', 'Article::edit');
-    $routes->get('article/detailarticle', 'Article::detail');
+    $routes->get('article/new', 'Article::new');
+    $routes->post('article', 'Article::create');
+    $routes->get('article/edit/(:num)', 'Article::edit/$1');
+    $routes->get('article/(:num)', 'Article::update/$1');
+    $routes->get('article/delete/(:num)', 'Article::delete/$1');
+    $routes->get('article/detail/(:num)', 'Article::detail/$1');
 
     $routes->get('complain', 'Complain::index');
     $routes->get('complain/reply', 'Complain::reply');
