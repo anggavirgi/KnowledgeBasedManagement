@@ -43,8 +43,6 @@ class ComplainReply extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('id_complain', 'complains', 'id');
-        $this->forge->addForeignKey('id_user', 'users', 'id');
         $this->forge->createTable('complain_reply');
     }
 

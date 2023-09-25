@@ -61,8 +61,6 @@ class Content extends Migration
             ]
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('id_category', 'categories', 'id');
-        $this->forge->addForeignKey('id_sub_category', 'sub_category', 'id');
         $this->forge->createTable('content');
     }
 
