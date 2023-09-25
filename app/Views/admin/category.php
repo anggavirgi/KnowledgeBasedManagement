@@ -6,7 +6,7 @@
   <h2 class="font-bold text-xl">List Category</h2>
   <div class="flex justify-between items-center my-5">
     <form method="" class="relative flex justify-end items-center">
-      <input type="text" placeholder="search" class="px-5 py-2 w-64 rounded-2xl border border-gray-400 outline-main">
+      <input type="text" id="searchInput" placeholder="search" class="px-5 py-2 w-64 rounded-2xl border border-gray-400 outline-main">
       <button class="absolute right-5 cursor-pointer align-middle">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search text-gray-400" viewBox="0 0 16 16">
           <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
@@ -35,7 +35,7 @@
     <div class="flash-error" data-flashmessage="<?php echo session('error') ?>"></div>
   <?php endif; ?>
 
-  <table class="w-full text-center">
+  <table class="w-full text-center" id="myTable">
     <thead class="border-b">
       <tr>
         <th class="p-3">
