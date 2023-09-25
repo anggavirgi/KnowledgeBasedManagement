@@ -46,6 +46,7 @@ $routes->group('kb', static function ($routes) {
     $routes->get('history', 'Home::history');
     $routes->get('personalarticle', 'Home::personalarticle');
     $routes->get('personalarticle/personalarticledetail', 'Home::personalarticledetail');
+    $routes->get('complain/reply', 'Home::reply');
 });
 
 // ROUTE ADMIN
