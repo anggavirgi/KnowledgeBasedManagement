@@ -197,36 +197,36 @@ $(document).ready(function () {
   // Selector Checkbox
   var rowCount = $("tbody tr").length;
   const checkboxAll = $('#checkall');
-  const checkboxsingle = $('input[name="userCheckbox"]');
+  const checkboxsingle = $('input[name="checkboxitems"]');
   const delbtn = $('#check-del');
   $(checkboxAll).change(function () {
     if ($(this).is(":checked")) {
-      // Check all checkboxes with the name "userCheckbox"
-      $('input[name="userCheckbox"]').prop('checked', true);
+      // Check all checkboxes with the name "checkboxitems"
+      $('input[name="checkboxitems"]').prop('checked', true);
       $(delbtn).removeClass('hidden');
     } else {
-      // Uncheck all checkboxes with the name "userCheckbox"
-      $('input[name="userCheckbox"]').prop('checked', false);
+      // Uncheck all checkboxes with the name "checkboxitems"
+      $('input[name="checkboxitems"]').prop('checked', false);
       $(delbtn).addClass('hidden');
     }
   });
 
   $(checkboxsingle).change(function () {
     if ($(this).is(":checked")) {
-      // Check all checkboxes with the name "userCheckbox"
+      // Check all checkboxes with the name "checkboxitems"
       $(delbtn).removeClass('hidden');
     } else {
-      // Uncheck all checkboxes with the name "userCheckbox"
-      if($('input[name="userCheckbox"]:checked').length != 0){
+      // Uncheck all checkboxes with the name "checkboxitems"
+      if($('input[name="checkboxitems"]:checked').length != 0){
       }else{
         $(delbtn).addClass('hidden');
       }
     }
   });
   
-  const singleCheck =$('input[name="userCheckbox"]');
+  const singleCheck =$('input[name="checkboxitems"]');
   $(singleCheck).change(function () {
-    if($('input[name="userCheckbox"]:checked').length == rowCount){
+    if($('input[name="checkboxitems"]:checked').length == rowCount){
       $('input[id="checkall"]').prop('checked', true);
       // $(delbtn).removeClass('hidden');
     }else{
