@@ -84,7 +84,7 @@ class Category extends ResourceController
   {
     $rules = [
       'category'      => 'required|alpha_numeric_space',
-      'icon'          => 'uploaded[icon]|max_size[icon,1024]|is_image[icon]|mime_in[icon,image/jpg,image/jpeg,image/png,image/svg,image/webp]'
+      'icon'          => 'max_size[icon,1024]|is_image[icon]|mime_in[icon,image/jpg,image/jpeg,image/png,image/svg,image/webp]'
     ];
 
     if (!$this->validate($rules)) {
@@ -94,19 +94,36 @@ class Category extends ResourceController
       $slug = url_title($name_category, "-", true);
 
       $icon_file = $this->request->getFile('icon');
-      $icon_name = $icon_file->getRandomName();
-      $icon_file->move('src/images/icon', $icon_name);
+      if($icon_file->getError() == 4){
+        $icon_name = $this->request->getVar('old_icon');
+      } else {
+        $icon_name = $icon_file->getRandomName();
+        $icon_file->move('src/images/icon', $icon_name);
+        unlink('src/images/icon/'.$this->request->getVar('old_icon'));
+      }
 
       $data = [
+        'id'            => $id,
         'name_category' => $name_category,
         'slug'          => $slug,
         'icon'          => $icon_name
       ];
-      if (!$this->categoryModel->save($data)) {
-        return redirect()->to('kb/administrator/category')->with('error', "Data category gagal diubah");
+      if (!$this->categoryModel->update($id, $data)) {
+        return redirect()->to('kb/administrator/category')->with('error', "Data category gagal diupdate");
       } else {
-        return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil diubah");
+        return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil diupdate");
       }
+    }
+  }
+  
+  public function delete($id = null)
+  {
+    $dataCategory = $this->categoryModel->find($id);
+    unlink('src/images/icon/'.$dataCategory['icon']);
+    if (!$this->categoryModel->delete($id)) {
+      return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
+    } else {
+      return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
     }
   }
 
@@ -120,7 +137,7 @@ class Category extends ResourceController
 
     return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
   }
-
+  
   public function subcategory()
   {
     $data = [

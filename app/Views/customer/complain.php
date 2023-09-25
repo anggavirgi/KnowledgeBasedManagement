@@ -2,13 +2,13 @@
 
 <?php echo $this->section('content'); ?>
 <section id="main">
-    <div class="container h-[40rem] overflow-y-scroll scrollbar-hide lg:w-8/12 mx-auto">
+    <div class="container lg:w-8/12 mx-auto">
 
         <div class="m-7 md:mx-12 mb-20">
 
             <div class="flex justify-end">
 
-                <div data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="fixed lg:absolute bottom-4 lg:bottom-0 lg:left-16 right-4 lg:right-0 lg:top-32 md:right-8 bg-[#2561AE] text-white drop-shadow-md flex items-center border-2 font-medium text-xs rounded-full px-1 lg:px-3 py-2 w-fit h-fit cursor-pointer">
+                <div data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="fixed lg:absolute bottom-4 lg:bottom-0 lg:left-16 right-4 lg:right-0 lg:top-32 md:right-8 bg-main text-white drop-shadow-md flex items-center border-2 font-medium text-xs rounded-full px-1 lg:px-3 py-2 w-fit h-fit cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 md:w-11 lg:w-7 h-8 md:h-9 lg:h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
                     </svg>
@@ -26,24 +26,38 @@
                             <span class="sr-only">Close modal</span>
                         </button>
                         <div class="px-6 lg:px-8 w-[95%]">
-                            <form class="space-y-4" action="#">
+                            <form class="space-y-2" action="#">
                                 <div>
                                     <label for="username" class="block mb-2 text-xs font-medium text-form">username</label>
                                     <input type="username" name="username" id="username" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" required>
                                 </div>
                                 <div>
+                                    <label for="subject" class="block mb-2 text-xs font-medium text-form">subject</label>
+                                    <input type="subject" name="subject" id="subject" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" required>
+                                </div>
+                                <div>
                                     <label for="email" class="block mb-2 text-xs font-medium text-form">Your email</label>
                                     <input type="email" name="email" id="email" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" required>
                                 </div>
-                                <div>
-                                    <label for="project" class="block mb-2 text-xs font-medium text-form">Project</label>
-                                    <select id="project" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main">
-                                        <option selected>Choose a project</option>
-                                        <option value="p1">P001</option>
-                                        <option value="p2">P002</option>
-                                        <option value="p3">P003</option>
-                                        <option value="p4">P004</option>
-                                    </select>
+                                <div class="flex gap-2">
+                                    <div class="w-full">
+                                        <label for="user" class="block mb-2 text-xs font-medium text-form">User status</label>
+                                        <select id="user" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main">
+                                            <option selected>Choose User</option>
+                                            <option value="newUser">New User</option>
+                                            <option value="oldUser">Old User</option>
+                                        </select>
+                                    </div>
+                                    <div class="w-full">
+                                        <label for="project" class="block mb-2 text-xs font-medium text-form">Project</label>
+                                        <select id="project" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main">
+                                            <option selected>Choose a project</option>
+                                            <option value="p1">P001</option>
+                                            <option value="p2">P002</option>
+                                            <option value="p3">P003</option>
+                                            <option value="p4">P004</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div>
                                     <label for="message" class="block mb-2 text-xs font-medium text-form">Description</label>
@@ -76,8 +90,8 @@
             </div>
 
             <div class="pb-12 flex flex-col">
-                <span class="border-b-2 pb-3 border-slate-200 font-semibold text-xl">August 2023</span>
-                <a href="" class="py-3 font-semibold text-xl text-orange-600">How to maintenance server down</a>
+                <span class=" border-slate-200 font-semibold text-xl">August 2023</span>
+                <a href="" class="py-3 border-b-2 pb-3 font-semibold text-xl text-orange-600">How to maintenance server down</a>
                 <span class="text-ellipsis text-sm overflow-hidden h-44 text-justify">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. At illum ab aspernatur voluptatem enim ipsa ex dolore, adipisci amet eius optio fugiat, dolorem magni aliquam nam, eum repellat rerum fuga! Laudantium aut dolorem itaque facere, dolore et, impedit similique laboriosam vel nesciunt excepturi corporis ab repellendus sint. Quibusdam velit error enim dolor exercitationem iste, debitis asperiores placeat facere, sint minima autem numquam! Deleniti, earum. Inventore magnam vel, tenetur non nam minus exercitationem odit odio libero reiciendis sapiente repellendus porro temporibus accusamus labore, laboriosam dolorum sint laudantium enim magni suscipit fugit pariatur consequatur incidunt. Eum, aspernatur consequuntur modi quisquam corporis assumenda!Deleniti, earum. Inventore magnam vel, tenetur non nam minus exercitationem odit odio libero reiciendis sapiente repellendus porro temporibus accusamus labore, laboriosam dolorum sint laudantium enim magni suscipit fugit pariatur consequatur incidunt. Eum, aspernatur consequuntur modi quisquam corporis assumenda!Deleniti, earum. Inventore magnam vel, tenetur non nam minus exercitationem odit odio libero reiciendis sapiente repellendus porro temporibus accusamus labore, laboriosam dolorum sint laudantium enim magni suscipit fugit pariatur consequatur incidunt. Eum, aspernatur consequuntur modi quisquam corporis assumenda!
                 </span>
