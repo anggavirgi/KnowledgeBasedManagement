@@ -48,7 +48,7 @@ class Category extends ResourceController
     ];
 
     if (!$this->validate($rules)) {
-        return redirect()->route('kb/administrator/category/new')->withInput()->with('errors', $this->validator->getErrors());
+      return redirect()->route('kb/administrator/category/new')->withInput()->with('errors', $this->validator->getErrors());
     } else {
       $name_category = $this->request->getVar('category');
       $slug = url_title($name_category, "-", true);
@@ -63,9 +63,9 @@ class Category extends ResourceController
         'icon'          => $icon_name
       ];
       if (!$this->categoryModel->save($data)) {
-          return redirect()->to('kb/administrator/category')->with('error', "Data category gagal ditambah");
+        return redirect()->to('kb/administrator/category')->with('error', "Data category gagal ditambah");
       } else {
-          return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil ditambah");
+        return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil ditambah");
       }
     }
   }
@@ -88,7 +88,7 @@ class Category extends ResourceController
     ];
 
     if (!$this->validate($rules)) {
-        return redirect()->route('kb/administrator/category/edit/' . $id)->withInput()->with('errors', $this->validator->getErrors());
+      return redirect()->route('kb/administrator/category/edit/' . $id)->withInput()->with('errors', $this->validator->getErrors());
     } else {
       $name_category = $this->request->getVar('category');
       $slug = url_title($name_category, "-", true);
@@ -115,7 +115,7 @@ class Category extends ResourceController
       }
     }
   }
-
+  
   public function delete($id = null)
   {
     $dataCategory = $this->categoryModel->find($id);
@@ -127,6 +127,17 @@ class Category extends ResourceController
     }
   }
 
+  public function deleteBatch()
+  {
+    $id_categories = $this->request->getVar("ids");
+    for ($i = 0; $i < count($id_categories); $i++) {
+      $id = $id_categories[$i];
+      $this->categoryModel->delete($id);
+    }
+
+    return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
+  }
+  
   public function subcategory()
   {
     $data = [

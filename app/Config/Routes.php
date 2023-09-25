@@ -74,6 +74,7 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     $routes->get('category/edit/(:num)', 'Category::edit/$1');
     $routes->post('category/(:num)', 'Category::update/$1');
     $routes->get('category/delete/(:num)', 'Category::delete/$1');
+    $routes->post('category/deleteBatch', "Category::deleteBatch");
 
     $routes->get('category/subcategory', 'Category::subcategory');
     $routes->get('category/subcategory/addsubcategory', 'Category::addsub');

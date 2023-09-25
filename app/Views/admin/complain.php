@@ -93,7 +93,7 @@
             <tbody>
                 <tr class="clickable-row cursor-pointer border-b hover:bg-gray-50 dark:hover:bg-sky-50" data-href="<?php echo base_url(); ?>kb/administrator/complain/reply">
                     <td class="p-3">
-                        <input type="checkbox" name="" id="">
+                        <input type="checkbox" class="cursor-pointer" name="" id="">
                     </td>
                     <td class="p-3 font-medium text-gray-900 whitespace-nowrap cursor-pointer">
                         Aviarianss32@gmail.com
