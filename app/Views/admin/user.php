@@ -13,12 +13,18 @@
                 </svg>
             </button>
         </form>
-        <a href="<?php echo base_url(); ?>kb/administrator/user/adduser" class="border border-gray-400 px-6 py-2 rounded-2xl hover:border-green-400 cursor-pointer">
+        <a href="<?php echo base_url(); ?>kb/administrator/user/new" class="border border-gray-400 px-6 py-2 rounded-2xl hover:border-green-400 cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 cursor-pointer">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
             </svg>
         </a>
     </div>
+
+    <?php if (session()->has('success')) : ?>
+        <div class="flash-success" data-flashmessage="<?php echo session('success') ?>"></div>
+    <?php else : ?>
+        <div class="flash-error" data-flashmessage="<?php echo session('error') ?>"></div>
+    <?php endif; ?>
 
     <table class="w-full text-left">
         <thead class="border-b">
@@ -27,16 +33,16 @@
                     <input type="checkbox" name="" id="">
                 </th>
                 <th class="p-3 flex gap-4 items-center">
-                    <span>User</span>
+                    <span>Name</span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 cursor-pointer">
                         <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v13.19l5.47-5.47a.75.75 0 111.06 1.06l-6.75 6.75a.75.75 0 01-1.06 0l-6.75-6.75a.75.75 0 111.06-1.06l5.47 5.47V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
                     </svg>
                 </th>
                 <th class="p-3">
-                    ID Project
+                    Email
                 </th>
                 <th class="p-3">
-                    Password
+                    Project Name
                 </th>
                 <th class="p-3 text-center">
                     Action
@@ -44,32 +50,40 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="border-b hover:bg-gray-50">
-                <td class="p-3">
-                    <input type="checkbox" name="" id="">
-                </td>
-                <td class="p-3 font-medium text-gray-900 whitespace-nowrap">
-                    Apple MacBook Pro 17"
-                </td>
-                <td class="p-3">
-                    Silver
-                </td>
-                <td class="p-3">
-                    Laptop
-                </td>
-                <td class="p-3 text-center">
-                    <a href="<?php echo base_url() ?>kb/administrator/user/edituser" class="px-2 inline-block">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-5 h-5 stroke-secondary hover:stroke-yellow-600">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                        </svg>
-                    </a>
-                    <a href="" class="px-2 inline-block">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-5 h-5 stroke-red-500 hover:stroke-red-700">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                        </svg>
-                    </a>
-                </td>
-            </tr>
+            <?php foreach ($users as $user) : ?>
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="p-3">
+                        <input type="checkbox" name="" id="">
+                    </td>
+                    <td class="p-3 font-medium text-gray-900 whitespace-nowrap">
+                        <?= $user['name']; ?>
+                    </td>
+                    <td class="p-3">
+                        <?= $user['email']; ?>
+                    </td>
+                    <td class="p-3">
+                        <?= $user['id_project']; ?>
+                    </td>
+                    <td class="p-3 text-center">
+                        <a href="<?php echo base_url() ?>kb/administrator/user/detail/<?= $user['id'] ?>" class="px-2 inline-block" title="detail">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 stroke-main hover:stroke-blue-700">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </a>
+                        <a href="<?php echo base_url() ?>kb/administrator/user/edit/<?= $user['id']; ?>" class="px-2 inline-block">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-5 h-5 stroke-secondary hover:stroke-yellow-600">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                            </svg>
+                        </a>
+                        <button type="button" class="btn-delete px-2 inline-block" data-id="<?= $user['id']; ?>">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-5 h-5 stroke-red-500 hover:stroke-red-700">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
         </tbody>
     </table>
 
