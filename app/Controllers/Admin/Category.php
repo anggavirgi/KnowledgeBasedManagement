@@ -2,8 +2,8 @@
 
 namespace App\Controllers\Admin;
 
-use App\Models\Admin\SubCategoryModel;
 use App\Models\Admin\CategoryModel;
+use App\Models\Admin\SubCategoryModel;
 use CodeIgniter\RESTful\ResourceController;
 use Exception;
 
