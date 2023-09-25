@@ -60,8 +60,6 @@ class Complains extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('id_user', 'users', 'id');
-        $this->forge->addForeignKey('id_project', 'project', 'id');
         $this->forge->createTable('complains');
     }
 

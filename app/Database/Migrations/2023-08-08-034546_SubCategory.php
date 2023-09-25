@@ -39,7 +39,6 @@ class SubCategory extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('id_category', 'categories', 'id');
         $this->forge->createTable('sub_category');
     }
 
