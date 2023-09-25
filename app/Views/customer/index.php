@@ -312,7 +312,7 @@
                     <a href="" class="text-white p-3 rounded-[10px] bg-[#18A8D8] font-bold">Read More <i class="bi bi-chevron-double-right"></i></a>
                 </p>
             </div>
-            <div class="absolute xl:bottom-[-175px] lg:bottom-[-150px] sm:bottom-[-90px] bottom-[-70px] left-0 right-0 z-0 w-full">
+            <div class="absolute top-[100%] left-0 right-0 z-0 w-full">
                 <img src="<?php echo base_url(); ?>src/images/background.png" class="w-[100%]" alt="">
 
             </div>
