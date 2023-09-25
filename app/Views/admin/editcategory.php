@@ -18,7 +18,7 @@
   <form action="<?php echo base_url(); ?>kb/administrator/category/<?php echo $category['id'] ?>" method="post" enctype="multipart/form-data" class="ms-7 my-10">
     <?php echo csrf_field(); ?>
     <input type="hidden" name="slug" value="<?php echo $category['slug'] ?>">
-    <input type="hidden" name="oldIcon" value="<?php echo $category['icon'] ?>">
+    <input type="hidden" name="old_icon" value="<?php echo $category['icon'] ?>">
     <div class="mb-5">
       <label for="category" class="block mb-2 text-sm font-medium text-gray-800">Category name</label>
       <input type="category" id="category" name="category" value="<?php echo $category['name_category'] ?>" class="bg-gray-50 border text-gray-800 text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-2/4 p-4  " placeholder="Category name">
