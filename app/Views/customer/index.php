@@ -104,28 +104,28 @@
 
         <!-- <div class="hero-section bg-main rounded-b-full min-h-[70vh]"> -->
 
-        <div id="faq" class="flex-col justify-center items-center min-h-[50vh] md:min-h[60vh] lg:min-h-[70vh] sm:min-h-[35vh] md:min-h-[70vh]">
+        <div id="faq" class="flex-col justify-center items-center min-h-[40vh] lg:min-h-[80vh] sm:min-h-[70vh] md:min-h-[80vh]">
             <!-- <div class="hero-section bg-main rounded-b-full h-[40rem] w-full absolute z-[-1] top-[-rem]"></div> -->
             <!-- <svg xmlns="http://www.w3.org/2000/svg" class="w-full absolute z-[-1] top-0 h-[50rem]" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="1" d="M0,224L48,218.7C96,213,192,203,288,213.3C384,224,480,256,576,234.7C672,213,768,139,864,133.3C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg> -->
-            <img src="<?php echo base_url(); ?>src/images/waves-hero.png" class="w-[100%] h-[38rem] md:h-[50rem] sm:h-[40rem] lg:h-[47rem]   absolute z-[-1] top-0" alt="">
+            <img src="<?php echo base_url(); ?>src/images/waves-hero.png" class="w-[100%] h-[38rem] md:h-[49rem] sm:h-[40rem] lg:h-[49rem] object-cover  absolute z-[-1] top-0" alt="">
             <div class="mt-12">
-                <h1 class="flex gap-3 justify-center text-4xl lg:text-5xl sm:text-4xl font-semibold">
+                <h1 class="flex gap-3 justify-center text-4xl lg:text-5xl sm:text-4xl font-semibold sm:font-bold">
                     <span class="text-white">Help center</span>
                     <span class="text-[#2562AE]">Virtu</span>
                     <span class="text-[#FFC700]">see</span>
                 </h1>
                 <div class="flex justify-center" id="search">
                     <form action="" class="relative">
-                        <input type="text" name="email" id="email" placeholder="Search Your question, answer, etc" class="sm:w-[30rem] w-[25rem]  mb-3 px-7 mt-[30px] py-3  rounded-sm border border-gray-400 outline-main">
+                        <input type="text" name="email" id="email" placeholder="Search Your question, answer, etc" class="sm:w-[30rem] w-[22rem]  mb-3 px-7 mt-[30px] py-3  rounded-sm border border-gray-400 outline-main">
                         <button>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search absolute sm:left-[450px] left-[370px] top-[47px] cursor-pointer text-[#919191]" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search absolute sm:left-[450px] left-[320px] top-[47px] cursor-pointer text-[#919191]" viewBox="0 0 16 16">
                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                             </svg>
                         </button>
                     </form>
                 </div>
-                <div class="flex justify-center mt-[5px]">
-                    <div class="sm:w-[30rem] w-[25rem] ">
+                <div class="flex justify-center mt-[3px] sm:[5px]">
+                    <div class="sm:w-[30rem] w-[22rem] text-justify">
                         <p class="text-sm text-white"><span class="text-secondary font-semibold">Search what you want,</span> we will answer your question and you can search anything
                             about the Virtusee Program or technical </p>
                     </div>
@@ -133,7 +133,7 @@
             </div>
             <div id="categories" class="flex justify-center w-full mt-7 sm:md-7 md:mt-12">
                 <div class="grid items-center">
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-5 gap-5 sm:gap-5 lg:gap-10 ">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 mb-5 gap-5 sm:gap-5 lg:gap-10 ">
                         <div class="bg-gray-200 px-[2rem] py-3 rounded-md w-[8rem] h-[5rem] sm:w-[9rem] sm:h-[5rem] md:w-[12rem] md:h-[7rem] flex items-center justify-center">
                             <div class="flex-col items-center mb-1 text-center">
                                 <i class="bi bi-shield-fill-exclamation text-2xl sm:text md:text-4xl"></i>
@@ -143,19 +143,19 @@
                         <div class="bg-gray-200 px-[2rem] py-3 rounded-md w-[8rem] h-[5rem] sm:w-[9rem] sm:h-[5rem] md:w-[12rem] md:h-[7rem] flex items-center justify-center">
                             <div class="flex-col items-center mb-1 text-center">
                                 <i class="bi bi-shield-fill-exclamation text-2xl sm:text-2xl md:text-4xl"></i>
-                                <h4 class="whitespace-nowrap text-sm md:text-md text-center mt-1">security alert bang</h4>
+                                <h4 class="whitespace-nowrap text-sm md:text-md text-center mt-1">security alert</h4>
                             </div>
                         </div>
                         <div class="bg-gray-200 px-[2rem] py-3 rounded-md w-[8rem] h-[5rem] sm:w-[9rem] sm:h-[5rem] md:w-[12rem] md:h-[7rem] flex items-center justify-center">
                             <div class="flex-col items-center mb-1 text-center">
                                 <i class="bi bi-shield-fill-exclamation text-2xl sm:text md:text-4xl"></i>
-                                <h4 class="whitespace-nowrap text-sm md:text-md text-center mt-1">security alert bang</h4>
+                                <h4 class="whitespace-nowrap text-sm md:text-md text-center mt-1">security alert</h4>
                             </div>
                         </div>
                         <div class="bg-gray-200 px-[2rem] py-3 rounded-md w-[8rem] h-[5rem] sm:w-[9rem] sm:h-[5rem] md:w-[12rem] md:h-[7rem] flex items-center justify-center">
                             <div class="flex-col items-center mb-1 text-center">
                                 <i class="bi bi-shield-fill-exclamation text-2xl sm:text md:text-4xl"></i>
-                                <h4 class="whitespace-nowrap text-sm md:text-md text-center mt-1">security alert bang</h4>
+                                <h4 class="whitespace-nowrap text-sm md:text-md text-center mt-1">security alert</h4>
                             </div>
                         </div>
                     </div>
@@ -163,7 +163,7 @@
             </div>
         </div>
         <!-- </div> -->
-        <div id="general_question" class="px-10 mt-32 sm:mt-[13rem] md:mt-[12rem]">
+        <div id="general_question" class="px-10 mt-16 sm:mt-[5rem] md:mt-[10rem] lg:[10rem]">
             <div class=" w-full mb-2 text-center">
                 <h4 class="text-[#18A8D8] font-bold text-3xl">General Question</h4>
             </div>
@@ -342,7 +342,7 @@
                     <a href="" class="text-white p-3 rounded-[10px] bg-[#18A8D8] font-bold">Read More <i class="bi bi-chevron-double-right"></i></a>
                 </p>
             </div>
-            <div class="absolute xl:bottom-[-175px] lg:bottom-[-150px] sm:bottom-[-90px] bottom-[-70px] left-0 right-0 z-0 w-full">
+            <div class="absolute top-[100%] left-0 right-0 z-0 w-full">
                 <img src="<?php echo base_url(); ?>src/images/background.png" class="w-[100%]" alt="">
 
             </div>
