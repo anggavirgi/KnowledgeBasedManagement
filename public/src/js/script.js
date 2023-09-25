@@ -1,22 +1,9 @@
 $(document).ready(function () {
-  
   // LAYOUT CUSTOMER
+
   // DROPDOWN GENERAL QUESTION
-  document.addEventListener("DOMContentLoaded", function () {
-    const navbarPage = window.location.pathname;
-    const navbarLayout = document.getElementById("navbar-layout");
-
-    if (navbarPage !== "/kb" || navbarPage !== "/") {
-      navbarLayout.classList.add("md:block");
-    } else {
-      navbarLayout.classList.remove("md:block");
-    }
-  });
-
-  
   $(".collapsible").click(function () {
     var icon = $(this).find(".icon");
-    // console.log(icon);
     if (icon.hasClass("bi-chevron-down")) {
       icon.removeClass("bi-chevron-down");
       icon.addClass("bi-chevron-up");
@@ -36,10 +23,8 @@ $(document).ready(function () {
   });
 
   // DROPDOWN SIDEBAR ARTICLE
-
   $(".collapsiblesidebar").click(function () {
     var iconside = $(this).find(".icon");
-
     if (iconside.hasClass("bi-chevron-down")) {
       iconside.removeClass("bi-chevron-down").addClass("bi-chevron-up");
       var titlesidebar = $(this).attr("data-title");
@@ -57,6 +42,19 @@ $(document).ready(function () {
   });
 
   // LAYOUT ADMIN
+
+  // Sidebar Menu Active
+  $(document).ready(function () {
+    const activePage = window.location.pathname;
+
+    $("#sidebar-child a").each(function () {
+      if (this.href.includes(activePage)) {
+        $(this).addClass("bg-main text-white rounded-md");
+      }
+    });
+  });
+
+  // Burger Sidebar
   $(".burger-icon").click(function () {
     $(".sidebar").toggleClass("hidden");
     $(".right-side").toggleClass(
@@ -64,12 +62,10 @@ $(document).ready(function () {
     );
   });
 
-  // SIDEBAR MENU ACTIVE
-  const activePage = window.location.pathname;
-  const parts = activePage.split("/");
-  const menuPart = "/" + parts[3];
-
-  
+  // CKEDITOR 5 CLASSIC
+  ClassicEditor.create(document.querySelector("#editor")).catch((error) => {
+    console.error(error);
+  });
 
   // Changing Status Complain
   var initialValue = $("#status-entries").val();
@@ -184,162 +180,161 @@ $(document).ready(function () {
   `;
   $("button[data-drawer-show='drawer-disabled-backdrop']").click(function () {
     // Append the button to the aside element
-    $('#drawer-disabled-backdrop').append(toggleClose);
+    $("#drawer-disabled-backdrop").append(toggleClose);
   });
-  
-  const aside = $('#drawer-disabled-backdrop');
-  $(aside).on('click', "button[data-drawer-hide='drawer-disabled-backdrop']", function () {
-    $(aside).removeClass('transform-none')
-    $(aside).addClass('-translate-x-full')
-    $(this).remove()
-  });
-  
-  // Selector Checkbox
-  var rowCount = $("tbody tr").length;
-  const checkboxAll = $('#checkall');
-  const checkboxsingle = $('input[name="checkboxitems"]');
-  const delbtn = $('#check-del');
-  $(checkboxAll).change(function () {
-    if ($(this).is(":checked")) {
-      // Check all checkboxes with the name "checkboxitems"
-      $('input[name="checkboxitems"]').prop('checked', true);
-      $(delbtn).removeClass('hidden');
-    } else {
-      // Uncheck all checkboxes with the name "checkboxitems"
-      $('input[name="checkboxitems"]').prop('checked', false);
-      $(delbtn).addClass('hidden');
+
+  const aside = $("#drawer-disabled-backdrop");
+  $(aside).on(
+    "click",
+    "button[data-drawer-hide='drawer-disabled-backdrop']",
+    function () {
+      $(aside).removeClass("transform-none");
+      $(aside).addClass("-translate-x-full");
+      $(this).remove();
     }
-  });
+  );
 
-  $(checkboxsingle).change(function () {
-    if ($(this).is(":checked")) {
-      // Check all checkboxes with the name "checkboxitems"
-      $(delbtn).removeClass('hidden');
-    } else {
-      // Uncheck all checkboxes with the name "checkboxitems"
-      if($('input[name="checkboxitems"]:checked').length != 0){
-      }else{
-        $(delbtn).addClass('hidden');
-      }
-    }
-  });
-  
-  const singleCheck =$('input[name="checkboxitems"]');
-  $(singleCheck).change(function () {
-    if($('input[name="checkboxitems"]:checked').length == rowCount){
-      $('input[id="checkall"]').prop('checked', true);
-      // $(delbtn).removeClass('hidden');
-    }else{
-      $('input[id="checkall"]').prop('checked', false);
-    }
-  });
-  
+  // Alert notification CRUD
+  const flashSuccess = $(".flash-success").data("flashmessage");
+  const flashError = $(".flash-error").data("flashmessage");
 
-
-  
-});
-
-const navbarPage = window.location.pathname;
-  const navbarLayout = document.getElementById("navbar-layout");
-  if (navbarPage !== "/kb") {
-    navbarLayout.classList.add("md:block");
-    navbarLayout.classList;
-  } else {
-    navbarLayout.classList.remove("md:block");
+  if (flashSuccess) {
+    Swal.fire({
+      title: "Success",
+      text: flashSuccess,
+      showConfirmButton: false,
+      icon: "success",
+      timer: "1200",
+    });
   }
 
-  // const navLink = document.querySelectorAll('.navbar a').forEach(link => {
-  // if(link.href.includes(activePage) && !link.closest('#dropdownAvatarName') && !link.closest('#navbar-search')){
-    const navLink = document
-    .querySelectorAll(".sidebar-child a")
-    .forEach((link) => {
-      if (link.href.includes(activePage)) {
-        link.classList.add("bg-main");
-        link.classList.add("text-white");
-        link.classList.add("rounded-md");
+  if (flashError) {
+    Swal.fire({
+      title: "Failed",
+      text: flashSuccess,
+      showConfirmButton: false,
+      icon: "error",
+      timer: "1500",
+    });
+  }
+
+  $(".btn-delete").on("click", function () {
+    const id = $(this).attr("data-id");
+    const url = $(this).attr("data-action");
+    // console.log(href);
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          type: "GET",
+          url: url,
+        });
+
+        location.reload();
       }
     });
-
-  // CKEDITOR 5 CLASSIC
-  ClassicEditor.create(document.querySelector("#editor")).catch((error) => {
-    console.error(error);
   });
+});
 
-  // Show file name in drag & drop box
-  // Select the file input element by its id
-  const fileInput = document.getElementById("dropzone-file");
+// USER
 
-  // Select the <p> element where you want to display the file name
-  const selectedFileName = document.getElementById("selected-file-name");
+// Search Bar
+document.addEventListener("DOMContentLoaded", function () {
+  const navbarPage = window.location.pathname;
+  const navbarLayout = document.getElementById("navbar-layout");
 
-  const dragdroptext = document.getElementById("dragdroptext");
-  const formatsizetext = document.getElementById("formatsizetext");
-
-  //Border
-  const dropzone = document.getElementById("dropzone");
-
-  // Add an event listener to the file input element
-  fileInput.addEventListener("change", (event) => {
-    // Get the selected file
-    const selectedFile = event.target.files[0];
-
-    // Check if a file is selected
-    if (selectedFile) {
-      // Update the text content of the <p> element with the file name
-      selectedFileName.textContent = `Selected file: ${selectedFile.name}`;
-      selectedFileName.classList.add("-mt-8");
-      dragdroptext.classList.remove("block");
-      dropzone.classList.add("border-main");
-      formatsizetext.classList.remove("block");
-      dragdroptext.classList.add("hidden");
-      formatsizetext.classList.add("hidden");
-    } else {
-      // If no file is selected, clear the text content
-      selectedFileName.textContent = "";
-      selectedFileName.classList.remove("-mt-8");
-      dragdroptext.classList.remove("hidden");
-      dropzone.classList.remove("border-main");
-      formatsizetext.classList.remove("hidden");
-      dragdroptext.classList.add("block");
-      formatsizetext.classList.add("block");
-    }
-  });
-
-  dropzone.addEventListener("dragover", (e) => {
-    e.preventDefault();
-    dropzone.classList.add("border-main"); // Add a class to highlight the drop area when dragging over it.
-  });
-
-  dropzone.addEventListener("dragleave", () => {
-    dropzone.classList.remove("border-main"); // Remove the highlighting class when dragging leaves the drop area.
-  });
-
-  dropzone.addEventListener("drop", (e) => {
-    e.preventDefault();
-    dropzone.classList.remove("border-main"); // Remove the highlighting class when a file is dropped.
-
-    const files = e.dataTransfer.files;
-    handleFileChange(files);
-  });
-
-  function handleFileChange(files) {
-    if (files.length > 0) {
-      const file = files[0];
-      selectedFileName.textContent = `Selected file: ${file.name}`;
-      selectedFileName.classList.add("-mt-8");
-      dragdroptext.classList.remove("block");
-      dropzone.classList.add("border-main");
-      formatsizetext.classList.remove("block");
-      dragdroptext.classList.add("hidden");
-      formatsizetext.classList.add("hidden");
-      fileInput.files = files; // Assign the selected files to the hidden input for form submission.
-    } else {
-      selectedFileName.textContent = "";
-      selectedFileName.classList.remove("-mt-8");
-      dragdroptext.classList.remove("hidden");
-      dropzone.classList.remove("border-main");
-      formatsizetext.classList.remove("hidden");
-      dragdroptext.classList.add("block");
-      formatsizetext.classList.add("block");
-    }
+  if (navbarPage == "/kb" || navbarPage == "/kb/" || navbarPage == "/") {
+    navbarLayout.classList.remove("md:block");
+  } else {
+    navbarLayout.classList.add("md:block");
   }
+});
+
+// ADMIN
+
+// Show file name in drag & drop box
+// Select the file input element by its id
+const fileInput = document.getElementById("dropzone-file");
+
+// Select the <p> element where you want to display the file name
+const selectedFileName = document.getElementById("selected-file-name");
+
+const dragdroptext = document.getElementById("dragdroptext");
+const formatsizetext = document.getElementById("formatsizetext");
+
+//Border
+const dropzone = document.getElementById("dropzone");
+
+// Add an event listener to the file input element
+fileInput.addEventListener("change", (event) => {
+  // Get the selected file
+  const selectedFile = event.target.files[0];
+
+  // Check if a file is selected
+  if (selectedFile) {
+    // Update the text content of the <p> element with the file name
+    selectedFileName.textContent = `Selected file: ${selectedFile.name}`;
+    selectedFileName.classList.add("-mt-8");
+    dragdroptext.classList.remove("block");
+    dropzone.classList.add("border-main");
+    formatsizetext.classList.remove("block");
+    dragdroptext.classList.add("hidden");
+    formatsizetext.classList.add("hidden");
+  } else {
+    // If no file is selected, clear the text content
+    selectedFileName.textContent = "";
+    selectedFileName.classList.remove("-mt-8");
+    dragdroptext.classList.remove("hidden");
+    dropzone.classList.remove("border-main");
+    formatsizetext.classList.remove("hidden");
+    dragdroptext.classList.add("block");
+    formatsizetext.classList.add("block");
+  }
+});
+
+dropzone.addEventListener("dragover", (e) => {
+  e.preventDefault();
+  dropzone.classList.add("border-main"); // Add a class to highlight the drop area when dragging over it.
+});
+
+dropzone.addEventListener("dragleave", () => {
+  dropzone.classList.remove("border-main"); // Remove the highlighting class when dragging leaves the drop area.
+});
+
+dropzone.addEventListener("drop", (e) => {
+  e.preventDefault();
+  dropzone.classList.remove("border-main"); // Remove the highlighting class when a file is dropped.
+
+  const files = e.dataTransfer.files;
+  handleFileChange(files);
+});
+
+function handleFileChange(files) {
+  if (files.length > 0) {
+    const file = files[0];
+    selectedFileName.textContent = `Selected file: ${file.name}`;
+    selectedFileName.classList.add("-mt-8");
+    dragdroptext.classList.remove("block");
+    dropzone.classList.add("border-main");
+    formatsizetext.classList.remove("block");
+    dragdroptext.classList.add("hidden");
+    formatsizetext.classList.add("hidden");
+    fileInput.files = files; // Assign the selected files to the hidden input for form submission.
+  } else {
+    selectedFileName.textContent = "";
+    selectedFileName.classList.remove("-mt-8");
+    dragdroptext.classList.remove("hidden");
+    dropzone.classList.remove("border-main");
+    formatsizetext.classList.remove("hidden");
+    dragdroptext.classList.add("block");
+    formatsizetext.classList.add("block");
+  }
+}

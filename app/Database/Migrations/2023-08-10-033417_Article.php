@@ -36,8 +36,6 @@ class Article extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('id_content', 'content', 'id');
-        $this->forge->addForeignKey('id_project', 'project', 'id');
         $this->forge->createTable('article');
     }
 
