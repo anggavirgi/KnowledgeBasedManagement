@@ -17,23 +17,33 @@
       <span>Edit Sub-Category</span>
     </div>
   </div>
-  <form class="ms-7 my-10">
+  <form class="ms-7 my-10" action="<?php echo base_url(); ?>kb/administrator/category/subcategory/update/<?= $subcategory['id']; ?>" method="post">
     <div class="mb-4 relative">
-        <label for="category" class="block mb-2 text-sm font-medium text-form">Choose Category</label>
-        <select id="category" name="category" class="cursor-pointer bg-gray-50 border appearance-none border-gray-300 text-sm rounded-lg block w-2/4 p-4 text-form focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-            <option selected>Choose category</option>
-            <option value="P001">P001</option>
-            <option value="P002">P002</option>
-        </select>
-        <div class="w-2/4 absolute inset-y-0 right-8 top-7 flex items-center pr-3 pointer-events-none">
-            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
+      <label for="id_category" class="block mb-2 text-sm font-medium text-form">Choose Category</label>
+      <select id="id_category" name="id_category" class="cursor-pointer bg-gray-50 border appearance-none border-gray-300 text-sm rounded-lg block w-2/4 p-4 text-form focus:outline-none focus:ring-blue-500 focus:border-blue-500 <?php if (session('errors.id_category')) : ?>border-red-600<?php endif ?>">
+        <option value="">Choose category</option>
+        <option value="1" <?php if ($subcategory["id_category"] == "1") echo "selected" ?>>P001</option>
+        <option value="2" <?php if ($subcategory["id_category"] == "2") echo "selected" ?>>P002</option>
+      </select>
+      <div class="w-2/4 absolute inset-y-0 right-8 top-7 flex items-center pr-3 pointer-events-none">
+        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </div>
+      <?php if (session('errors.id_category')) : ?>
+        <div class="mt-1">
+          <small class=" text-red-600 text-sm"><?= session('errors.id_category'); ?></small>
         </div>
+      <?php endif; ?>
     </div>
     <div class="mb-5">
       <label for="subcategory" class="block mb-2 text-sm font-medium text-form">Sub-Category name</label>
-      <input type="subcategory" id="subcategory" class="bg-gray-50 border text-form text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-2/4 p-4  " placeholder="Category name" required>
+      <input type="text" id="subcategory" name="subcategory" class="bg-gray-50 border text-form text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 <?php if (session('errors.subcategory')) : ?>border-red-600<?php endif ?> w-2/4 p-4  " placeholder="Category name" value="<?= $subcategory['name_subcategory']; ?>">
+      <?php if (session('errors.subcategory')) : ?>
+        <div class="mt-1">
+          <small class=" text-red-600 text-sm"><?= session('errors.subcategory'); ?></small>
+        </div>
+      <?php endif; ?>
     </div>
 
     <button type="reset" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-main font-medium rounded-lg text-sm px-6 py-2.5 mr-8 ">Clear</button>

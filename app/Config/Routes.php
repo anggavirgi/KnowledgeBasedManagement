@@ -2,6 +2,8 @@
 
 namespace Config;
 
+use App\Controllers\Admin\Category;
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -75,7 +77,10 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
 
     $routes->get('category/subcategory', 'Category::subcategory');
     $routes->get('category/subcategory/addsubcategory', 'Category::addsub');
-    $routes->get('category/subcategory/editsubcategory', 'Category::editsub');
+    $routes->post('category/subcategory/addsubcategory', 'Category::createSubCategory');
+    $routes->get('category/subcategory/editsubcategory/(:num)', 'Category::editsub/$1');
+    $routes->post('category/subcategory/update/(:num)', 'Category::updateSubCategory/$1');
+    $routes->get('category/subcategory/delete/(:num)', 'Category::deleteSubCategory/$1');
 
     $routes->get('article', 'Article::index');
     $routes->get('article/addarticle', 'Article::add');

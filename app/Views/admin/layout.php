@@ -130,7 +130,8 @@
     $('.btn-delete').on('click', function() {
 
       const id = $(this).attr('data-id');
-      console.log(id);
+      const url = $(this).attr('data-action')
+      // console.log(href);
 
       Swal.fire({
         title: 'Are you sure?',
@@ -144,7 +145,7 @@
         if (result.isConfirmed) {
           $.ajax({
             type: 'GET',
-            url: '/kb/administrator/user/delete/' + id,
+            url: url,
           });
 
           location.reload();
