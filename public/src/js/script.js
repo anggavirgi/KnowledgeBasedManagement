@@ -194,6 +194,49 @@ $(document).ready(function () {
     $(this).remove()
   });
   
+  // Selector Checkbox
+  var rowCount = $("tbody tr").length;
+  const checkboxAll = $('#checkall');
+  const checkboxsingle = $('input[name="userCheckbox"]');
+  const delbtn = $('#check-del');
+  $(checkboxAll).change(function () {
+    if ($(this).is(":checked")) {
+      // Check all checkboxes with the name "userCheckbox"
+      $('input[name="userCheckbox"]').prop('checked', true);
+      $(delbtn).removeClass('hidden');
+    } else {
+      // Uncheck all checkboxes with the name "userCheckbox"
+      $('input[name="userCheckbox"]').prop('checked', false);
+      $(delbtn).addClass('hidden');
+    }
+  });
+
+  $(checkboxsingle).change(function () {
+    if ($(this).is(":checked")) {
+      // Check all checkboxes with the name "userCheckbox"
+      $(delbtn).removeClass('hidden');
+    } else {
+      // Uncheck all checkboxes with the name "userCheckbox"
+      if($('input[name="userCheckbox"]:checked').length != 0){
+      }else{
+        $(delbtn).addClass('hidden');
+      }
+    }
+  });
+  
+  const singleCheck =$('input[name="userCheckbox"]');
+  $(singleCheck).change(function () {
+    if($('input[name="userCheckbox"]:checked').length == rowCount){
+      $('input[id="checkall"]').prop('checked', true);
+      // $(delbtn).removeClass('hidden');
+    }else{
+      $('input[id="checkall"]').prop('checked', false);
+    }
+  });
+  
+
+
+  
 });
 
 const navbarPage = window.location.pathname;
