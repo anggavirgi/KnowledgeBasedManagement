@@ -19,20 +19,15 @@
                 <img src="<?php echo base_url(); ?>src/images/logo.png" alt="" class="nav-brand w-32 ml-3 md:w-40">
             </a>
 
-            <div class="flex ">
 
-                <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search" aria-expanded="false" class="md:hidden text-gray-400 focus:outline-none focus:ring-4 focus:ring-gray-200  rounded-lg text-sm p-2.5 mr-1">
-                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                    </svg>
-                    <span class="sr-only">Search</span>
-                </button>
+            <?php if (logged_in()) : ?>
+                <div class="flex ">
 
-                <div class="relative hidden" id="navbar-layout">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search" aria-expanded="false" class="md:hidden text-gray-400 focus:outline-none focus:ring-4 focus:ring-gray-200  rounded-lg text-sm p-2.5 mr-1">
+                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                         </svg>
+<<<<<<< HEAD
                         <span class="sr-only">Search icon</span>
                     </div>
                     <input type="text" id="search-navbar" class="block w-[18rem] lg:w-[30rem] p-2 pl-10 text-sm border border-gray-400 placeholder-gray-400 text-form rounded-2xl outline-main" placeholder="Search...">
@@ -81,6 +76,15 @@
                     </div>
                     <input type="text" id="search-navbar" class="block w-full p-2 pl-10  text-sm border border-gray-400 placeholder-gray-400 text-form rounded-2xl outline-main" placeholder="Search...">
                 </div>
+                <div class="items-center justify-between hidden w-full p-5" id="navbar-search">
+                    <div class="relative mt-3 md:hidden flex justify-center items-center">
+                        <div class="absolute inset-y-0 left-2 flex items-center pl-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                            </svg>
+                        </div>
+                        <input type="text" id="search-navbar" class="block w-full p-2 pl-10  text-sm border border-gray-400 placeholder-gray-400 text-form rounded-2xl outline-main" placeholder="Search...">
+                    </div>
 
                 <!-- After Login -->
                 <ul class="flex flex-col p-4 md:p-0 md:hidden mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white ">
@@ -130,6 +134,45 @@
                     <svg class="w-4 h-4 text-gray-500 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                     </svg>
+                    <!-- After Login -->
+                    <ul class="flex flex-col p-4 md:p-0 md:hidden mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white ">
+                        <li>
+                            <button class="flex w-full mb-3 items-center text-sm font-medium  hover:text-blue-500 focus:ring-4 focus:ring-gray-100 rounded-full text-form " type="button">
+                                <span class="sr-only">Open user menu</span>
+                                <img class="w-12 h-12 mr-2 rounded-full" src="<?php echo base_url(); ?>src/images/profilepic.png" alt="user photo">
+                                <div class="flex flex-col text-left ">
+                                    Bonnie Green
+                                    <span class="text-form text-xs truncate w-44">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus dignissimos excepturi molestias mollitia nobis voluptas?</span>
+                                </div>
+                            </button>
+                        </li>
+                        <li>
+                            <a href="#" class="block py-2 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0  ">Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block py-2 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0  ">Article</a>
+                        </li>
+                        <li>
+                            <a href="/kb/logout" class="block py-2 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 text-red-600 ">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            <?php else : ?>
+                <!-- Element Before Login -->
+                <div>
+                    <div class="relative hidden md:block">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                            </svg>
+                            <span class="sr-only">Search icon</span>
+                        </div>
+                        <input type="text" id="search-navbar" class="block w-[18rem] lg:w-[30rem] p-2 pl-10 text-sm border border-gray-400 placeholder-gray-400 text-form rounded-2xl outline-main" placeholder="Search...">
+                    </div>
+                </div>
+                <div class="buttons grid grid-cols-2 gap-2 me-2 text-center">
+                    <a href="/kb/login" class="p-2 whitespace-nowrap ">Sign In</a>
+                    <a href="/kb/register" class="bg-main text-white rounded-md p-2 whitespace-nowrap">Sign Up</a>
                 </div>
                 <input type="text" id="search-navbar" class="block w-full p-2 pl-10  text-sm border border-gray-400 placeholder-gray-400 text-form rounded-2xl outline-main" placeholder="Search...">
             </div>
@@ -157,6 +200,7 @@
                 </li>
             </ul>
         </div>
+
     </section>
 
 
