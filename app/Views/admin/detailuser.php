@@ -16,16 +16,16 @@
     </div>
   </div>
 
-  <div class="flex mt-10 ps-8 pe-5">
-    <div class="w-1/5">
-      <div class="font-bold text-2xl">John Doe</div>
+  <div class="flex mt-10 ps-8 pe-5 gap-3">
+    <div class="w-1/4">
+      <div class="font-bold text-2xl"><?php echo $user['name'] ?></div>
       <div class="text-sm">User</div>
     </div>
 
-    <div class="w-4/5 pt-3">
+    <div class="w-10/12">
       <div class="font-semibold text-main text-base">Detail User</div>
-      <hr class="w-1/2 my-3">
-      <div class="flex flex-col gap-3 text-sm w-1/2">
+      <hr class="w-10/12 my-3">
+      <div class="flex flex-col gap-3 text-sm w-10/12">
         <div class="flex items-center border h-13">
           <div class="border-r px-1">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-7 h-7 stroke-main">

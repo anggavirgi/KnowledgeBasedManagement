@@ -27,10 +27,12 @@ class User extends ResourceController
     public function index()
     {
         $dataUser = $this->userModel->findAll();
+        // $pager = $this->userModel->pager;
 
         $data = [
             'title' => 'User',
-            'users' => $dataUser
+            'users' => $dataUser,
+            // 'pager' => $pager
         ];
 
         return view('admin/user', $data);
@@ -203,4 +205,12 @@ class User extends ResourceController
         return view('admin/detailuser', $data);
     }
 
+    public function getLimitedUsers($limit = 10)
+    {
+        // Fetch user records with a limit
+        $dataUser = $this->userModel->findAll($limit);
+
+        // Return the data as JSON or in any desired format
+        return $this->response->setJSON($dataUser);
+    }
 }
