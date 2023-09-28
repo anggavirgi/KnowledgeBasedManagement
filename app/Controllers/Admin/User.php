@@ -26,13 +26,11 @@ class User extends ResourceController
 
     public function index()
     {
-        $dataUser = $this->userModel->findAll();
-        // $pager = $this->userModel->pager;
+        $dataUser = $this->userModel->findAll(10);
 
         $data = [
             'title' => 'User',
             'users' => $dataUser,
-            // 'pager' => $pager
         ];
 
         return view('admin/user', $data);
@@ -205,12 +203,35 @@ class User extends ResourceController
         return view('admin/detailuser', $data);
     }
 
-    public function getLimitedUsers($limit = 10)
+    public function getLimitedUsers($page = 1, $perPage = 10)
     {
-        // Fetch user records with a limit
-        $dataUser = $this->userModel->findAll($limit);
+        $page = $this->request->getGet('page') ?? $page; // Get the 'page' parameter from the URL or use the default value
+        $perPage = $this->request->getGet('perPage') ?? $perPage;
 
-        // Return the data as JSON or in any desired format
-        return $this->response->setJSON($dataUser);
+        // Calculate the offset based on the current page and perPage
+        $offset = ($page - 1) * $perPage;
+
+        // Fetch user records with the specified limit and offset
+        $dataUser = $this->userModel->findAll($perPage, $offset);
+
+        // Count the total number of records
+        $totalRecords = $this->userModel->countAll();
+
+        // Calculate the total number of pages
+        $totalPages = ceil($totalRecords / $perPage);
+
+        // Create a pagination array
+        $pagination = [
+            'page' => $page,
+            'perPage' => $perPage,
+            'totalRecords' => $totalRecords,
+            'totalPages' => $totalPages
+        ];
+        // Pass the data and pagination to the view
+        return view('admin/user', [
+            'title' => 'User',
+            'users' => $dataUser,
+            'pagination' => $pagination
+        ]);
     }
 }

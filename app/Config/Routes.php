@@ -63,7 +63,7 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     $routes->post('user/(:num)', 'User::update/$1');
     $routes->get('user/delete/(:num)', 'User::delete/$1');
     $routes->get('user/detail/(:num)', 'User::detail/$1');
-    $routes->get('user/getLimitedUsers/(:num)', 'User::getLimitedUsers/$1');
+    $routes->get('user/getLimitedUsers/(:num)/(:num)', 'User::getLimitedUsers/$1/$2');
 
 
     // $routes->resource('user', ['controller' => 'User', 'only' => ['index', 'show', 'new', 'create', 'edit', 'update']]);
