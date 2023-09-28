@@ -13,6 +13,7 @@
         </svg>
       </button>
     </form>
+
     <div class="flex items-center gap-4">
       <div class="delete-batch hidden">
         <button type="button" class="delete-batch-btn px-2 inline-block" data-action="/kb/administrator/category/deleteBatch">

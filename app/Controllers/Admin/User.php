@@ -26,11 +26,11 @@ class User extends ResourceController
 
     public function index()
     {
-        $dataUser = $this->userModel->findAll();
+        $dataUser = $this->userModel->findAll(10);
 
         $data = [
             'title' => 'User',
-            'users' => $dataUser
+            'users' => $dataUser,
         ];
 
         return view('admin/user', $data);
@@ -203,4 +203,29 @@ class User extends ResourceController
         return view('admin/detailuser', $data);
     }
 
+    public function getLimitedUsers($page = 1, $perPage = 10)
+    {
+        $page = $this->request->getGet('page') ?? $page;
+        $perPage = $this->request->getGet('perPage') ?? $perPage;
+
+        $offset = ($page - 1) * $perPage;
+
+        $dataUser = $this->userModel->findAll($perPage, $offset);
+
+        $totalRecords = $this->userModel->countAll();
+
+        $totalPages = ceil($totalRecords / $perPage);
+
+        $pagination = [
+            'page' => $page,
+            'perPage' => $perPage,
+            'totalRecords' => $totalRecords,
+            'totalPages' => $totalPages
+        ];
+        return view('admin/user', [
+            'title' => 'User',
+            'users' => $dataUser,
+            'pagination' => $pagination
+        ]);
+    }
 }

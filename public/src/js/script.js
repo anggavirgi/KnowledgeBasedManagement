@@ -123,7 +123,7 @@ $(document).ready(function () {
 
   // CKEDITOR 5 CLASSIC
   ClassicEditor.create(document.querySelector("#editor")).catch((error) => {
-    console.error(error);
+    // console.error(error);
   });
 
   // Changing Status Complain
@@ -277,10 +277,8 @@ $(document).ready(function () {
     });
   }
 
-  $(".btn-delete").on("click", function () {
+  $(document).on("click",".btn-delete", function () {
     const id = $(this).attr("data-id");
-    const url = $(this).attr("data-action");
-    // console.log(href);
 
     Swal.fire({
       title: "Are you sure?",
@@ -294,13 +292,55 @@ $(document).ready(function () {
       if (result.isConfirmed) {
         $.ajax({
           type: "GET",
-          url: url,
+          url: '/kb/administrator/user/delete/' + id,
         });
 
         location.reload();
       }
     });
   });
+
+  
+
+  
+  $('#row-entries').change(function() {
+    // UserTable Model
+    var data = $('#row-entries').val();
+    var offset = 1;
+    var currentData = data;
+    var selectedValue = $(this).val(); 
+      if (selectedValue != data) {
+          currentData = selectedValue; 
+        } else {
+          currentData = data;
+      }
+      fetchData(currentData, offset); 
+  });
+
+  function fetchData(Data, offset) {
+    // Prepare the data to send in the POST request
+    var postData = {
+        page: offset,
+        perPage: Data
+    };
+
+    $.ajax({
+        type: "POST",
+        url: '/kb/administrator/user/getLimitedUsers',
+        data: postData, // Send the data as JSON
+        success: function(response) {
+            // Handle the response as needed
+            console.log(response);
+
+            // You can still redirect if necessary
+            window.location.href = 'http://localhost:8080/kb/administrator/user/getLimitedUsers/' + offset + '/' + Data;
+        },
+        error: function(xhr, status, error) {
+            console.error('AJAX error: ' + error);
+        }
+    });
+}
+    
 });
 
 // USER
@@ -397,3 +437,4 @@ function handleFileChange(files) {
     formatsizetext.classList.add("block");
   }
 }
+

@@ -99,6 +99,9 @@
                             <a href="#" class="block py-2 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0  ">Dashboard</a>
                         </li>
                         <li>
+                            <a href="#" class="block py-2 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0  ">History</a>
+                        </li>
+                        <li>
                             <a href="#" class="block py-2 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0  ">Article</a>
                         </li>
                         <li>
