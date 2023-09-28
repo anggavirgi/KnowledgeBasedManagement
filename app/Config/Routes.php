@@ -65,12 +65,6 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     $routes->get('user/detail/(:num)', 'User::detail/$1');
     $routes->get('user/getLimitedUsers/(:num)/(:num)', 'User::getLimitedUsers/$1/$2');
 
-
-    // $routes->resource('user', ['controller' => 'User', 'only' => ['index', 'show', 'new', 'create', 'edit', 'update']]);
-
-    // $routes->post('user/save', 'User::save');
-    // $routes->get('user/edituser', 'User::edit');
-
     $routes->get('category', 'Category::index');
     $routes->get('category/new', 'Category::new');
     $routes->post('category', 'Category::create');

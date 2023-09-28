@@ -205,29 +205,23 @@ class User extends ResourceController
 
     public function getLimitedUsers($page = 1, $perPage = 10)
     {
-        $page = $this->request->getGet('page') ?? $page; // Get the 'page' parameter from the URL or use the default value
+        $page = $this->request->getGet('page') ?? $page;
         $perPage = $this->request->getGet('perPage') ?? $perPage;
 
-        // Calculate the offset based on the current page and perPage
         $offset = ($page - 1) * $perPage;
 
-        // Fetch user records with the specified limit and offset
         $dataUser = $this->userModel->findAll($perPage, $offset);
 
-        // Count the total number of records
         $totalRecords = $this->userModel->countAll();
 
-        // Calculate the total number of pages
         $totalPages = ceil($totalRecords / $perPage);
 
-        // Create a pagination array
         $pagination = [
             'page' => $page,
             'perPage' => $perPage,
             'totalRecords' => $totalRecords,
             'totalPages' => $totalPages
         ];
-        // Pass the data and pagination to the view
         return view('admin/user', [
             'title' => 'User',
             'users' => $dataUser,
