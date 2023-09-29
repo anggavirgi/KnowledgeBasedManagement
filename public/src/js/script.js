@@ -299,47 +299,30 @@ $(document).ready(function () {
       }
     });
   });
-
-  
-
   
   // UserTable Model
   $('#row-entries').change(function() {
-    var data = $('#row-entries').val();
     var offset = 1;
-    var currentData = data;
     var selectedValue = $(this).val(); 
-      if (selectedValue != data) {
-          currentData = selectedValue; 
-        } else {
-          currentData = data;
-      }
-      fetchData(currentData, offset); 
+    var currentUrl = window.location.href;
+    var parts = currentUrl.split("/");
+    var lastPart = parts[parts.length - 1];
+    var pages = lastPart.split("?")[0];
+    
+
+    fetchData(selectedValue, offset, pages); 
   });
 
-  function fetchData(Data, offset) {
-    
-    // Prepare the data to send in the POST request
-    var postData = {
-        page: offset,
-        perPage: Data
-    };
-
-    $.ajax({
-        type: "POST",
-        url: '/kb/administrator/user/getLimitedUsers',
-        data: postData, // Send the data as JSON
-        success: function(response) {
-
-            // You can still redirect if necessary
-            // Ubah URL tanpa redirect
-            var newUrl = '/kb/administrator/user?page=' + offset + '&perPage=' + Data;
-            window.location.href = newUrl;
-        },
-        error: function(xhr, status, error) {
-            console.error('AJAX error: ' + error);
-        }
-    });
+  function fetchData(Data, offset, pages) {
+    if(pages == 'subcategory'){
+      const url = new URL(window.location.href);
+      const categoryId = url.searchParams.get("category_id");
+      var newUrl = '/kb/administrator/category/'+pages+'?category_id=' + categoryId + '&page=' + offset + '&perPage=' + Data;
+      window.location.href = newUrl;
+    }else{
+      var newUrl = '/kb/administrator/'+pages+'?page=' + offset + '&perPage=' + Data;
+      window.location.href = newUrl;
+    }
   }
     
 });
