@@ -63,7 +63,6 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     $routes->post('user/(:num)', 'User::update/$1');
     $routes->get('user/delete/(:num)', 'User::delete/$1');
     $routes->get('user/detail/(:num)', 'User::detail/$1');
-    // $routes->get('user/getLimitedUsers', 'User::getLimitedUsers');
 
     $routes->get('category', 'Category::index');
     $routes->get('category/new', 'Category::new');
@@ -76,7 +75,7 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     $routes->get('category/subcategory', 'Category::subcategory');
     $routes->get('category/subcategory/addsubcategory', 'Category::addsub');
     $routes->post('category/subcategory/addsubcategory', 'Category::createSubCategory');
-    $routes->get('category/subcategory/editsubcategory/(:num)', 'Category::editsub/$1');
+    $routes->get('category/subcategory/editsubcategory/', 'Category::editsub');
     $routes->post('category/subcategory/update/(:num)', 'Category::updateSubCategory/$1');
     $routes->get('category/subcategory/delete/(:num)', 'Category::deleteSubCategory/$1');
 

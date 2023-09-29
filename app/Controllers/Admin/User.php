@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Admin;
 
+use App\Models\Admin\ProjectModel;
 use App\Models\Admin\UserModel;
 use CodeIgniter\RESTful\ResourceController;
 use Exception;
@@ -18,15 +19,16 @@ class User extends ResourceController
      */
 
     protected $userModel;
+    protected $projectModel;
 
     public function __construct()
     {
         $this->userModel = new UserModel();
+        $this->projectModel = new ProjectModel();
     }
 
     public function index()
     {
-
         $page = $this->request->getGet('page') ?? 1;
         $perPage = $this->request->getGet('perPage') ?? 10;
 
@@ -68,8 +70,11 @@ class User extends ResourceController
      */
     public function new()
     {
+
+        $dataProject = $this->projectModel->find();
         $data = [
-            'title' => 'Add User'
+            'title' => 'Add User',
+            'projects' => $dataProject
         ];
 
         return view('admin/adduser', $data);
@@ -128,9 +133,11 @@ class User extends ResourceController
      */
     public function edit($id = null)
     {
+        $dataProject = $this->projectModel->find();
         $data = [
             'title' => 'Edit User',
-            'user'  => $this->userModel->find($id)
+            'user'  => $this->userModel->find($id),
+            'projects' => $dataProject
         ];
 
         return view('admin/edituser', $data);

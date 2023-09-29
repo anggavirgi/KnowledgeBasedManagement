@@ -233,9 +233,11 @@ class Category extends ResourceController
 
   public function editsub($id = null)
   {
+    $id = $this->request->getGet('id');
     $data = [
       'title'       => 'Edit Sub-Category',
-      'subcategory' => $this->subCategoryModel->find($id)
+      'subcategory' => $this->subCategoryModel->find($id),
+      'categories' => $this->categoryModel->findAll()
     ];
 
     return view('admin/editsubcategory', $data);
