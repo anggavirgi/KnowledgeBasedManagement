@@ -26,14 +26,29 @@ class User extends ResourceController
 
     public function index()
     {
-        $dataUser = $this->userModel->findAll(10);
 
-        $data = [
+        $page = $this->request->getGet('page') ?? 1;
+        $perPage = $this->request->getGet('perPage') ?? 10;
+
+        $offset = ($page - 1) * $perPage;
+
+        $dataUser = $this->userModel->findAll($perPage, $offset);
+
+        $totalRecords = $this->userModel->countAll();
+
+        $totalPages = ceil($totalRecords / $perPage);
+
+        $pagination = [
+            'page' => $page,
+            'perPage' => $perPage,
+            'totalRecords' => $totalRecords,
+            'totalPages' => $totalPages
+        ];
+        return view('admin/user', [
             'title' => 'User',
             'users' => $dataUser,
-        ];
-
-        return view('admin/user', $data);
+            'pagination' => $pagination
+        ]);
     }
 
     /**
@@ -201,31 +216,5 @@ class User extends ResourceController
         ];
 
         return view('admin/detailuser', $data);
-    }
-
-    public function getLimitedUsers($page = 1, $perPage = 10)
-    {
-        $page = $this->request->getGet('page') ?? $page;
-        $perPage = $this->request->getGet('perPage') ?? $perPage;
-
-        $offset = ($page - 1) * $perPage;
-
-        $dataUser = $this->userModel->findAll($perPage, $offset);
-
-        $totalRecords = $this->userModel->countAll();
-
-        $totalPages = ceil($totalRecords / $perPage);
-
-        $pagination = [
-            'page' => $page,
-            'perPage' => $perPage,
-            'totalRecords' => $totalRecords,
-            'totalPages' => $totalPages
-        ];
-        return view('admin/user', [
-            'title' => 'User',
-            'users' => $dataUser,
-            'pagination' => $pagination
-        ]);
     }
 }

@@ -303,8 +303,8 @@ $(document).ready(function () {
   
 
   
+  // UserTable Model
   $('#row-entries').change(function() {
-    // UserTable Model
     var data = $('#row-entries').val();
     var offset = 1;
     var currentData = data;
@@ -318,6 +318,7 @@ $(document).ready(function () {
   });
 
   function fetchData(Data, offset) {
+    
     // Prepare the data to send in the POST request
     var postData = {
         page: offset,
@@ -329,17 +330,17 @@ $(document).ready(function () {
         url: '/kb/administrator/user/getLimitedUsers',
         data: postData, // Send the data as JSON
         success: function(response) {
-            // Handle the response as needed
-            console.log(response);
 
             // You can still redirect if necessary
-            window.location.href = 'http://localhost:8080/kb/administrator/user/getLimitedUsers/' + offset + '/' + Data;
+            // Ubah URL tanpa redirect
+            var newUrl = '/kb/administrator/user?page=' + offset + '&perPage=' + Data;
+            window.location.href = newUrl;
         },
         error: function(xhr, status, error) {
             console.error('AJAX error: ' + error);
         }
     });
-}
+  }
     
 });
 
