@@ -305,43 +305,43 @@ $(document).ready(function () {
   
 
   
-  $('#row-entries').change(function() {
-    // UserTable Model
-    var data = $('#row-entries').val();
-    var offset = 1;
-    var currentData = data;
-    var selectedValue = $(this).val(); 
-      if (selectedValue != data) {
-          currentData = selectedValue; 
-        } else {
-          currentData = data;
-      }
-      fetchData(currentData, offset); 
-  });
+  // $('#row-entries').change(function() {
+  //   // UserTable Model
+  //   var data = $('#row-entries').val();
+  //   var offset = 1;
+  //   var currentData = data;
+  //   var selectedValue = $(this).val(); 
+  //     if (selectedValue != data) {
+  //         currentData = selectedValue; 
+  //       } else {
+  //         currentData = data;
+  //     }
+  //     fetchData(currentData, offset); 
+  // });
 
-  function fetchData(Data, offset) {
-    // Prepare the data to send in the POST request
-    var postData = {
-        page: offset,
-        perPage: Data
-    };
+  // function fetchData(Data, offset) {
+  //   // Prepare the data to send in the POST request
+  //   var postData = {
+  //       page: offset,
+  //       perPage: Data
+  //   };
 
-    $.ajax({
-        type: "POST",
-        url: '/kb/administrator/user/getLimitedUsers',
-        data: postData, // Send the data as JSON
-        success: function(response) {
-            // Handle the response as needed
-            console.log(response);
+  //   $.ajax({
+  //       type: "POST",
+  //       url: '/kb/administrator/user/getLimitedUsers',
+  //       data: postData, // Send the data as JSON
+  //       success: function(response) {
+  //           // Handle the response as needed
+  //           console.log(response);
 
-            // You can still redirect if necessary
-            window.location.href = 'http://localhost:8080/kb/administrator/user/getLimitedUsers/' + offset + '/' + Data;
-        },
-        error: function(xhr, status, error) {
-            console.error('AJAX error: ' + error);
-        }
-    });
-}
+  //           // You can still redirect if necessary
+  //           window.location.href = 'http://localhost:8080/kb/administrator/user/getLimitedUsers/' + offset + '/' + Data;
+  //       },
+  //       error: function(xhr, status, error) {
+  //           console.error('AJAX error: ' + error);
+  //       }
+  //   });
+  // }
     
 });
 

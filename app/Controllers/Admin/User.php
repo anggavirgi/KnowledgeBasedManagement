@@ -26,7 +26,7 @@ class User extends ResourceController
 
     public function index()
     {
-        $dataUser = $this->userModel->findAll(10);
+        $dataUser = $this->userModel->findAll();
 
         $data = [
             'title' => 'User',
