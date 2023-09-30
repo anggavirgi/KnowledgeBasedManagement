@@ -185,16 +185,19 @@ class Category extends ResourceController
     return view('admin/subcategory', [
       'title' => 'Category',
       'subcategory' => $subCategory,
+      'categoryId' => $categoryId,
       'pagination' => $pagination
     ]);
   }
 
   public function addsub()
   {
+    $categoryId = $this->request->getGet('category_id');
     $idCategory = $this->categoryModel->findAll();
     $data = [
       'title' => 'Add Sub-Category',
       'category' => $idCategory,
+      'categoryId' => $categoryId
     ];
     return view('admin/addsubcategory', $data);
   }
