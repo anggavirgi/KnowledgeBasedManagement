@@ -97,7 +97,10 @@ $(document).ready(function () {
     $(".delete-checkbox:checked").each(function () {
       selectedItems.push($(this).closest("td").data("id"));
     });
-    
+
+
+    console.log(selectedItems);
+
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
