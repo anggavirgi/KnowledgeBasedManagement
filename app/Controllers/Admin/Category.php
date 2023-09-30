@@ -94,12 +94,12 @@ class Category extends ResourceController
       $slug = url_title($name_category, "-", true);
 
       $icon_file = $this->request->getFile('icon');
-      if($icon_file->getError() == 4){
+      if ($icon_file->getError() == 4) {
         $icon_name = $this->request->getVar('old_icon');
       } else {
         $icon_name = $icon_file->getRandomName();
         $icon_file->move('src/images/icon', $icon_name);
-        unlink('src/images/icon/'.$this->request->getVar('old_icon'));
+        unlink('src/images/icon/' . $this->request->getVar('old_icon'));
       }
 
       $data = [
@@ -115,11 +115,11 @@ class Category extends ResourceController
       }
     }
   }
-  
+
   public function delete($id = null)
   {
     $dataCategory = $this->categoryModel->find($id);
-    unlink('src/images/icon/'.$dataCategory['icon']);
+    unlink('src/images/icon/' . $dataCategory['icon']);
     if (!$this->categoryModel->delete($id)) {
       return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
     } else {
@@ -137,7 +137,7 @@ class Category extends ResourceController
 
     return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
   }
-  
+
   public function subcategory()
   {
     $data = [
@@ -151,7 +151,8 @@ class Category extends ResourceController
   public function addsub()
   {
     $data = [
-      'title' => 'Add Sub-Category'
+      'title'       => 'Add Sub-Category',
+      'categories'  => $this->categoryModel->findAll(),
     ];
 
     return view('admin/addsubcategory', $data);
@@ -190,6 +191,7 @@ class Category extends ResourceController
   {
     $data = [
       'title'       => 'Edit Sub-Category',
+      'categories'  => $this->categoryModel->findAll(),
       'subcategory' => $this->subCategoryModel->find($id)
     ];
 
@@ -237,5 +239,16 @@ class Category extends ResourceController
     } else {
       return redirect()->to('kb/administrator/category/subcategory')->with('success', "Data sub category berhasil dihapus");
     }
+  }
+
+  public function deleteBatchSubCategory()
+  {
+    $id_sub_categories = $this->request->getVar("ids");
+    for ($i = 0; $i < count($id_sub_categories); $i++) {
+      $id = $id_sub_categories[$i];
+      $this->subCategoryModel->delete($id);
+    }
+
+    return redirect()->to('kb/administrator/category/subcategory')->with('success', "Data sub category berhasil dihapus");
   }
 }

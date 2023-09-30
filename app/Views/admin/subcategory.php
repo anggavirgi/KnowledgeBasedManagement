@@ -19,18 +19,44 @@
   <h2 class="font-bold text-xl mt-6">List Sub-Category</h2>
   <div class="flex justify-between items-center my-5">
     <form method="" class="relative flex justify-end items-center">
-      <input type="text" placeholder="search" class="px-5 py-2 w-64 rounded-2xl border border-gray-400 outline-main">
-      <button class="absolute right-5 cursor-pointer align-middle">
+      <input type="text" placeholder="search" id="searchInput" class="px-5 py-2 pe-10 w-64 rounded-2xl border border-gray-400 outline-main">
+      <button class="absolute right-5 cursor-pointer align-middle" disabled>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search text-gray-400" viewBox="0 0 16 16">
           <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
         </svg>
       </button>
     </form>
-    <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory/addsubcategory" class="border border-gray-400 px-6 py-2 rounded-2xl hover:border-green-400 cursor-pointer">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" width="20" height="20">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z" />
-      </svg>
-    </a>
+    <div class="flex items-center gap-4">
+      <div class="delete-batch hidden">
+        <button type="button" class="delete-batch-btn px-2 inline-block" data-action="/kb/administrator/category/subcategory/deleteBatch">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-5 h-5 stroke-red-500 hover:stroke-red-700">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+          </svg>
+        </button>
+      </div>
+      <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory/addsubcategory" class="border border-gray-400 px-6 py-2 rounded-2xl hover:border-green-400 cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" width="20" height="20">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z" />
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="mb-5 flex items-center justify-end text-xs">
+    <label for="entries" class="mr-2">Rows per page : </label>
+    <div class="relative">
+      <select id="entries" class="appearance-none border border-gray-400 px-6 py-2 rounded-2xl hover:border-blue-500 cursor-pointer focus:outline-none">
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+      <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </div>
+    </div>
   </div>
 
   <?php if (session()->has('success')) : ?>
@@ -39,11 +65,11 @@
     <div class="flash-error" data-flashmessage="<?php echo session('error') ?>"></div>
   <?php endif; ?>
 
-  <table class="w-full text-center">
+  <table class="w-full text-center" id="dataTable">
     <thead class="border-b">
       <tr>
         <th class="p-3">
-          <input type="checkbox" name="" id="">
+          <input type="checkbox" class="delete-all-checkbox" name="" id="">
         </th>
         <th class="p-3 relative flex justify-center items-center">
           <span>No</span>
@@ -61,8 +87,8 @@
       foreach ($subcategory as $subcategory) :
       ?>
         <tr class="border-b hover:bg-gray-50">
-          <td class="p-3">
-            <input type="checkbox" name="" id="">
+          <td class="p-3" data-id="<?= $subcategory['id'] ?>">
+            <input type="checkbox" class="delete-checkbox" name="" id="">
           </td>
           <td class="p-3"><?= $no; ?></td>
           <td class="p-3"><?= $subcategory['name_subcategory'] ?></td>
@@ -90,25 +116,12 @@
     <nav aria-label="Page navigation example">
       <ul class="inline-flex -space-x-px text-sm">
         <li>
-          <a href="#" class="flex items-center justify-center px-3 h-8 ml-0 leading-tight  bg-white border rounded-l-lg hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">Previous</a>
+          <button class="flex items-center justify-center px-3 h-8 ml-0 leading-tight  bg-white border rounded-l-lg hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400" id="prevBtn" disabled>Previous</button>
+        </li>
+        <li class="inline-flex" id="pageIndicator">
         </li>
         <li>
-          <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight  bg-white border hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">1</a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight  bg-white border hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">2</a>
-        </li>
-        <li>
-          <a href="#" aria-current="page" class="flex items-center justify-center px-3 h-8 text-white border bg-blue-50 hover:text-blue-700 border-white dark:bg-main dark:hover:text-white">3</a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight  bg-white border hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">4</a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight  bg-white border hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">5</a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight  bg-white border rounded-r-lg hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">Next</a>
+          <button class="flex items-center justify-center px-3 h-8 leading-tight  bg-white border rounded-r-lg hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400" id="nextBtn">Next</button>
         </li>
       </ul>
     </nav>
