@@ -20,14 +20,19 @@ class Article extends ResourceController
 
   public function index()
   {
+    $dataArticle = $this->articleModel->findAll();
+    $dataContent = $this->contentModel->findAll();
+
     $data = [
-      'title' => 'Article'
+      'title' => 'Article',
+      'articles' => $dataArticle,
+      'contents' => $dataContent
     ];
     
     return view('admin/article', $data);
   }
 
-  public function add()
+  public function new()
   {
     $data = [
       'title' => 'Add Article'
@@ -39,7 +44,8 @@ class Article extends ResourceController
   public function edit($id=null)
   {
     $data = [
-      'title' => 'Edit Article'
+      'title' => 'Edit Article',
+      'article'  => $this->articleModel->find($id)
     ];
     
     return view('admin/editarticle', $data);
@@ -48,7 +54,8 @@ class Article extends ResourceController
   public function detail($id=null)
   {
     $data = [
-      'title' => 'Detail Article'
+      'title' => 'Detail Article',
+      'article'  => $this->articleModel->find($id)
     ];
     
     return view('admin/detailarticle', $data);
