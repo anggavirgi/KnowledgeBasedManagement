@@ -48,6 +48,7 @@ $routes->group('kb', static function ($routes) {
     $routes->get('history', 'Home::history');
     $routes->get('personalarticle', 'Home::personalarticle');
     $routes->get('personalarticle/personalarticledetail', 'Home::personalarticledetail');
+    $routes->get('complain/reply', 'Home::reply');
 });
 
 // ROUTE ADMIN
@@ -63,11 +64,6 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     $routes->get('user/delete/(:num)', 'User::delete/$1');
     $routes->get('user/detail/(:num)', 'User::detail/$1');
 
-    // $routes->resource('user', ['controller' => 'User', 'only' => ['index', 'show', 'new', 'create', 'edit', 'update']]);
-
-    // $routes->post('user/save', 'User::save');
-    // $routes->get('user/edituser', 'User::edit');
-
     $routes->get('category', 'Category::index');
     $routes->get('category/new', 'Category::new');
     $routes->post('category', 'Category::create');
@@ -79,7 +75,7 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     $routes->get('category/subcategory', 'Category::subcategory');
     $routes->get('category/subcategory/addsubcategory', 'Category::addsub');
     $routes->post('category/subcategory/addsubcategory', 'Category::createSubCategory');
-    $routes->get('category/subcategory/editsubcategory/(:num)', 'Category::editsub/$1');
+    $routes->get('category/subcategory/editsubcategory/', 'Category::editsub');
     $routes->post('category/subcategory/update/(:num)', 'Category::updateSubCategory/$1');
     $routes->get('category/subcategory/delete/(:num)', 'Category::deleteSubCategory/$1');
 

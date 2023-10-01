@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Admin;
 
+use App\Models\Admin\ProjectModel;
 use App\Models\Admin\UserModel;
 use CodeIgniter\RESTful\ResourceController;
 use Exception;
@@ -18,22 +19,38 @@ class User extends ResourceController
      */
 
     protected $userModel;
+    protected $projectModel;
 
     public function __construct()
     {
         $this->userModel = new UserModel();
+        $this->projectModel = new ProjectModel();
     }
 
     public function index()
     {
-        $dataUser = $this->userModel->findAll();
+        $page = $this->request->getGet('page') ?? 1;
+        $perPage = $this->request->getGet('perPage') ?? 10;
 
-        $data = [
-            'title' => 'User',
-            'users' => $dataUser
+        $offset = ($page - 1) * $perPage;
+
+        $dataUser = $this->userModel->findAll($perPage, $offset);
+
+        $totalRecords = $this->userModel->countAll();
+
+        $totalPages = ceil($totalRecords / $perPage);
+
+        $pagination = [
+            'page' => $page,
+            'perPage' => $perPage,
+            'totalRecords' => $totalRecords,
+            'totalPages' => $totalPages
         ];
-
-        return view('admin/user', $data);
+        return view('admin/user', [
+            'title' => 'User',
+            'users' => $dataUser,
+            'pagination' => $pagination
+        ]);
     }
 
     /**
@@ -53,8 +70,11 @@ class User extends ResourceController
      */
     public function new()
     {
+
+        $dataProject = $this->projectModel->find();
         $data = [
-            'title' => 'Add User'
+            'title' => 'Add User',
+            'projects' => $dataProject
         ];
 
         return view('admin/adduser', $data);
@@ -113,9 +133,11 @@ class User extends ResourceController
      */
     public function edit($id = null)
     {
+        $dataProject = $this->projectModel->find();
         $data = [
             'title' => 'Edit User',
-            'user'  => $this->userModel->find($id)
+            'user'  => $this->userModel->find($id),
+            'projects' => $dataProject
         ];
 
         return view('admin/edituser', $data);
@@ -202,5 +224,4 @@ class User extends ResourceController
 
         return view('admin/detailuser', $data);
     }
-
 }

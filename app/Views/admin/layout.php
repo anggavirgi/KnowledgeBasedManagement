@@ -99,8 +99,8 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="<?php echo base_url(); ?>node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
   <script src="<?php echo base_url(); ?>node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
+  <script src="<?php echo base_url(); ?>/src/js/dataTables.js"></script>
   <script src="<?php echo base_url(); ?>/src/js/script.js"></script>
-  
 </body>
 
 </html>
