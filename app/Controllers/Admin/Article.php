@@ -20,11 +20,28 @@ class Article extends ResourceController
 
   public function index()
   {
-    $data = [
-      'title' => 'Article'
+    $page = $this->request->getGet('page') ?? 1;
+    $perPage = $this->request->getGet('perPage') ?? 10;
+
+    $offset = ($page - 1) * $perPage;
+
+    $dataArticle = $this->articleModel->findAll($perPage, $offset);
+
+    $totalRecords = $this->articleModel->countAll();
+
+    $totalPages = ceil($totalRecords / $perPage);
+
+    $pagination = [
+      'page' => $page,
+      'perPage' => $perPage,
+      'totalRecords' => $totalRecords,
+      'totalPages' => $totalPages
     ];
-    
-    return view('admin/article', $data);
+    return view('admin/article', [
+      'title' => 'article',
+      'articles' => $dataArticle,
+      'pagination' => $pagination
+    ]);
   }
 
   public function add()
@@ -32,25 +49,25 @@ class Article extends ResourceController
     $data = [
       'title' => 'Add Article'
     ];
-    
+
     return view('admin/addarticle', $data);
   }
 
-  public function edit($id=null)
+  public function edit($id = null)
   {
     $data = [
       'title' => 'Edit Article'
     ];
-    
+
     return view('admin/editarticle', $data);
   }
 
-  public function detail($id=null)
+  public function detail($id = null)
   {
     $data = [
       'title' => 'Detail Article'
     ];
-    
+
     return view('admin/detailarticle', $data);
   }
 }
