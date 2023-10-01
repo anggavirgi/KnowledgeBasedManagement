@@ -29,25 +29,11 @@ class User extends ResourceController
 
     public function index()
     {
-        $key = $this->request->getGet('keyword') ?? ''; // Retrieve the search keyword from the GET request
-
-        // Check if a search keyword is provided
-        if (!empty($key)) {
-            // If a keyword is provided, filter the user data
-            $users = $this->userModel->like('name', $key)->findAll();
-        } else {
-            // If no keyword is provided, fetch all users
-            $users = $this->userModel->findAll();
-        }
-
-        d($users);
-
         $page = $this->request->getGet('page') ?? 1;
         $perPage = $this->request->getGet('perPage') ?? 10;
 
         $offset = ($page - 1) * $perPage;
 
-        // Fetch the paginated user data
         $dataUser = $this->userModel->findAll($perPage, $offset);
 
         $totalRecords = $this->userModel->countAll();
@@ -60,14 +46,12 @@ class User extends ResourceController
             'totalRecords' => $totalRecords,
             'totalPages' => $totalPages
         ];
-
         return view('admin/user', [
             'title' => 'User',
             'users' => $dataUser,
             'pagination' => $pagination
         ]);
     }
-
 
     /**
      * Return the properties of a resource object
@@ -239,9 +223,5 @@ class User extends ResourceController
         ];
 
         return view('admin/detailuser', $data);
-    }
-
-    public function searchData()
-    {
     }
 }
