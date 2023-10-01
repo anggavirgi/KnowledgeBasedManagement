@@ -32,12 +32,20 @@
     <div class="mb-5 flex items-center justify-end text-xs">
         <label for="entries" class="mr-2">Rows per page : </label>
         <div class="relative">
-            <select id="entries" class="appearance-none border border-gray-400 px-6 py-2 rounded-2xl hover:border-blue-500 cursor-pointer focus:outline-none">
-                <option value="10">10</option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-            </select>
+            <?php $options = [10, 25, 50, 100]; ?>
+            <?php if (isset($pagination)) : ?>
+                <select id="row-entries" data-url="<?php echo base_url(); ?>kb/administrator/category/subcategory/fetch" class="appearance-none border border-gray-400 px-6 py-2 rounded-2xl hover:border-blue-500 cursor-pointer focus:outline-none">
+                    <?php foreach ($options as $option) : ?>
+                        <option value="<?php echo $option; ?>" <?php echo isset($pagination) && $pagination['perPage'] == $option ? 'selected' : ''; ?>><?php echo $option; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            <?php else : ?>
+                <select id="row-entries" data-url="<?php echo base_url(); ?>kb/administrator/category/subcategory/fetch" class="appearance-none border border-gray-400 px-6 py-2 rounded-2xl hover:border-blue-500 cursor-pointer focus:outline-none">
+                    <?php foreach ($options as $option) : ?>
+                        <option value="<?php echo $option; ?>" <?php echo isset($pagination) && $pagination['perPage'] == $option ? 'selected' : ''; ?>><?php echo $option; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            <?php endif; ?>
             <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                 <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
