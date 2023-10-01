@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d5660fb6478991d5ed6a44fbd26ab9a5",
+    "content-hash": "507e4e7b4b6fe1ab6fdd0efbcf50b680",
     "packages": [
         {
             "name": "codeigniter4/framework",
@@ -878,7 +878,6 @@
             "time": "2022-07-13T18:35:46+00:00"
         },
         {
-
             "name": "paragonie/constant_time_encoding",
             "version": "v2.6.3",
             "source": {
