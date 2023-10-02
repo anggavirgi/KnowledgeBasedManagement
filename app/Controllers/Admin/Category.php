@@ -6,6 +6,7 @@ use App\Models\Admin\CategoryModel;
 use App\Models\Admin\SubCategoryModel;
 use CodeIgniter\RESTful\ResourceController;
 use Exception;
+use CodeIgniter\Database\Exceptions\DatabaseException;
 
 class Category extends ResourceController
 {
@@ -65,14 +66,13 @@ class Category extends ResourceController
 
   public function create()
   {
-
     $rules = [
-      'category'      => 'required|alpha_numeric_space',
-      'icon'          => 'uploaded[icon]|max_size[icon,1024]|is_image[icon]|mime_in[icon,image/jpg,image/jpeg,image/png,image/svg,image/webp]'
+      'category'      => 'required|alpha_numeric_space|is_unique[categories.name_category]',
+      'icon'          => 'uploaded[icon]|max_size[icon,1024]|is_image[icon]|mime_in[icon,image/jpg,image/jpeg,image/png,image/svg,image/webp]|is_unique[categoreies.name_category]'
     ];
 
     if (!$this->validate($rules)) {
-      return redirect()->route('kb/administrator/category/new')->withInput()->with('errors', $this->validator->getErrors());
+      return redirect()->to('kb/administrator/category/new')->withInput()->with('errors', $this->validator->getErrors());
     } else {
       $name_category = $this->request->getVar('category');
       $slug = url_title($name_category, "-", true);
@@ -112,7 +112,7 @@ class Category extends ResourceController
     ];
 
     if (!$this->validate($rules)) {
-      return redirect()->route('kb/administrator/category/edit/' . $id)->withInput()->with('errors', $this->validator->getErrors());
+      return redirect()->to('kb/administrator/category/edit/' . $id)->withInput()->with('errors', $this->validator->getErrors());
     } else {
       $name_category = $this->request->getVar('category');
       $slug = url_title($name_category, "-", true);
@@ -143,13 +143,33 @@ class Category extends ResourceController
   public function delete($id = null)
   {
     $dataCategory = $this->categoryModel->find($id);
-    unlink('src/images/icon/' . $dataCategory['icon']);
-    if (!$this->categoryModel->delete($id)) {
-      return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
-    } else {
-      $this->subCategoryModel->where('id_category', $id)->delete();
-      return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
+    $icon = $dataCategory['icon'];
+
+    try {
+      if(file_exists('src/images/icon/' . $icon)){
+        unlink('src/images/icon/' . $icon);
+        if (!$this->categoryModel->delete($id)) {
+          return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
+        } else {
+          return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
+        }
+      } else {
+        if (!$this->categoryModel->delete($id)) {
+          return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
+        } else {
+          return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
+        }
+      }
+    } catch (DatabaseException $e) {
+        if (strpos($e->getMessage(), 'Cannot delete or update a parent row') !== false) {
+            // Handle foreign key constraint violation error
+            return redirect()->to('kb/administrator/category')->with('error', "Cannot delete the category as it is referenced by other records.");
+        } else {
+            // Handle other database errors
+            return redirect()->to('kb/administrator/category')->with('error', "An error occurred: " . $e->getMessage());
+        }
     }
+
   }
 
   public function deleteBatch()
@@ -168,9 +188,9 @@ class Category extends ResourceController
     return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
   }
 
-  public function subcategory()
+  public function subcategory($id)
   {
-    $categoryId = $this->request->getGet('category_id');
+    $categoryId = $id;
     $page = $this->request->getGet('page') ?? 1;
     $perPage = $this->request->getGet('perPage') ?? 10;
 
@@ -188,19 +208,23 @@ class Category extends ResourceController
       'totalRecords' => $totalRecords,
       'totalPages' => $totalPages
     ];
+    dd($subCategory);
     return view('admin/subcategory', [
       'title' => 'Category',
       'subcategory' => $subCategory,
+      'categoryId' => $categoryId,
       'pagination' => $pagination
     ]);
   }
 
   public function addsub()
   {
+    $categoryId = $this->request->getGet('category_id');
     $idCategory = $this->categoryModel->findAll();
     $data = [
-      'title'       => 'Add Sub-Category',
-      'categories'  => $this->categoryModel->findAll(),
+      'title' => 'Add Sub-Category',
+      'category' => $idCategory,
+      'categoryId' => $categoryId
     ];
     return view('admin/addsubcategory', $data);
   }
@@ -239,7 +263,6 @@ class Category extends ResourceController
 
   public function editsub($id = null)
   {
-    $id = $this->request->getGet('id');
     $data = [
       'title'       => 'Edit Sub-Category',
       'categories'  => $this->categoryModel->findAll(),
@@ -267,7 +290,7 @@ class Category extends ResourceController
 
     $cek_subcategory = $this->subCategoryModel->select('*')->where('name_subcategory', $sub_category)->where('id !=', $id)->findAll();
     if ($cek_subcategory) {
-      return redirect()->to('kb/administrator/user/edit/' . $id)->withInput()->with('errors', ['subcategory' => 'Nama Subcategory sudah tersedia']);
+      return redirect()->to('kb/administrator/category/subcategory/editsubcategory/' . $id)->withInput()->with('errors', ['subcategory' => 'Nama Subcategory sudah tersedia']);
     } else {
       $data = [
         'id_category'       => $id_category,
@@ -276,9 +299,9 @@ class Category extends ResourceController
       ];
 
       if (!$this->subCategoryModel->update($id, $data)) {
-        return redirect()->to('kb/administrator/category/subcategory')->with('error', "Data sub category gagal diupdate");
+        return redirect()->to('kb/administrator/category/subcategory/' . $id_category . '')->with('error', "Data sub category gagal diupdate");
       } else {
-        return redirect()->to('kb/administrator/category/subcategory')->with('success', "Data sub category berhasil diupdate");
+        return redirect()->to('kb/administrator/category/subcategory/' . $id_category . '')->with('success', "Data sub category berhasil diupdate");
       }
     }
   }

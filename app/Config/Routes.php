@@ -37,7 +37,7 @@ $routes->group('kb', static function ($routes) {
 
     // ROUTE LOGIN
     // $routes->get('proses', 'Login::proses');
-    // $routes->get('register/', 'Login::register');
+    $routes->get('register/', 'Login::register');
     // $routes->get('forgot-password/', 'Login::forgotpassword');
 
     //HOME
@@ -45,6 +45,7 @@ $routes->group('kb', static function ($routes) {
     $routes->get('generalarticle', 'Home::generalarticle');
     $routes->get('generalarticle/generalarticledetail', 'Home::generalarticledetail');
     $routes->get('complain', 'Home::complain');
+    $routes->post('complain', 'Home::create');
     $routes->get('history', 'Home::history');
     $routes->get('personalarticle', 'Home::personalarticle');
     $routes->get('personalarticle/personalarticledetail', 'Home::personalarticledetail');
@@ -73,10 +74,10 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     $routes->post('category/deleteBatch', "Category::deleteBatch");
     $routes->post('category/subcategory/deleteBatch', "Category::deleteBatchSubCategory");
 
-    $routes->get('category/subcategory', 'Category::subcategory');
+    $routes->get('category/subcategory/(:num)', 'Category::subcategory/$1');
     $routes->get('category/subcategory/addsubcategory', 'Category::addsub');
     $routes->post('category/subcategory/addsubcategory', 'Category::createSubCategory');
-    $routes->get('category/subcategory/editsubcategory/', 'Category::editsub');
+    $routes->get('category/subcategory/editsubcategory/(:num)', 'Category::editsub/$1');
     $routes->post('category/subcategory/update/(:num)', 'Category::updateSubCategory/$1');
     $routes->get('category/subcategory/delete/(:num)', 'Category::deleteSubCategory/$1');
 
@@ -84,7 +85,7 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     $routes->get('article/new', 'Article::new');
     $routes->post('article', 'Article::create');
     $routes->get('article/edit/(:num)', 'Article::edit/$1');
-    $routes->get('article/(:num)', 'Article::update/$1');
+    $routes->post('article/(:num)', 'Article::update/$1');
     $routes->get('article/delete/(:num)', 'Article::delete/$1');
     $routes->get('article/detail/(:num)', 'Article::detail/$1');
 

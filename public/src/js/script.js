@@ -44,14 +44,11 @@ $(document).ready(function () {
   // LAYOUT ADMIN
 
   // Sidebar Menu Active
-  $(document).ready(function () {
-    const activePage = window.location.pathname;
-
-    $("#sidebar-child a").each(function () {
-      if (this.href.includes(activePage)) {
-        $(this).addClass("bg-main text-white rounded-md");
-      }
-    });
+  const activePage = window.location.pathname;
+  $("#sidebar-child a").each(function () {
+    if (this.href.includes(activePage)) {
+      $(this).addClass("bg-main text-white rounded-md");
+    }
   });
 
   // Burger Sidebar
@@ -123,9 +120,25 @@ $(document).ready(function () {
     });
   });
 
-  // CKEDITOR 5 CLASSIC
-  ClassicEditor.create(document.querySelector("#editor")).catch((error) => {
-    // console.error(error);
+  // Sidebar Mobile Toggle Aside Expand
+  var toggleClose = `
+  <button type="button" data-drawer-hide="drawer-disabled-backdrop" aria-controls="drawer-disabled-backdrop" class="text-white bg-main rounded-lg text-sm w-14 h-10 absolute top-0 -right-12 inline-flex items-center justify-center">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-white">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+  </svg>
+  <span class="sr-only">Close menu</span>
+  </button>
+  `;
+  $("button[data-drawer-show='drawer-disabled-backdrop']").click(function () {
+    // Append the button to the aside element
+    $('#drawer-disabled-backdrop').append(toggleClose);
+  });
+  
+  const aside = $('#drawer-disabled-backdrop');
+  $(aside).on('click', "button[data-drawer-hide='drawer-disabled-backdrop']", function () {
+    $(aside).removeClass('transform-none')
+    $(aside).addClass('-translate-x-full')
+    $(this).remove()
   });
 
   // Changing Status Complain
@@ -246,7 +259,7 @@ $(document).ready(function () {
     location.reload();
   });
 
-  // Complain Details Row Selected
+  // Complain Details ``Row`` Selected
   $(".clickable-row").click(function (event) {
     if (
       !$(event.target).closest("select").length &&
@@ -256,31 +269,6 @@ $(document).ready(function () {
       window.location = $(this).data("href");
     }
   });
-
-  // Sidebar Mobile Toggle Aside Expand
-  var toggleClose = `
-  <button type="button" data-drawer-hide="drawer-disabled-backdrop" aria-controls="drawer-disabled-backdrop" class="text-white bg-main rounded-lg text-sm w-14 h-10 absolute top-0 -right-12 inline-flex items-center justify-center">
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-white">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-  </svg>
-  <span class="sr-only">Close menu</span>
-  </button>
-  `;
-  $("button[data-drawer-show='drawer-disabled-backdrop']").click(function () {
-    // Append the button to the aside element
-    $("#drawer-disabled-backdrop").append(toggleClose);
-  });
-
-  const aside = $("#drawer-disabled-backdrop");
-  $(aside).on(
-    "click",
-    "button[data-drawer-hide='drawer-disabled-backdrop']",
-    function () {
-      $(aside).removeClass("transform-none");
-      $(aside).addClass("-translate-x-full");
-      $(this).remove();
-    }
-  );
 
   // Alert notification Message
   const flashSuccessMessage = $(".flash-success-message").data("message");
@@ -325,7 +313,6 @@ $(document).ready(function () {
       title: flashErrorMessage,
     });
   }
-
   // Alert notification CRUD
   const flashSuccess = $(".flash-success").data("flashmessage");
   const flashError = $(".flash-error").data("flashmessage");
@@ -343,15 +330,17 @@ $(document).ready(function () {
   if (flashError) {
     Swal.fire({
       title: "Failed",
-      text: flashSuccess,
+      text: flashError,
       showConfirmButton: false,
       icon: "error",
       timer: "1500",
     });
   }
 
-  $(document).on("click",".btn-delete", function () {
+  $(".btn-delete").on("click", function () {
     const id = $(this).attr("data-id");
+    const url = $(this).attr("data-action");
+    // console.log(href);
 
     Swal.fire({
       title: "Are you sure?",
@@ -365,39 +354,13 @@ $(document).ready(function () {
       if (result.isConfirmed) {
         $.ajax({
           type: "GET",
-          url: '/kb/administrator/user/delete/' + id,
+          url: url,
         });
 
         location.reload();
       }
     });
   });
-  
-  // UserTable Model
-  $('#row-entries').change(function() {
-    var offset = 1;
-    var selectedValue = $(this).val(); 
-    var currentUrl = window.location.href;
-    var parts = currentUrl.split("/");
-    var lastPart = parts[parts.length - 1];
-    var pages = lastPart.split("?")[0];
-    
-
-    fetchData(selectedValue, offset, pages); 
-  });
-
-  function fetchData(Data, offset, pages) {
-    if(pages == 'subcategory'){
-      const url = new URL(window.location.href);
-      const categoryId = url.searchParams.get("category_id");
-      var newUrl = '/kb/administrator/category/'+pages+'?category_id=' + categoryId + '&page=' + offset + '&perPage=' + Data;
-      window.location.href = newUrl;
-    }else{
-      var newUrl = '/kb/administrator/'+pages+'?page=' + offset + '&perPage=' + Data;
-      window.location.href = newUrl;
-    }
-  }
-    
 });
 
 // USER
@@ -494,4 +457,3 @@ function handleFileChange(files) {
     formatsizetext.classList.add("block");
   }
 }
-

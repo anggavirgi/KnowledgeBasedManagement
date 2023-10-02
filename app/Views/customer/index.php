@@ -1,358 +1,321 @@
-    <?php echo $this->extend('customer/layout'); ?>
+<?php echo $this->extend('customer/layout'); ?>
 
-    <?php echo $this->section('content'); ?>
-    <section id="main">
+<?php echo $this->section('content'); ?>
+<section id="main">
 
-        <!-- FAQ SECTION -->
-        <!-- <div id="faq" class="flex justify-center w-full">
-            <div class="grid justify-items-center mt-[40px]">
-                <h1 class="flex text-4xl font-bold">
-                    <span class="text-main">FA</span>
-                    <span class="text-[#FFC700]">Q</span>
-                </h1>
-                <div class="relative flex justify-center items-center" id="search">
-                    <form action="">
-                        <input type="text" name="email" id="email" placeholder="Search Your question, answer, etc" class="sm:w-[30rem] w-[25rem] mb-5 px-7 mt-[30px] py-3 rounded-2xl border border-gray-400 outline-main">
-                        <button>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search absolute sm:left-[450px] left-[370px] top-[47px] cursor-pointer text-[#919191]" viewBox="0 0 16 16">
-                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+    <div id="faq" class="flex-col justify-center items-center min-h-[40vh] lg:min-h-[80vh] sm:min-h-[70vh] md:min-h-[80vh]">
+        <img src="<?php echo base_url(); ?>src/images/waves-hero.png" class="w-[100%] h-[38rem] md:h-[49rem] sm:h-[40rem] lg:h-[49rem] object-cover  absolute z-[-1] top-0" alt="">
+        <div class="mt-12">
+            <h1 class="flex gap-3 justify-center text-4xl lg:text-5xl sm:text-4xl font-semibold sm:font-bold">
+                <span class="text-white">Help center</span>
+                <span class="text-[#2562AE]">Virtu</span>
+                <span class="text-[#FFC700]">see</span>
+            </h1>
+            <div class="flex justify-center" id="search">
+                <form action="" class="relative">
+                    <input type="text" name="email" id="email" placeholder="Search Your question, answer, etc" class="sm:w-[30rem] w-[22rem]  mb-3 px-7 mt-[30px] py-3  rounded-sm border border-gray-400 outline-main">
+                    <button>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search absolute sm:left-[450px] left-[320px] top-[47px] cursor-pointer text-[#919191]" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        </svg>
+                    </button>
+                </form>
+            </div>
+            <div class="flex justify-center mt-[3px] sm:[5px]">
+                <div class="sm:w-[30rem] w-[22rem] text-justify">
+                    <p class="text-sm text-white"><span class="text-secondary font-semibold">Search what you want,</span> we will answer your question and you can search anything
+                        about the Virtusee Program or technical </p>
+                </div>
+            </div>
+        </div>
+        <div id="categories" class="flex justify-center w-full mt-7 sm:md-7 md:mt-12">
+            <div class="grid items-center">
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 mb-5 gap-5 sm:gap-5 lg:gap-10 ">
+                    <div class="bg-gray-200 px-[2rem] py-3 rounded-md w-[8rem] h-[5rem] sm:w-[9rem] sm:h-[5rem] md:w-[12rem] md:h-[7rem] flex items-center justify-center">
+                        <div class="flex-col items-center mb-1 text-center">
+                            <i class="bi bi-shield-fill-exclamation text-2xl sm:text md:text-4xl"></i>
+                            <h4 class="whitespace-nowrap text-sm md:text-md text-center mt-1">security alert bang</h4>
+                        </div>
+                    </div>
+                    <div class="bg-gray-200 px-[2rem] py-3 rounded-md w-[8rem] h-[5rem] sm:w-[9rem] sm:h-[5rem] md:w-[12rem] md:h-[7rem] flex items-center justify-center">
+                        <div class="flex-col items-center mb-1 text-center">
+                            <i class="bi bi-shield-fill-exclamation text-2xl sm:text-2xl md:text-4xl"></i>
+                            <h4 class="whitespace-nowrap text-sm md:text-md text-center mt-1">security alert</h4>
+                        </div>
+                    </div>
+                    <div class="bg-gray-200 px-[2rem] py-3 rounded-md w-[8rem] h-[5rem] sm:w-[9rem] sm:h-[5rem] md:w-[12rem] md:h-[7rem] flex items-center justify-center">
+                        <div class="flex-col items-center mb-1 text-center">
+                            <i class="bi bi-shield-fill-exclamation text-2xl sm:text md:text-4xl"></i>
+                            <h4 class="whitespace-nowrap text-sm md:text-md text-center mt-1">security alert</h4>
+                        </div>
+                    </div>
+                    <div class="bg-gray-200 px-[2rem] py-3 rounded-md w-[8rem] h-[5rem] sm:w-[9rem] sm:h-[5rem] md:w-[12rem] md:h-[7rem] flex items-center justify-center">
+                        <div class="flex-col items-center mb-1 text-center">
+                            <i class="bi bi-shield-fill-exclamation text-2xl sm:text md:text-4xl"></i>
+                            <h4 class="whitespace-nowrap text-sm md:text-md text-center mt-1">security alert</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- </div> -->
+    <div id="general_question" class="px-10 mt-16 sm:mt-[5rem] md:mt-[10rem] lg:[10rem]">
+        <div class=" w-full mb-2 text-center">
+            <h4 class="text-[#18A8D8] font-bold text-3xl">General Question</h4>
+        </div>
+        <div class="flex justify-center">
+            <div class="lg:w-5/12 md:flex hidden">
+                <img src="<?php echo base_url(); ?>src/images/Question.png" alt="Question.png" class="mx-auto w-[30rem] object-cover">
+            </div>
+            <div id="question" class="mt-7 w-full lg:w-6/12 md:w-10/12 self-center">
+                <div class="border-solid border-2 border-[#919191] rounded-md p-4 ps-10 mb-3">
+                    <div class="flex justify-between">
+                        <p class="text-md" id="title1">How I can buy the programs ? </p>
+                        <p class="text-xl cursor-pointer collapsible" data-target="collapse1" data-title="title1">
+                            <i class="bi bi-chevron-down icon"></i>
+                        </p>
+                    </div>
+                    <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse1">
+                        <p class="text-[14px]">Search what you want, we will answer your question and you can search anything about the Virtusee Progran or technical <a href="" class="text-[#18A8D8]">more .. </a></p>
+                    </div>
+                </div>
+                <div class="border-solid border-2 border-[#919191] rounded-[10px] p-4 ps-10 mb-3">
+                    <div class="flex justify-between">
+                        <p class="text-[16px]" id="title1">How I can buy the programs ? </p>
+                        <p class="text-xl cursor-pointer collapsible" data-target="collapse2" data-title="title1">
+                            <i class="bi bi-chevron-down icon"></i>
+                        </p>
+                    </div>
+                    <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse2">
+                        <p class="text-[14px]">Search what you want, we will answer your question and you can search anything about the Virtusee Progran or technical <a href="" class="text-[#18A8D8]">more .. </a></p>
+                    </div>
+                </div>
+                <div class="border-solid border-2 border-[#919191] rounded-[10px] p-4 ps-10 mb-3">
+                    <div class="flex justify-between">
+                        <p class="text-[16px]" id="title1">How I can buy the programs ? </p>
+                        <p class="text-xl cursor-pointer collapsible" data-target="collapse3" data-title="title1">
+                            <i class="bi bi-chevron-down icon"></i>
+                        </p>
+                    </div>
+                    <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse3">
+                        <p class="text-[14px]">Search what you want, we will answer your question and you can search anything about the Virtusee Progran or technical <a href="" class="text-[#18A8D8]">more .. </a></p>
+                    </div>
+                </div>
+                <div class="border-solid border-2 border-[#919191] rounded-[10px] p-4 ps-10 mb-3">
+                    <div class="flex justify-between">
+                        <p class="text-[16px]" id="title1">How I can buy the programs ? </p>
+                        <p class="text-xl cursor-pointer collapsible" data-target="collapse4" data-title="title1">
+                            <i class="bi bi-chevron-down icon"></i>
+                        </p>
+                    </div>
+                    <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse4">
+                        <p class="text-[14px]">Search what you want, we will answer your question and you can search anything about the Virtusee Progran or technical <a href="" class="text-[#18A8D8]">more .. </a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="customer_complain" class="flex flex-col justify-center items-center w-full bg-[#F8F8F8] pt-12 mt-10 relative">
+        <div id="customer_complain" class="mb-2 p-5 w-10/12">
+            <h4 class="font-bold text-4xl text-center mb-10">General Complain User</h4>
+            <div class="grid lg:grid-cols-2 md:grid-cols-1 gap-12 gap-y-4">
+                <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
+                    <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
+                        <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
+                        <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
+                    </svg>
+
+                    <div class="flex justify-between">
+                        <div class="gap-2">
+                            <h4 class="font-bold text-2xl">title of complain</h4>
+                            <h4 class="sm:text-sm text-[14px] sm:mt-2 mt-3">User9012230 / PRJ-0998123 </h4>
+                        </div>
+                        <div>
+                            <h4 class="font-bold sm:text-sm text-[10px] text-[#1F9254] sm:mt-2 mt-3 py-2 px-8 bg-[#CFF2DE] rounded-[15px]">Solved</h4>
+                        </div>
+                    </div>
+                    <div class="max-w-4xl text-sm mt-4">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at</p>
+                    </div>
+                </div>
+                <div class="border-solid bg-white border-2 border-[#b4b1b1] rounded-[10px] p-5 pl-10 mb-7 relative">
+                    <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
+                        <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
+                        <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
+                    </svg>
+
+                    <div class="flex justify-between">
+                        <div class="gap-2">
+                            <h4 class="font-bold text-2xl">title of complain</h4>
+                            <h4 class="sm:text-sm text-[14px] sm:mt-2 mt-3">User9012230 / PRJ-0998123 </h4>
+                        </div>
+                        <div>
+                            <h4 class="font-bold sm:text-sm text-[10px] text-[#1F9254] sm:mt-2 mt-3 py-2 px-8 bg-[#CFF2DE] rounded-[15px]">Solved</h4>
+                        </div>
+                    </div>
+                    <div class="max-w-4xl text-sm mt-4">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at.</p>
+                    </div>
+                </div>
+                <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
+                    <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
+                        <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
+                        <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
+                    </svg>
+
+                    <div class="flex justify-between">
+                        <div class="gap-2">
+                            <h4 class="font-bold text-2xl">title of complain</h4>
+                            <h4 class="sm:text-sm text-[14px] sm:mt-2 mt-3">User9012230 / PRJ-0998123 </h4>
+                        </div>
+                        <div>
+                            <h4 class="font-bold sm:text-sm text-[10px] text-[#1F9254] sm:mt-2 mt-3 py-2 px-8 bg-[#CFF2DE] rounded-[15px]">Solved</h4>
+                        </div>
+                    </div>
+                    <div class="max-w-4xl text-sm mt-4">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at</p>
+                    </div>
+                </div>
+                <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
+                    <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
+                        <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
+                        <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
+                    </svg>
+
+                    <div class="flex justify-between">
+                        <div class="gap-2">
+                            <h4 class="font-bold text-2xl">title of complain</h4>
+                            <h4 class="sm:text-sm text-[14px] sm:mt-2 mt-3">User9012230 / PRJ-0998123 </h4>
+                        </div>
+                        <div>
+                            <h4 class="font-bold sm:text-sm text-[10px] text-[#1F9254] sm:mt-2 mt-3 py-2 px-8 bg-[#CFF2DE] rounded-[15px]">Solved</h4>
+                        </div>
+                    </div>
+                    <div class="max-w-4xl text-sm mt-4">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at.</p>
+                    </div>
+                </div>
+                <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
+                    <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
+                        <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
+                        <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
+                    </svg>
+
+                    <div class="flex justify-between">
+                        <div class="gap-2">
+                            <h4 class="font-bold text-2xl">title of complain</h4>
+                            <h4 class="sm:text-sm text-[14px] sm:mt-2 mt-3">User9012230 / PRJ-0998123 </h4>
+                        </div>
+                        <div>
+                            <h4 class="font-bold sm:text-sm text-[10px] text-[#1F9254] sm:mt-2 mt-3 py-2 px-8 bg-[#CFF2DE] rounded-[15px]">Solved</h4>
+                        </div>
+                    </div>
+                    <div class="max-w-4xl text-sm mt-4">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at</p>
+                    </div>
+                </div>
+                <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
+                    <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
+                        <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
+                        <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
+                    </svg>
+
+                    <div class="flex justify-between">
+                        <div class="gap-2">
+                            <h4 class="font-bold text-2xl">title of complain</h4>
+                            <h4 class="sm:text-sm text-[14px] sm:mt-2 mt-3">User9012230 / PRJ-0998123 </h4>
+                        </div>
+                        <div>
+                            <h4 class="font-bold sm:text-sm text-[10px] text-[#1F9254] sm:mt-2 mt-3 py-2 px-8 bg-[#CFF2DE] rounded-[15px]">Solved</h4>
+                        </div>
+                    </div>
+                    <div class="max-w-4xl text-sm mt-4">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at.</p>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center mb-10 mt-10">
+                <a href="" class="text-white p-3 rounded-[10px] bg-[#18A8D8] font-bold">Read More <i class="bi bi-chevron-double-right"></i></a>
+            </p>
+        </div>
+        <div class="absolute top-[100%] left-0 right-0 z-0 w-full">
+            <img src="<?php echo base_url(); ?>src/images/background.png" class="w-[100%]" alt="">
+
+        </div>
+    </div>
+    <div id="question" class="flex flex-col justify-center items-center mb-28 xl:mt-20 lg:mt-16 md:mt-2 relative">
+        <p class="text-[24px] font-medium">Do you have any question?</p>
+        <div class="mt-8 whitespace-nowrap">
+            <?php if (logged_in()) : ?>
+                <a data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="p-2 py-4 bg-[#FFC700] rounded-[15px] cursor-pointer"><i class="bi bi-envelope-fill "></i> Report a Problem</a>
+
+                <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 bottom-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto">
+                    <!-- Modal content -->
+                    <div class="absolute inset-0 bg-white flex items-center justify-center w-full md:w-[55%] lg:w-[40%] h-full md:h-[95%] md:rounded-md my-auto mx-auto">
+                        <button type="button" class="absolute top-3 flex justify-center right-2.5 text-gray-400 bg-transparent hover:bg-slate-200  rounded-lg text-sm w-8 h-8 ml-auto items-center hover:text-form" data-modal-hide="authentication-modal">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                             </svg>
+                            <span class="sr-only">Close modal</span>
                         </button>
-                    </form>
-                </div>
-                <div class="flex justify-center sm:mt-0 mt-[-10px]">
-                    <div class="sm:w-[30rem] w-[25rem] ">
-                        <p class="text-sm"><span class="text-main">Search what you want,</span> we will answer your question and you can search anything
-                            about the Virtusee Progran or technical </p>
-                    </div>
-                </div>
-            </div>
-        </div> -->
+                        <div class="px-6 lg:px-8 w-[95%]">
+                            <form class="space-y-2" action="#">
+                                <div>
+                                    <label for="username" class="block mb-2 text-xs font-medium text-form">username</label>
+                                    <input type="username" name="username" id="username" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" required>
+                                </div>
+                                <div>
+                                    <label for="subject" class="block mb-2 text-xs font-medium text-form">subject</label>
+                                    <input type="subject" name="subject" id="subject" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" required>
+                                </div>
+                                <div>
+                                    <label for="email" class="block mb-2 text-xs font-medium text-form">Your email</label>
+                                    <input type="email" name="email" id="email" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" required>
+                                </div>
+                                <div>
+                                    <label for="project" class="block mb-2 text-xs font-medium text-form">Project</label>
+                                    <select disabled id="project" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main">
+                                        <option selected>Choose a project</option>
+                                        <option value="p1" selected>P001</option>
+                                        <option value="p2">P002</option>
+                                        <option value="p3">P003</option>
+                                        <option value="p4">P004</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="message" class="block mb-2 text-xs font-medium text-form">Description</label>
+                                    <textarea id="message" rows="5" class="border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="Write your thoughts here..."></textarea>
+                                </div>
+                                <div>
+                                    <label for="dropzone-file" class="flex flex-col items-center justify-center w-28 md:w-40 lg:w-72 h-12 md:h-20 lg:h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
+                                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                            <svg class="w-6 md:w-8 h-6 md:h-8 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                            </svg>
+                                            <div class="hidden lg:block">
+                                                <p class="mb-2 text-sm text-gray-500 "><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                                                <p class="text-xs text-gray-500 ">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                                            </div>
+                                        </div>
+                                        <input id="dropzone-file" type="file" class="hidden" />
+                                    </label>
+                                    <div class=" text-[8px] md:text-xs w-max mt-2 lg:hidden">
+                                        <p class=" text-red-500 ">* SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                                    </div>
+                                </div>
 
-        <!-- CATEGORIES SECTION -->
-        <!-- <div id="categories" class="flex justify-center w-full">
-            <div class="grid justify-items-center mt-[40px]">
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-5 gap-6">
-                    <div class="bg-[#D9D9D9] px-[4rem] py-5 rounded-[10px]">
-                        <div class="flex justify-center mb-3">
-                            <i class="bi bi-cart-fill text-4xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="whitespace-nowrap">Categories 1</h4>
-                        </div>
-                    </div>
-                    <div class="bg-[#D9D9D9] px-[4rem] py-5 rounded-[10px]">
-                        <div class="flex justify-center mb-3">
-                            <i class="bi bi-cart-fill text-4xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="whitespace-nowrap">Categories 1</h4>
-                        </div>
-                    </div>
-                    <div class="bg-[#D9D9D9] px-[4rem] py-5 rounded-[10px]">
-                        <div class="flex justify-center mb-3">
-                            <i class="bi bi-cart-fill text-4xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="whitespace-nowrap">Categories 1</h4>
-                        </div>
-                    </div>
-                    <div class="bg-[#D9D9D9] px-[4rem] py-5 rounded-[10px]">
-                        <div class="flex justify-center mb-3">
-                            <i class="bi bi-cart-fill text-4xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="whitespace-nowrap">Categories 1</h4>
-                        </div>
-                    </div>
-                    <div class="bg-[#D9D9D9] px-[4rem] py-5 rounded-[10px]">
-                        <div class="flex justify-center mb-3">
-                            <i class="bi bi-cart-fill text-4xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="whitespace-nowrap">Categories 1</h4>
-                        </div>
-                    </div>
-                    <div class="bg-[#D9D9D9] px-[4rem] py-5 rounded-[10px]">
-                        <div class="flex justify-center mb-3">
-                            <i class="bi bi-cart-fill text-4xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="whitespace-nowrap">Categories 1</h4>
-                        </div>
-                    </div>
-                    <div class="bg-[#D9D9D9] px-[4rem] py-5 rounded-[10px]">
-                        <div class="flex justify-center mb-3">
-                            <i class="bi bi-cart-fill text-4xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="whitespace-nowrap">Categories 1</h4>
-                        </div>
-                    </div>
-                    <div class="bg-[#D9D9D9] px-[4rem] py-5 rounded-[10px]">
-                        <div class="flex justify-center mb-3">
-                            <i class="bi bi-cart-fill text-4xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="whitespace-nowrap">Categories 1</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
+                                <button type="submit" class=" text-white float-right bg-main focus:ring-2 focus:outline-none rounded-lg text-sm px-5 py-2.5 text-center hover:bg-[#179CC8] ">Submit</button>
 
-
-        <!-- <div class="hero-section bg-main rounded-b-full min-h-[70vh]"> -->
-
-        <div id="faq" class="flex-col justify-center items-center min-h-[40vh] lg:min-h-[80vh] sm:min-h-[70vh] md:min-h-[80vh]">
-            <!-- <div class="hero-section bg-main rounded-b-full h-[40rem] w-full absolute z-[-1] top-[-rem]"></div> -->
-            <!-- <svg xmlns="http://www.w3.org/2000/svg" class="w-full absolute z-[-1] top-0 h-[50rem]" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="1" d="M0,224L48,218.7C96,213,192,203,288,213.3C384,224,480,256,576,234.7C672,213,768,139,864,133.3C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg> -->
-            <img src="<?php echo base_url(); ?>src/images/waves-hero.png" class="w-[100%] h-[38rem] md:h-[49rem] sm:h-[40rem] lg:h-[49rem] object-cover  absolute z-[-1] top-0" alt="">
-            <div class="mt-12">
-                <h1 class="flex gap-3 justify-center text-4xl lg:text-5xl sm:text-4xl font-semibold sm:font-bold">
-                    <span class="text-white">Help center</span>
-                    <span class="text-[#2562AE]">Virtu</span>
-                    <span class="text-[#FFC700]">see</span>
-                </h1>
-                <div class="flex justify-center" id="search">
-                    <form action="" class="relative">
-                        <input type="text" name="email" id="email" placeholder="Search Your question, answer, etc" class="sm:w-[30rem] w-[22rem]  mb-3 px-7 mt-[30px] py-3  rounded-sm border border-gray-400 outline-main">
-                        <button>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search absolute sm:left-[450px] left-[320px] top-[47px] cursor-pointer text-[#919191]" viewBox="0 0 16 16">
-                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                            </svg>
-                        </button>
-                    </form>
-                </div>
-                <div class="flex justify-center mt-[3px] sm:[5px]">
-                    <div class="sm:w-[30rem] w-[22rem] text-justify">
-                        <p class="text-sm text-white"><span class="text-secondary font-semibold">Search what you want,</span> we will answer your question and you can search anything
-                            about the Virtusee Program or technical </p>
-                    </div>
-                </div>
-            </div>
-            <div id="categories" class="flex justify-center w-full mt-7 sm:md-7 md:mt-12">
-                <div class="grid items-center">
-                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 mb-5 gap-5 sm:gap-5 lg:gap-10 ">
-                        <div class="bg-gray-200 px-[2rem] py-3 rounded-md w-[8rem] h-[5rem] sm:w-[9rem] sm:h-[5rem] md:w-[12rem] md:h-[7rem] flex items-center justify-center">
-                            <div class="flex-col items-center mb-1 text-center">
-                                <i class="bi bi-shield-fill-exclamation text-2xl sm:text md:text-4xl"></i>
-                                <h4 class="whitespace-nowrap text-sm md:text-md text-center mt-1">security alert bang</h4>
-                            </div>
-                        </div>
-                        <div class="bg-gray-200 px-[2rem] py-3 rounded-md w-[8rem] h-[5rem] sm:w-[9rem] sm:h-[5rem] md:w-[12rem] md:h-[7rem] flex items-center justify-center">
-                            <div class="flex-col items-center mb-1 text-center">
-                                <i class="bi bi-shield-fill-exclamation text-2xl sm:text-2xl md:text-4xl"></i>
-                                <h4 class="whitespace-nowrap text-sm md:text-md text-center mt-1">security alert</h4>
-                            </div>
-                        </div>
-                        <div class="bg-gray-200 px-[2rem] py-3 rounded-md w-[8rem] h-[5rem] sm:w-[9rem] sm:h-[5rem] md:w-[12rem] md:h-[7rem] flex items-center justify-center">
-                            <div class="flex-col items-center mb-1 text-center">
-                                <i class="bi bi-shield-fill-exclamation text-2xl sm:text md:text-4xl"></i>
-                                <h4 class="whitespace-nowrap text-sm md:text-md text-center mt-1">security alert</h4>
-                            </div>
-                        </div>
-                        <div class="bg-gray-200 px-[2rem] py-3 rounded-md w-[8rem] h-[5rem] sm:w-[9rem] sm:h-[5rem] md:w-[12rem] md:h-[7rem] flex items-center justify-center">
-                            <div class="flex-col items-center mb-1 text-center">
-                                <i class="bi bi-shield-fill-exclamation text-2xl sm:text md:text-4xl"></i>
-                                <h4 class="whitespace-nowrap text-sm md:text-md text-center mt-1">security alert</h4>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </div>
+            <?php else : ?>
+                <a href="<?= site_url('register') ?>" class="p-2 py-4 bg-[#FFC700] rounded-[15px] cursor-pointer"><i class="bi bi-envelope-fill "></i> Report a Problem</a>
+            <?php endif; ?>
         </div>
-        <!-- </div> -->
-        <div id="general_question" class="px-10 mt-16 sm:mt-[5rem] md:mt-[10rem] lg:[10rem]">
-            <div class=" w-full mb-2 text-center">
-                <h4 class="text-[#18A8D8] font-bold text-3xl">General Question</h4>
-            </div>
-            <div class="flex justify-center">
-                <div class="lg:w-5/12 md:flex hidden">
-                    <img src="<?php echo base_url(); ?>src/images/Question.png" alt="Question.png" class="mx-auto w-[30rem] object-cover">
-                </div>
-                <div id="question" class="mt-7 w-full lg:w-6/12 md:w-10/12 self-center">
-                    <div class="border-solid border-2 border-[#919191] rounded-md p-4 ps-10 mb-3">
-                        <div class="flex justify-between">
-                            <p class="text-md" id="title1">How I can buy the programs ? </p>
-                            <p class="text-xl cursor-pointer collapsible" data-target="collapse1" data-title="title1">
-                                <i class="bi bi-chevron-down icon"></i>
-                            </p>
-                        </div>
-                        <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse1">
-                            <p class="text-[14px]">Search what you want, we will answer your question and you can search anything about the Virtusee Progran or technical <a href="" class="text-[#18A8D8]">more .. </a></p>
-                        </div>
-                    </div>
-                    <div class="border-solid border-2 border-[#919191] rounded-[10px] p-4 ps-10 mb-3">
-                        <div class="flex justify-between">
-                            <p class="text-[16px]" id="title1">How I can buy the programs ? </p>
-                            <p class="text-xl cursor-pointer collapsible" data-target="collapse2" data-title="title1">
-                                <i class="bi bi-chevron-down icon"></i>
-                            </p>
-                        </div>
-                        <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse2">
-                            <p class="text-[14px]">Search what you want, we will answer your question and you can search anything about the Virtusee Progran or technical <a href="" class="text-[#18A8D8]">more .. </a></p>
-                        </div>
-                    </div>
-                    <div class="border-solid border-2 border-[#919191] rounded-[10px] p-4 ps-10 mb-3">
-                        <div class="flex justify-between">
-                            <p class="text-[16px]" id="title1">How I can buy the programs ? </p>
-                            <p class="text-xl cursor-pointer collapsible" data-target="collapse3" data-title="title1">
-                                <i class="bi bi-chevron-down icon"></i>
-                            </p>
-                        </div>
-                        <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse3">
-                            <p class="text-[14px]">Search what you want, we will answer your question and you can search anything about the Virtusee Progran or technical <a href="" class="text-[#18A8D8]">more .. </a></p>
-                        </div>
-                    </div>
-                    <div class="border-solid border-2 border-[#919191] rounded-[10px] p-4 ps-10 mb-3">
-                        <div class="flex justify-between">
-                            <p class="text-[16px]" id="title1">How I can buy the programs ? </p>
-                            <p class="text-xl cursor-pointer collapsible" data-target="collapse4" data-title="title1">
-                                <i class="bi bi-chevron-down icon"></i>
-                            </p>
-                        </div>
-                        <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse4">
-                            <p class="text-[14px]">Search what you want, we will answer your question and you can search anything about the Virtusee Progran or technical <a href="" class="text-[#18A8D8]">more .. </a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="customer_complain" class="flex flex-col justify-center items-center w-full bg-[#F8F8F8] pt-12 mt-10 relative">
-            <div id="customer_complain" class="mb-2 p-5 w-10/12">
-                <h4 class="font-bold text-4xl text-center mb-10">General Complain User</h4>
-                <div class="grid lg:grid-cols-2 md:grid-cols-1 gap-12 gap-y-4">
-                    <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
-                        <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
-                            <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
-                            <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
-                        </svg>
+    </div>
+</section>
 
-                        <div class="flex justify-between">
-                            <div class="gap-2">
-                                <h4 class="font-bold text-2xl">title of complain</h4>
-                                <h4 class="sm:text-sm text-[14px] sm:mt-2 mt-3">User9012230 / PRJ-0998123 </h4>
-                            </div>
-                            <div>
-                                <h4 class="font-bold sm:text-sm text-[10px] text-[#1F9254] sm:mt-2 mt-3 py-2 px-8 bg-[#CFF2DE] rounded-[15px]">Solved</h4>
-                            </div>
-                        </div>
-                        <div class="max-w-4xl text-sm mt-4">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at</p>
-                        </div>
-                    </div>
-                    <div class="border-solid bg-white border-2 border-[#b4b1b1] rounded-[10px] p-5 pl-10 mb-7 relative">
-                        <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
-                            <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
-                            <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
-                        </svg>
-
-                        <div class="flex justify-between">
-                            <div class="gap-2">
-                                <h4 class="font-bold text-2xl">title of complain</h4>
-                                <h4 class="sm:text-sm text-[14px] sm:mt-2 mt-3">User9012230 / PRJ-0998123 </h4>
-                            </div>
-                            <div>
-                                <h4 class="font-bold sm:text-sm text-[10px] text-[#1F9254] sm:mt-2 mt-3 py-2 px-8 bg-[#CFF2DE] rounded-[15px]">Solved</h4>
-                            </div>
-                        </div>
-                        <div class="max-w-4xl text-sm mt-4">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at.</p>
-                        </div>
-                    </div>
-                    <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
-                        <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
-                            <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
-                            <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
-                        </svg>
-
-                        <div class="flex justify-between">
-                            <div class="gap-2">
-                                <h4 class="font-bold text-2xl">title of complain</h4>
-                                <h4 class="sm:text-sm text-[14px] sm:mt-2 mt-3">User9012230 / PRJ-0998123 </h4>
-                            </div>
-                            <div>
-                                <h4 class="font-bold sm:text-sm text-[10px] text-[#1F9254] sm:mt-2 mt-3 py-2 px-8 bg-[#CFF2DE] rounded-[15px]">Solved</h4>
-                            </div>
-                        </div>
-                        <div class="max-w-4xl text-sm mt-4">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at</p>
-                        </div>
-                    </div>
-                    <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
-                        <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
-                            <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
-                            <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
-                        </svg>
-
-                        <div class="flex justify-between">
-                            <div class="gap-2">
-                                <h4 class="font-bold text-2xl">title of complain</h4>
-                                <h4 class="sm:text-sm text-[14px] sm:mt-2 mt-3">User9012230 / PRJ-0998123 </h4>
-                            </div>
-                            <div>
-                                <h4 class="font-bold sm:text-sm text-[10px] text-[#1F9254] sm:mt-2 mt-3 py-2 px-8 bg-[#CFF2DE] rounded-[15px]">Solved</h4>
-                            </div>
-                        </div>
-                        <div class="max-w-4xl text-sm mt-4">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at.</p>
-                        </div>
-                    </div>
-                    <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
-                        <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
-                            <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
-                            <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
-                        </svg>
-
-                        <div class="flex justify-between">
-                            <div class="gap-2">
-                                <h4 class="font-bold text-2xl">title of complain</h4>
-                                <h4 class="sm:text-sm text-[14px] sm:mt-2 mt-3">User9012230 / PRJ-0998123 </h4>
-                            </div>
-                            <div>
-                                <h4 class="font-bold sm:text-sm text-[10px] text-[#1F9254] sm:mt-2 mt-3 py-2 px-8 bg-[#CFF2DE] rounded-[15px]">Solved</h4>
-                            </div>
-                        </div>
-                        <div class="max-w-4xl text-sm mt-4">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at</p>
-                        </div>
-                    </div>
-                    <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
-                        <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
-                            <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
-                            <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
-                        </svg>
-
-                        <div class="flex justify-between">
-                            <div class="gap-2">
-                                <h4 class="font-bold text-2xl">title of complain</h4>
-                                <h4 class="sm:text-sm text-[14px] sm:mt-2 mt-3">User9012230 / PRJ-0998123 </h4>
-                            </div>
-                            <div>
-                                <h4 class="font-bold sm:text-sm text-[10px] text-[#1F9254] sm:mt-2 mt-3 py-2 px-8 bg-[#CFF2DE] rounded-[15px]">Solved</h4>
-                            </div>
-                        </div>
-                        <div class="max-w-4xl text-sm mt-4">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at.</p>
-                        </div>
-                    </div>
-                </div>
-                <p class="text-center mb-10 mt-10">
-                    <a href="" class="text-white p-3 rounded-[10px] bg-[#18A8D8] font-bold">Read More <i class="bi bi-chevron-double-right"></i></a>
-                </p>
-            </div>
-            <div class="absolute top-[100%] left-0 right-0 z-0 w-full">
-                <img src="<?php echo base_url(); ?>src/images/background.png" class="w-[100%]" alt="">
-
-            </div>
-        </div>
-        <div id="question" class="flex flex-col justify-center items-center mb-28 xl:mt-20 lg:mt-16 md:mt-2 relative z-10">
-            <p class="text-[24px] font-medium">Do you have any question?</p>
-            <div class="mt-8 whitespace-nowrap">
-                <a href="" class="p-2 py-4 bg-[#FFC700] rounded-[15px]"><i class="bi bi-envelope-fill"></i> Report a Problem</a>
-            </div>
-        </div>
-    </section>
-
-    <?php echo $this->endSection(); ?>
+<?php echo $this->endSection(); ?>
