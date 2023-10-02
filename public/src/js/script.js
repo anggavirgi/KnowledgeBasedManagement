@@ -95,6 +95,8 @@ $(document).ready(function () {
       selectedItems.push($(this).closest("td").data("id"));
     });
 
+    console.log(selectedItems);
+
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -118,7 +120,6 @@ $(document).ready(function () {
     });
   });
 
-  
   // Sidebar Mobile Toggle Aside Expand
   var toggleClose = `
   <button type="button" data-drawer-hide="drawer-disabled-backdrop" aria-controls="drawer-disabled-backdrop" class="text-white bg-main rounded-lg text-sm w-14 h-10 absolute top-0 -right-12 inline-flex items-center justify-center">
@@ -140,12 +141,6 @@ $(document).ready(function () {
     $(this).remove()
   });
 
-
-
-  // CKEDITOR 5 CLASSIC
-  ClassicEditor.create(document.querySelector("#editor")).catch((error) => {
-    // console.error(error);
-  });
   // Changing Status Complain
   var initialValue = $("#status-entries").val();
   const statusComplainElement = $("#status-entries");
@@ -176,6 +171,7 @@ $(document).ready(function () {
 
   statusComplainElement.change(function () {
     initialValue = $(this).val();
+    const id = $(this).data("id");
     if (initialValue === "pending") {
       $(statusComplainElement)
         .removeClass("bg-solved-status text-solved-status-text")
@@ -207,6 +203,17 @@ $(document).ready(function () {
         .addClass("right-[4.5rem]");
       $(ddIconElement).attr("fill", "#047FA6").attr("stroke", "#047FA6");
     }
+    const data = {
+      id: id,
+      status: initialValue,
+    };
+    $.ajax({
+      type: "POST",
+      url: "/kb/administrator/complain/updateStatus",
+      data: data,
+    });
+
+    location.reload();
   });
 
   // Changing Status Case Complain
@@ -227,6 +234,7 @@ $(document).ready(function () {
 
   statusCaseComplainElement.change(function () {
     initialCaseValue = $(this).val();
+    const id = $(this).data("id");
     if (initialCaseValue === "open") {
       $(statusCaseComplainElement)
         .removeClass("bg-close-status text-close-status-text")
@@ -238,17 +246,73 @@ $(document).ready(function () {
         .addClass("bg-close-status text-close-status-text");
       $(ddCaseIconElement).attr("fill", "#A30D11").attr("stroke", "#A30D11");
     }
+    const data = {
+      id: id,
+      visibility: initialCaseValue,
+    };
+    $.ajax({
+      type: "POST",
+      url: "/kb/administrator/complain/updateVisibility",
+      data: data,
+    });
+
+    location.reload();
   });
 
-  // Complain Details Row Selected
+  // Complain Details ``Row`` Selected
   $(".clickable-row").click(function (event) {
-    if (!$(event.target).closest("select").length && $("#checkbox-del").length > 0) {
+    if (
+      !$(event.target).closest("select").length &&
+      !$(event.target).closest(".delete-checkbox").length
+    ) {
       // Only navigate if the clicked element is not a select dropdown
       window.location = $(this).data("href");
     }
   });
 
-  
+  // Alert notification Message
+  const flashSuccessMessage = $(".flash-success-message").data("message");
+  const flashErrorMessage = $(".flash-error-message").data("message");
+
+  console.log(flashSuccessMessage);
+
+  if (flashSuccessMessage) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      },
+    });
+
+    Toast.fire({
+      icon: "success",
+      title: flashSuccessMessage,
+    });
+  }
+
+  if (flashErrorMessage) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      },
+    });
+
+    Toast.fire({
+      icon: "error",
+      title: flashErrorMessage,
+    });
+  }
   // Alert notification CRUD
   const flashSuccess = $(".flash-success").data("flashmessage");
   const flashError = $(".flash-error").data("flashmessage");
@@ -266,15 +330,17 @@ $(document).ready(function () {
   if (flashError) {
     Swal.fire({
       title: "Failed",
-      text: flashSuccess,
+      text: flashError,
       showConfirmButton: false,
       icon: "error",
       timer: "1500",
     });
   }
 
-  $(document).on("click",".btn-delete", function () {
+  $(".btn-delete").on("click", function () {
     const id = $(this).attr("data-id");
+    const url = $(this).attr("data-action");
+    // console.log(href);
 
     Swal.fire({
       title: "Are you sure?",
@@ -288,14 +354,14 @@ $(document).ready(function () {
       if (result.isConfirmed) {
         $.ajax({
           type: "GET",
-          url: '/kb/administrator/user/delete/' + id,
+          url: url,
         });
 
         location.reload();
       }
     });
   });
-  
+
   // Row Entries Per Page
   $('#row-entries').change(function() {
     var offset = 1;
@@ -320,7 +386,6 @@ $(document).ready(function () {
       window.location.href = newUrl;
     }
   }
-    
 });
 
 // USER
@@ -417,4 +482,3 @@ function handleFileChange(files) {
     formatsizetext.classList.add("block");
   }
 }
-
