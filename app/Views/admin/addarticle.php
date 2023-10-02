@@ -15,55 +15,76 @@
       <span>Add Article</span>
     </div>
   </div>
-  <form class="px-6 my-10">
-    <div class="mb-4">
-      <label for="email" class="block mb-2 font-medium text-gray-800">Title article</label>
-      <input type="email" id="email" class="bg-gray-50 border text-gray-800 rounded-lg  focus:ring-main focus:outline-none focus:border-main w-full p-3  " placeholder="Category name" required>
+  <form action="<?php echo base_url(); ?>kb/administrator/article" method="post" enctype="multipart/form-data" class="px-6 my-10">
+    <div>
+      <label for="title" class="block mb-2 font-medium text-gray-800">Title article</label>
+      <input type="text" id="title" name="title" class="bg-gray-50 border text-gray-800 rounded-lg  focus:ring-main focus:outline-none focus:border-main w-full p-3 <?php if (session('errors.title')) : ?>border-red-600<?php endif ?>" placeholder="How to prevent error" value="<?= old("title") ?>">
     </div>
-    <div class="flex justify-between gap-5">
+    <?php if (session('errors.title')) : ?>
+      <div class="mt-1">
+        <small class=" text-red-600 text-sm"><?= session('errors.title'); ?></small>
+      </div>
+    <?php endif; ?>
+    <div class="flex justify-between gap-5 mt-4">
       <div class="select-category w-full">
         <label for="default" class="block mb-2 font-medium text-gray-800">Category</label>
-        <select id="default" class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-800 mb-6 rounded-lg focus:ring-main focus:outline-none focus:border-main block w-full p-3">
-          <option selected>Select category</option>
-          <option value="category-1">category-1</option>
-          <option value="category-2">category-2</option>
-          <option value="category-3">category-3</option>
-          <option value="category-4">category-4</option>
+        <select id="default" name="category" class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-800 rounded-lg focus:ring-main focus:outline-none focus:border-main block w-full p-3 <?php if (session('errors.category')) : ?>border-red-600<?php endif ?>">
+          <option value="">Select category</option>
+          <?php foreach ($category as $category) : ?>
+            <option value="<?= $category['id'] ?>" <?php echo old('category') == $category['id'] ? "selected" : "" ?>><?= $category['name_category'] ?></option>
+          <?php endforeach; ?>
         </select>
+        <?php if (session('errors.category')) : ?>
+          <div class="mt-1">
+            <small class=" text-red-600 text-sm"><?= session('errors.category'); ?></small>
+          </div>
+        <?php endif; ?>
       </div>
       <div class="select-category w-full">
         <label for="default" class="block mb-2 font-medium text-gray-800">Select sub category</label>
-        <select id="default" class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-800 mb-6 rounded-lg focus:ring-main focus:outline-none focus:border-main block w-full p-3">
-          <option selected>Select Sub category</option>
-          <option value="category-1">Sub category-1</option>
-          <option value="category-2">Sub category-2</option>
-          <option value="category-3">Sub category-3</option>
-          <option value="category-4">Sub category-4</option>
+        <select id="default" name="subcategory" class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-800 rounded-lg focus:ring-main focus:outline-none focus:border-main block w-full p-3 <?php if (session('errors.subcategory')) : ?>border-red-600<?php endif ?>">
+          <option value="">Select Sub category</option>
+          <?php foreach ($sub_category as $sub_category) : ?>
+            <option value="<?= $sub_category['id'] ?>" <?php echo old('subcategory') == $sub_category['id'] ? "selected" : "" ?>><?= $sub_category['name_subcategory'] ?></option>
+          <?php endforeach; ?>
         </select>
+        <?php if (session('errors.subcategory')) : ?>
+          <div class="mt-1">
+            <small class=" text-red-600 text-sm"><?= session('errors.subcategory'); ?></small>
+          </div>
+        <?php endif; ?>
       </div>
       <div class="select-category w-full">
         <label for="default" class="block mb-2 font-medium text-gray-800">Select project</label>
-        <select id="default" class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-800 mb-6 rounded-lg focus:ring-main focus:outline-none focus:border-main block w-full p-3">
-          <option selected>Select project</option>
-          <option value="category-1">Project-1</option>
-          <option value="category-2">Project-2</option>
-          <option value="category-3">Project-3</option>
-          <option value="category-4">Project-4</option>
+        <select id="default" name="project" class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-800 rounded-lg focus:ring-main focus:outline-none focus:border-main block w-full p-3 <?php if (session('errors.project')) : ?>border-red-600<?php endif ?>">
+          <option value="">Select project</option>
+          <?php foreach ($project as $project) : ?>
+            <option value="<?= $project['id'] ?>" <?php echo old('project') == $project['id'] ? "selected" : "" ?>><?= $project['name_project'] ?></option>
+          <?php endforeach; ?>
         </select>
+        <?php if (session('errors.project')) : ?>
+          <div class="mt-1">
+            <small class=" text-red-600 text-sm"><?= session('errors.project'); ?></small>
+          </div>
+        <?php endif; ?>
       </div>
     </div>
 
-    <!-- <div>
-      <label for="message" class="block mb-2 font-medium text-gray-800 ">Your message</label>
-      <textarea id="message" rows="8" class="block p-2.5 w-full mb-10 text-gray-800 bg-gray-50 rounded-lg border border-gray-300 focus:outline-none focus:ring-main focus:border-main " placeholder="Leave a comment..."></textarea>
-    </div> -->
-
-    <div class="mb-5">
-      <div id="editor"></div>
+    <div class="mt-5 mb-2 flex gap-1 items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-5 h-5 stroke-yellow-600">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+      </svg>
+      <span class="text-yellow-600">Before filling in the content (field below), make sure all the fields above have been filled in !</span>
     </div>
 
-    <button type="button" class="text-gray-800 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-main font-medium rounded-lg px-6 py-2.5 mr-8 ">Cancel</button>
-    <button type="submit" class="text-white bg-main hover:bg-main focus:ring-3 focus:outline-none font-medium rounded-lg sm:w-auto px-6 py-2.5 text-center">Submit</button>
+    <div>
+      <textarea id="editor" name="description"></textarea>
+    </div>
+
+    <div class="mt-5">
+      <a href="<?php echo base_url() ?>kb/administrator/article" class="text-gray-800 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-main font-medium rounded-lg px-6 py-2.5 mr-8 ">Cancel</a>
+      <button type="submit" class="text-white bg-main hover:bg-main focus:ring-3 focus:outline-none font-medium rounded-lg sm:w-auto px-6 py-2.5 text-center">Submit</button>
+    </div>
   </form>
 
 </div>

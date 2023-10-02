@@ -6,6 +6,7 @@ use App\Models\Admin\CategoryModel;
 use App\Models\Admin\SubCategoryModel;
 use CodeIgniter\RESTful\ResourceController;
 use Exception;
+use CodeIgniter\Database\Exceptions\DatabaseException;
 
 class Category extends ResourceController
 {
@@ -65,14 +66,13 @@ class Category extends ResourceController
 
   public function create()
   {
-
     $rules = [
       'category'      => 'required|alpha_numeric_space|is_unique[categories.name_category]',
       'icon'          => 'uploaded[icon]|max_size[icon,1024]|is_image[icon]|mime_in[icon,image/jpg,image/jpeg,image/png,image/svg,image/webp]|is_unique[categoreies.name_category]'
     ];
 
     if (!$this->validate($rules)) {
-      return redirect()->route('kb/administrator/category/new')->withInput()->with('errors', $this->validator->getErrors());
+      return redirect()->to('kb/administrator/category/new')->withInput()->with('errors', $this->validator->getErrors());
     } else {
       $name_category = $this->request->getVar('category');
       $slug = url_title($name_category, "-", true);
@@ -112,7 +112,7 @@ class Category extends ResourceController
     ];
 
     if (!$this->validate($rules)) {
-      return redirect()->route('kb/administrator/category/edit/' . $id)->withInput()->with('errors', $this->validator->getErrors());
+      return redirect()->to('kb/administrator/category/edit/' . $id)->withInput()->with('errors', $this->validator->getErrors());
     } else {
       $name_category = $this->request->getVar('category');
       $slug = url_title($name_category, "-", true);
@@ -143,12 +143,33 @@ class Category extends ResourceController
   public function delete($id = null)
   {
     $dataCategory = $this->categoryModel->find($id);
-    unlink('src/images/icon/' . $dataCategory['icon']);
-    if (!$this->categoryModel->delete($id)) {
-      return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
-    } else {
-      return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
+    $icon = $dataCategory['icon'];
+
+    try {
+      if(file_exists('src/images/icon/' . $icon)){
+        unlink('src/images/icon/' . $icon);
+        if (!$this->categoryModel->delete($id)) {
+          return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
+        } else {
+          return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
+        }
+      } else {
+        if (!$this->categoryModel->delete($id)) {
+          return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
+        } else {
+          return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
+        }
+      }
+    } catch (DatabaseException $e) {
+        if (strpos($e->getMessage(), 'Cannot delete or update a parent row') !== false) {
+            // Handle foreign key constraint violation error
+            return redirect()->to('kb/administrator/category')->with('error', "Cannot delete the category as it is referenced by other records.");
+        } else {
+            // Handle other database errors
+            return redirect()->to('kb/administrator/category')->with('error', "An error occurred: " . $e->getMessage());
+        }
     }
+
   }
 
   public function deleteBatch()
@@ -156,15 +177,19 @@ class Category extends ResourceController
     $id_categories = $this->request->getVar("ids");
     for ($i = 0; $i < count($id_categories); $i++) {
       $id = $id_categories[$i];
+      
+      $dataCategory = $this->categoryModel->find($id);
+      unlink('src/images/icon/'.$dataCategory['icon']);
+
       $this->categoryModel->delete($id);
     }
 
     return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
   }
 
-  public function subcategory()
+  public function subcategory($id)
   {
-    $categoryId = $this->request->getGet('category_id');
+    $categoryId = $id;
     $page = $this->request->getGet('page') ?? 1;
     $perPage = $this->request->getGet('perPage') ?? 10;
 
@@ -237,11 +262,10 @@ class Category extends ResourceController
 
   public function editsub($id = null)
   {
-    $id = $this->request->getGet('id');
     $data = [
       'title'       => 'Edit Sub-Category',
-      'subcategory' => $this->subCategoryModel->find($id),
-      'categories' => $this->categoryModel->findAll()
+      'categories'  => $this->categoryModel->findAll(),
+      'subcategory' => $this->subCategoryModel->find($id)
     ];
 
     return view('admin/editsubcategory', $data);
@@ -274,9 +298,9 @@ class Category extends ResourceController
       ];
 
       if (!$this->subCategoryModel->update($id, $data)) {
-        return redirect()->to('kb/administrator/category/subcategory')->with('error', "Data sub category gagal diupdate");
+        return redirect()->to('kb/administrator/category/subcategory/' . $id_category . '')->with('error', "Data sub category gagal diupdate");
       } else {
-        return redirect()->to('kb/administrator/category/subcategory')->with('success', "Data sub category berhasil diupdate");
+        return redirect()->to('kb/administrator/category/subcategory/' . $id_category . '')->with('success', "Data sub category berhasil diupdate");
       }
     }
   }
