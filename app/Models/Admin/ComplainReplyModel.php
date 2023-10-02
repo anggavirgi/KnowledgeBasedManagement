@@ -8,10 +8,10 @@ class ComplainReplyModel extends Model
 {
     protected $table            = 'complain_reply';
     protected $primaryKey       = 'id';
-    protected $allowedFields    = ['id_complain','id_user','description','is_read'];
+    protected $allowedFields    = ['id_complain', 'id_user', 'description', 'is_read'];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -21,5 +21,4 @@ class ComplainReplyModel extends Model
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
-
 }

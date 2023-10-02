@@ -24,7 +24,7 @@
       <select id="id_category" name="id_category" class="cursor-pointer bg-gray-50 border appearance-none border-gray-300 text-sm rounded-lg block w-2/4 p-4 text-form focus:outline-none focus:ring-blue-500 focus:border-blue-500 <?php if (session('errors.id_category')) : ?>border-red-600<?php endif ?>">
         <option value="">Choose category</option>
         <?php foreach ($categories as $category) : ?>
-          <option value="<?= $category['id'] ?>" <?php if ($subcategory["id_category"] == $category['id']) echo "selected" ?>><?= $category['name_category'] ?></option>
+          <option value="<?= $category['id'] ?>" <?php if ($subcategory['id_category'] == $category['id']) echo "selected" ?>><?= $category['name_category'] ?></option>
         <?php endforeach; ?>
       </select>
       <div class="w-2/4 absolute inset-y-0 right-8 top-7 flex items-center pr-3 pointer-events-none">

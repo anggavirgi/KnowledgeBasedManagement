@@ -71,6 +71,7 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     $routes->post('category/(:num)', 'Category::update/$1');
     $routes->get('category/delete/(:num)', 'Category::delete/$1');
     $routes->post('category/deleteBatch', "Category::deleteBatch");
+    $routes->post('category/subcategory/deleteBatch', "Category::deleteBatchSubCategory");
 
     $routes->get('category/subcategory/(:num)', 'Category::subcategory/$1');
     $routes->get('category/subcategory/addsubcategory', 'Category::addsub');
@@ -88,7 +89,10 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     $routes->get('article/detail/(:num)', 'Article::detail/$1');
 
     $routes->get('complain', 'Complain::index');
-    $routes->get('complain/reply', 'Complain::reply');
+    $routes->get('complain/reply/(:num)', 'Complain::reply/$1');
+    $routes->post('complain/sendReply', 'Complain::sendReply');
+    $routes->post('complain/updateStatus', 'Complain::updateStatus');
+    $routes->post('complain/updateVisibility', 'Complain::updateVisibility');
 });
 
 
