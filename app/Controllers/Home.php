@@ -59,4 +59,11 @@ class Home extends BaseController
         ];
         return view('customer/articledetailpersonal', $data);
     }
+    public function reply()
+    {
+        $data = [
+            'title' => 'Virtusee | article reply'
+        ];
+        return view('customer/replycomplain', $data);
+    }
 }

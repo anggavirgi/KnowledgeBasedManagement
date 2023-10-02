@@ -125,7 +125,7 @@ $(document).ready(function () {
 
   // CKEDITOR 5 CLASSIC
   ClassicEditor.create(document.querySelector("#editor")).catch((error) => {
-    console.error(error);
+    // console.error(error);
   });
 
   // Changing Status Complain
@@ -350,10 +350,8 @@ $(document).ready(function () {
     });
   }
 
-  $(".btn-delete").on("click", function () {
+  $(document).on("click",".btn-delete", function () {
     const id = $(this).attr("data-id");
-    const url = $(this).attr("data-action");
-    // console.log(href);
 
     Swal.fire({
       title: "Are you sure?",
@@ -367,13 +365,39 @@ $(document).ready(function () {
       if (result.isConfirmed) {
         $.ajax({
           type: "GET",
-          url: url,
+          url: '/kb/administrator/user/delete/' + id,
         });
 
         location.reload();
       }
     });
   });
+  
+  // UserTable Model
+  $('#row-entries').change(function() {
+    var offset = 1;
+    var selectedValue = $(this).val(); 
+    var currentUrl = window.location.href;
+    var parts = currentUrl.split("/");
+    var lastPart = parts[parts.length - 1];
+    var pages = lastPart.split("?")[0];
+    
+
+    fetchData(selectedValue, offset, pages); 
+  });
+
+  function fetchData(Data, offset, pages) {
+    if(pages == 'subcategory'){
+      const url = new URL(window.location.href);
+      const categoryId = url.searchParams.get("category_id");
+      var newUrl = '/kb/administrator/category/'+pages+'?category_id=' + categoryId + '&page=' + offset + '&perPage=' + Data;
+      window.location.href = newUrl;
+    }else{
+      var newUrl = '/kb/administrator/'+pages+'?page=' + offset + '&perPage=' + Data;
+      window.location.href = newUrl;
+    }
+  }
+    
 });
 
 // USER
@@ -470,3 +494,4 @@ function handleFileChange(files) {
     formatsizetext.classList.add("block");
   }
 }
+

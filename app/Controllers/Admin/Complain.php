@@ -80,7 +80,7 @@ class Complain extends BaseController
       'is_read'     => 0
     ];
 
-    if ($this->complainReplyModel->save($data)) {
+    if (!$this->complainReplyModel->save($data)) {
       return redirect()->to('kb/administrator/complain/reply/' . $id_complain)->with('errorMessage', "Pesan gagal terkirim");
     } else {
       return redirect()->to('kb/administrator/complain/reply/' . $id_complain)->with('successMessage', "Pesan telah terkirim");
