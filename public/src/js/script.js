@@ -158,6 +158,7 @@ $(document).ready(function () {
 
   statusComplainElement.change(function () {
     initialValue = $(this).val();
+    const id = $(this).data("id");
     if (initialValue === "pending") {
       $(statusComplainElement)
         .removeClass("bg-solved-status text-solved-status-text")
@@ -189,6 +190,17 @@ $(document).ready(function () {
         .addClass("right-[4.5rem]");
       $(ddIconElement).attr("fill", "#047FA6").attr("stroke", "#047FA6");
     }
+    const data = {
+      id: id,
+      status: initialValue,
+    };
+    $.ajax({
+      type: "POST",
+      url: "/kb/administrator/complain/updateStatus",
+      data: data,
+    });
+
+    location.reload();
   });
 
   // Changing Status Case Complain
@@ -209,6 +221,7 @@ $(document).ready(function () {
 
   statusCaseComplainElement.change(function () {
     initialCaseValue = $(this).val();
+    const id = $(this).data("id");
     if (initialCaseValue === "open") {
       $(statusCaseComplainElement)
         .removeClass("bg-close-status text-close-status-text")
@@ -220,6 +233,17 @@ $(document).ready(function () {
         .addClass("bg-close-status text-close-status-text");
       $(ddCaseIconElement).attr("fill", "#A30D11").attr("stroke", "#A30D11");
     }
+    const data = {
+      id: id,
+      visibility: initialCaseValue,
+    };
+    $.ajax({
+      type: "POST",
+      url: "/kb/administrator/complain/updateVisibility",
+      data: data,
+    });
+
+    location.reload();
   });
 
   // Complain Details Row Selected
@@ -254,6 +278,50 @@ $(document).ready(function () {
       $(this).remove();
     }
   );
+
+  // Alert notification Message
+  const flashSuccessMessage = $(".flash-success-message").data("message");
+  const flashErrorMessage = $(".flash-error-message").data("message");
+
+  console.log(flashSuccessMessage);
+
+  if (flashSuccessMessage) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      },
+    });
+
+    Toast.fire({
+      icon: "success",
+      title: flashSuccessMessage,
+    });
+  }
+
+  if (flashErrorMessage) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      },
+    });
+
+    Toast.fire({
+      icon: "error",
+      title: flashErrorMessage,
+    });
+  }
 
   // Alert notification CRUD
   const flashSuccess = $(".flash-success").data("flashmessage");
