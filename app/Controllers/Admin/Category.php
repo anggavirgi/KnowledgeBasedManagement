@@ -123,6 +123,7 @@ class Category extends ResourceController
     if (!$this->categoryModel->delete($id)) {
       return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
     } else {
+      $this->subCategoryModel->where('id_category', $id)->delete();
       return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
     }
   }
@@ -132,7 +133,10 @@ class Category extends ResourceController
     $id_categories = $this->request->getVar("ids");
     for ($i = 0; $i < count($id_categories); $i++) {
       $id = $id_categories[$i];
+      $dataCategory = $this->categoryModel->find($id);
+      unlink('src/images/icon/' . $dataCategory['icon']);
       $this->categoryModel->delete($id);
+      $this->subCategoryModel->where('id_category', $id)->delete();
     }
 
     return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");

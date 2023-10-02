@@ -8,10 +8,10 @@ class SubCategoryModel extends Model
 {
     protected $table            = 'sub_category';
     protected $primaryKey       = 'id';
-    protected $allowedFields    = ['id_category','name_subcategory','slug'];
+    protected $allowedFields    = ['id_category', 'name_subcategory', 'slug'];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -21,5 +21,4 @@ class SubCategoryModel extends Model
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
-
 }

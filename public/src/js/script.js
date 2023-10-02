@@ -248,7 +248,10 @@ $(document).ready(function () {
 
   // Complain Details Row Selected
   $(".clickable-row").click(function (event) {
-    if (!$(event.target).closest("select").length) {
+    if (
+      !$(event.target).closest("select").length &&
+      !$(event.target).closest(".delete-checkbox").length
+    ) {
       // Only navigate if the clicked element is not a select dropdown
       window.location = $(this).data("href");
     }
