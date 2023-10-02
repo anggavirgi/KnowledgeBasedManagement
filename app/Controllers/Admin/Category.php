@@ -65,14 +65,13 @@ class Category extends ResourceController
 
   public function create()
   {
-
     $rules = [
       'category'      => 'required|alpha_numeric_space',
       'icon'          => 'uploaded[icon]|max_size[icon,1024]|is_image[icon]|mime_in[icon,image/jpg,image/jpeg,image/png,image/svg,image/webp]'
     ];
 
     if (!$this->validate($rules)) {
-      return redirect()->route('kb/administrator/category/new')->withInput()->with('errors', $this->validator->getErrors());
+      return redirect()->to('kb/administrator/category/new')->withInput()->with('errors', $this->validator->getErrors());
     } else {
       $name_category = $this->request->getVar('category');
       $slug = url_title($name_category, "-", true);
@@ -112,7 +111,7 @@ class Category extends ResourceController
     ];
 
     if (!$this->validate($rules)) {
-      return redirect()->route('kb/administrator/category/edit/' . $id)->withInput()->with('errors', $this->validator->getErrors());
+      return redirect()->to('kb/administrator/category/edit/' . $id)->withInput()->with('errors', $this->validator->getErrors());
     } else {
       $name_category = $this->request->getVar('category');
       $slug = url_title($name_category, "-", true);
@@ -166,9 +165,9 @@ class Category extends ResourceController
     return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
   }
 
-  public function subcategory()
+  public function subcategory($id)
   {
-    $categoryId = $this->request->getGet('category_id');
+    $categoryId = $id;
     $page = $this->request->getGet('page') ?? 1;
     $perPage = $this->request->getGet('perPage') ?? 10;
 
@@ -189,6 +188,7 @@ class Category extends ResourceController
     return view('admin/subcategory', [
       'title' => 'Category',
       'subcategory' => $subCategory,
+      'category_id' => $categoryId,
       'pagination' => $pagination
     ]);
   }
@@ -237,7 +237,6 @@ class Category extends ResourceController
 
   public function editsub($id = null)
   {
-    $id = $this->request->getGet('id');
     $data = [
       'title'       => 'Edit Sub-Category',
       'categories'  => $this->categoryModel->findAll(),
@@ -274,9 +273,9 @@ class Category extends ResourceController
       ];
 
       if (!$this->subCategoryModel->update($id, $data)) {
-        return redirect()->to('kb/administrator/category/subcategory')->with('error', "Data sub category gagal diupdate");
+        return redirect()->to('kb/administrator/category/subcategory/' . $id_category . '')->with('error', "Data sub category gagal diupdate");
       } else {
-        return redirect()->to('kb/administrator/category/subcategory')->with('success', "Data sub category berhasil diupdate");
+        return redirect()->to('kb/administrator/category/subcategory/' . $id_category . '')->with('success', "Data sub category berhasil diupdate");
       }
     }
   }

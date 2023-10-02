@@ -12,11 +12,11 @@
     <div class="font-medium">
       <a href="<?php echo base_url(); ?>kb/administrator/category" class="text-main hover:text-sky-600">Category</a>
       <span> / </span>
-      <span>Sub-Category</span>
+      <span>Sub-Category <?php echo $category_id ?></span>
     </div>
   </div>
 
-  <h2 class="font-bold text-xl mt-6">List Sub-Category</h2>
+  <h2 class="font-bold text-xl mt-6">List Sub-Category <?php echo $category_id ?></h2>
   <div class="flex justify-between items-center my-5">
     <form method="" class="relative flex justify-end items-center">
       <input type="text" placeholder="search" id="searchInput" class="px-5 py-2 pe-10 w-64 rounded-2xl border border-gray-400 outline-main">
@@ -97,7 +97,7 @@
           </td>
           <td class="p-3"><?= $subcategory['name_subcategory'] ?></td>
           <td class="p-3 text-center">
-            <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory/editsubcategory?category_id=<?= $subcategory['id_category']; ?>&id=<?= $subcategory['id']; ?>" class="px-2 inline-block" title="edit">
+            <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory/editsubcategory/<?= $subcategory['id']; ?>" class="px-2 inline-block" title="edit">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-5 h-5 stroke-secondary hover:stroke-yellow-600">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
               </svg>
@@ -118,18 +118,18 @@
       <ul class="inline-flex -space-x-px text-sm">
         <?php if (isset($pagination) && $pagination['page'] > 1) : ?>
           <li>
-            <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory?category_id=<?= $subcategory['id_category']; ?>&page=<?php echo $pagination['page'] - 1; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 ml-0 leading-tight bg-white border rounded-l-lg hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Previous</a>
+            <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory/<?= $subcategory['id_category']; ?>&page=<?php echo $pagination['page'] - 1; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 ml-0 leading-tight bg-white border rounded-l-lg hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Previous</a>
           </li>
         <?php endif; ?>
         <?php if (isset($pagination)) : ?>
           <?php for ($i = 1; $i <= $pagination['totalPages']; $i++) : ?>
             <li>
-              <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory?category_id=<?= $subcategory['id_category']; ?>&page=<?php echo $i; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 border border-white <?php echo ($i == $pagination['page']) ? 'bg-main text-white' : 'bg-white text-gray-400'; ?> hover:bg-main hover:text-white"><?php echo $i; ?></a>
+              <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory/<?= $subcategory['id_category']; ?>&page=<?php echo $i; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 border border-white <?php echo ($i == $pagination['page']) ? 'bg-main text-white' : 'bg-white text-gray-400'; ?> hover:bg-main hover:text-white"><?php echo $i; ?></a>
             </li>
           <?php endfor; ?>
           <?php if ($pagination['page'] < $pagination['totalPages']) : ?>
             <li>
-              <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory?category_id=<?= $subcategory['id_category']; ?>&page=<?php echo $pagination['page'] + 1; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 leading-tight bg-white border hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Next</a>
+              <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory/<?= $subcategory['id_category']; ?>&page=<?php echo $pagination['page'] + 1; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 leading-tight bg-white border hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Next</a>
             </li>
           <?php endif; ?>
         <?php else : ?>
@@ -140,11 +140,11 @@
           ?>
           <?php for ($i = 1; $i <= $pagination['page']; $i++) : ?>
             <li>
-              <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory?category_id=<?= $subcategory['id_category']; ?>&page=<?php echo $i; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 border border-white <?php echo ($i == $pagination['page']) ? 'bg-main text-white' : 'bg-white text-gray-400'; ?> hover:bg-main hover:text-white"><?php echo $i; ?></a>
+              <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory/<?= $subcategory['id_category']; ?>&page=<?php echo $i; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 border border-white <?php echo ($i == $pagination['page']) ? 'bg-main text-white' : 'bg-white text-gray-400'; ?> hover:bg-main hover:text-white"><?php echo $i; ?></a>
             </li>
           <?php endfor; ?>
           <li>
-            <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory?category_id=<?= $subcategory['id_category']; ?>&page=<?php echo $pagination['page'] + 1; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 leading-tight bg-white border hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Next</a>
+            <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory/<?= $subcategory['id_category']; ?>&page=<?php echo $pagination['page'] + 1; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 leading-tight bg-white border hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Next</a>
           </li>
         <?php endif; ?>
       </ul>

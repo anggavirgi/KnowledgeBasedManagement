@@ -4,7 +4,7 @@
 
 <div class="border-2 border-gray-200 bg-white p-7 rounded shadow-md text-sm">
   <div class="flex justify-between items-center">
-    <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory?category_id=<?= $subcategory['id_category']; ?>">
+    <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory/<?= $subcategory['id_category']; ?>">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 hover:stroke-neutral-700">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
       </svg>
@@ -12,12 +12,13 @@
     <div class="font-medium">
       <a href="<?php echo base_url(); ?>kb/administrator/category" class="text-main hover:text-sky-600">Category</a>
       <span> / </span>
-      <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory?category_id=<?= $subcategory['id_category']; ?>" class="text-main hover:text-sky-600">Sub-Category</a>
+      <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory/<?= $subcategory['id_category']; ?>" class="text-main hover:text-sky-600">Sub-Category</a>
       <span> / </span>
       <span>Edit Sub-Category</span>
     </div>
   </div>
   <form class="ms-7 my-10" action="<?php echo base_url(); ?>kb/administrator/category/subcategory/update/<?= $subcategory['id']; ?>" method="post">
+    <?php echo csrf_field(); ?>
     <div class="mb-4 relative">
       <label for="id_category" class="block mb-2 text-sm font-medium text-form">Choose Category</label>
       <select id="id_category" name="id_category" class="cursor-pointer bg-gray-50 border appearance-none border-gray-300 text-sm rounded-lg block w-2/4 p-4 text-form focus:outline-none focus:ring-blue-500 focus:border-blue-500 <?php if (session('errors.id_category')) : ?>border-red-600<?php endif ?>">

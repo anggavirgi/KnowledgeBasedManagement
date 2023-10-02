@@ -4,7 +4,7 @@
 
 <div class="border-2 border-gray-200 bg-white p-7 rounded shadow-md text-sm">
   <div class="flex justify-between items-center">
-    <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory">
+    <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory/<?php echo $category[0]['id'] ?>">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 hover:stroke-neutral-700">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
       </svg>
@@ -18,12 +18,13 @@
     </div>
   </div>
   <form class="ms-7 my-10" action="<?php echo base_url(); ?>kb/administrator/category/subcategory/addsubcategory" method="post">
+    <?php echo csrf_field(); ?>
     <div class="mb-4 relative">
       <label for="id_category" class="block mb-2 text-sm font-medium text-form">Choose Category</label>
       <select id="id_category" name="id_category" class="cursor-pointer bg-gray-50 border appearance-none border-gray-300 text-sm rounded-lg block w-2/4 p-4 text-form focus:outline-none focus:ring-blue-500 focus:border-blue-500 <?php if (session('errors.id_category')) : ?>border-red-600<?php endif ?>">
         <option value="">Choose category</option>
-        <?php foreach ($categories as $category) : ?>
-          <option value="<?= $category['id'] ?>" <?php if (old("id_category") == $category['id']) echo "selected" ?>><?= $category['name_category'] ?></option>
+        <?php foreach ($category as $category) : ?>
+          <option value="<?= $category['id'] ?>" <?php echo old('id_category') == $category['id'] ? "selected" : "" ?>><?= $category['name_category'] ?></option>
         <?php endforeach; ?>
       </select>
       <div class="w-2/4 absolute inset-y-0 right-8 top-7 flex items-center pr-3 pointer-events-none">
