@@ -241,7 +241,7 @@ $(document).ready(function () {
     location.reload();
   });
 
-  // Complain Details Row Selected
+  // Complain Details ``Row`` Selected
   $(".clickable-row").click(function (event) {
     if (!$(event.target).closest("select").length) {
       // Only navigate if the clicked element is not a select dropdown
@@ -335,15 +335,17 @@ $(document).ready(function () {
   if (flashError) {
     Swal.fire({
       title: "Failed",
-      text: flashSuccess,
+      text: flashError,
       showConfirmButton: false,
       icon: "error",
       timer: "1500",
     });
   }
 
-  $(document).on("click",".btn-delete", function () {
+  $(".btn-delete").on("click", function () {
     const id = $(this).attr("data-id");
+    const url = $(this).attr("data-action");
+    // console.log(href);
 
     Swal.fire({
       title: "Are you sure?",
@@ -357,39 +359,13 @@ $(document).ready(function () {
       if (result.isConfirmed) {
         $.ajax({
           type: "GET",
-          url: '/kb/administrator/user/delete/' + id,
+          url: url,
         });
 
         location.reload();
       }
     });
   });
-  
-  // UserTable Model
-  $('#row-entries').change(function() {
-    var offset = 1;
-    var selectedValue = $(this).val(); 
-    var currentUrl = window.location.href;
-    var parts = currentUrl.split("/");
-    var lastPart = parts[parts.length - 1];
-    var pages = lastPart.split("?")[0];
-    
-
-    fetchData(selectedValue, offset, pages); 
-  });
-
-  function fetchData(Data, offset, pages) {
-    if(pages == 'subcategory'){
-      const url = new URL(window.location.href);
-      const categoryId = url.searchParams.get("category_id");
-      var newUrl = '/kb/administrator/category/'+pages+'?category_id=' + categoryId + '&page=' + offset + '&perPage=' + Data;
-      window.location.href = newUrl;
-    }else{
-      var newUrl = '/kb/administrator/'+pages+'?page=' + offset + '&perPage=' + Data;
-      window.location.href = newUrl;
-    }
-  }
-    
 });
 
 // USER
@@ -486,4 +462,3 @@ function handleFileChange(files) {
     formatsizetext.classList.add("block");
   }
 }
-

@@ -94,7 +94,6 @@ class Article extends ResourceController
       $subcategory = $this->request->getVar('subcategory');
       $project = $this->request->getVar('project');
       $desc = $_REQUEST['description'];
-      $visibility = 'close';
 
       $file_upload = array() ;
       if (isset($_FILES['upload']['name'])){
@@ -123,8 +122,7 @@ class Article extends ResourceController
         'id_sub_category'  => $subcategory,
         'title'           => $title,
         'slug'            => $slug,
-        'content'         => $desc,
-        'visibility'      => $visibility
+        'content'         => $desc
       ];
       
       $this->contentModel->save($data);
@@ -235,9 +233,12 @@ class Article extends ResourceController
 
   public function delete($id = null)
   {
-    $dataCategory = $this->categoryModel->find($id);
-    unlink('src/images/icon/' . $dataCategory['icon']);
-    if (!$this->categoryModel->delete($id)) {
+    $article = $this->articleModel->where('id_content', $id)->findAll();
+    $id_article = $article[0]['id'];
+
+    $this->articleModel->delete($id_article);
+    
+    if (!$this->contentModel->delete($id)) {
       return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
     } else {
       return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
