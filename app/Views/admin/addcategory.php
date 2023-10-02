@@ -19,7 +19,7 @@
     <?php echo csrf_field(); ?>
     <div class="mb-5">
       <label for="category" class="block mb-2 text-sm font-medium text-gray-800">Category name</label>
-      <input type="category" id="category" name="category" class="bg-gray-50 border text-gray-800 text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-2/4 p-4 " placeholder="Category name" value="<?= old('category'); ?>">
+      <input type="category" id="category" name="category" class="bg-gray-50 border text-gray-800 text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-2/4 p-4 <?php if (session('errors.category')) : ?>border-red-600<?php endif ?>" placeholder="Category name" value="<?= old('category'); ?>">
       <?php if (session('errors.category')) : ?>
           <div class="mt-1">
               <small class=" text-red-600 text-sm"><?= session('errors.category'); ?></small>
@@ -28,7 +28,7 @@
     </div>
     <div class="mb-11">
       <div class="flex items-center justify-start ">
-        <label for="dropzone-file" id="dropzone" class="flex flex-col items-center justify-center w-72 h-56 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 ">
+        <label for="dropzone-file" id="dropzone" class="flex flex-col items-center justify-center w-72 h-56 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 <?php if (session('errors.icon')) : ?>border-red-600<?php endif ?>">
           <div class="flex flex-col items-center justify-center pt-5 pb-6">
             <svg class="w-8 h-8 mb-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />

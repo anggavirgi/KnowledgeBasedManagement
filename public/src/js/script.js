@@ -121,11 +121,6 @@ $(document).ready(function () {
     });
   });
 
-  // CKEDITOR 5 CLASSIC
-  ClassicEditor.create(document.querySelector("#editor")).catch((error) => {
-    // console.error(error);
-  });
-
   // Changing Status Complain
   var initialValue = $("#status-entries").val();
   const statusComplainElement = $("#status-entries");

@@ -96,11 +96,32 @@
 
   </div>
 
+  <?php 
+    $uploadurl = base_url().'kb/administrator/article/create';
+  ?>
+  
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="<?php echo base_url(); ?>node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
   <script src="<?php echo base_url(); ?>node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
   <script src="<?php echo base_url(); ?>/src/js/dataTables.js"></script>
   <script src="<?php echo base_url(); ?>/src/js/script.js"></script>
+  <script>
+    // CKEDITOR 5 CLASSIC
+    ClassicEditor
+    .create(document.querySelector("#editor"), {
+      ckfinder: {
+        uploadUrl: 'https://ckeditor.com/apps/ckfinder/3.5.0/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
+      }
+    })
+    .then(editor => {
+      console.log(editor);
+    })
+    .catch((error) => {
+      // console.error(error);
+      console.log("Error in CKEDITOR");
+    });
+  </script>
+
 </body>
 
 </html>
