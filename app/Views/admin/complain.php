@@ -138,7 +138,7 @@
                             </div>
                         </td>
                         <td class="p-3 text-center">
-                            <a class="text-white font-semibold" href="<?php echo base_url(); ?>kb/administrator/complain/reply">
+                            <a class="text-white font-semibold" href="<?php echo base_url(); ?>kb/administrator/complain/reply/<?php echo $complain['id'] ?>">
                                 <div class=" rounded-2xl px-6 py-2 bg-blue-600 inline-flex justify-center items-center">
                                     Reply
                                 </div>
