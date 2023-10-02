@@ -67,8 +67,8 @@ class Category extends ResourceController
   {
 
     $rules = [
-      'category'      => 'required|alpha_numeric_space',
-      'icon'          => 'uploaded[icon]|max_size[icon,1024]|is_image[icon]|mime_in[icon,image/jpg,image/jpeg,image/png,image/svg,image/webp]'
+      'category'      => 'required|alpha_numeric_space|is_unique[categories.name_category]',
+      'icon'          => 'uploaded[icon]|max_size[icon,1024]|is_image[icon]|mime_in[icon,image/jpg,image/jpeg,image/png,image/svg,image/webp]|is_unique[categoreies.name_category]'
     ];
 
     if (!$this->validate($rules)) {
@@ -182,6 +182,7 @@ class Category extends ResourceController
       'totalRecords' => $totalRecords,
       'totalPages' => $totalPages
     ];
+    dd($subCategory);
     return view('admin/subcategory', [
       'title' => 'Category',
       'subcategory' => $subCategory,
