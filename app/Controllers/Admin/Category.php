@@ -197,8 +197,8 @@ class Category extends ResourceController
   {
     $idCategory = $this->categoryModel->findAll();
     $data = [
-      'title' => 'Add Sub-Category',
-      'category' => $idCategory,
+      'title'       => 'Add Sub-Category',
+      'categories'  => $this->categoryModel->findAll(),
     ];
     return view('admin/addsubcategory', $data);
   }
@@ -240,8 +240,8 @@ class Category extends ResourceController
     $id = $this->request->getGet('id');
     $data = [
       'title'       => 'Edit Sub-Category',
-      'subcategory' => $this->subCategoryModel->find($id),
-      'categories' => $this->categoryModel->findAll()
+      'categories'  => $this->categoryModel->findAll(),
+      'subcategory' => $this->subCategoryModel->find($id)
     ];
 
     return view('admin/editsubcategory', $data);
@@ -288,5 +288,16 @@ class Category extends ResourceController
     } else {
       return redirect()->to('kb/administrator/category/subcategory')->with('success', "Data sub category berhasil dihapus");
     }
+  }
+
+  public function deleteBatchSubCategory()
+  {
+    $id_sub_categories = $this->request->getVar("ids");
+    for ($i = 0; $i < count($id_sub_categories); $i++) {
+      $id = $id_sub_categories[$i];
+      $this->subCategoryModel->delete($id);
+    }
+
+    return redirect()->to('kb/administrator/category/subcategory')->with('success', "Data sub category berhasil dihapus");
   }
 }

@@ -6,8 +6,8 @@
   <h2 class="font-bold text-xl">List Category</h2>
   <div class="flex justify-between items-center my-5">
     <form method="" class="relative flex justify-end items-center">
-      <input type="text" id="searchInput" placeholder="search" class="px-5 py-2 w-64 rounded-2xl border border-gray-400 outline-main">
-      <button class="absolute right-5 cursor-pointer align-middle">
+      <input type="text" id="searchInput" placeholder="search" class="px-5 py-2 pe-10 w-64 rounded-2xl border border-gray-400 outline-main">
+      <button class="absolute right-5 cursor-pointer align-middle" disabled>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search text-gray-400" viewBox="0 0 16 16">
           <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
         </svg>
@@ -53,13 +53,30 @@
     </div>
   </div>
 
+  <div class="mb-5 flex items-center justify-end text-xs">
+    <label for="entries" class="mr-2">Rows per page : </label>
+    <div class="relative">
+      <select id="entries" class="appearance-none border border-gray-400 px-6 py-2 rounded-2xl hover:border-blue-500 cursor-pointer focus:outline-none">
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+      <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+
   <?php if (session()->has('success')) : ?>
     <div class="flash-success" data-flashmessage="<?php echo session('success') ?>"></div>
   <?php else : ?>
     <div class="flash-error" data-flashmessage="<?php echo session('error') ?>"></div>
   <?php endif; ?>
 
-  <table class="w-full text-center" id="myTable">
+  <table class="w-full text-center" id="dataTable">
     <thead class="border-b">
       <tr>
         <th class="p-3">
