@@ -361,6 +361,31 @@ $(document).ready(function () {
       }
     });
   });
+
+  // Row Entries Per Page
+  $('#row-entries').change(function() {
+    var offset = 1;
+    var selectedValue = $(this).val(); 
+    var currentUrl = window.location.href;
+    var parts = currentUrl.split("/");
+    var lastPart = parts[parts.length - 1];
+    var pages = lastPart.split("?")[0];
+    
+
+    fetchData(selectedValue, offset, pages); 
+  });
+
+  function fetchData(Data, offset, pages) {
+    if(pages == 'subcategory'){
+      const url = new URL(window.location.href);
+      const categoryId = url.searchParams.get("category_id");
+      var newUrl = '/kb/administrator/category/'+pages+'?category_id=' + categoryId + '&page=' + offset + '&perPage=' + Data;
+      window.location.href = newUrl;
+    }else{
+      var newUrl = '/kb/administrator/'+pages+'?page=' + offset + '&perPage=' + Data;
+      window.location.href = newUrl;
+    }
+  }
 });
 
 // USER
