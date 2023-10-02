@@ -6,6 +6,7 @@ use App\Models\Admin\CategoryModel;
 use App\Models\Admin\SubCategoryModel;
 use CodeIgniter\RESTful\ResourceController;
 use Exception;
+use CodeIgniter\Database\Exceptions\DatabaseException;
 
 class Category extends ResourceController
 {
@@ -142,12 +143,33 @@ class Category extends ResourceController
   public function delete($id = null)
   {
     $dataCategory = $this->categoryModel->find($id);
-    unlink('src/images/icon/' . $dataCategory['icon']);
-    if (!$this->categoryModel->delete($id)) {
-      return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
-    } else {
-      return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
+    $icon = $dataCategory['icon'];
+
+    try {
+      if(file_exists('src/images/icon/' . $icon)){
+        unlink('src/images/icon/' . $icon);
+        if (!$this->categoryModel->delete($id)) {
+          return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
+        } else {
+          return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
+        }
+      } else {
+        if (!$this->categoryModel->delete($id)) {
+          return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
+        } else {
+          return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
+        }
+      }
+    } catch (DatabaseException $e) {
+        if (strpos($e->getMessage(), 'Cannot delete or update a parent row') !== false) {
+            // Handle foreign key constraint violation error
+            return redirect()->to('kb/administrator/category')->with('error', "Cannot delete the category as it is referenced by other records.");
+        } else {
+            // Handle other database errors
+            return redirect()->to('kb/administrator/category')->with('error', "An error occurred: " . $e->getMessage());
+        }
     }
+
   }
 
   public function deleteBatch()
