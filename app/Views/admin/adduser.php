@@ -78,8 +78,9 @@
                     <label for="id_project" class="block mb-2 text-sm font-medium text-form">Project Name</label>
                     <select id="id_project" name="id_project" class="cursor-pointer bg-gray-50 border appearance-none border-gray-300 text-sm rounded-lg block w-full p-3.5 placeholder-gray-400 text-form focus:outline-none focus:ring-blue-500 focus:border-blue-500 <?php if (session('errors.id_project')) : ?>border-red-600<?php endif ?>">
                         <option value="">Choose project name</option>
-                        <option value="1" <?php if (old('id_project') == '1') echo "selected" ?>>P001</option>
-                        <option value="2" <?php if (old('id_project') == '2') echo "selected" ?>>P002</option>
+                        <?php foreach ($projects as $project) : ?>
+                            <option value="<?= $project['id'] ?>" <?php if (old('id_project') == $project['id']) echo "selected" ?>><?= $project['name_project'] ?></option>
+                        <?php endforeach; ?>
                     </select>
                     <div class="absolute inset-y-0 right-0 top-7 flex items-center pr-3 pointer-events-none">
                         <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

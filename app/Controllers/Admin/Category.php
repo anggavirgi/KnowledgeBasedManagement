@@ -11,23 +11,47 @@ class Category extends ResourceController
 {
   protected $categoryModel;
   protected $subCategoryModel;
+  protected $db;
+
 
   public function __construct()
   {
     $this->categoryModel = new CategoryModel();
     $this->subCategoryModel = new SubCategoryModel();
+    $this->db = db_connect();
   }
 
   public function index()
   {
-    $dataCategory = $this->categoryModel->findAll();
+    $page = $this->request->getGet('page') ?? 1;
+    $perPage = $this->request->getGet('perPage') ?? 10;
 
-    $data = [
-      'title' => 'Category',
-      'categories' => $dataCategory
+    $offset = ($page - 1) * $perPage;
+
+    $dataCategory = $this->categoryModel->findAll($perPage, $offset);
+
+    $totalRecords = $this->categoryModel->countAll();
+
+    $countByCategory = $this->db->table('sub_category')
+      ->select('DISTINCT(id_category),COUNT(*) as subcategory_count')
+      ->groupBy('id_category')
+      ->get()
+      ->getResultArray();
+
+    $totalPages = ceil($totalRecords / $perPage);
+
+    $pagination = [
+      'page' => $page,
+      'perPage' => $perPage,
+      'totalRecords' => $totalRecords,
+      'totalPages' => $totalPages
     ];
-
-    return view('admin/category', $data);
+    return view('admin/category', [
+      'title' => 'Category',
+      'categories' => $dataCategory,
+      'subCategory' => $countByCategory,
+      'pagination' => $pagination
+    ]);
   }
 
   public function new()
@@ -132,6 +156,10 @@ class Category extends ResourceController
     $id_categories = $this->request->getVar("ids");
     for ($i = 0; $i < count($id_categories); $i++) {
       $id = $id_categories[$i];
+      
+      $dataCategory = $this->categoryModel->find($id);
+      unlink('src/images/icon/'.$dataCategory['icon']);
+
       $this->categoryModel->delete($id);
     }
 
@@ -140,21 +168,38 @@ class Category extends ResourceController
 
   public function subcategory()
   {
-    $data = [
-      'title'       => 'Sub-Category',
-      'subcategory' => $this->subCategoryModel->findAll()
-    ];
+    $categoryId = $this->request->getGet('category_id');
+    $page = $this->request->getGet('page') ?? 1;
+    $perPage = $this->request->getGet('perPage') ?? 10;
 
-    return view('admin/subcategory', $data);
+    $offset = ($page - 1) * $perPage;
+
+    $totalRecords = $this->subCategoryModel->where('id_category', $categoryId)->countAllResults();
+
+    $subCategory = $this->subCategoryModel->where('id_category', $categoryId)->findAll($perPage, $offset);
+
+    $totalPages = ceil($totalRecords / $perPage);
+
+    $pagination = [
+      'page' => $page,
+      'perPage' => $perPage,
+      'totalRecords' => $totalRecords,
+      'totalPages' => $totalPages
+    ];
+    return view('admin/subcategory', [
+      'title' => 'Category',
+      'subcategory' => $subCategory,
+      'pagination' => $pagination
+    ]);
   }
 
   public function addsub()
   {
+    $idCategory = $this->categoryModel->findAll();
     $data = [
       'title'       => 'Add Sub-Category',
       'categories'  => $this->categoryModel->findAll(),
     ];
-
     return view('admin/addsubcategory', $data);
   }
 
@@ -165,6 +210,7 @@ class Category extends ResourceController
       'subcategory'       => "required|is_unique[sub_category.name_subcategory]"
     ];
 
+
     if (!$this->validate($rules)) {
       return redirect()->to('kb/administrator/category/subcategory/addsubcategory')->withInput()->with('errors', $this->validator->getErrors());
     } else {
@@ -173,22 +219,25 @@ class Category extends ResourceController
       $x            = explode(" ", strtolower($sub_category));
       $slug         = implode("-", $x);
 
+
       $data = [
         'id_category'       => $id_category,
         'name_subcategory'  => $sub_category,
         'slug'              => $slug
       ];
 
+
       if (!$this->subCategoryModel->save($data)) {
-        return redirect()->to('kb/administrator/category/subcategory')->with('error', "Data sub category gagal ditambah");
+        return redirect()->to('kb/administrator/category/subcategory?category_id=' . $id_category . '')->with('error', "Data sub category gagal ditambah");
       } else {
-        return redirect()->to('kb/administrator/category/subcategory')->with('success', "Data sub category berhasil ditambah");
+        return redirect()->to('kb/administrator/category/subcategory?category_id=' . $id_category . '')->with('success', "Data sub category berhasil ditambah");
       }
     }
   }
 
   public function editsub($id = null)
   {
+    $id = $this->request->getGet('id');
     $data = [
       'title'       => 'Edit Sub-Category',
       'categories'  => $this->categoryModel->findAll(),
