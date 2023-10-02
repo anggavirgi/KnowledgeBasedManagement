@@ -182,7 +182,6 @@ class Category extends ResourceController
       'totalRecords' => $totalRecords,
       'totalPages' => $totalPages
     ];
-    dd($subCategory);
     return view('admin/subcategory', [
       'title' => 'Category',
       'subcategory' => $subCategory,
