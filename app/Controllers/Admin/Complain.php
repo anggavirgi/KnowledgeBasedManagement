@@ -37,9 +37,9 @@ class Complain extends BaseController
     $this->complainModel->set('status', $status);
     $this->complainModel->where('id', $id);
     if (!$this->complainModel->update()) {
-      return redirect()->to('kb/administrator/complain')->with('error', "Sepertinya ada yang salah");
+      return redirect()->to('kb/administrator/complain');
     } else {
-      return redirect()->to('kb/administrator/complain')->with('success', "Status berhasil di update");
+      return redirect()->to('kb/administrator/complain');
     }
   }
 
@@ -50,9 +50,9 @@ class Complain extends BaseController
     $this->complainModel->set('visibility', $visibility);
     $this->complainModel->where('id', $id);
     if (!$this->complainModel->update()) {
-      return redirect()->to('kb/administrator/complain')->with('error', "Sepertinya ada yang salah");
+      return redirect()->to('kb/administrator/complain');
     } else {
-      return redirect()->to('kb/administrator/complain')->with('success', "Complaine telah di" . $visibility);
+      return redirect()->to('kb/administrator/complain');
     }
   }
 
