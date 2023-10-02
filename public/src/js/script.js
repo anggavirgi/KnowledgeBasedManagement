@@ -296,7 +296,6 @@ $(document).ready(function () {
     });
   });
   
-  // UserTable Model Rows
   $('#row-entries').change(function() {
     var offset = 1;
     var selectedValue = $(this).val(); 
