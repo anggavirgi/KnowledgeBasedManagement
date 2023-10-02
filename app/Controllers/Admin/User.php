@@ -29,39 +29,28 @@ class User extends ResourceController
 
     public function index()
     {
-        $ninja = $this->userModel->paginate(10);
-        $pager = $this->userModel->pager;
-        $data = [
-            'title' => 'List Of Ninja',
-            'ninja' => $ninja,
-            // 'pager' => $pager
+        $page = $this->request->getGet('page') ?? 1;
+        $perPage = $this->request->getGet('perPage') ?? 10;
 
+        $offset = ($page - 1) * $perPage;
+
+        $dataUser = $this->userModel->findAll($perPage, $offset);
+
+        $totalRecords = $this->userModel->countAll();
+
+        $totalPages = ceil($totalRecords / $perPage);
+
+        $pagination = [
+            'page' => $page,
+            'perPage' => $perPage,
+            'totalRecords' => $totalRecords,
+            'totalPages' => $totalPages
         ];
-        dd($data);
-
-        return view('admin/user', $data);
-        // $page = $this->request->getGet('page') ?? 1;
-        // $perPage = $this->request->getGet('perPage') ?? 10;
-
-        // $offset = ($page - 1) * $perPage;
-
-        // $dataUser = $this->userModel->findAll($perPage, $offset);
-
-        // $totalRecords = $this->userModel->countAll();
-
-        // $totalPages = ceil($totalRecords / $perPage);
-
-        // $pagination = [
-        //     'page' => $page,
-        //     'perPage' => $perPage,
-        //     'totalRecords' => $totalRecords,
-        //     'totalPages' => $totalPages
-        // ];
-        // return view('admin/user', [
-        //     'title' => 'User',
-        //     'users' => $dataUser,
-        //     'pagination' => $pagination
-        // ]);
+        return view('admin/user', [
+            'title' => 'User',
+            'users' => $dataUser,
+            'pagination' => $pagination
+        ]);
     }
 
     /**
