@@ -26,7 +26,6 @@ $("#searchInput").on("keyup", function () {
 
     if (rowText.toUpperCase().indexOf(filter) > -1) {
       row.style.display = "";
-      resultsFound = true;
     } else {
       row.style.display = "none";
     }

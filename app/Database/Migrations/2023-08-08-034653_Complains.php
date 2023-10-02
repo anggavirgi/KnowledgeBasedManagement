@@ -29,6 +29,10 @@ class Complains extends Migration
                 'type'           => 'VARCHAR',
                 'constraint'     => '128',
             ],
+            'subject' => [
+                'type'           => 'VARCHAR',
+                'constraint'     => '128',
+            ],
             'description' => [
                 'type'       => 'TEXT',
             ],
@@ -43,6 +47,7 @@ class Complains extends Migration
             'status' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '128',
+                'default'    => 'pending'
             ],
             'visibility' => [
                 'type'       => 'VARCHAR',

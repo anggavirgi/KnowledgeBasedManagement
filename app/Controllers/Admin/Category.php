@@ -67,8 +67,8 @@ class Category extends ResourceController
   public function create()
   {
     $rules = [
-      'category'      => 'required|alpha_numeric_space',
-      'icon'          => 'uploaded[icon]|max_size[icon,1024]|is_image[icon]|mime_in[icon,image/jpg,image/jpeg,image/png,image/svg,image/webp]'
+      'category'      => 'required|alpha_numeric_space|is_unique[categories.name_category]',
+      'icon'          => 'uploaded[icon]|max_size[icon,1024]|is_image[icon]|mime_in[icon,image/jpg,image/jpeg,image/png,image/svg,image/webp]|is_unique[categoreies.name_category]'
     ];
 
     if (!$this->validate($rules)) {
@@ -207,20 +207,23 @@ class Category extends ResourceController
       'totalRecords' => $totalRecords,
       'totalPages' => $totalPages
     ];
+    dd($subCategory);
     return view('admin/subcategory', [
       'title' => 'Category',
       'subcategory' => $subCategory,
-      'category_id' => $categoryId,
+      'categoryId' => $categoryId,
       'pagination' => $pagination
     ]);
   }
 
   public function addsub()
   {
+    $categoryId = $this->request->getGet('category_id');
     $idCategory = $this->categoryModel->findAll();
     $data = [
-      'title'       => 'Add Sub-Category',
-      'categories'  => $this->categoryModel->findAll(),
+      'title' => 'Add Sub-Category',
+      'category' => $idCategory,
+      'categoryId' => $categoryId
     ];
     return view('admin/addsubcategory', $data);
   }
@@ -286,7 +289,7 @@ class Category extends ResourceController
 
     $cek_subcategory = $this->subCategoryModel->select('*')->where('name_subcategory', $sub_category)->where('id !=', $id)->findAll();
     if ($cek_subcategory) {
-      return redirect()->to('kb/administrator/user/edit/' . $id)->withInput()->with('errors', ['subcategory' => 'Nama Subcategory sudah tersedia']);
+      return redirect()->to('kb/administrator/category/subcategory/editsubcategory/' . $id)->withInput()->with('errors', ['subcategory' => 'Nama Subcategory sudah tersedia']);
     } else {
       $data = [
         'id_category'       => $id_category,

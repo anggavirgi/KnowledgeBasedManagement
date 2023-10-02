@@ -28,18 +28,19 @@
             </a>
         </div>
     </div>
+
     <div class="mb-5 flex items-center justify-end text-xs">
         <label for="entries" class="mr-2">Rows per page : </label>
         <div class="relative">
             <?php $options = [10, 25, 50, 100]; ?>
             <?php if (isset($pagination)) : ?>
-                <select id="row-entries" data-url="<?php echo base_url(); ?>kb/administrator/user/fetch" class="appearance-none border border-gray-400 px-6 py-2 rounded-2xl hover:border-blue-500 cursor-pointer focus:outline-none">
+                <select id="row-entries" data-url="<?php echo base_url(); ?>kb/administrator/category/fetch" class="appearance-none border border-gray-400 px-6 py-2 rounded-2xl hover:border-blue-500 cursor-pointer focus:outline-none">
                     <?php foreach ($options as $option) : ?>
                         <option value="<?php echo $option; ?>" <?php echo isset($pagination) && $pagination['perPage'] == $option ? 'selected' : ''; ?>><?php echo $option; ?></option>
                     <?php endforeach; ?>
                 </select>
             <?php else : ?>
-                <select id="row-entries" data-url="<?php echo base_url(); ?>kb/administrator/user/fetch" class="appearance-none border border-gray-400 px-6 py-2 rounded-2xl hover:border-blue-500 cursor-pointer focus:outline-none">
+                <select id="row-entries" data-url="<?php echo base_url(); ?>kb/administrator/category/fetch" class="appearance-none border border-gray-400 px-6 py-2 rounded-2xl hover:border-blue-500 cursor-pointer focus:outline-none">
                     <?php foreach ($options as $option) : ?>
                         <option value="<?php echo $option; ?>" <?php echo isset($pagination) && $pagination['perPage'] == $option ? 'selected' : ''; ?>><?php echo $option; ?></option>
                     <?php endforeach; ?>

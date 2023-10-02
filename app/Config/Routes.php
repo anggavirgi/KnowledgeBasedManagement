@@ -37,7 +37,7 @@ $routes->group('kb', static function ($routes) {
 
     // ROUTE LOGIN
     // $routes->get('proses', 'Login::proses');
-    // $routes->get('register/', 'Login::register');
+    $routes->get('register/', 'Login::register');
     // $routes->get('forgot-password/', 'Login::forgotpassword');
 
     //HOME
@@ -45,6 +45,7 @@ $routes->group('kb', static function ($routes) {
     $routes->get('generalarticle', 'Home::generalarticle');
     $routes->get('generalarticle/generalarticledetail', 'Home::generalarticledetail');
     $routes->get('complain', 'Home::complain');
+    $routes->post('complain', 'Home::create');
     $routes->get('history', 'Home::history');
     $routes->get('personalarticle', 'Home::personalarticle');
     $routes->get('personalarticle/personalarticledetail', 'Home::personalarticledetail');

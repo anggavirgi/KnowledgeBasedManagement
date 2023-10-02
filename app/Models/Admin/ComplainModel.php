@@ -8,7 +8,7 @@ class ComplainModel extends Model
 {
     protected $table            = 'complains';
     protected $primaryKey       = 'id';
-    protected $allowedFields    = ['id_user','id_project','email','description','file','is_read','status','visibility'];
+    protected $allowedFields    = ['id_user', 'id_project', 'email', 'subject', 'description', 'file', 'is_read', 'status', 'visibility'];
 
     // Dates
     protected $useTimestamps = false;
@@ -21,5 +21,4 @@ class ComplainModel extends Model
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
-
 }
