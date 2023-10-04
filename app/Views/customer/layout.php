@@ -19,7 +19,6 @@
                 <img src="<?php echo base_url(); ?>src/images/logo.png" alt="" class="nav-brand w-32 ml-3 md:w-40">
             </a>
 
-
             <?php if (logged_in()) : ?>
                 <div class="flex ">
 
@@ -69,7 +68,7 @@
                         </li>
                     </ul>
                     <div class="py-2">
-                        <a href="/kb/logout" class="block px-4 py-2 text-sm text-red-700 hover:bg-gray-300">Logout</a>
+                        <a href="<?php echo base_url(); ?>/logout" class="block px-4 py-2 text-sm text-red-700 hover:bg-gray-300">Logout</a>
                     </div>
                 </div>
 

@@ -59,7 +59,7 @@
     <div class="flash-error" data-flashmessage="<?php echo session('error') ?>"></div>
   <?php endif; ?>
 
-  <table class="w-full text-center" id="dataTable">
+  <table class="w-full text-center" id="myTable">
     <thead class="border-b">
       <tr>
         <th class="p-3">

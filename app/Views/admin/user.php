@@ -61,7 +61,7 @@
         <div class="flash-error" data-flashmessage="<?php echo session('error') ?>"></div>
     <?php endif; ?>
 
-    <table class="w-full text-left" id="dataTable">
+    <table class="w-full text-left" id="myTable">
         <thead class="border-b">
             <tr>
                 <th class="p-3">
