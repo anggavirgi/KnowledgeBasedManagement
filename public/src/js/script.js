@@ -361,7 +361,7 @@ $(document).ready(function () {
       }
     });
   });
-  
+
   // Row Entries Per Page
   $('#row-entries').change(function() {
     var offset = 1;
