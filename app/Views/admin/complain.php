@@ -7,7 +7,7 @@
     <h2 class="font-bold text-xl">List Complain</h2>
     <div class="flex items-center justify-between mt-5 mb-3" id="search">
         <form method="" class="relative flex justify-end items-center">
-            <input type="text" placeholder="search" class="px-5 py-2 w-64 rounded-2xl border border-gray-400 outline-main">
+            <input type="text" id="searchInput" placeholder="search" class="px-5 py-2 w-64 rounded-2xl border border-gray-400 outline-main">
             <button class="absolute right-5 cursor-pointer align-middle">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search text-gray-400" viewBox="0 0 16 16">
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
@@ -15,6 +15,13 @@
             </button>
         </form>
         <div class="flex gap-3">
+            <div class="delete-batch hidden">
+                <button type="button" class="delete-batch-btn px-2 inline-block" data-action="/kb/administrator/category/deleteBatch">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-5 h-5 stroke-red-500 hover:stroke-red-700">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                    </svg>
+                </button>
+            </div>
             <a href="#" class="border inline-flex gap-4 border-gray-400 px-6 py-2 rounded-2xl hover:border-green-400 cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
@@ -27,12 +34,20 @@
     <div class="mb-5 flex items-center justify-end text-xs">
         <label for="entries" class="mr-2">Rows per page : </label>
         <div class="relative">
-            <select id="entries" class="appearance-none border border-gray-400 px-6 py-2 rounded-2xl hover:border-blue-500 cursor-pointer focus:outline-none">
-                <option value="10">10</option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-            </select>
+            <?php $options = [10, 25, 50, 100]; ?>
+            <?php if (isset($pagination)) : ?>
+                <select id="row-entries" data-url="<?php echo base_url(); ?>kb/administrator/category/fetch" class="appearance-none border border-gray-400 px-6 py-2 rounded-2xl hover:border-blue-500 cursor-pointer focus:outline-none">
+                    <?php foreach ($options as $option) : ?>
+                        <option value="<?php echo $option; ?>" <?php echo isset($pagination) && $pagination['perPage'] == $option ? 'selected' : ''; ?>><?php echo $option; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            <?php else : ?>
+                <select id="row-entries" data-url="<?php echo base_url(); ?>kb/administrator/category/fetch" class="appearance-none border border-gray-400 px-6 py-2 rounded-2xl hover:border-blue-500 cursor-pointer focus:outline-none">
+                    <?php foreach ($options as $option) : ?>
+                        <option value="<?php echo $option; ?>" <?php echo isset($pagination) && $pagination['perPage'] == $option ? 'selected' : ''; ?>><?php echo $option; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            <?php endif; ?>
             <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                 <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -41,9 +56,14 @@
         </div>
     </div>
 
+    <?php if (session()->has('success')) : ?>
+        <div class="flash-success" data-flashmessage="<?php echo session('success') ?>"></div>
+    <?php else : ?>
+        <div class="flash-error" data-flashmessage="<?php echo session('error') ?>"></div>
+    <?php endif; ?>
 
     <div class="relative overflow-x-auto sm:rounded-lg">
-        <table class="w-full text-left">
+        <table class="w-full text-left" id="myTable">
             <thead class="border-b">
                 <tr>
                     <th class="p-3">
@@ -91,72 +111,61 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="clickable-row cursor-pointer border-b hover:bg-gray-50 dark:hover:bg-sky-50" data-href="<?php echo base_url(); ?>kb/administrator/complain/reply">
-                    <td class="p-3">
-                        <input type="checkbox" class="delete-checkbox" name="" id="">
-                    </td>
-                    <td class="p-3 font-medium text-gray-900 whitespace-nowrap cursor-pointer">
-                        Aviarianss32@gmail.com
-                    </td>
-                    <td class="p-3">
-                        System eror bang
-                    </td>
-                    <td class="p-3 text-center">
-                        <div class="relative flex justify-center items-center">
-                            <select id="status-entries" name="status_entries" class="py-2 ps-4 pe-6 appearance-none cursor-pointer rounded-2xl text-gray-700 focus:outline-none focus:border-blue-500">
-                                <option value="pending" class=" bg-white text-black">Pending</option>
-                                <option value="progress" class="bg-white text-black">In progres</option>
-                                <option value="solved" class="bg-white text-black">Solved</option>
-                            </select>
-                            <svg class="w-2 h-2 absolute ml-[58px] text-gray-400" width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6.97607 0.81897L4.055 5.13429L1.00017 0.9126L6.97607 0.81897Z" fill="#CD6200" stroke="#CD6200" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                    </td>
-                    <td class="p-3 text-center">
-                        <div class="relative flex justify-center items-center">
-                            <select id="case-entries" name="status_case_entries" class="py-2 pe-9 ps-5 appearance-none cursor-pointer rounded-2xl text-gray-700 focus:outline-none focus:border-blue-500">
-                                <option value="close" class="block px-4 py-5 bg-white text-black">Close</option>
-                                <option value="open" class="block px-4 py-5 bg-white text-black">Open</option>
-                            </select>
-                            <svg class="w-2 h-2 absolute ml-[50px] text-gray-400" width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6.97607 0.81897L4.055 5.13429L1.00017 0.9126L6.97607 0.81897Z" fill="#A30D11" stroke="#A30D11" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                    </td>
-                    <td class="p-3 text-center">
-                        <a class="text-white font-semibold" href="<?php echo base_url(); ?>kb/administrator/complain/reply">
-                            <div class=" rounded-2xl px-6 py-2 bg-blue-600 inline-flex justify-center items-center">
-                                Reply
+                <?php foreach ($complains as $complain) : ?>
+                    <tr class="clickable-row cursor-pointer border-b hover:bg-gray-50 dark:hover:bg-sky-50" data-href="<?php echo base_url(); ?>kb/administrator/complain/reply/<?php echo $complain['id'] ?>">
+                        <td class="p-3" data-id="<?php echo $complain['id'] ?>">
+                            <input type="checkbox" class="cursor-pointer delete-checkbox" name="" id="">
+                        </td>
+                        <td class="p-3 font-medium text-gray-900 whitespace-nowrap cursor-pointer">
+                            <?= $complain['email'] ?>
+                        </td>
+                        <td class="p-3">
+                            <?= $complain['description'] ?>
+                        </td>
+                        <td class="p-3 text-center">
+                            <div class="relative flex justify-center items-center">
+                                <select id="status-entries" name="status-entries" class="py-2 ps-4 pe-6 appearance-none cursor-pointer rounded-2xl text-gray-700 focus:outline-none focus:border-blue-500" data-id="<?php echo $complain['id'] ?>">
+                                    <option value="pending" class=" bg-white text-black" <?php if ($complain['status'] === "pending") echo "selected"; ?>>Pending</option>
+                                    <option value="progress" class="bg-white text-black" <?php if ($complain['status'] === "progress") echo "selected"; ?>>In progres</option>
+                                    <option value="solved" class="bg-white text-black" <?php if ($complain['status'] === "solved") echo "selected"; ?>>Solved</option>
+                                </select>
+                                <svg class="w-2 h-2 absolute ml-[58px] text-gray-400" width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.97607 0.81897L4.055 5.13429L1.00017 0.9126L6.97607 0.81897Z" fill="#CD6200" stroke="#CD6200" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
                             </div>
-                        </a>
-                    </td>
-                </tr>
+                        </td>
+                        <td class="p-3 text-center">
+                            <div class="relative flex justify-center items-center">
+                                <select id="case-entries" name="status_case_entries" class="py-2 pe-9 ps-5 appearance-none cursor-pointer rounded-2xl text-gray-700 focus:outline-none focus:border-blue-500" data-id="<?php echo $complain['id'] ?>">
+                                    <option value="closed" class="block px-4 py-5 bg-white text-black" <?php if ($complain['visibility'] === "closed") echo "selected"; ?>>Close</option>
+                                    <option value="open" class="block px-4 py-5 bg-white text-black" <?php if ($complain['visibility'] === "open") echo "selected"; ?>>Open</option>
+                                </select>
+                                <svg class="w-2 h-2 absolute ml-[50px] text-gray-400" width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.97607 0.81897L4.055 5.13429L1.00017 0.9126L6.97607 0.81897Z" fill="#A30D11" stroke="#A30D11" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                        </td>
+                        <td class="p-3 text-center">
+                            <a class="text-white font-semibold" href="<?php echo base_url(); ?>kb/administrator/complain/reply/<?php echo $complain['id'] ?>">
+                                <div class=" rounded-2xl px-6 py-2 bg-blue-600 inline-flex justify-center items-center">
+                                    Reply
+                                </div>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
         <div class="flex justify-center mt-5">
             <nav aria-label="Page navigation example">
                 <ul class="inline-flex -space-x-px text-sm">
                     <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 ml-0 leading-tight  bg-white border rounded-l-lg hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">Previous</a>
+                        <button class="flex items-center justify-center px-3 h-8 ml-0 leading-tight  bg-white border rounded-l-lg hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400" id="prevBtn" disabled>Previous</button>
+                    </li>
+                    <li class="inline-flex" id="pageIndicator">
                     </li>
                     <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight  bg-white border hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">1</a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight  bg-white border hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">2</a>
-                    </li>
-                    <li>
-                        <a href="#" aria-current="page" class="flex items-center justify-center px-3 h-8 text-white border bg-blue-50 hover:text-blue-700 border-white dark:bg-main dark:hover:text-white">3</a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight  bg-white border hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">4</a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight  bg-white border hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">5</a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight  bg-white border rounded-r-lg hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">Next</a>
+                        <button class="flex items-center justify-center px-3 h-8 leading-tight  bg-white border rounded-r-lg hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400" id="nextBtn">Next</button>
                     </li>
                 </ul>
             </nav>

@@ -11,7 +11,7 @@ class ComplainModel extends Model
     protected $allowedFields    = ['id_user', 'id_project', 'email', 'subject', 'description', 'file', 'is_read', 'status', 'visibility'];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

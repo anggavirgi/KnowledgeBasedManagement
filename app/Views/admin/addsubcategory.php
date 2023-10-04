@@ -18,12 +18,13 @@
     </div>
   </div>
   <form class="ms-7 my-10" action="<?php echo base_url(); ?>kb/administrator/category/subcategory/addsubcategory" method="post">
+    <?php echo csrf_field(); ?>
     <div class="mb-4 relative">
       <label for="id_category" class="block mb-2 text-sm font-medium text-form">Choose Category</label>
       <select id="id_category" name="id_category" class="cursor-pointer bg-gray-50 border appearance-none border-gray-300 text-sm rounded-lg block w-2/4 p-4 text-form focus:outline-none focus:ring-blue-500 focus:border-blue-500 <?php if (session('errors.id_category')) : ?>border-red-600<?php endif ?>">
         <option value="">Choose category</option>
         <?php foreach ($category as $category) : ?>
-          <option value="<?= $category['id'] ?>"><?= $category['name_category'] ?></option>
+          <option value="<?= $category['id'] ?>" <?php echo old('id_category') == $category['id'] ? "selected" : "" ?>><?= $category['name_category'] ?></option>
         <?php endforeach; ?>
       </select>
       <div class="w-2/4 absolute inset-y-0 right-8 top-7 flex items-center pr-3 pointer-events-none">
