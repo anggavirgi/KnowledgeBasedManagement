@@ -68,7 +68,7 @@
                         </li>
                     </ul>
                     <div class="py-2">
-                        <a href="<?php echo base_url(); ?>/logout" class="block px-4 py-2 text-sm text-red-700 hover:bg-gray-300">Logout</a>
+                        <a href="<?php echo base_url(); ?>logout" class="block px-4 py-2 text-sm text-red-700 hover:bg-gray-300">Logout</a>
                     </div>
                 </div>
 

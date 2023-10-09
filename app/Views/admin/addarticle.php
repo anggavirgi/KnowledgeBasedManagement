@@ -27,8 +27,8 @@
     <?php endif; ?>
     <div class="flex justify-between gap-5 mt-4">
       <div class="select-category w-full">
-        <label for="default" class="block mb-2 font-medium text-gray-800">Category</label>
-        <select id="default" name="category" class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-800 rounded-lg focus:ring-main focus:outline-none focus:border-main block w-full p-3 <?php if (session('errors.category')) : ?>border-red-600<?php endif ?>">
+        <label for="categorySelect" class="block mb-2 font-medium text-gray-800">Category</label>
+        <select id="categorySelect" name="category" class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-800 rounded-lg focus:ring-main focus:outline-none focus:border-main block w-full p-3 <?php if (session('errors.category')) : ?>border-red-600<?php endif ?>">
           <option value="">Select category</option>
           <?php foreach ($category as $category) : ?>
             <option value="<?= $category['id'] ?>" <?php echo old('category') == $category['id'] ? "selected" : "" ?>><?= $category['name_category'] ?></option>
@@ -41,11 +41,11 @@
         <?php endif; ?>
       </div>
       <div class="select-category w-full">
-        <label for="default" class="block mb-2 font-medium text-gray-800">Select sub category</label>
-        <select id="default" name="subcategory" class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-800 rounded-lg focus:ring-main focus:outline-none focus:border-main block w-full p-3 <?php if (session('errors.subcategory')) : ?>border-red-600<?php endif ?>">
+        <label for="subcategorySelect" class="block mb-2 font-medium text-gray-800">Select sub category</label>
+        <select id="subcategorySelect" name="subcategory" class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-800 rounded-lg focus:ring-main focus:outline-none focus:border-main block w-full p-3 <?php if (session('errors.subcategory')) : ?>border-red-600<?php endif ?>" disabled>
           <option value="">Select Sub category</option>
           <?php foreach ($sub_category as $sub_category) : ?>
-            <option value="<?= $sub_category['id'] ?>" <?php echo old('subcategory') == $sub_category['id'] ? "selected" : "" ?>><?= $sub_category['name_subcategory'] ?></option>
+            <option class="<?= $sub_category['id_category'] ?>" value="<?= $sub_category['id'] ?>" <?php echo old('subcategory') == $sub_category['id'] ? "selected" : "" ?>><?= $sub_category['name_subcategory'] ?></option>
           <?php endforeach; ?>
         </select>
         <?php if (session('errors.subcategory')) : ?>
@@ -78,7 +78,7 @@
     </div>
 
     <div>
-      <textarea id="editor" name="description"></textarea>
+      <textarea id="editor" name="description"><?= old('description') ?></textarea>
     </div>
 
     <div class="mt-5">

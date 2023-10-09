@@ -76,11 +76,18 @@ $(document).ready(function () {
       $(".delete-batch").hide();
     }
   });
+  
   $(".delete-all-checkbox").on("change", function () {
     const checkAll = document.querySelector(".delete-all-checkbox");
 
     if (checkAll.checked) {
-      $(".delete-checkbox").prop("checked", true);
+      $(".delete-checkbox").prop("checked", false); // Uncheck all checkboxes first
+      $(".delete-checkbox").each(function () {
+        const row = $(this).closest("tr");
+        if (row.css("display") !== "none") {
+          $(this).prop("checked", true); // Check checkboxes for rows with display not "none"
+        }
+      });
       $(".delete-batch").show();
     } else {
       $(".delete-checkbox").prop("checked", false);
@@ -94,7 +101,6 @@ $(document).ready(function () {
     $(".delete-checkbox:checked").each(function () {
       selectedItems.push($(this).closest("td").data("id"));
     });
-
     console.log(selectedItems);
 
     Swal.fire({
@@ -216,47 +222,59 @@ $(document).ready(function () {
     location.reload();
   });
 
-  // Changing Status Case Complain
-  var initialCaseValue = $("#case-entries").val();
-  const statusCaseComplainElement = $("#case-entries");
-  const ddCaseIconElement = $("#dd-case-icon svg path");
-  if (initialCaseValue === "open") {
-    $(statusCaseComplainElement)
-      .removeClass("bg-close-status text-close-status-text")
-      .addClass("bg-solved-status text-solved-status-text");
-    $(ddCaseIconElement).attr("fill", "#1F9254").attr("stroke", "#1F9254");
-  } else {
-    $(statusCaseComplainElement)
-      .removeClass("bg-solved-status text-solved-status-text")
-      .addClass("bg-close-status text-close-status-text");
-    $(ddCaseIconElement).attr("fill", "#A30D11").attr("stroke", "#A30D11");
-  }
+  // Initiate Article Case
+  $('[id^="case-entries"]').each(function () {
+    var $dropdown = $(this);
+    var selectedValue = $dropdown.val();
+    var iconElement = $dropdown.siblings('svg').find('path');
+    if (selectedValue === "open") {
+        $(this)
+          .removeClass("bg-close-status text-close-status-text")
+          .addClass("bg-solved-status text-solved-status-text");
+        $(iconElement).attr("fill", "#1F9254").attr("stroke", "#1F9254");
+      } else {
+        $(this)
+          .removeClass("bg-solved-status text-solved-status-text")
+          .addClass("bg-close-status text-close-status-text");
+        $(iconElement).attr("fill", "#A30D11").attr("stroke", "#A30D11");
+      }
+  });
 
-  statusCaseComplainElement.change(function () {
-    initialCaseValue = $(this).val();
-    const id = $(this).data("id");
+  $('[id^="case-entries"]').change(function () {
+    var initialCaseValue = $(this).val();
+    var id = $(this).data("id");
+    var iconElement = $(this).siblings('svg').find('path');
     if (initialCaseValue === "open") {
-      $(statusCaseComplainElement)
+      $(this)
         .removeClass("bg-close-status text-close-status-text")
         .addClass("bg-solved-status text-solved-status-text");
-      $(ddCaseIconElement).attr("fill", "#1F9254").attr("stroke", "#1F9254");
+      $(iconElement).attr("fill", "#1F9254").attr("stroke", "#1F9254");
     } else {
-      $(statusCaseComplainElement)
+      $(this)
         .removeClass("bg-solved-status text-solved-status-text")
         .addClass("bg-close-status text-close-status-text");
-      $(ddCaseIconElement).attr("fill", "#A30D11").attr("stroke", "#A30D11");
+      $(iconElement).attr("fill", "#A30D11").attr("stroke", "#A30D11");
     }
     const data = {
       id: id,
       visibility: initialCaseValue,
     };
+    console.log(data);
     $.ajax({
       type: "POST",
-      url: "/kb/administrator/complain/updateVisibility",
+      url: "/kb/administrator/article/updateVisibility",
       data: data,
+      success: function(response) {
+        // This code runs after the AJAX request is successful
+        console.log("AJAX request successful.");
+        // location.reload();
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+          // This code runs if there's an error with the AJAX request
+          console.error("AJAX request error:", textStatus, errorThrown);
+      }
     });
 
-    location.reload();
   });
 
   // Complain Details ``Row`` Selected
@@ -387,6 +405,36 @@ $(document).ready(function () {
     }
   }
     
+  $('#categorySelect').change(function() {
+    var selectedCategory = $(this).val();
+    var subcategorySelect = $('#subcategorySelect');
+
+    // Disable the subcategory select by default
+    subcategorySelect.prop('disabled', true);
+
+    // Hide all subcategory options
+    $('#subcategorySelect option').hide();
+
+    if (selectedCategory === '') {
+        // If no category is selected, show the default option and keep it disabled
+        $('#subcategorySelect option[value=""]').show();
+    } else {
+        // Show subcategory options with class matching selected category
+        $('#subcategorySelect option.' + selectedCategory).show();
+        
+        // Check if there are subcategory options with the selected class
+        if ($('#subcategorySelect option.' + selectedCategory).length === 0) {
+            // If no matching class found, show the default option and keep it disabled
+            $('#subcategorySelect option[value=""]').show();
+        } else {
+            // Enable the subcategory select if a matching class is found
+            subcategorySelect.prop('disabled', false);
+        }
+    }
+
+    // Reset the subcategory selection
+    subcategorySelect.val('');
+  });
 });
 
 // USER

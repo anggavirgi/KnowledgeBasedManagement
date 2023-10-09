@@ -224,4 +224,15 @@ class User extends ResourceController
 
         return view('admin/detailuser', $data);
     }
+
+    public function deleteBatchUser()
+    {
+        $id_user = $this->request->getVar("ids");
+        for ($i = 0; $i < count($id_user); $i++) {
+            $id = $id_user[$i];
+            $this->userModel->delete($id);
+        }
+
+        return redirect()->to('kb/administrator/user')->with('success', "Data user berhasil dihapus");
+    }
 }

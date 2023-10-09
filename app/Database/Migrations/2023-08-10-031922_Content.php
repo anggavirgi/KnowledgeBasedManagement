@@ -49,7 +49,7 @@ class Content extends Migration
             'visibility' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '128',
-                'defaul'    => 'closed'
+                'default'    => 'closed'
             ],
             'created_at' => [
                 'type'       => 'DATETIME',

@@ -64,6 +64,7 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     $routes->post('user/(:num)', 'User::update/$1');
     $routes->get('user/delete/(:num)', 'User::delete/$1');
     $routes->get('user/detail/(:num)', 'User::detail/$1');
+    $routes->post('user/deleteBatch', "User::deleteBatchUser");
 
     $routes->get('category', 'Category::index');
     $routes->get('category/new', 'Category::new');
@@ -88,6 +89,7 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     $routes->post('article/(:num)', 'Article::update/$1');
     $routes->get('article/delete/(:num)', 'Article::delete/$1');
     $routes->get('article/detail/(:num)', 'Article::detail/$1');
+    $routes->post('article/updateVisibility', 'Article::updateVisibility');
 
     $routes->get('complain', 'Complain::index');
     $routes->get('complain/reply/(:num)', 'Complain::reply/$1');

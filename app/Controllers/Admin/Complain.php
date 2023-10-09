@@ -22,9 +22,28 @@ class Complain extends BaseController
 
   public function index()
   {
+    $page = $this->request->getGet('page') ?? 1;
+    $perPage = $this->request->getGet('perPage') ?? 10;
+
+    $offset = ($page - 1) * $perPage;
+
+    $complain =  $this->complainModel->findAll($perPage, $offset);
+
+    $totalRecords = $this->complainModel->countAll();
+
+    $totalPages = ceil($totalRecords / $perPage);
+
+    $pagination = [
+      'page' => $page,
+      'perPage' => $perPage,
+      'totalRecords' => $totalRecords,
+      'totalPages' => $totalPages
+    ];
+
     $data = [
       'title'     => 'Complain',
-      'complains' => $this->complainModel->findAll()
+      'complains' => $complain,
+      'pagination' => $pagination
     ];
 
     return view('admin/complain', $data);

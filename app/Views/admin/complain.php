@@ -36,13 +36,13 @@
         <div class="relative">
             <?php $options = [10, 25, 50, 100]; ?>
             <?php if (isset($pagination)) : ?>
-                <select id="row-entries" data-url="<?php echo base_url(); ?>kb/administrator/category/fetch" class="appearance-none border border-gray-400 px-6 py-2 rounded-2xl hover:border-blue-500 cursor-pointer focus:outline-none">
+                <select id="row-entries" data-url="<?php echo base_url(); ?>kb/administrator/complain/fetch" class="appearance-none border border-gray-400 px-6 py-2 rounded-2xl hover:border-blue-500 cursor-pointer focus:outline-none">
                     <?php foreach ($options as $option) : ?>
                         <option value="<?php echo $option; ?>" <?php echo isset($pagination) && $pagination['perPage'] == $option ? 'selected' : ''; ?>><?php echo $option; ?></option>
                     <?php endforeach; ?>
                 </select>
             <?php else : ?>
-                <select id="row-entries" data-url="<?php echo base_url(); ?>kb/administrator/category/fetch" class="appearance-none border border-gray-400 px-6 py-2 rounded-2xl hover:border-blue-500 cursor-pointer focus:outline-none">
+                <select id="row-entries" data-url="<?php echo base_url(); ?>kb/administrator/complain/fetch" class="appearance-none border border-gray-400 px-6 py-2 rounded-2xl hover:border-blue-500 cursor-pointer focus:outline-none">
                     <?php foreach ($options as $option) : ?>
                         <option value="<?php echo $option; ?>" <?php echo isset($pagination) && $pagination['perPage'] == $option ? 'selected' : ''; ?>><?php echo $option; ?></option>
                     <?php endforeach; ?>
@@ -156,17 +156,41 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
+        <!-- Pagination Buttons -->
         <div class="flex justify-center mt-5">
             <nav aria-label="Page navigation example">
                 <ul class="inline-flex -space-x-px text-sm">
-                    <li>
-                        <button class="flex items-center justify-center px-3 h-8 ml-0 leading-tight  bg-white border rounded-l-lg hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400" id="prevBtn" disabled>Previous</button>
-                    </li>
-                    <li class="inline-flex" id="pageIndicator">
-                    </li>
-                    <li>
-                        <button class="flex items-center justify-center px-3 h-8 leading-tight  bg-white border rounded-r-lg hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400" id="nextBtn">Next</button>
-                    </li>
+                    <?php if (isset($pagination) && $pagination['page'] > 1) : ?>
+                        <li>
+                            <a href="<?php echo base_url(); ?>kb/administrator/article?page=<?php echo $pagination['page'] - 1; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 ml-0 leading-tight bg-white border rounded-l-lg hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Previous</a>
+                        </li>
+                    <?php endif; ?>
+                    <?php if (isset($pagination)) : ?>
+                        <?php for ($i = 1; $i <= $pagination['totalPages']; $i++) : ?>
+                            <li>
+                                <a href="<?php echo base_url(); ?>kb/administrator/article?page=<?php echo $i; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 border border-white <?php echo ($i == $pagination['page']) ? 'bg-main text-white' : 'bg-white text-gray-400'; ?> hover:bg-main hover:text-white"><?php echo $i; ?></a>
+                            </li>
+                        <?php endfor; ?>
+                        <?php if ($pagination['page'] < $pagination['totalPages']) : ?>
+                            <li>
+                                <a href="<?php echo base_url(); ?>kb/administrator/article?page=<?php echo $pagination['page'] + 1; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 leading-tight bg-white border hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Next</a>
+                            </li>
+                        <?php endif; ?>
+                    <?php else : ?>
+                        <!-- Set pagination page active to page 1 when $pagination is not set -->
+                        <?php
+                        $pagination['page'] = 1;
+                        $pagination['perPage'] = 10;
+                        ?>
+                        <?php for ($i = 1; $i <= $pagination['page']; $i++) : ?>
+                            <li>
+                                <a href="<?php echo base_url(); ?>kb/administrator/article?page=<?php echo $i; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 border border-white <?php echo ($i == $pagination['page']) ? 'bg-main text-white' : 'bg-white text-gray-400'; ?> hover:bg-main hover:text-white"><?php echo $i; ?></a>
+                            </li>
+                        <?php endfor; ?>
+                        <li>
+                            <a href="<?php echo base_url(); ?>kb/administrator/article?page=<?php echo $pagination['page'] + 1; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 leading-tight bg-white border hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Next</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </nav>
         </div>

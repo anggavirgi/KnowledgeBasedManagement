@@ -50,7 +50,7 @@ class Article extends ResourceController
       'totalRecords' => $totalRecords,
       'totalPages' => $totalPages
     ];
-    
+
     return view('admin/article', [
       'title' => 'article',
       'articles' => $dataArticle,
@@ -61,6 +61,7 @@ class Article extends ResourceController
 
   public function new()
   {
+    $categorySelected = $this->request->getGet('category') ?? 0;
     $category = $this->categoryModel->findAll();
     $sub_category = $this->subCategoryModel->findAll();
     $project = $this->projectModel->findAll();
@@ -69,9 +70,10 @@ class Article extends ResourceController
       'title' => 'Add Article',
       'category' => $category,
       'sub_category' => $sub_category,
+      'categorySelected' => $categorySelected,
       'project' => $project,
     ];
-
+    d($data);
     return view('admin/addarticle', $data);
   }
 
@@ -89,28 +91,28 @@ class Article extends ResourceController
     } else {
       $title = $this->request->getVar('title');
       $slug = url_title($title, "-", true);
-      
+
       $category = $this->request->getVar('category');
       $subcategory = $this->request->getVar('subcategory');
       $project = $this->request->getVar('project');
       $desc = $_REQUEST['description'];
 
-      $file_upload = array() ;
-      if (isset($_FILES['upload']['name'])){
-        $file_name= $_FILES['upload']['name'];
-        $file_path= base_url().'public/src/images/img_article/'.$file_name;
+      $file_upload = array();
+      if (isset($_FILES['upload']['name'])) {
+        $file_name = $_FILES['upload']['name'];
+        $file_path = base_url() . 'public/src/images/img_article/' . $file_name;
         $file_extension = strtolower(pathinfo($file_path, PATHINFO_EXTENSION));
-        if($file_extension=='jpg' || $file_extension=='jpeg' || $file_extension=='png' || $file_extension=='webp' || $file_extension=='svg'){
-          if (move_uploaded_file($_FILES['upload']['tmp_name'], $file_path)){
-            $file_upload['file']= $file_name;
-            $file_upload['url']= $file_path;
-            $file_upload['uploaded']= 1;
+        if ($file_extension == 'jpg' || $file_extension == 'jpeg' || $file_extension == 'png' || $file_extension == 'webp' || $file_extension == 'svg') {
+          if (move_uploaded_file($_FILES['upload']['tmp_name'], $file_path)) {
+            $file_upload['file'] = $file_name;
+            $file_upload['url'] = $file_path;
+            $file_upload['uploaded'] = 1;
           } else {
-            $file_upload['uploaded']= 0;
+            $file_upload['uploaded'] = 0;
             $file_upload['error']['message'] = 'Error! File not uploaded';
           }
         } else {
-          $file_upload['uploaded']= 0;
+          $file_upload['uploaded'] = 0;
           $file_upload['error']['message'] = 'Invalid Extension !';
         }
       }
@@ -124,7 +126,7 @@ class Article extends ResourceController
         'slug'            => $slug,
         'content'         => $desc
       ];
-      
+
       $this->contentModel->save($data);
 
       $insertedID = $this->contentModel->insertID();
@@ -176,28 +178,28 @@ class Article extends ResourceController
     } else {
       $title = $this->request->getVar('title');
       $slug = url_title($title, "-", true);
-      
+
       $category = $this->request->getVar('category');
       $subcategory = $this->request->getVar('subcategory');
       $project = $this->request->getVar('project');
       $desc = $_REQUEST['description'];
 
-      $file_upload = array() ;
-      if (isset($_FILES['upload']['name'])){
-        $file_name= $_FILES['upload']['name'];
-        $file_path= base_url().'public/src/images/img_article/'.$file_name;
+      $file_upload = array();
+      if (isset($_FILES['upload']['name'])) {
+        $file_name = $_FILES['upload']['name'];
+        $file_path = base_url() . 'public/src/images/img_article/' . $file_name;
         $file_extension = strtolower(pathinfo($file_path, PATHINFO_EXTENSION));
-        if($file_extension=='jpg' || $file_extension=='jpeg' || $file_extension=='png' || $file_extension=='webp' || $file_extension=='svg'){
-          if (move_uploaded_file($_FILES['upload']['tmp_name'], $file_path)){
-            $file_upload['file']= $file_name;
-            $file_upload['url']= $file_path;
-            $file_upload['uploaded']= 1;
+        if ($file_extension == 'jpg' || $file_extension == 'jpeg' || $file_extension == 'png' || $file_extension == 'webp' || $file_extension == 'svg') {
+          if (move_uploaded_file($_FILES['upload']['tmp_name'], $file_path)) {
+            $file_upload['file'] = $file_name;
+            $file_upload['url'] = $file_path;
+            $file_upload['uploaded'] = 1;
           } else {
-            $file_upload['uploaded']= 0;
+            $file_upload['uploaded'] = 0;
             $file_upload['error']['message'] = 'Error! File not uploaded';
           }
         } else {
-          $file_upload['uploaded']= 0;
+          $file_upload['uploaded'] = 0;
           $file_upload['error']['message'] = 'Invalid Extension !';
         }
       }
@@ -212,7 +214,7 @@ class Article extends ResourceController
         'slug'            => $slug,
         'content'         => $desc
       ];
-      
+
       $this->contentModel->update($id, $data);
 
       $article = $this->articleModel->where('id_content', $id)->findAll();
@@ -237,7 +239,7 @@ class Article extends ResourceController
     $id_article = $article[0]['id'];
 
     $this->articleModel->delete($id_article);
-    
+
     if (!$this->contentModel->delete($id)) {
       return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
     } else {
@@ -257,5 +259,18 @@ class Article extends ResourceController
     ];
 
     return view('admin/detailarticle', $data);
+  }
+
+  public function updateVisibility()
+  {
+    $id = $this->request->getVar('id');
+    $visibility = $this->request->getVar('visibility');
+    $this->contentModel->set('visibility', $visibility);
+    $this->contentModel->where('id', $id);
+    if (!$this->contentModel->update()) {
+      return redirect()->to('kb/administrator/article');
+    } else {
+      return redirect()->to('kb/administrator/article');
+    }
   }
 }
