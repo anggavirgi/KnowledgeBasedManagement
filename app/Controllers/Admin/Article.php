@@ -73,7 +73,6 @@ class Article extends ResourceController
       'categorySelected' => $categorySelected,
       'project' => $project,
     ];
-    d($data);
     return view('admin/addarticle', $data);
   }
 

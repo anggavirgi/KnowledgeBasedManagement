@@ -240,6 +240,7 @@ $(document).ready(function () {
       }
   });
 
+  // Change Condition Article Case
   $('[id^="case-entries"]').change(function () {
     var initialCaseValue = $(this).val();
     var id = $(this).data("id");
@@ -274,8 +275,11 @@ $(document).ready(function () {
           console.error("AJAX request error:", textStatus, errorThrown);
       }
     });
-
   });
+
+  // ========================= Detail Article Attribute =========================
+  const nodes = $(".uploadTime").get();
+  timeago.render(nodes, 'en_US');
 
   // Complain Details ``Row`` Selected
   $(".clickable-row").click(function (event) {
@@ -292,7 +296,7 @@ $(document).ready(function () {
   const flashSuccessMessage = $(".flash-success-message").data("message");
   const flashErrorMessage = $(".flash-error-message").data("message");
 
-  console.log(flashSuccessMessage);
+  // console.log(flashSuccessMessage);
 
   if (flashSuccessMessage) {
     const Toast = Swal.mixin({
