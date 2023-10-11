@@ -30,31 +30,17 @@
         </div>
         <div id="categories" class="flex justify-center w-full mt-7 sm:md-7 md:mt-12">
             <div class="grid items-center">
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 mb-5 gap-5 sm:gap-5 lg:gap-10 ">
-                    <div class="bg-gray-200 px-[2rem] py-3 rounded-md w-[8rem] h-[5rem] sm:w-[9rem] sm:h-[5rem] md:w-[12rem] md:h-[7rem] flex items-center justify-center">
-                        <div class="flex-col items-center mb-1 text-center">
-                            <i class="bi bi-shield-fill-exclamation text-2xl sm:text md:text-4xl"></i>
-                            <h4 class="whitespace-nowrap text-sm md:text-md text-center mt-1">security alert bang</h4>
-                        </div>
-                    </div>
-                    <div class="bg-gray-200 px-[2rem] py-3 rounded-md w-[8rem] h-[5rem] sm:w-[9rem] sm:h-[5rem] md:w-[12rem] md:h-[7rem] flex items-center justify-center">
-                        <div class="flex-col items-center mb-1 text-center">
-                            <i class="bi bi-shield-fill-exclamation text-2xl sm:text-2xl md:text-4xl"></i>
-                            <h4 class="whitespace-nowrap text-sm md:text-md text-center mt-1">security alert</h4>
-                        </div>
-                    </div>
-                    <div class="bg-gray-200 px-[2rem] py-3 rounded-md w-[8rem] h-[5rem] sm:w-[9rem] sm:h-[5rem] md:w-[12rem] md:h-[7rem] flex items-center justify-center">
-                        <div class="flex-col items-center mb-1 text-center">
-                            <i class="bi bi-shield-fill-exclamation text-2xl sm:text md:text-4xl"></i>
-                            <h4 class="whitespace-nowrap text-sm md:text-md text-center mt-1">security alert</h4>
-                        </div>
-                    </div>
-                    <div class="bg-gray-200 px-[2rem] py-3 rounded-md w-[8rem] h-[5rem] sm:w-[9rem] sm:h-[5rem] md:w-[12rem] md:h-[7rem] flex items-center justify-center">
-                        <div class="flex-col items-center mb-1 text-center">
-                            <i class="bi bi-shield-fill-exclamation text-2xl sm:text md:text-4xl"></i>
-                            <h4 class="whitespace-nowrap text-sm md:text-md text-center mt-1">security alert</h4>
-                        </div>
-                    </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 mb-5 gap-5 sm:gap-5 lg:gap-10 ">
+                    <?php foreach ($category as $category) : ?>
+                        <a href="<?php echo base_url(); ?>kb/generalarticle?category=<?= $category['name_category']; ?>">
+                            <div class="bg-gray-200 px-[2rem] py-3 rounded-md w-[8rem] h-[5rem] sm:w-[9rem] sm:h-[5rem] md:w-[12rem] md:h-[7rem] flex items-center justify-center cursor-pointer">
+                                <div class="flex-col items-center mb-1 text-center">
+                                    <img src="<?php echo base_url() ?>src/images/icon/<?php echo $category['icon'] ?>" alt="" class="mx-auto w-8 h-8 object-cover">
+                                    <h4 class="whitespace-nowrap text-sm md:text-md text-center mt-1"><?= $category['name_category']; ?></h4>
+                                </div>
+                            </div>
+                        </a>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>

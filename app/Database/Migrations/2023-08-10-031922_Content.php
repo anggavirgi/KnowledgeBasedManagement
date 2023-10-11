@@ -46,6 +46,11 @@ class Content extends Migration
                 'constraint' => 11,
                 'default'    => 0
             ],
+            'content_views' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => 0,
+            ],
             'visibility' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '128',

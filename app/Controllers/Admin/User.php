@@ -40,6 +40,13 @@ class User extends ResourceController
 
         $totalPages = ceil($totalRecords / $perPage);
 
+        foreach ($dataUser as &$user) {
+            $project = $this->projectModel->find($user['id_project']);
+            if ($user['id_project'] !== 0) {
+                $user['id_project'] = $project['name_project'];
+            }
+        }
+
         $pagination = [
             'page' => $page,
             'perPage' => $perPage,
@@ -105,7 +112,7 @@ class User extends ResourceController
             $name = $this->request->getVar('name');
             $username = $this->request->getVar('username');
             $email = $this->request->getVar('email');
-            $password = password_hash($this->request->getVar('password'), PASSWORD_DEFAULT);
+            $password = Password::hash($this->request->getVar('password'));
             $level = $this->request->getVar('level');
             $id_project = $this->request->getVar('id_project');
 

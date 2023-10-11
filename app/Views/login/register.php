@@ -7,6 +7,7 @@
   <link rel="shortcut icon" href="<?php echo base_url(); ?>src/images/favicon.png" type="image/x-icon">
   <title><?php echo $title; ?></title>
   <link rel="stylesheet" href="<?php echo base_url(); ?>src/css/style.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>node_modules/bootstrap-icons/font/bootstrap-icons.css">
   <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"> -->
@@ -62,20 +63,14 @@
         <label for=" password">Create password</label>
         <div class="relative flex items-center justify-end mb-1">
           <input type="password" name="password" id="password" placeholder="Password" class="w-full mt-2 px-4 py-2 rounded-md border border-gray-400 outline-[#18A8D8] <?php if (session('errors.password')) : ?> border-red-600<?php endif; ?>">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-eye absolute mt-2 mr-4 cursor-pointer text-gray-400 hover:text-[#18A8D8]" viewBox="0 0 16 16">
-            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
-            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
-          </svg>
+          <i id="password-toggle" class="bi bi-eye-slash absolute mt-2 mr-4 cursor-pointer text-gray-400 hover:text-[#18A8D8]"></i>
         </div>
         <?php if (session('errors.password')) : ?>
           <small class=" text-red-600 text-sm"><?php echo session('errors.password') ?></small>
         <?php endif; ?>
         <div class="relative flex items-center justify-end mb-3">
           <input type="password" name="pass_confirm" id="pass_confirm" placeholder="Confirm Password" class="w-full mt-2 px-4 py-2 rounded-md border border-gray-400 outline-[#18A8D8] <?php if (session('errors.pass_confirm')) : ?> border-red-600<?php endif; ?>">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-eye absolute mt-2 mr-4 cursor-pointer text-gray-400 hover:text-[#18A8D8]" viewBox="0 0 16 16">
-            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
-            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
-          </svg>
+          <i id="cpassword-toggle" class="bi bi-eye-slash absolute mt-2 mr-4 cursor-pointer text-gray-400 hover:text-[#18A8D8]"></i>
         </div>
         <?php if (session('errors.pass_confirm')) : ?>
           <small class=" text-red-600 text-sm"><?php echo session('errors.pass_confirm') ?></small>
@@ -83,15 +78,15 @@
 
         <div class="flex justify-between">
           <div class="w-1/2 mr-4">
-            <label for="status_user">Are you new / old user</label>
+            <label for="status_user">Choose User Status</label>
             <select name="status_user" id="status_user" class="w-full mt-2 mb-3 px-4 py-2 rounded-md border border-gray-400 outline-[#18A8D8] <?php if (session('errors.status_user')) : ?> border-red-600<?php endif; ?>">
-              <option value="">Choose..</option>
-              <option value="old_user" <?php if (old('status_user') == "old_user") {
-                                          echo "selected";
-                                        } ?>>User Baru</option>
+              <option value="">Select user status</option>
               <option value="new_user" <?php if (old('status_user') == "new_user") {
                                           echo "selected";
-                                        } ?>>User Lama</option>
+                                        } ?>>New User</option>
+              <option value="old_user" <?php if (old('status_user') == "old_user") {
+                                          echo "selected";
+                                        } ?>>Old User</option>
             </select>
             <?php if (session('errors.status_user')) : ?>
               <small class=" text-red-600 text-sm"><?php echo session('errors.status_user') ?></small>
@@ -99,17 +94,11 @@
           </div>
           <div class="w-1/2">
             <label for="id_project">Choose your project</label>
-            <select name="id_project" id="id_project" class="w-full mt-2 mb-3 px-4 py-2 rounded-md border border-gray-400 outline-[#18A8D8] <?php if (session('errors.id_project')) : ?> border-red-600<?php endif; ?>">
-              <option value="">Choose..</option>
-              <option value="1" <?php if (old('id_project') == "1") {
-                                  echo "selected";
-                                } ?>>Project 1</option>
-              <option value="2" <?php if (old('id_project') == "2") {
-                                  echo "selected";
-                                } ?>>Project 2</option>
-              <option value="3" <?php if (old('id_project') == "3") {
-                                  echo "selected";
-                                } ?>>Project 3</option>
+            <select disabled name="id_project" id="id_project" class="w-full mt-2 mb-3 px-4 py-2 rounded-md border border-gray-400 outline-[#18A8D8] <?php if (session('errors.id_project')) : ?> border-red-600<?php endif; ?>">
+              <option value="">Select project</option>
+              <?php foreach ($project as $project) : ?>
+                <option value="<?= $project['id'] ?>" <?php echo old('project') == $project['id'] ? "selected" : "" ?>><?= $project['name_project'] ?></option>
+              <?php endforeach; ?>
             </select>
             <?php if (session('errors.id_project')) : ?>
               <small class=" text-red-600 text-sm"><?php echo session('errors.id_project') ?></small>
@@ -134,8 +123,10 @@
         </button>
       </form>
     </div>
-
   </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="<?php echo base_url(); ?>/src/js/script.js"></script>
 </body>
 
 </html>

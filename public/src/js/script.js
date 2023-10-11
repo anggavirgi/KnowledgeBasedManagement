@@ -1,7 +1,65 @@
 $(document).ready(function () {
+  
   // LAYOUT CUSTOMER
+  // ======================= Password Visibilty Toggle =========================
+  // Password Visibility Toggle
+  $('#password-toggle').click(function() {
+    var passwordInput = $('#password');
+    var passwordToggleIcon = $('#password-toggle');
+    if (passwordInput.attr('type') === 'password') {
+      passwordInput.attr('type', 'text');
+      passwordToggleIcon.removeClass('bi-eye-slash').addClass('bi-eye');
+    } else {
+      passwordInput.attr('type', 'password');
+      passwordToggleIcon.removeClass('bi-eye').addClass('bi-eye-slash');
+    }
+  });
+  // Confirm Password Visibilty Toggle
+  $('#cpassword-toggle').click(function() {
+    var cpasswordInput = $('#pass_confirm');
+    var cpasswordToggleIcon = $('#cpassword-toggle');
+    if (cpasswordInput.attr('type') === 'password') {
+      cpasswordInput.attr('type', 'text');
+      cpasswordToggleIcon.removeClass('bi-eye-slash').addClass('bi-eye');
+    } else {
+      cpasswordInput.attr('type', 'password');
+      cpasswordToggleIcon.removeClass('bi-eye').addClass('bi-eye-slash');
+    }
+  });
+  // ===========================================================================
 
-  // DROPDOWN GENERAL QUESTION
+
+
+  // ================== Select Condition Prject & User Type ====================
+  var statusUserDropdown = $('#status_user');
+  var projectDropdown = $('#id_project');
+  var signupButton = $('#signup_button');
+
+  // Event listener for change project if any change in user type
+  statusUserDropdown.change(function() {
+    setStatusProject();
+  });
+
+  // Call setStatusProject() when page is loaded
+  setStatusProject();
+
+  function setStatusProject() {
+    if (statusUserDropdown.val() === 'new_user') {
+      projectDropdown.prop('disabled', true);
+      signupButton.prop('disabled', false);
+    } else if (statusUserDropdown.val() === '') {
+      projectDropdown.prop('disabled', true).val('');
+      signupButton.prop('disabled', true);
+    } else {
+      projectDropdown.prop('disabled', false);
+      signupButton.prop('disabled', false);
+    }
+  }
+  // ===========================================================================
+
+
+
+  // ======================== Dropdown General Question ========================
   $(".collapsible").click(function () {
     var icon = $(this).find(".icon");
     if (icon.hasClass("bi-chevron-down")) {
@@ -21,8 +79,11 @@ $(document).ready(function () {
     var id = "#" + target;
     $(id).slideToggle();
   });
+  // ===========================================================================
 
-  // DROPDOWN SIDEBAR ARTICLE
+
+
+  // ===================== Dropdown Sidebar General Article =====================
   $(".collapsiblesidebar").click(function () {
     var iconside = $(this).find(".icon");
     if (iconside.hasClass("bi-chevron-down")) {
@@ -36,21 +97,22 @@ $(document).ready(function () {
       var titlesidebar = "#" + titlesidebar;
       $(titlesidebar).removeClass("text-sky-700");
     }
-
     var targetside = $(this).attr("data-target");
     $("#" + targetside).slideToggle();
   });
+  // ===========================================================================
+
+
+
 
   // LAYOUT ADMIN
-
-  // Sidebar Menu Active
+  // =========================== Sidebar Menu Active ===========================
   const activePage = window.location.pathname;
   $("#sidebar-child a").each(function () {
     if (this.href.includes(activePage)) {
       $(this).addClass("bg-main text-white rounded-md");
     }
   });
-
   // Burger Sidebar
   $(".burger-icon").click(function () {
     $(".sidebar").toggleClass("hidden");
@@ -58,8 +120,11 @@ $(document).ready(function () {
       "md:ml-[22%] xl:ml-[18%] 2xl:ml-[14%] md:w-[78%] xl:w-[82%] 2xl:w-[86%]"
     );
   });
+  // ===========================================================================
 
-  // DELETE BY CHECKLIST
+
+
+  // ========================= Delete Single Checkbox ==========================
   $(".delete-checkbox").on("change", function () {
     let checkbox = $(".delete-checkbox").length;
     let checkboxChecked = $(".delete-checkbox:checked").length;
@@ -76,10 +141,9 @@ $(document).ready(function () {
       $(".delete-batch").hide();
     }
   });
-  
+  // Delete all checkbox
   $(".delete-all-checkbox").on("change", function () {
     const checkAll = document.querySelector(".delete-all-checkbox");
-
     if (checkAll.checked) {
       $(".delete-checkbox").prop("checked", false); // Uncheck all checkboxes first
       $(".delete-checkbox").each(function () {
@@ -94,15 +158,13 @@ $(document).ready(function () {
       $(".delete-batch").hide();
     }
   });
-
+  // Send data delete batch using ajax 
   $(".delete-batch-btn").on("click", function () {
     const url = $(this).attr("data-action");
     let selectedItems = [];
     $(".delete-checkbox:checked").each(function () {
       selectedItems.push($(this).closest("td").data("id"));
     });
-    console.log(selectedItems);
-
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -125,8 +187,11 @@ $(document).ready(function () {
       }
     });
   });
+  // ===========================================================================
 
-  // Sidebar Mobile Toggle Aside Expand
+
+
+  // ==================== Sidebar Toggle Expand Mobile View ====================
   var toggleClose = `
   <button type="button" data-drawer-hide="drawer-disabled-backdrop" aria-controls="drawer-disabled-backdrop" class="text-white bg-main rounded-lg text-sm w-14 h-10 absolute top-0 -right-12 inline-flex items-center justify-center">
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-white">
@@ -139,15 +204,17 @@ $(document).ready(function () {
     // Append the button to the aside element
     $('#drawer-disabled-backdrop').append(toggleClose);
   });
-  
   const aside = $('#drawer-disabled-backdrop');
   $(aside).on('click', "button[data-drawer-hide='drawer-disabled-backdrop']", function () {
     $(aside).removeClass('transform-none')
     $(aside).addClass('-translate-x-full')
     $(this).remove()
   });
+  // =========================================================================== 
 
-  // Changing Status Complain
+
+
+  // ======================== Initiate Status Complain =========================
   var initialValue = $("#status-entries").val();
   const statusComplainElement = $("#status-entries");
   const ddIconElement = $("#dd-icon svg path");
@@ -174,7 +241,10 @@ $(document).ready(function () {
     $(ddIconPos).addClass("right-[4rem]");
     $(ddIconElement).attr("fill", "#047FA6").attr("stroke", "#047FA6");
   }
+  // ===========================================================================
 
+
+  // ========================= Change Status Complain ==========================
   statusComplainElement.change(function () {
     initialValue = $(this).val();
     const id = $(this).data("id");
@@ -218,11 +288,13 @@ $(document).ready(function () {
       url: "/kb/administrator/complain/updateStatus",
       data: data,
     });
-
     location.reload();
   });
+  // ===========================================================================
 
-  // Initiate Article Case
+
+
+  // ======================= Initiate Open/Close Article =======================
   $('[id^="case-entries"]').each(function () {
     var $dropdown = $(this);
     var selectedValue = $dropdown.val();
@@ -239,8 +311,11 @@ $(document).ready(function () {
         $(iconElement).attr("fill", "#A30D11").attr("stroke", "#A30D11");
       }
   });
+  // ===========================================================================
 
-  // Change Condition Article Case
+
+
+  // ================ Change Condition Open/Close Article ======================
   $('[id^="case-entries"]').change(function () {
     var initialCaseValue = $(this).val();
     var id = $(this).data("id");
@@ -266,22 +341,17 @@ $(document).ready(function () {
       url: "/kb/administrator/article/updateVisibility",
       data: data,
       success: function(response) {
-        // This code runs after the AJAX request is successful
-        console.log("AJAX request successful.");
-        // location.reload();
       },
       error: function(jqXHR, textStatus, errorThrown) {
-          // This code runs if there's an error with the AJAX request
           console.error("AJAX request error:", textStatus, errorThrown);
       }
     });
   });
+  // ===========================================================================
 
-  // ========================= Detail Article Attribute =========================
-  const nodes = $(".uploadTime").get();
-  timeago.render(nodes, 'en_US');
 
-  // Complain Details ``Row`` Selected
+  
+  // ======================= Clickable Row Complain =========================== 
   $(".clickable-row").click(function (event) {
     if (
       !$(event.target).closest("select").length &&
@@ -291,12 +361,13 @@ $(document).ready(function () {
       window.location = $(this).data("href");
     }
   });
+  // ===========================================================================
 
-  // Alert notification Message
+
+
+  // ======================= Alert notification Message =======================
   const flashSuccessMessage = $(".flash-success-message").data("message");
   const flashErrorMessage = $(".flash-error-message").data("message");
-
-  // console.log(flashSuccessMessage);
 
   if (flashSuccessMessage) {
     const Toast = Swal.mixin({
@@ -310,13 +381,11 @@ $(document).ready(function () {
         toast.addEventListener("mouseleave", Swal.resumeTimer);
       },
     });
-
     Toast.fire({
       icon: "success",
       title: flashSuccessMessage,
     });
   }
-
   if (flashErrorMessage) {
     const Toast = Swal.mixin({
       toast: true,
@@ -329,13 +398,16 @@ $(document).ready(function () {
         toast.addEventListener("mouseleave", Swal.resumeTimer);
       },
     });
-
     Toast.fire({
       icon: "error",
       title: flashErrorMessage,
     });
   }
-  // Alert notification CRUD
+  // ===========================================================================
+
+
+
+  // ========================= Alert Notification CRUD =========================
   const flashSuccess = $(".flash-success").data("flashmessage");
   const flashError = $(".flash-error").data("flashmessage");
 
@@ -348,7 +420,6 @@ $(document).ready(function () {
       timer: "1200",
     });
   }
-
   if (flashError) {
     Swal.fire({
       title: "Failed",
@@ -362,8 +433,6 @@ $(document).ready(function () {
   $(".btn-delete").on("click", function () {
     const id = $(this).attr("data-id");
     const url = $(this).attr("data-action");
-    // console.log(href);
-
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -378,13 +447,15 @@ $(document).ready(function () {
           type: "GET",
           url: url,
         });
-
         location.reload();
       }
     });
   });
+  // ============================================================================
 
-  // Row Entries Per Page
+
+
+  // =============================== Row Per Page ===============================
   $('#row-entries').change(function() {
     var offset = 1;
     var selectedValue = $(this).val(); 
@@ -392,11 +463,8 @@ $(document).ready(function () {
     var parts = currentUrl.split("/");
     var lastPart = parts[parts.length - 1];
     var pages = lastPart.split("?")[0];
-    
-
     fetchData(selectedValue, offset, pages); 
   });
-
   function fetchData(Data, offset, pages) {
     if(pages == 'subcategory'){
       const url = new URL(window.location.href);
@@ -408,37 +476,42 @@ $(document).ready(function () {
       window.location.href = newUrl;
     }
   }
-    
+  // ================================================================================
+
+
+
+  // =============== Select Category & Subcategory Condition Article ================
   $('#categorySelect').change(function() {
     var selectedCategory = $(this).val();
     var subcategorySelect = $('#subcategorySelect');
-
-    // Disable the subcategory select by default
     subcategorySelect.prop('disabled', true);
-
-    // Hide all subcategory options
     $('#subcategorySelect option').hide();
 
     if (selectedCategory === '') {
-        // If no category is selected, show the default option and keep it disabled
         $('#subcategorySelect option[value=""]').show();
     } else {
-        // Show subcategory options with class matching selected category
         $('#subcategorySelect option.' + selectedCategory).show();
-        
-        // Check if there are subcategory options with the selected class
         if ($('#subcategorySelect option.' + selectedCategory).length === 0) {
-            // If no matching class found, show the default option and keep it disabled
             $('#subcategorySelect option[value=""]').show();
         } else {
-            // Enable the subcategory select if a matching class is found
             subcategorySelect.prop('disabled', false);
         }
     }
-
-    // Reset the subcategory selection
     subcategorySelect.val('');
   });
+  // ===================================================================================
+
+
+
+  // ========================= Dynamically URL Article Details =========================
+  var urlPattern = /http:\/\/localhost:8080\/kb\/administrator\/article\/detail\/\d+/;
+  // Check if the current page URL matches the pattern run Timeago.js
+  if (urlPattern.test(window.location.href)) {
+    const nodes = $(".uploadTime").get();
+    timeago.render(nodes, 'en_US');
+  }
+  // ===================================================================================
+
 });
 
 // USER

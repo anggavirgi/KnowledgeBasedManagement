@@ -4,28 +4,47 @@ namespace App\Controllers;
 
 use App\Controllers\Admin\Complain;
 use App\Models\Admin\ComplainModel;
+use App\Models\Admin\CategoryModel;
+use App\Models\Admin\SubCategoryModel;
+use App\Models\Admin\ContentModel;
 
 class Home extends BaseController
 {
     protected $complainModel;
+    protected $categoryModel;
+    protected $subCategoryModel;
+    protected $contentModel;
 
     public function __construct()
     {
         $this->complainModel = new ComplainModel();
+        $this->categoryModel = new categoryModel();
+        $this->subCategoryModel = new subcategoryModel();
+        $this->contentModel = new contentModel();
     }
 
     public function index()
     {
+        $category =  $this->categoryModel->findAll();
         $data = [
-            'title' => 'Virtusee | Knowledge Based'
+            'title' => 'Virtusee | Knowledge Based',
+            'category' => $category,
         ];
         return view('customer/index', $data);
     }
 
     public function generalarticle()
     {
+        $category = $this->request->getGet('category') ?? 'Category';
+        $categories =  $this->categoryModel->findAll();
+        $subcategories =  $this->subCategoryModel->findAll();
+        $content =  $this->contentModel->findAll();
         $data = [
-            'title' => 'Virtusee | article'
+            'title' => 'Virtusee | article',
+            'category_title' => $category,
+            'categories' => $categories,
+            'subcategories' => $subcategories,
+            'content' => $content,
         ];
         return view('customer/articlegeneral', $data);
     }

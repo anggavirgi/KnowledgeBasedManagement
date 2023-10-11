@@ -108,13 +108,7 @@
                             <?php echo $content['id_sub_category'] ?>
                         </td>
                         <td class="p-3">
-                            <?php
-                            foreach ($articles as $article) {
-                                if ($content['id'] == $article['id_content']) {
-                                    echo $article['id_project'];
-                                }
-                            }
-                            ?>
+                            <?php echo $content['id_project'] ?>
                         </td>
                         <td class="p-3 text-center">
                             <div class="relative flex justify-center items-center">

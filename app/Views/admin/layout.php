@@ -114,13 +114,8 @@
           uploadUrl: 'https://ckeditor.com/apps/ckfinder/3.5.0/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
         }
       })
-      .then(editor => {
-        console.log(editor);
-      })
-      .catch((error) => {
-        // console.error(error);
-        console.log("Error in CKEDITOR");
-      });
+      .then(editor => {})
+      .catch((error) => {});
   </script>
 
 </body>

@@ -35,11 +35,6 @@ $routes->get('/', 'Home::index');
 
 $routes->group('kb', static function ($routes) {
 
-    // ROUTE LOGIN
-    // $routes->get('proses', 'Login::proses');
-    // $routes->get('register/', 'Login::register');
-    // $routes->get('forgot-password/', 'Login::forgotpassword');
-
     //HOME
     $routes->get('/', 'Home::index');
     $routes->get('generalarticle', 'Home::generalarticle');

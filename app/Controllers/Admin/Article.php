@@ -42,7 +42,14 @@ class Article extends ResourceController
 
     $totalPages = ceil($totalRecords / $perPage);
 
-    $content = $this->contentModel->findAll();
+    $content = $this->db->table('content a')
+      ->select('a.*, c.name_category AS id_category, d.name_subcategory AS id_sub_category, b.name_project AS id_project')
+      ->join('article e', 'a.id = e.id_content')
+      ->join('categories c', 'a.id_category = c.id')
+      ->join('sub_category d', 'a.id_sub_category = d.id')
+      ->join('project b', 'e.id_project = b.id')
+      ->get()
+      ->getResultArray();
 
     $pagination = [
       'page' => $page,

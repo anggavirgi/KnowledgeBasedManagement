@@ -68,7 +68,7 @@
                         </li>
                     </ul>
                     <div class="py-2">
-                        <a href="<?php echo base_url(); ?>logout" class="block px-4 py-2 text-sm text-red-700 hover:bg-gray-300">Logout</a>
+                        <a href="<?php echo base_url(); ?>kb/logout" class="block px-4 py-2 text-sm text-red-700 hover:bg-gray-300">Logout</a>
                     </div>
                 </div>
 
@@ -104,7 +104,7 @@
                             <a href="#" class="block py-2 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0  ">Article</a>
                         </li>
                         <li>
-                            <a href="/kb/logout" class="block py-2 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 text-red-600 ">Logout</a>
+                            <a href="<?php echo base_url(); ?>kb/logout" class="block py-2 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 text-red-600 ">Logout</a>
                         </li>
                     </ul>
                 </div>
