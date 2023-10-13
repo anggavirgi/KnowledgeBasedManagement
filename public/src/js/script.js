@@ -56,52 +56,165 @@ $(document).ready(function () {
     }
   }
   // ===========================================================================
+  
 
 
+  // ===================== Dropdown Condition Article =====================
+  const category = new URLSearchParams(window.location.search).get("category");
+  const subcategory = new URLSearchParams(window.location.search).get("subcategory");
+  var titlesidebar = $(".collapsiblesidebar:contains('"+category+"')");
+  var subtitlesidebar = $(".sidebarcollapse a:contains('"+subcategory+"')");
+  var iconside = titlesidebar.find(".icon");
+  $('#breadcrumb-category').text(category);
 
-  // ======================== Dropdown General Question ========================
-  $(".collapsible").click(function () {
-    var icon = $(this).find(".icon");
-    if (icon.hasClass("bi-chevron-down")) {
-      icon.removeClass("bi-chevron-down");
-      icon.addClass("bi-chevron-up");
-      var title = $(this).attr("data-title");
-      var title = "#" + title;
-      $(title).addClass("text-sky-700");
-    } else if (icon.hasClass("bi-chevron-up")) {
-      icon.removeClass("bi-chevron-up");
-      icon.addClass("bi-chevron-down");
-      var title = $(this).attr("data-title");
-      var title = "#" + title;
-      $(title).removeClass("text-sky-700");
-    }
-    var target = $(this).attr("data-target");
-    var id = "#" + target;
-    $(id).slideToggle();
-  });
-  // ===========================================================================
-
-
-
-  // ===================== Dropdown Sidebar General Article =====================
-  $(".collapsiblesidebar").click(function () {
-    var iconside = $(this).find(".icon");
-    if (iconside.hasClass("bi-chevron-down")) {
+  if (iconside.hasClass("bi-chevron-down")) {
+      var targetside = titlesidebar.attr("data-target");
+      $("#" + targetside).slideToggle();
       iconside.removeClass("bi-chevron-down").addClass("bi-chevron-up");
-      var titlesidebar = $(this).attr("data-title");
-      var titlesidebar = "#" + titlesidebar;
-      $(titlesidebar).addClass("text-sky-700");
-    } else if (iconside.hasClass("bi-chevron-up")) {
-      iconside.removeClass("bi-chevron-up").addClass("bi-chevron-down");
-      var titlesidebar = $(this).attr("data-title");
-      var titlesidebar = "#" + titlesidebar;
-      $(titlesidebar).removeClass("text-sky-700");
+      var titlesidebarId = titlesidebar.attr("data-title");
+      titlesidebarId = "#" + titlesidebarId;
+      $(titlesidebarId).addClass("text-sky-700");
+      $(subtitlesidebar).addClass("text-sky-700");
     }
-    var targetside = $(this).attr("data-target");
-    $("#" + targetside).slideToggle();
+    
+    $('.collapsiblesidebar').on('click', function () {
+      var iconside = $(this).find(".icon");
+      var targetside = $(this).attr("data-target");
+      
+      if (iconside.hasClass("bi-chevron-down")) {
+        $(".collapsiblesidebar .icon.bi-chevron-up").each(function () {
+          var otherCategory = $(this).closest(".collapsiblesidebar");
+          var otherTarget = otherCategory.attr("data-target");
+             $("#" + otherTarget).slideUp();
+             $(this).removeClass("bi-chevron-up").addClass("bi-chevron-down");
+             var otherTitleId = otherCategory.attr("data-title");
+             otherTitleId = "#" + otherTitleId;
+             $(otherTitleId).removeClass("text-sky-700");
+         });
+         $("#" + targetside).slideDown();
+         iconside.removeClass("bi-chevron-down").addClass("bi-chevron-up");
+         var titlesidebarId = $(this).attr("data-title");
+         titlesidebarId = "#" + titlesidebarId;
+         $(titlesidebarId).addClass("text-sky-700");
+     } else {
+     }
   });
+
+  // Handle subcategory link clicks
+  $('.subcategory-link').on('click', function (e) {
+    e.preventDefault();
+    $('.subcategory-link').removeClass('text-sky-700');
+    const category = $(this).data('category');
+    const subcategory = $(this).data('subcategory');
+    $(this).addClass('text-sky-700');
+
+    updateContent(category, subcategory);
+    const newUrl = 'http://localhost:8080/kb/generalarticle?category=' + category + '&subcategory=' + subcategory;
+    history.pushState({}, '', newUrl);
+  });
+
+  function updateContent(category, subcategory) {
+      $.ajax({
+          type: 'GET', 
+          url: 'http://localhost:8080/kb/generalarticle?cateogry='+category+'&subcategory='+subcategory,
+          data: { category: category, subcategory: subcategory },
+          success: function (response) {
+              var tempElement = document.createElement('div');
+              tempElement.innerHTML = response;
+              var contentContainer = tempElement.querySelector('#content-container');
+
+              if (contentContainer) {
+                  var contentHTML = contentContainer.innerHTML;
+                  $('#content-title').text(subcategory || category);
+                  $('#breadcrumb-category').text(category);
+                  $('#content-container').html(contentHTML);
+              } else {
+                  console.error('#content-container not found in the response');
+              }
+          },
+          error: function (error) {
+              console.error('Error:', error);
+          }
+      });
+  }
+  // ===========================================================================
+  
+  
+  
+  // ======================== Reaction Icon Condition =========================
+  $('#likes').hover(function () {
+      $(this).find('svg path').css('fill', '#00d431'); 
+  }, function () {
+      $(this).find('svg path').css('fill', ''); 
+  });
+  $('#likeButton').on('click', function () {
+      // Get the current URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const category = urlParams.get('category');
+      const subcategory = urlParams.get('subcategory');
+      const articleId = urlParams.get('articleId');
+
+      // Make an AJAX request to increment the like count
+      $.ajax({
+          type: 'POST', // Adjust the request type if needed
+          url: 'http://localhost:8080/kb/generalarticle/generalarticledetail?category='+category+'&subcategory='+subcategory+'&articleId='+articleId+'', // Replace with your server endpoint
+          data: {
+              category: category,
+              subcategory: subcategory,
+              articleId: articleId
+          },
+          success: function (response) {
+              // Handle success response, e.g., update the UI
+              console.log('Like sent successfully');
+          },
+          error: function (error) {
+              // Handle error, e.g., show an error message
+              console.error('Error:', error);
+          }
+      });
+  });
+
+  $('#notlikes').hover(function () {
+      $(this).find('svg path').css('fill', '#d10023'); 
+  }, function () {
+      $(this).find('svg path').css('fill', ''); 
+  });
+  var urlPattern = /http:\/\/localhost:8080\/kb\/generalarticle\/generalarticledetail\?.+/;
+  // Check if the current page URL matches the pattern run Timeago.js
+  if (urlPattern.test(window.location.href)) {
+    const nodes = $(".uploadTime").get();
+    timeago.render(nodes, 'en_US');
+  }
   // ===========================================================================
 
+
+  
+  
+  // ===================== Open Close Modal Form Complain ======================
+  // Select the modal element by its ID or other means
+  const $modalElement = document.querySelector('#authentication-modal');
+  // Define the options for the modal
+  const modalOptions = {
+      placement: 'bottom-right',
+      onHide: () => {
+      },
+      onShow: () => {
+      },
+      onToggle: () => {
+      }
+  };
+  // Create a new Modal instance
+  if (window.location.href === 'http://localhost:8080/kb/complain') {
+  // This code will run only when the URL matches 'http://localhost:8080/kb/complain'
+    const modal = new Modal($modalElement, modalOptions);
+    if (fileMessage !== null) {
+      modal.show();
+    } 
+    $('[data-modal-hide="authentication-modal"]').click(function() {
+      modal.hide();
+    });
+  }
+  // ===========================================================================
 
 
 
@@ -532,79 +645,74 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Show file name in drag & drop box
 // Select the file input element by its id
-const fileInput = document.getElementById("dropzone-file");
-
-// Select the <p> element where you want to display the file name
-const selectedFileName = document.getElementById("selected-file-name");
-
-const dragdroptext = document.getElementById("dragdroptext");
-const formatsizetext = document.getElementById("formatsizetext");
-
-//Border
-const dropzone = document.getElementById("dropzone");
+const $fileInput = $("#dropzone-file");
+const $selectedFileName = $("#selected-file-name");
+const $dragdroptext = $("#dragdroptext");
+const $formatsizetext = $("#formatsizetext");
+const $dropzone = $("#dropzone");
 
 // Add an event listener to the file input element
-fileInput.addEventListener("change", (event) => {
-  // Get the selected file
-  const selectedFile = event.target.files[0];
+$fileInput.on("change", function(event) {
+    // Get the selected file
+    const selectedFile = event.target.files[0];
 
-  // Check if a file is selected
-  if (selectedFile) {
-    // Update the text content of the <p> element with the file name
-    selectedFileName.textContent = `Selected file: ${selectedFile.name}`;
-    selectedFileName.classList.add("-mt-8");
-    dragdroptext.classList.remove("block");
-    dropzone.classList.add("border-main");
-    formatsizetext.classList.remove("block");
-    dragdroptext.classList.add("hidden");
-    formatsizetext.classList.add("hidden");
-  } else {
-    // If no file is selected, clear the text content
-    selectedFileName.textContent = "";
-    selectedFileName.classList.remove("-mt-8");
-    dragdroptext.classList.remove("hidden");
-    dropzone.classList.remove("border-main");
-    formatsizetext.classList.remove("hidden");
-    dragdroptext.classList.add("block");
-    formatsizetext.classList.add("block");
-  }
+    // Check if a file is selected
+    if (selectedFile) {
+        // Update the text content of the <p> element with the file name
+        $selectedFileName.text(`Selected file: ${selectedFile.name}`);
+        $selectedFileName.addClass("-mt-8");
+        $dragdroptext.removeClass("block md:block");
+        $dropzone.addClass("border-main");
+        $formatsizetext.removeClass("block md:block");
+        $dragdroptext.addClass("hidden");
+        $formatsizetext.addClass("hidden");
+    } else {
+        // If no file is selected, clear the text content
+        $selectedFileName.text("");
+        $selectedFileName.removeClass("-mt-8");
+        $dragdroptext.removeClass("hidden");
+        $dropzone.removeClass("border-main");
+        $formatsizetext.removeClass("hidden");
+        $dragdroptext.addClass("block");
+        $formatsizetext.addClass("block");
+    }
 });
 
-dropzone.addEventListener("dragover", (e) => {
-  e.preventDefault();
-  dropzone.classList.add("border-main"); // Add a class to highlight the drop area when dragging over it.
+$dropzone.on("dragover", function(e) {
+    e.preventDefault();
+    $dropzone.addClass("border-main"); // Add a class to highlight the drop area when dragging over it.
 });
 
-dropzone.addEventListener("dragleave", () => {
-  dropzone.classList.remove("border-main"); // Remove the highlighting class when dragging leaves the drop area.
+$dropzone.on("dragleave", function() {
+    $dropzone.removeClass("border-main"); // Remove the highlighting class when dragging leaves the drop area.
 });
 
-dropzone.addEventListener("drop", (e) => {
-  e.preventDefault();
-  dropzone.classList.remove("border-main"); // Remove the highlighting class when a file is dropped.
+$dropzone.on("drop", function(e) {
+    e.preventDefault();
+    $dropzone.removeClass("border-main"); // Remove the highlighting class when a file is dropped.
 
-  const files = e.dataTransfer.files;
-  handleFileChange(files);
+    const files = e.originalEvent.dataTransfer.files;
+    handleFileChange(files);
 });
 
 function handleFileChange(files) {
-  if (files.length > 0) {
-    const file = files[0];
-    selectedFileName.textContent = `Selected file: ${file.name}`;
-    selectedFileName.classList.add("-mt-8");
-    dragdroptext.classList.remove("block");
-    dropzone.classList.add("border-main");
-    formatsizetext.classList.remove("block");
-    dragdroptext.classList.add("hidden");
-    formatsizetext.classList.add("hidden");
-    fileInput.files = files; // Assign the selected files to the hidden input for form submission.
-  } else {
-    selectedFileName.textContent = "";
-    selectedFileName.classList.remove("-mt-8");
-    dragdroptext.classList.remove("hidden");
-    dropzone.classList.remove("border-main");
-    formatsizetext.classList.remove("hidden");
-    dragdroptext.classList.add("block");
-    formatsizetext.classList.add("block");
-  }
+    if (files.length > 0) {
+        const file = files[0];
+        $selectedFileName.text(`Selected file: ${file.name}`);
+        $selectedFileName.addClass("-mt-8");
+        $dragdroptext.removeClass("block md:block");
+        $dropzone.addClass("border-main");
+        $formatsizetext.removeClass("block md:block");
+        $dragdroptext.addClass("hidden");
+        $formatsizetext.addClass("hidden");
+        $fileInput[0].files = files; // Assign the selected files to the hidden input for form submission.
+    } else {
+        $selectedFileName.text("");
+        $selectedFileName.removeClass("-mt-8");
+        $dragdroptext.removeClass("hidden");
+        $dropzone.removeClass("border-main");
+        $formatsizetext.removeClass("hidden");
+        $dragdroptext.addClass("block");
+        $formatsizetext.addClass("block");
+    }
 }

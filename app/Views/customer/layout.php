@@ -52,8 +52,8 @@
                     <span class="sr-only">Open user menu</span>
                     <img class="w-12 h-12 mr-2 rounded-full" src="<?php echo base_url(); ?>src/images/profilepic.png" alt="user photo">
                     <div class="flex flex-col text-left">
-                        Bonnie Green
-                        <span class="text-form text-xs truncate w-32">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus dignissimos excepturi molestias mollitia nobis voluptas?</span>
+                        <?= user()->username; ?>
+                        <span class="text-form text-xs truncate w-32"><?= $project['name_project']; ?></span>
                     </div>
                 </button>
                 <!-- Element After Login -->
@@ -64,7 +64,10 @@
                             <a href="<?php echo base_url(); ?>kb/complain" class="block px-4 py-2 bg-white hover:bg-gray-300 text-black">Dashboard</a>
                         </li>
                         <li>
-                            <a href="#" class="block px-4 py-2 bg-white hover:bg-gray-300 text-black">Article</a>
+                            <a href="<?php echo base_url(); ?>kb/personalarticle" class="block px-4 py-2 bg-white hover:bg-gray-300 text-black">History</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url(); ?>kb/generalarticle" class="block px-4 py-2 bg-white hover:bg-gray-300 text-black">Article</a>
                         </li>
                     </ul>
                     <div class="py-2">
@@ -89,8 +92,8 @@
                                 <span class="sr-only">Open user menu</span>
                                 <img class="w-12 h-12 mr-2 rounded-full" src="<?php echo base_url(); ?>src/images/profilepic.png" alt="user photo">
                                 <div class="flex flex-col text-left ">
-                                    Bonnie Green
-                                    <span class="text-form text-xs truncate w-44">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus dignissimos excepturi molestias mollitia nobis voluptas?</span>
+                                    <?= user()->username; ?>
+                                    <span class="text-form text-xs truncate w-44"><?= $project['name_project']; ?></span>
                                 </div>
                             </button>
                         </li>
@@ -197,8 +200,10 @@
     </section>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="<?php echo base_url(); ?>node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <script src="<?php echo base_url(); ?>/src/js/script.js"></script>
     <script src="<?php echo base_url(); ?>node_modules/flowbite/dist/flowbite.min.js"></script>
+    <script src="<?php echo base_url(); ?>node_modules/timeago.js/dist/timeago.min.js"></script>
 
 </body>
 

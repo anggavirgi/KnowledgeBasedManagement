@@ -73,51 +73,61 @@
             </ul>
         </div>
     </aside>
-    <section class="lg:px-20 xl:px-40 pb-12 sm:py-12 flex text-sm" id="main">
-        <div class="w-1/4 pt-14 pe-8 2xl:px-24 hidden md:block px-7">
-            <h2 class="font-bold text-lg mb-3">All Categories</h2>
-            <div class="flex flex-col gap-2">
-                <?php
-                $i = 1;
-                foreach ($categories as $category) : ?>
-                    <div class="collapsiblesidebar" data-target="collapsesidebar<?= $i; ?>" data-title="titlesidebar<?= $i; ?>">
-                        <div class="flex justify-between items-center font-semibold cursor-pointer hover:text-main">
-                            <div id="titlesidebar<?= $i; ?>"><?= $category['name_category']; ?></div>
-                            <div class="text-xl cursor-pointer">
-                                <i class="bi bi-chevron-down icon text-sm"></i>
-                            </div>
-                        </div>
-                        <div class="hidden ms-1 mt-1 sidebarcollapse" id="collapsesidebar<?= $i; ?>">
-                            <?php foreach ($subcategories as $subcategory) : ?>
+</div>
 
-                                <a href="" class="block py-1 cursor-pointer hover:text-main"><?= $subcategory['name_subcategory']; ?></a>
-                            <?php endforeach; ?>
+<section class="lg:px-20 xl:px-40 pb-12 sm:py-12 flex text-sm" id="main">
+    <div class="w-1/4 pt-14 pe-8 2xl:px-24 hidden md:block px-7">
+        <h2 class="font-bold text-lg mb-3">All Categories</h2>
+        <div class="flex flex-col gap-2">
+            <?php
+            $i = 1;
+            foreach ($categories as $category) : ?>
+                <div class="collapsiblesidebar" data-target="collapsesidebar<?= $i; ?>" data-title="titlesidebar<?= $i; ?>">
+                    <div class="flex justify-between items-center font-semibold cursor-pointer hover:text-main">
+                        <div id="titlesidebar<?= $i; ?>"><?= $category['name_category']; ?></div>
+                        <div class="text-xl cursor-pointer">
+                            <i class="bi bi-chevron-down icon text-sm"></i>
                         </div>
                     </div>
-                <?php $i++;
+                    <div class="hidden ms-1 mt-1 sidebarcollapse" id="collapsesidebar<?= $i; ?>">
+                        <?php foreach ($subcategories as $subcategory) :
+                            if ($subcategory['id_category'] == $category['id']) :
+                        ?>
+                                <a href="javascript:void(0);" class="subcategory-link block py-1 cursor-pointer hover:text-main" data-category="<?= $category['name_category']; ?>" data-subcategory="<?= $subcategory['name_subcategory']; ?>">
+                                    <?= $subcategory['name_subcategory']; ?>
+                                </a>
+                        <?php
+                            endif;
+                        endforeach; ?>
+                    </div>
+                </div>
+            <?php $i++;
+            endforeach; ?>
+        </div>
+    </div>
+
+    <div class="w-full md:w-9/12 px-4 2xl:ps-4 2xl:pe-32">
+        <div class="font-medium px-3 text-sm">
+            <a href="<?php echo base_url(); ?>kb" class="text-main hover:text-sky-600">Home</a>
+            <span> / </span>
+            <span id="breadcrumb-category">Category</span>
+        </div>
+        <div class="mt-8">
+            <h4 class="text-2xl font-bold ps-3 mb-2" id="content-title"><?= isset($subcategory_title) ? $subcategory_title : $category_title; ?></h4>
+            <div id="content-container">
+                <?php foreach ($content as $content) :
+                    if ($content['name_category'] === $category_title && !isset($subcategory_title) || $content['name_subcategory'] === $subcategory_title) : ?>
+                        <a href="<?Php echo base_url() ?>kb/generalarticle/generalarticledetail?category=<?= $content['name_category'] ?>&subcategory=<?= $content['name_subcategory']; ?>&articleId=<?= $content['id']; ?>" class="block px-3 py-5 text-base hover:bg-gray-100">
+                            <?= $content['title']; ?>
+                        </a>
+                        <hr>
+                <?php
+                    endif;
                 endforeach; ?>
             </div>
         </div>
+    </div>
 
-        <div class="w-full md:w-9/12 px-4 2xl:ps-4 2xl:pe-32">
-            <div class="font-medium px-3 text-sm">
-                <a href="<?php echo base_url(); ?>kb" class="text-main hover:text-sky-600">Home</a>
-                <span> / </span>
-                <span>Categories</span>
-            </div>
-
-            <div class="mt-8">
-                <h4 class="text-2xl font-bold ps-3 mb-2"><?= $category_title; ?></h4>
-                <?php foreach ($content as $content) : ?>
-                    <a href="<?Php echo base_url() ?>kb/generalarticle/generalarticledetail" class="block px-3 py-5 text-base hover:bg-gray-100">
-                        <?= $content['title']; ?>
-                    </a>
-                    <hr>
-                <?php endforeach; ?>
-            </div>
-        </div>
-
-    </section>
-</div>
+</section>
 
 <?php echo $this->endSection(); ?>
