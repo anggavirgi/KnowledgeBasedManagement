@@ -19,7 +19,6 @@
                 <img src="<?php echo base_url(); ?>src/images/logo.png" alt="" class="nav-brand w-32 ml-3 md:w-40">
             </a>
 
-
             <?php if (logged_in()) : ?>
                 <div class="flex ">
 
@@ -53,8 +52,8 @@
                     <span class="sr-only">Open user menu</span>
                     <img class="w-12 h-12 mr-2 rounded-full" src="<?php echo base_url(); ?>src/images/profilepic.png" alt="user photo">
                     <div class="flex flex-col text-left">
-                        Bonnie Green
-                        <span class="text-form text-xs truncate w-32">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus dignissimos excepturi molestias mollitia nobis voluptas?</span>
+                        <?= user()->username; ?>
+                        <span class="text-form text-xs truncate w-32"><?= $project['name_project']; ?></span>
                     </div>
                 </button>
                 <!-- Element After Login -->
@@ -65,11 +64,14 @@
                             <a href="<?php echo base_url(); ?>kb/complain" class="block px-4 py-2 bg-white hover:bg-gray-300 text-black">Dashboard</a>
                         </li>
                         <li>
-                            <a href="#" class="block px-4 py-2 bg-white hover:bg-gray-300 text-black">Article</a>
+                            <a href="<?php echo base_url(); ?>kb/personalarticle" class="block px-4 py-2 bg-white hover:bg-gray-300 text-black">History</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url(); ?>kb/generalarticle" class="block px-4 py-2 bg-white hover:bg-gray-300 text-black">Article</a>
                         </li>
                     </ul>
                     <div class="py-2">
-                        <a href="/kb/logout" class="block px-4 py-2 text-sm text-red-700 hover:bg-gray-300">Logout</a>
+                        <a href="<?php echo base_url(); ?>kb/logout" class="block px-4 py-2 text-sm text-red-700 hover:bg-gray-300">Logout</a>
                     </div>
                 </div>
 
@@ -90,8 +92,8 @@
                                 <span class="sr-only">Open user menu</span>
                                 <img class="w-12 h-12 mr-2 rounded-full" src="<?php echo base_url(); ?>src/images/profilepic.png" alt="user photo">
                                 <div class="flex flex-col text-left ">
-                                    Bonnie Green
-                                    <span class="text-form text-xs truncate w-44">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus dignissimos excepturi molestias mollitia nobis voluptas?</span>
+                                    <?= user()->username; ?>
+                                    <span class="text-form text-xs truncate w-44"><?= $project['name_project']; ?></span>
                                 </div>
                             </button>
                         </li>
@@ -105,7 +107,7 @@
                             <a href="#" class="block py-2 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0  ">Article</a>
                         </li>
                         <li>
-                            <a href="/kb/logout" class="block py-2 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 text-red-600 ">Logout</a>
+                            <a href="<?php echo base_url(); ?>kb/logout" class="block py-2 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 text-red-600 ">Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -198,8 +200,10 @@
     </section>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="<?php echo base_url(); ?>node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <script src="<?php echo base_url(); ?>/src/js/script.js"></script>
     <script src="<?php echo base_url(); ?>node_modules/flowbite/dist/flowbite.min.js"></script>
+    <script src="<?php echo base_url(); ?>node_modules/timeago.js/dist/timeago.min.js"></script>
 
 </body>
 

@@ -54,6 +54,10 @@ class Complains extends Migration
                 'constraint' => '128',
                 'default'    => 'closed'
             ],
+            'slug' => [
+                'type' => 'VARCHAR',
+                'constraint' => '128',
+            ],
             'created_at' => [
                 'type'       => 'DATETIME',
                 'null'       => true

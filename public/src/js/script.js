@@ -1,56 +1,231 @@
 $(document).ready(function () {
+  
   // LAYOUT CUSTOMER
-
-  // DROPDOWN GENERAL QUESTION
-  $(".collapsible").click(function () {
-    var icon = $(this).find(".icon");
-    if (icon.hasClass("bi-chevron-down")) {
-      icon.removeClass("bi-chevron-down");
-      icon.addClass("bi-chevron-up");
-      var title = $(this).attr("data-title");
-      var title = "#" + title;
-      $(title).addClass("text-sky-700");
-    } else if (icon.hasClass("bi-chevron-up")) {
-      icon.removeClass("bi-chevron-up");
-      icon.addClass("bi-chevron-down");
-      var title = $(this).attr("data-title");
-      var title = "#" + title;
-      $(title).removeClass("text-sky-700");
+  // ======================= Password Visibilty Toggle =========================
+  // Password Visibility Toggle
+  $('#password-toggle').click(function() {
+    var passwordInput = $('#password');
+    var passwordToggleIcon = $('#password-toggle');
+    if (passwordInput.attr('type') === 'password') {
+      passwordInput.attr('type', 'text');
+      passwordToggleIcon.removeClass('bi-eye-slash').addClass('bi-eye');
+    } else {
+      passwordInput.attr('type', 'password');
+      passwordToggleIcon.removeClass('bi-eye').addClass('bi-eye-slash');
     }
-    var target = $(this).attr("data-target");
-    var id = "#" + target;
-    $(id).slideToggle();
+  });
+  // Confirm Password Visibilty Toggle
+  $('#cpassword-toggle').click(function() {
+    var cpasswordInput = $('#pass_confirm');
+    var cpasswordToggleIcon = $('#cpassword-toggle');
+    if (cpasswordInput.attr('type') === 'password') {
+      cpasswordInput.attr('type', 'text');
+      cpasswordToggleIcon.removeClass('bi-eye-slash').addClass('bi-eye');
+    } else {
+      cpasswordInput.attr('type', 'password');
+      cpasswordToggleIcon.removeClass('bi-eye').addClass('bi-eye-slash');
+    }
+  });
+  // ===========================================================================
+
+
+
+  // ================== Select Condition Prject & User Type ====================
+  var statusUserDropdown = $('#status_user');
+  var projectDropdown = $('#id_project');
+  var signupButton = $('#signup_button');
+
+  // Event listener for change project if any change in user type
+  statusUserDropdown.change(function() {
+    setStatusProject();
   });
 
-  // DROPDOWN SIDEBAR ARTICLE
-  $(".collapsiblesidebar").click(function () {
-    var iconside = $(this).find(".icon");
-    if (iconside.hasClass("bi-chevron-down")) {
+  // Call setStatusProject() when page is loaded
+  setStatusProject();
+
+  function setStatusProject() {
+    if (statusUserDropdown.val() === 'new_user') {
+      projectDropdown.prop('disabled', true);
+      signupButton.prop('disabled', false);
+    } else if (statusUserDropdown.val() === '') {
+      projectDropdown.prop('disabled', true).val('');
+      signupButton.prop('disabled', true);
+    } else {
+      projectDropdown.prop('disabled', false);
+      signupButton.prop('disabled', false);
+    }
+  }
+  // ===========================================================================
+  
+
+
+  // ===================== Dropdown Condition Article =====================
+  const category = new URLSearchParams(window.location.search).get("category");
+  const subcategory = new URLSearchParams(window.location.search).get("subcategory");
+  var titlesidebar = $(".collapsiblesidebar:contains('"+category+"')");
+  var subtitlesidebar = $(".sidebarcollapse a:contains('"+subcategory+"')");
+  var iconside = titlesidebar.find(".icon");
+  $('#breadcrumb-category').text(category);
+
+  if (iconside.hasClass("bi-chevron-down")) {
+      var targetside = titlesidebar.attr("data-target");
+      $("#" + targetside).slideToggle();
       iconside.removeClass("bi-chevron-down").addClass("bi-chevron-up");
-      var titlesidebar = $(this).attr("data-title");
-      var titlesidebar = "#" + titlesidebar;
-      $(titlesidebar).addClass("text-sky-700");
-    } else if (iconside.hasClass("bi-chevron-up")) {
-      iconside.removeClass("bi-chevron-up").addClass("bi-chevron-down");
-      var titlesidebar = $(this).attr("data-title");
-      var titlesidebar = "#" + titlesidebar;
-      $(titlesidebar).removeClass("text-sky-700");
+      var titlesidebarId = titlesidebar.attr("data-title");
+      titlesidebarId = "#" + titlesidebarId;
+      $(titlesidebarId).addClass("text-sky-700");
+      $(subtitlesidebar).addClass("text-sky-700");
     }
-
-    var targetside = $(this).attr("data-target");
-    $("#" + targetside).slideToggle();
+    
+    $('.collapsiblesidebar').on('click', function () {
+      var iconside = $(this).find(".icon");
+      var targetside = $(this).attr("data-target");
+      
+      if (iconside.hasClass("bi-chevron-down")) {
+        $(".collapsiblesidebar .icon.bi-chevron-up").each(function () {
+          var otherCategory = $(this).closest(".collapsiblesidebar");
+          var otherTarget = otherCategory.attr("data-target");
+             $("#" + otherTarget).slideUp();
+             $(this).removeClass("bi-chevron-up").addClass("bi-chevron-down");
+             var otherTitleId = otherCategory.attr("data-title");
+             otherTitleId = "#" + otherTitleId;
+             $(otherTitleId).removeClass("text-sky-700");
+         });
+         $("#" + targetside).slideDown();
+         iconside.removeClass("bi-chevron-down").addClass("bi-chevron-up");
+         var titlesidebarId = $(this).attr("data-title");
+         titlesidebarId = "#" + titlesidebarId;
+         $(titlesidebarId).addClass("text-sky-700");
+     } else {
+     }
   });
+
+  // Handle subcategory link clicks
+  $('.subcategory-link').on('click', function (e) {
+    e.preventDefault();
+    $('.subcategory-link').removeClass('text-sky-700');
+    const category = $(this).data('category');
+    const subcategory = $(this).data('subcategory');
+    $(this).addClass('text-sky-700');
+
+    updateContent(category, subcategory);
+    const newUrl = 'http://localhost:8080/kb/generalarticle?category=' + category + '&subcategory=' + subcategory;
+    history.pushState({}, '', newUrl);
+  });
+
+  function updateContent(category, subcategory) {
+      $.ajax({
+          type: 'GET', 
+          url: 'http://localhost:8080/kb/generalarticle?cateogry='+category+'&subcategory='+subcategory,
+          data: { category: category, subcategory: subcategory },
+          success: function (response) {
+              var tempElement = document.createElement('div');
+              tempElement.innerHTML = response;
+              var contentContainer = tempElement.querySelector('#content-container');
+
+              if (contentContainer) {
+                  var contentHTML = contentContainer.innerHTML;
+                  $('#content-title').text(subcategory || category);
+                  $('#breadcrumb-category').text(category);
+                  $('#content-container').html(contentHTML);
+              } else {
+                  console.error('#content-container not found in the response');
+              }
+          },
+          error: function (error) {
+              console.error('Error:', error);
+          }
+      });
+  }
+  // ===========================================================================
+  
+  
+  
+  // ======================== Reaction Icon Condition =========================
+  $('#likes').hover(function () {
+      $(this).find('svg path').css('fill', '#00d431'); 
+  }, function () {
+      $(this).find('svg path').css('fill', ''); 
+  });
+  $('#likeButton').on('click', function () {
+      // Get the current URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const category = urlParams.get('category');
+      const subcategory = urlParams.get('subcategory');
+      const articleId = urlParams.get('articleId');
+
+      // Make an AJAX request to increment the like count
+      $.ajax({
+          type: 'POST', // Adjust the request type if needed
+          url: 'http://localhost:8080/kb/generalarticle/generalarticledetail?category='+category+'&subcategory='+subcategory+'&articleId='+articleId+'', // Replace with your server endpoint
+          data: {
+              category: category,
+              subcategory: subcategory,
+              articleId: articleId
+          },
+          success: function (response) {
+              // Handle success response, e.g., update the UI
+              console.log('Like sent successfully');
+          },
+          error: function (error) {
+              // Handle error, e.g., show an error message
+              console.error('Error:', error);
+          }
+      });
+  });
+
+  $('#notlikes').hover(function () {
+      $(this).find('svg path').css('fill', '#d10023'); 
+  }, function () {
+      $(this).find('svg path').css('fill', ''); 
+  });
+  var urlPattern = /http:\/\/localhost:8080\/kb\/generalarticle\/generalarticledetail\?.+/;
+  // Check if the current page URL matches the pattern run Timeago.js
+  if (urlPattern.test(window.location.href)) {
+    const nodes = $(".uploadTime").get();
+    timeago.render(nodes, 'en_US');
+  }
+  // ===========================================================================
+
+
+  
+  
+  // ===================== Open Close Modal Form Complain ======================
+  // Select the modal element by its ID or other means
+  const $modalElement = document.querySelector('#authentication-modal');
+  // Define the options for the modal
+  const modalOptions = {
+      placement: 'bottom-right',
+      onHide: () => {
+      },
+      onShow: () => {
+      },
+      onToggle: () => {
+      }
+  };
+  // Create a new Modal instance
+  if (window.location.href === 'http://localhost:8080/kb/complain') {
+  // This code will run only when the URL matches 'http://localhost:8080/kb/complain'
+    const modal = new Modal($modalElement, modalOptions);
+    if (fileMessage !== null) {
+      modal.show();
+    } 
+    $('[data-modal-hide="authentication-modal"]').click(function() {
+      modal.hide();
+    });
+  }
+  // ===========================================================================
+
+
 
   // LAYOUT ADMIN
-
-  // Sidebar Menu Active
+  // =========================== Sidebar Menu Active ===========================
   const activePage = window.location.pathname;
   $("#sidebar-child a").each(function () {
     if (this.href.includes(activePage)) {
       $(this).addClass("bg-main text-white rounded-md");
     }
   });
-
   // Burger Sidebar
   $(".burger-icon").click(function () {
     $(".sidebar").toggleClass("hidden");
@@ -58,8 +233,11 @@ $(document).ready(function () {
       "md:ml-[22%] xl:ml-[18%] 2xl:ml-[14%] md:w-[78%] xl:w-[82%] 2xl:w-[86%]"
     );
   });
+  // ===========================================================================
 
-  // DELETE BY CHECKLIST
+
+
+  // ========================= Delete Single Checkbox ==========================
   $(".delete-checkbox").on("change", function () {
     let checkbox = $(".delete-checkbox").length;
     let checkboxChecked = $(".delete-checkbox:checked").length;
@@ -76,27 +254,30 @@ $(document).ready(function () {
       $(".delete-batch").hide();
     }
   });
+  // Delete all checkbox
   $(".delete-all-checkbox").on("change", function () {
     const checkAll = document.querySelector(".delete-all-checkbox");
-
     if (checkAll.checked) {
-      $(".delete-checkbox").prop("checked", true);
+      $(".delete-checkbox").prop("checked", false); // Uncheck all checkboxes first
+      $(".delete-checkbox").each(function () {
+        const row = $(this).closest("tr");
+        if (row.css("display") !== "none") {
+          $(this).prop("checked", true); // Check checkboxes for rows with display not "none"
+        }
+      });
       $(".delete-batch").show();
     } else {
       $(".delete-checkbox").prop("checked", false);
       $(".delete-batch").hide();
     }
   });
-
+  // Send data delete batch using ajax 
   $(".delete-batch-btn").on("click", function () {
     const url = $(this).attr("data-action");
     let selectedItems = [];
     $(".delete-checkbox:checked").each(function () {
       selectedItems.push($(this).closest("td").data("id"));
     });
-
-    console.log(selectedItems);
-
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -119,8 +300,11 @@ $(document).ready(function () {
       }
     });
   });
+  // ===========================================================================
 
-  // Sidebar Mobile Toggle Aside Expand
+
+
+  // ==================== Sidebar Toggle Expand Mobile View ====================
   var toggleClose = `
   <button type="button" data-drawer-hide="drawer-disabled-backdrop" aria-controls="drawer-disabled-backdrop" class="text-white bg-main rounded-lg text-sm w-14 h-10 absolute top-0 -right-12 inline-flex items-center justify-center">
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-white">
@@ -133,15 +317,17 @@ $(document).ready(function () {
     // Append the button to the aside element
     $('#drawer-disabled-backdrop').append(toggleClose);
   });
-  
   const aside = $('#drawer-disabled-backdrop');
   $(aside).on('click', "button[data-drawer-hide='drawer-disabled-backdrop']", function () {
     $(aside).removeClass('transform-none')
     $(aside).addClass('-translate-x-full')
     $(this).remove()
   });
+  // =========================================================================== 
 
-  // Changing Status Complain
+
+
+  // ======================== Initiate Status Complain =========================
   var initialValue = $("#status-entries").val();
   const statusComplainElement = $("#status-entries");
   const ddIconElement = $("#dd-icon svg path");
@@ -168,7 +354,10 @@ $(document).ready(function () {
     $(ddIconPos).addClass("right-[4rem]");
     $(ddIconElement).attr("fill", "#047FA6").attr("stroke", "#047FA6");
   }
+  // ===========================================================================
 
+
+  // ========================= Change Status Complain ==========================
   statusComplainElement.change(function () {
     initialValue = $(this).val();
     const id = $(this).data("id");
@@ -212,54 +401,70 @@ $(document).ready(function () {
       url: "/kb/administrator/complain/updateStatus",
       data: data,
     });
-
     location.reload();
   });
+  // ===========================================================================
 
-  // Changing Status Case Complain
-  var initialCaseValue = $("#case-entries").val();
-  const statusCaseComplainElement = $("#case-entries");
-  const ddCaseIconElement = $("#dd-case-icon svg path");
-  if (initialCaseValue === "open") {
-    $(statusCaseComplainElement)
-      .removeClass("bg-close-status text-close-status-text")
-      .addClass("bg-solved-status text-solved-status-text");
-    $(ddCaseIconElement).attr("fill", "#1F9254").attr("stroke", "#1F9254");
-  } else {
-    $(statusCaseComplainElement)
-      .removeClass("bg-solved-status text-solved-status-text")
-      .addClass("bg-close-status text-close-status-text");
-    $(ddCaseIconElement).attr("fill", "#A30D11").attr("stroke", "#A30D11");
-  }
 
-  statusCaseComplainElement.change(function () {
-    initialCaseValue = $(this).val();
-    const id = $(this).data("id");
+
+  // ======================= Initiate Open/Close Article =======================
+  $('[id^="case-entries"]').each(function () {
+    var $dropdown = $(this);
+    var selectedValue = $dropdown.val();
+    var iconElement = $dropdown.siblings('svg').find('path');
+    if (selectedValue === "open") {
+        $(this)
+          .removeClass("bg-close-status text-close-status-text")
+          .addClass("bg-solved-status text-solved-status-text");
+        $(iconElement).attr("fill", "#1F9254").attr("stroke", "#1F9254");
+      } else {
+        $(this)
+          .removeClass("bg-solved-status text-solved-status-text")
+          .addClass("bg-close-status text-close-status-text");
+        $(iconElement).attr("fill", "#A30D11").attr("stroke", "#A30D11");
+      }
+  });
+  // ===========================================================================
+
+
+
+  // ================ Change Condition Open/Close Article ======================
+  $('[id^="case-entries"]').change(function () {
+    var initialCaseValue = $(this).val();
+    var id = $(this).data("id");
+    var iconElement = $(this).siblings('svg').find('path');
     if (initialCaseValue === "open") {
-      $(statusCaseComplainElement)
+      $(this)
         .removeClass("bg-close-status text-close-status-text")
         .addClass("bg-solved-status text-solved-status-text");
-      $(ddCaseIconElement).attr("fill", "#1F9254").attr("stroke", "#1F9254");
+      $(iconElement).attr("fill", "#1F9254").attr("stroke", "#1F9254");
     } else {
-      $(statusCaseComplainElement)
+      $(this)
         .removeClass("bg-solved-status text-solved-status-text")
         .addClass("bg-close-status text-close-status-text");
-      $(ddCaseIconElement).attr("fill", "#A30D11").attr("stroke", "#A30D11");
+      $(iconElement).attr("fill", "#A30D11").attr("stroke", "#A30D11");
     }
     const data = {
       id: id,
       visibility: initialCaseValue,
     };
+    console.log(data);
     $.ajax({
       type: "POST",
-      url: "/kb/administrator/complain/updateVisibility",
+      url: "/kb/administrator/article/updateVisibility",
       data: data,
+      success: function(response) {
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+          console.error("AJAX request error:", textStatus, errorThrown);
+      }
     });
-
-    location.reload();
   });
+  // ===========================================================================
 
-  // Complain Details ``Row`` Selected
+
+  
+  // ======================= Clickable Row Complain =========================== 
   $(".clickable-row").click(function (event) {
     if (
       !$(event.target).closest("select").length &&
@@ -269,12 +474,13 @@ $(document).ready(function () {
       window.location = $(this).data("href");
     }
   });
+  // ===========================================================================
 
-  // Alert notification Message
+
+
+  // ======================= Alert notification Message =======================
   const flashSuccessMessage = $(".flash-success-message").data("message");
   const flashErrorMessage = $(".flash-error-message").data("message");
-
-  console.log(flashSuccessMessage);
 
   if (flashSuccessMessage) {
     const Toast = Swal.mixin({
@@ -288,13 +494,11 @@ $(document).ready(function () {
         toast.addEventListener("mouseleave", Swal.resumeTimer);
       },
     });
-
     Toast.fire({
       icon: "success",
       title: flashSuccessMessage,
     });
   }
-
   if (flashErrorMessage) {
     const Toast = Swal.mixin({
       toast: true,
@@ -307,13 +511,16 @@ $(document).ready(function () {
         toast.addEventListener("mouseleave", Swal.resumeTimer);
       },
     });
-
     Toast.fire({
       icon: "error",
       title: flashErrorMessage,
     });
   }
-  // Alert notification CRUD
+  // ===========================================================================
+
+
+
+  // ========================= Alert Notification CRUD =========================
   const flashSuccess = $(".flash-success").data("flashmessage");
   const flashError = $(".flash-error").data("flashmessage");
 
@@ -326,7 +533,6 @@ $(document).ready(function () {
       timer: "1200",
     });
   }
-
   if (flashError) {
     Swal.fire({
       title: "Failed",
@@ -340,8 +546,6 @@ $(document).ready(function () {
   $(".btn-delete").on("click", function () {
     const id = $(this).attr("data-id");
     const url = $(this).attr("data-action");
-    // console.log(href);
-
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -356,13 +560,15 @@ $(document).ready(function () {
           type: "GET",
           url: url,
         });
-
         location.reload();
       }
     });
   });
+  // ============================================================================
 
-  // Row Entries Per Page
+
+
+  // =============================== Row Per Page ===============================
   $('#row-entries').change(function() {
     var offset = 1;
     var selectedValue = $(this).val(); 
@@ -370,11 +576,8 @@ $(document).ready(function () {
     var parts = currentUrl.split("/");
     var lastPart = parts[parts.length - 1];
     var pages = lastPart.split("?")[0];
-    
-
     fetchData(selectedValue, offset, pages); 
   });
-
   function fetchData(Data, offset, pages) {
     if(pages == 'subcategory'){
       const url = new URL(window.location.href);
@@ -386,6 +589,42 @@ $(document).ready(function () {
       window.location.href = newUrl;
     }
   }
+  // ================================================================================
+
+
+
+  // =============== Select Category & Subcategory Condition Article ================
+  $('#categorySelect').change(function() {
+    var selectedCategory = $(this).val();
+    var subcategorySelect = $('#subcategorySelect');
+    subcategorySelect.prop('disabled', true);
+    $('#subcategorySelect option').hide();
+
+    if (selectedCategory === '') {
+        $('#subcategorySelect option[value=""]').show();
+    } else {
+        $('#subcategorySelect option.' + selectedCategory).show();
+        if ($('#subcategorySelect option.' + selectedCategory).length === 0) {
+            $('#subcategorySelect option[value=""]').show();
+        } else {
+            subcategorySelect.prop('disabled', false);
+        }
+    }
+    subcategorySelect.val('');
+  });
+  // ===================================================================================
+
+
+
+  // ========================= Dynamically URL Article Details =========================
+  var urlPattern = /http:\/\/localhost:8080\/kb\/administrator\/article\/detail\/\d+/;
+  // Check if the current page URL matches the pattern run Timeago.js
+  if (urlPattern.test(window.location.href)) {
+    const nodes = $(".uploadTime").get();
+    timeago.render(nodes, 'en_US');
+  }
+  // ===================================================================================
+
 });
 
 // USER
@@ -406,79 +645,74 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Show file name in drag & drop box
 // Select the file input element by its id
-const fileInput = document.getElementById("dropzone-file");
-
-// Select the <p> element where you want to display the file name
-const selectedFileName = document.getElementById("selected-file-name");
-
-const dragdroptext = document.getElementById("dragdroptext");
-const formatsizetext = document.getElementById("formatsizetext");
-
-//Border
-const dropzone = document.getElementById("dropzone");
+const $fileInput = $("#dropzone-file");
+const $selectedFileName = $("#selected-file-name");
+const $dragdroptext = $("#dragdroptext");
+const $formatsizetext = $("#formatsizetext");
+const $dropzone = $("#dropzone");
 
 // Add an event listener to the file input element
-fileInput.addEventListener("change", (event) => {
-  // Get the selected file
-  const selectedFile = event.target.files[0];
+$fileInput.on("change", function(event) {
+    // Get the selected file
+    const selectedFile = event.target.files[0];
 
-  // Check if a file is selected
-  if (selectedFile) {
-    // Update the text content of the <p> element with the file name
-    selectedFileName.textContent = `Selected file: ${selectedFile.name}`;
-    selectedFileName.classList.add("-mt-8");
-    dragdroptext.classList.remove("block");
-    dropzone.classList.add("border-main");
-    formatsizetext.classList.remove("block");
-    dragdroptext.classList.add("hidden");
-    formatsizetext.classList.add("hidden");
-  } else {
-    // If no file is selected, clear the text content
-    selectedFileName.textContent = "";
-    selectedFileName.classList.remove("-mt-8");
-    dragdroptext.classList.remove("hidden");
-    dropzone.classList.remove("border-main");
-    formatsizetext.classList.remove("hidden");
-    dragdroptext.classList.add("block");
-    formatsizetext.classList.add("block");
-  }
+    // Check if a file is selected
+    if (selectedFile) {
+        // Update the text content of the <p> element with the file name
+        $selectedFileName.text(`Selected file: ${selectedFile.name}`);
+        $selectedFileName.addClass("-mt-8");
+        $dragdroptext.removeClass("block md:block");
+        $dropzone.addClass("border-main");
+        $formatsizetext.removeClass("block md:block");
+        $dragdroptext.addClass("hidden");
+        $formatsizetext.addClass("hidden");
+    } else {
+        // If no file is selected, clear the text content
+        $selectedFileName.text("");
+        $selectedFileName.removeClass("-mt-8");
+        $dragdroptext.removeClass("hidden");
+        $dropzone.removeClass("border-main");
+        $formatsizetext.removeClass("hidden");
+        $dragdroptext.addClass("block");
+        $formatsizetext.addClass("block");
+    }
 });
 
-dropzone.addEventListener("dragover", (e) => {
-  e.preventDefault();
-  dropzone.classList.add("border-main"); // Add a class to highlight the drop area when dragging over it.
+$dropzone.on("dragover", function(e) {
+    e.preventDefault();
+    $dropzone.addClass("border-main"); // Add a class to highlight the drop area when dragging over it.
 });
 
-dropzone.addEventListener("dragleave", () => {
-  dropzone.classList.remove("border-main"); // Remove the highlighting class when dragging leaves the drop area.
+$dropzone.on("dragleave", function() {
+    $dropzone.removeClass("border-main"); // Remove the highlighting class when dragging leaves the drop area.
 });
 
-dropzone.addEventListener("drop", (e) => {
-  e.preventDefault();
-  dropzone.classList.remove("border-main"); // Remove the highlighting class when a file is dropped.
+$dropzone.on("drop", function(e) {
+    e.preventDefault();
+    $dropzone.removeClass("border-main"); // Remove the highlighting class when a file is dropped.
 
-  const files = e.dataTransfer.files;
-  handleFileChange(files);
+    const files = e.originalEvent.dataTransfer.files;
+    handleFileChange(files);
 });
 
 function handleFileChange(files) {
-  if (files.length > 0) {
-    const file = files[0];
-    selectedFileName.textContent = `Selected file: ${file.name}`;
-    selectedFileName.classList.add("-mt-8");
-    dragdroptext.classList.remove("block");
-    dropzone.classList.add("border-main");
-    formatsizetext.classList.remove("block");
-    dragdroptext.classList.add("hidden");
-    formatsizetext.classList.add("hidden");
-    fileInput.files = files; // Assign the selected files to the hidden input for form submission.
-  } else {
-    selectedFileName.textContent = "";
-    selectedFileName.classList.remove("-mt-8");
-    dragdroptext.classList.remove("hidden");
-    dropzone.classList.remove("border-main");
-    formatsizetext.classList.remove("hidden");
-    dragdroptext.classList.add("block");
-    formatsizetext.classList.add("block");
-  }
+    if (files.length > 0) {
+        const file = files[0];
+        $selectedFileName.text(`Selected file: ${file.name}`);
+        $selectedFileName.addClass("-mt-8");
+        $dragdroptext.removeClass("block md:block");
+        $dropzone.addClass("border-main");
+        $formatsizetext.removeClass("block md:block");
+        $dragdroptext.addClass("hidden");
+        $formatsizetext.addClass("hidden");
+        $fileInput[0].files = files; // Assign the selected files to the hidden input for form submission.
+    } else {
+        $selectedFileName.text("");
+        $selectedFileName.removeClass("-mt-8");
+        $dragdroptext.removeClass("hidden");
+        $dropzone.removeClass("border-main");
+        $formatsizetext.removeClass("hidden");
+        $dragdroptext.addClass("block");
+        $formatsizetext.addClass("block");
+    }
 }

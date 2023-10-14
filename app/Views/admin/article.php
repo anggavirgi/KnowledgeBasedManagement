@@ -30,20 +30,19 @@
                 <a class="border border-gray-400 px-6 py-2 rounded-2xl font-medium hover:border-green-400 cursor-pointer">export</a>
             </div>
         </div>
-
     </div>
     <div class="mb-5 flex items-center justify-end text-xs">
         <label for="entries" class="mr-2">Rows per page : </label>
         <div class="relative">
             <?php $options = [10, 25, 50, 100]; ?>
             <?php if (isset($pagination)) : ?>
-                <select id="row-entries" data-url="<?php echo base_url(); ?>kb/administrator/category/fetch" class="appearance-none border border-gray-400 px-6 py-2 rounded-2xl hover:border-blue-500 cursor-pointer focus:outline-none">
+                <select id="row-entries" data-url="<?php echo base_url(); ?>kb/administrator/article/fetch" class="appearance-none border border-gray-400 px-6 py-2 rounded-2xl hover:border-blue-500 cursor-pointer focus:outline-none">
                     <?php foreach ($options as $option) : ?>
                         <option value="<?php echo $option; ?>" <?php echo isset($pagination) && $pagination['perPage'] == $option ? 'selected' : ''; ?>><?php echo $option; ?></option>
                     <?php endforeach; ?>
                 </select>
             <?php else : ?>
-                <select id="row-entries" data-url="<?php echo base_url(); ?>kb/administrator/category/fetch" class="appearance-none border border-gray-400 px-6 py-2 rounded-2xl hover:border-blue-500 cursor-pointer focus:outline-none">
+                <select id="row-entries" data-url="<?php echo base_url(); ?>kb/administrator/article/fetch" class="appearance-none border border-gray-400 px-6 py-2 rounded-2xl hover:border-blue-500 cursor-pointer focus:outline-none">
                     <?php foreach ($options as $option) : ?>
                         <option value="<?php echo $option; ?>" <?php echo isset($pagination) && $pagination['perPage'] == $option ? 'selected' : ''; ?>><?php echo $option; ?></option>
                     <?php endforeach; ?>
@@ -94,7 +93,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach($contents as $content){ ?>
+                <?php foreach ($contents as $content) { ?>
                     <tr class="border-b hover:bg-gray-50 dark:hover:bg-sky-50">
                         <td class="p-3">
                             <input type="checkbox" class="delete-checkbox" name="" id="">
@@ -109,19 +108,18 @@
                             <?php echo $content['id_sub_category'] ?>
                         </td>
                         <td class="p-3">
-                            <?php 
-                                foreach($articles as $article){
-                                    if($content['id'] == $article['id_content']){
-                                        echo $article['id_project'];
-                                    }
-                                }
-                            ?>
+                            <?php echo $content['id_project'] ?>
                         </td>
                         <td class="p-3 text-center">
                             <div class="relative flex justify-center items-center">
-                                <select id="case-entries" name="status_case_entries" class="py-2 pe-9 ps-5 appearance-none cursor-pointer rounded-[15px] text-gray-700 focus:outline-none focus:border-blue-500>">
-                                    <option value="close" class="block px-4 py-5 bg-white text-black">Close</option>
-                                    <option value="open" class="block px-4 py-5 bg-white text-black">Open</option>
+                                <select id="case-entries" name="status_case_entries" class="py-2 pe-9 ps-5 appearance-none cursor-pointer rounded-[15px] text-gray-700" data-id="<?= $content['id']; ?>">
+                                    <?php if ($content['visibility'] == 'closed') : ?>
+                                        <option value="closed" class="block px-4 py-2 bg-white text-black" selected>Close</option>
+                                        <option value="open" class="block px-4 py-2 bg-white text-black">Open</option>
+                                    <?php else : ?>
+                                        <option value="closed" class="block px-4 py-2 bg-white text-black">Close</option>
+                                        <option value="open" class="block px-4 py-2 bg-white text-black" selected>Open</option>
+                                    <?php endif; ?>
                                 </select>
                                 <svg class="w-2 h-2 absolute ml-[50px] text-gray-400" width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M6.97607 0.81897L4.055 5.13429L1.00017 0.9126L6.97607 0.81897Z" fill="#A30D11" stroke="#A30D11" stroke-linecap="round" stroke-linejoin="round" />
@@ -150,33 +148,46 @@
                 <?php } ?>
             </tbody>
         </table>
+
+        <!-- Pagination Buttons -->
         <div class="flex justify-center mt-5">
             <nav aria-label="Page navigation example">
                 <ul class="inline-flex -space-x-px text-sm">
-                    <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 ml-0 leading-tight  bg-white border rounded-l-lg hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">Previous</a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight  bg-white border hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">1</a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight  bg-white border hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">2</a>
-                    </li>
-                    <li>
-                        <a href="#" aria-current="page" class="flex items-center justify-center px-3 h-8 text-white border bg-blue-50 hover:text-blue-700 border-white dark:bg-main dark:hover:text-white">3</a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight  bg-white border hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">4</a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight  bg-white border hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">5</a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight  bg-white border rounded-r-lg hover:bg-gray-100 hover:text-gray-700  border-white dark:text-gray-400 dark:hover:bg-main dark:hover:text-white">Next</a>
-                    </li>
+                    <?php if (isset($pagination) && $pagination['page'] > 1) : ?>
+                        <li>
+                            <a href="<?php echo base_url(); ?>kb/administrator/article?page=<?php echo $pagination['page'] - 1; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 ml-0 leading-tight bg-white border rounded-l-lg hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Previous</a>
+                        </li>
+                    <?php endif; ?>
+                    <?php if (isset($pagination)) : ?>
+                        <?php for ($i = 1; $i <= $pagination['totalPages']; $i++) : ?>
+                            <li>
+                                <a href="<?php echo base_url(); ?>kb/administrator/article?page=<?php echo $i; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 border border-white <?php echo ($i == $pagination['page']) ? 'bg-main text-white' : 'bg-white text-gray-400'; ?> hover:bg-main hover:text-white"><?php echo $i; ?></a>
+                            </li>
+                        <?php endfor; ?>
+                        <?php if ($pagination['page'] < $pagination['totalPages']) : ?>
+                            <li>
+                                <a href="<?php echo base_url(); ?>kb/administrator/article?page=<?php echo $pagination['page'] + 1; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 leading-tight bg-white border hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Next</a>
+                            </li>
+                        <?php endif; ?>
+                    <?php else : ?>
+                        <!-- Set pagination page active to page 1 when $pagination is not set -->
+                        <?php
+                        $pagination['page'] = 1;
+                        $pagination['perPage'] = 10;
+                        ?>
+                        <?php for ($i = 1; $i <= $pagination['page']; $i++) : ?>
+                            <li>
+                                <a href="<?php echo base_url(); ?>kb/administrator/article?page=<?php echo $i; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 border border-white <?php echo ($i == $pagination['page']) ? 'bg-main text-white' : 'bg-white text-gray-400'; ?> hover:bg-main hover:text-white"><?php echo $i; ?></a>
+                            </li>
+                        <?php endfor; ?>
+                        <li>
+                            <a href="<?php echo base_url(); ?>kb/administrator/article?page=<?php echo $pagination['page'] + 1; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 leading-tight bg-white border hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Next</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </nav>
         </div>
+
     </div>
 
 </div>

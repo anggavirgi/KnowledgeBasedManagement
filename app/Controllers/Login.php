@@ -3,14 +3,17 @@
 namespace App\Controllers;
 
 use Google_Client;
+use App\Models\Admin\ProjectModel;
 
 class Login extends BaseController
 {
 
   protected $googleClient;
+  protected $projectModel;
 
   public function __construct()
   {
+    $this->projectModel = new ProjectModel();
     $this->googleClient = new Google_Client();
     $this->googleClient->setClientId('68235445122-s9tfb97u83qbr80v023b9qriurtuquds.apps.googleusercontent.com');
     $this->googleClient->setClientSecret('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');
@@ -32,10 +35,13 @@ class Login extends BaseController
 
   public function register()
   {
-    $data = [
-      'title' => 'Register'
-    ];
+    $project = $this->projectModel->findAll();
 
+    $data = [
+      'title' => 'Register',
+      'project' => $project,
+    ];
+    dd($data);
     return view('login/register', $data);
   }
 

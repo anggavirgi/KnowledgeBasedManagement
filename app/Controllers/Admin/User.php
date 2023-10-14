@@ -40,6 +40,13 @@ class User extends ResourceController
 
         $totalPages = ceil($totalRecords / $perPage);
 
+        foreach ($dataUser as &$user) {
+            $project = $this->projectModel->find($user['id_project']);
+            if ($user['id_project'] !== 0) {
+                $user['id_project'] = $project['name_project'];
+            }
+        }
+
         $pagination = [
             'page' => $page,
             'perPage' => $perPage,
@@ -105,7 +112,7 @@ class User extends ResourceController
             $name = $this->request->getVar('name');
             $username = $this->request->getVar('username');
             $email = $this->request->getVar('email');
-            $password = password_hash($this->request->getVar('password'), PASSWORD_DEFAULT);
+            $password = Password::hash($this->request->getVar('password'));
             $level = $this->request->getVar('level');
             $id_project = $this->request->getVar('id_project');
 
@@ -223,5 +230,16 @@ class User extends ResourceController
         ];
 
         return view('admin/detailuser', $data);
+    }
+
+    public function deleteBatchUser()
+    {
+        $id_user = $this->request->getVar("ids");
+        for ($i = 0; $i < count($id_user); $i++) {
+            $id = $id_user[$i];
+            $this->userModel->delete($id);
+        }
+
+        return redirect()->to('kb/administrator/user')->with('success', "Data user berhasil dihapus");
     }
 }

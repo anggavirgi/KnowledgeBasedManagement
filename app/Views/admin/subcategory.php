@@ -12,11 +12,11 @@
     <div class="font-medium">
       <a href="<?php echo base_url(); ?>kb/administrator/category" class="text-main hover:text-sky-600">Category</a>
       <span> / </span>
-      <span>Sub-Category <?php echo $category_id ?></span>
+      <span>Sub-Category <?php echo $category[0]['name_category']; ?></span>
     </div>
   </div>
 
-  <h2 class="font-bold text-xl mt-6">List Sub-Category <?php echo $category_id ?></h2>
+  <h2 class="font-bold text-xl mt-6">List Sub-Category <?php echo $category[0]['name_category'] ?></h2>
   <div class="flex justify-between items-center my-5">
     <form method="" class="relative flex justify-end items-center">
       <input type="text" placeholder="search" id="searchInput" class="px-5 py-2 pe-10 w-64 rounded-2xl border border-gray-400 outline-main">
@@ -28,20 +28,20 @@
     </form>
     <div class="flex items-center gap-4">
       <div class="delete-batch hidden">
-        <button type="button" class="delete-batch-btn px-2 inline-block" data-action="/kb/administrator/category/subcategory/deleteBatch">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-5 h-5 stroke-red-500 hover:stroke-red-700">
+        <button type="button" class="delete-batch-btn inline-block px-4 py-2 border border-white hover:border-red-600 rounded-2xl bg-red-500 hover:bg-red-600" data-action="/kb/administrator/category/subcategory/deleteBatch">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-5 h-5 stroke-white">
             <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
           </svg>
         </button>
       </div>
-      <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory/addsubcategory?category_id=<?= $categoryId; ?>" class="border border-gray-400 px-6 py-2 rounded-2xl hover:border-green-400 cursor-pointer">
+      <a href="<?php echo base_url(); ?>kb/administrator/category/subcategory/addsubcategory?category_id=<?= $category[0]['id']; ?>" class="border border-gray-400 px-6 py-2 rounded-2xl hover:border-green-400 cursor-pointer">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" width="20" height="20">
           <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z" />
         </svg>
       </a>
     </div>
   </div>
-  
+
   <div class="mb-5 flex items-center justify-end text-xs">
     <label for="entries" class="mr-2">Rows per page : </label>
     <div class="relative">
@@ -73,18 +73,12 @@
     <div class="flash-error" data-flashmessage="<?php echo session('error') ?>"></div>
   <?php endif; ?>
 
-  <table class="w-full text-center" id="dataTable">
+  <table class="w-full text-center" id="myTable">
     <thead class="border-b">
       <tr>
         <th class="p-3">
           <input type="checkbox" class="delete-all-checkbox" name="" id="">
         </th>
-        <!-- <th class="p-3 relative flex justify-center items-center">
-          <span>No</span>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 absolute right-0 cursor-pointer">
-            <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v13.19l5.47-5.47a.75.75 0 111.06 1.06l-6.75 6.75a.75.75 0 01-1.06 0l-6.75-6.75a.75.75 0 111.06-1.06l5.47 5.47V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
-          </svg>
-        </th> -->
         <th class="p-3 w-64">Name Sub-Category</th>
         <th class="p-3">Action</th>
       </tr>

@@ -32,13 +32,9 @@ $routes->setAutoRoute(false);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+$routes->post('/', 'Home::create');
 
 $routes->group('kb', static function ($routes) {
-
-    // ROUTE LOGIN
-    // $routes->get('proses', 'Login::proses');
-    $routes->get('register/', 'Login::register');
-    // $routes->get('forgot-password/', 'Login::forgotpassword');
 
     //HOME
     $routes->get('/', 'Home::index');
@@ -64,6 +60,7 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     $routes->post('user/(:num)', 'User::update/$1');
     $routes->get('user/delete/(:num)', 'User::delete/$1');
     $routes->get('user/detail/(:num)', 'User::detail/$1');
+    $routes->post('user/deleteBatch', "User::deleteBatchUser");
 
     $routes->get('category', 'Category::index');
     $routes->get('category/new', 'Category::new');
@@ -88,6 +85,7 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     $routes->post('article/(:num)', 'Article::update/$1');
     $routes->get('article/delete/(:num)', 'Article::delete/$1');
     $routes->get('article/detail/(:num)', 'Article::detail/$1');
+    $routes->post('article/updateVisibility', 'Article::updateVisibility');
 
     $routes->get('complain', 'Complain::index');
     $routes->get('complain/reply/(:num)', 'Complain::reply/$1');

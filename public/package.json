@@ -15,8 +15,10 @@
   },
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^39.0.2",
+    "bootstrap-icons": "^1.11.1",
     "flowbite": "^1.8.1",
     "sweetalert2": "^11.7.28",
-    "tailwind-scrollbar-hide": "^1.1.7"
+    "tailwind-scrollbar-hide": "^1.1.7",
+    "timeago.js": "^4.0.2"
   }
 }

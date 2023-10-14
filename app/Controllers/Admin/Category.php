@@ -68,7 +68,7 @@ class Category extends ResourceController
   {
     $rules = [
       'category'      => 'required|alpha_numeric_space|is_unique[categories.name_category]',
-      'icon'          => 'uploaded[icon]|max_size[icon,1024]|is_image[icon]|mime_in[icon,image/jpg,image/jpeg,image/png,image/svg,image/webp]|is_unique[categoreies.name_category]'
+      'icon'          => 'uploaded[icon]|max_size[icon,1024]|is_image[icon]|mime_in[icon,image/jpg,image/jpeg,image/png,image/svg,image/webp]|is_unique[categories.name_category]'
     ];
 
     if (!$this->validate($rules)) {
@@ -146,7 +146,7 @@ class Category extends ResourceController
     $icon = $dataCategory['icon'];
 
     try {
-      if(file_exists('src/images/icon/' . $icon)){
+      if (file_exists('src/images/icon/' . $icon)) {
         unlink('src/images/icon/' . $icon);
         if (!$this->categoryModel->delete($id)) {
           return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
@@ -161,15 +161,14 @@ class Category extends ResourceController
         }
       }
     } catch (DatabaseException $e) {
-        if (strpos($e->getMessage(), 'Cannot delete or update a parent row') !== false) {
-            // Handle foreign key constraint violation error
-            return redirect()->to('kb/administrator/category')->with('error', "Cannot delete the category as it is referenced by other records.");
-        } else {
-            // Handle other database errors
-            return redirect()->to('kb/administrator/category')->with('error', "An error occurred: " . $e->getMessage());
-        }
+      if (strpos($e->getMessage(), 'Cannot delete or update a parent row') !== false) {
+        // Handle foreign key constraint violation error
+        return redirect()->to('kb/administrator/category')->with('error', "Cannot delete the category as it is referenced by other records.");
+      } else {
+        // Handle other database errors
+        return redirect()->to('kb/administrator/category')->with('error', "An error occurred: " . $e->getMessage());
+      }
     }
-
   }
 
   public function deleteBatch()
@@ -200,6 +199,8 @@ class Category extends ResourceController
 
     $subCategory = $this->subCategoryModel->where('id_category', $categoryId)->findAll($perPage, $offset);
 
+    $category = $this->categoryModel->where('id', $categoryId)->find();
+
     $totalPages = ceil($totalRecords / $perPage);
 
     $pagination = [
@@ -208,11 +209,10 @@ class Category extends ResourceController
       'totalRecords' => $totalRecords,
       'totalPages' => $totalPages
     ];
-    dd($subCategory);
     return view('admin/subcategory', [
       'title' => 'Category',
       'subcategory' => $subCategory,
-      'categoryId' => $categoryId,
+      'category' => $category,
       'pagination' => $pagination
     ]);
   }
@@ -253,10 +253,11 @@ class Category extends ResourceController
       ];
 
 
+
       if (!$this->subCategoryModel->save($data)) {
-        return redirect()->to('kb/administrator/category/subcategory?category_id=' . $id_category . '')->with('error', "Data sub category gagal ditambah");
+        return redirect()->to('kb/administrator/category/subcategory/' . $id_category . '')->with('error', "Data sub category gagal ditambah");
       } else {
-        return redirect()->to('kb/administrator/category/subcategory?category_id=' . $id_category . '')->with('success', "Data sub category berhasil ditambah");
+        return redirect()->to('kb/administrator/category/subcategory/' . $id_category . '')->with('success', "Data sub category berhasil ditambah");
       }
     }
   }
