@@ -112,13 +112,13 @@
                         </td>
                         <td class="p-3 text-center">
                             <div class="relative flex justify-center items-center">
-                                <select id="case-entries" name="status_case_entries" class="py-2 pe-9 ps-5 appearance-none cursor-pointer rounded-[15px] text-gray-700" data-id="<?= $content['id']; ?>">
+                                <select id="case-entries" name="status_case_entries" class="py-2 pe-9 ps-5 appearance-none cursor-pointer rounded-[15px]" data-id="<?= $content['id']; ?>">
                                     <?php if ($content['visibility'] == 'closed') : ?>
-                                        <option value="closed" class="block px-4 py-2 bg-white text-black" selected>Close</option>
-                                        <option value="open" class="block px-4 py-2 bg-white text-black">Open</option>
+                                        <option value="closed" class="block px-4 py-2 bg-white text-close-status-text" selected>Close</option>
+                                        <option value="open" class="block px-4 py-2 bg-white text-solved-status-text">Open</option>
                                     <?php else : ?>
-                                        <option value="closed" class="block px-4 py-2 bg-white text-black">Close</option>
-                                        <option value="open" class="block px-4 py-2 bg-white text-black" selected>Open</option>
+                                        <option value="closed" class="block px-4 py-2 bg-white text-close-status-text">Close</option>
+                                        <option value="open" class="block px-4 py-2 bg-white text-solved-status-text" selected>Open</option>
                                     <?php endif; ?>
                                 </select>
                                 <svg class="w-2 h-2 absolute ml-[50px] text-gray-400" width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">

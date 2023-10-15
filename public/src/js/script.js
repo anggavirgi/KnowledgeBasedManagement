@@ -367,94 +367,98 @@ $(document).ready(function () {
 
 
   // ======================== Initiate Status Complain =========================
-  var initialValue = $("#status-entries").val();
-  const statusComplainElement = $("#status-entries");
-  const ddIconElement = $("#dd-icon svg path");
-  const ddIconPos = $("#dd-icon");
-  if (initialValue === "pending") {
-    $(statusComplainElement)
-      .removeClass("bg-solved-status text-solved-status-text")
-      .removeClass("bg-progress-status text-progress-status-text")
-      .addClass("bg-pending-status text-pending-status-text");
-    $(ddIconPos).addClass("right-[4.5rem]");
-    $(ddIconElement).attr("fill", "#CD6200").attr("stroke", "#CD6200");
-  } else if (initialValue === "progress") {
-    $(statusComplainElement)
-      .removeClass("bg-pending-status text-pending-status-text")
-      .removeClass("bg-solved-status text-solved-status-text")
-      .addClass("bg-progress-status text-progress-status-text");
-    $(ddIconPos).addClass("right-[3.5rem]");
-    $(ddIconElement).attr("fill", "#1F9254").attr("stroke", "#1F9254");
-  } else {
-    $(statusComplainElement)
+  $('[id^="status-entries"]').each(function () {
+    var dropdown = $(this);
+    var selectedValue = $(dropdown).val();
+    var iconElement = $(dropdown).siblings('svg').find('path');
+    var iconElementPos = $(dropdown).find('svg');
+    if (selectedValue === "pending") {
+      $(this)
+        .removeClass("bg-solved-status text-solved-status-text")
+        .removeClass("bg-progress-status text-progress-status-text")
+        .addClass("bg-pending-status text-pending-status-text");
+      $(iconElementPos).addClass("right-[4.5rem]");
+      $(iconElement).attr("fill", "#CD6200").attr("stroke", "#CD6200");
+    } else if (selectedValue === "progress") {
+      $(this)
+        .removeClass("bg-pending-status text-pending-status-text")
+        .removeClass("bg-solved-status text-solved-status-text")
+        .addClass("bg-progress-status text-progress-status-text");
+      $(iconElementPos).addClass("right-[3.5rem]");
+      $(iconElement).attr("fill", "#047FA6").attr("stroke", "#047FA6");
+    } else {
+      $(this)
       .removeClass("bg-pending-status text-pending-status-text")
       .removeClass("bg-progress-status text-progress-status-text")
       .addClass("bg-solved-status text-solved-status-text");
-    $(ddIconPos).addClass("right-[4rem]");
-    $(ddIconElement).attr("fill", "#047FA6").attr("stroke", "#047FA6");
-  }
+      $(iconElementPos).addClass("right-[4rem]");
+      $(iconElement).attr("fill", "#1F9254").attr("stroke", "#1F9254");
+    }
+  });
   // ===========================================================================
 
 
   // ========================= Change Status Complain ==========================
-  statusComplainElement.change(function () {
-    initialValue = $(this).val();
-    const id = $(this).data("id");
-    if (initialValue === "pending") {
-      $(statusComplainElement)
-        .removeClass("bg-solved-status text-solved-status-text")
-        .removeClass("bg-progress-status text-progress-status-text")
-        .addClass("bg-pending-status text-pending-status-text");
-      $(ddIconPos)
-        .removeClass("right-[4.5rem]")
-        .removeClass("right-[4rem]")
-        .addClass("right-[4.5rem]");
-      $(ddIconElement).attr("fill", "#CD6200").attr("stroke", "#CD6200");
-    } else if (initialValue === "progress") {
-      $(statusComplainElement)
-        .removeClass("bg-pending-status text-pending-status-text")
-        .removeClass("bg-solved-status text-solved-status-text")
-        .addClass("bg-progress-status text-progress-status-text");
-      $(ddIconPos)
-        .removeClass("right-[4.5rem]")
-        .removeClass("right-[4rem]")
-        .addClass("right-[4rem]");
-      $(ddIconElement).attr("fill", "#1F9254").attr("stroke", "#1F9254");
-    } else {
-      $(statusComplainElement)
+  $('[id^="status-entries"]').change(function () {
+    var initialStatusValue = $(this).val();
+    var id = $(this).data("id");
+    var iconElement = $(this).siblings('svg').find('path');
+    var iconElementPos = $(this).find('svg');
+    if (initialStatusValue === "pending") {
+        $(this)
+          .removeClass("bg-solved-status text-solved-status-text")
+          .removeClass("bg-progress-status text-progress-status-text")
+          .addClass("bg-pending-status text-pending-status-text");
+        $(iconElementPos)
+          .removeClass("right-[4.5rem]")
+          .removeClass("right-[4rem]")
+          .addClass("right-[4.5rem]");
+        $(iconElement).attr("fill", "#CD6200").attr("stroke", "#CD6200");
+      } else if (initialStatusValue === "progress") {
+        $(this)
+          .removeClass("bg-pending-status text-pending-status-text")
+          .removeClass("bg-solved-status text-solved-status-text")
+          .addClass("bg-progress-status text-progress-status-text");
+        $(iconElementPos)
+          .removeClass("right-[4.5rem]")
+          .removeClass("right-[4rem]")
+          .addClass("right-[4rem]");
+        $(iconElement).attr("fill", "#047FA6").attr("stroke", "#047FA6");
+      } else {
+        $(this)
         .removeClass("bg-pending-status text-pending-status-text")
         .removeClass("bg-progress-status text-progress-status-text")
         .addClass("bg-solved-status text-solved-status-text");
-      $(ddIconPos)
+        $(iconElementPos)
         .removeClass("right-[4.5rem]")
         .removeClass("right-[4rem]")
         .addClass("right-[4.5rem]");
-      $(ddIconElement).attr("fill", "#047FA6").attr("stroke", "#047FA6");
-    }
-    const data = {
-      id: id,
-      status: initialValue,
-    };
-    $.ajax({
-      type: "POST",
-      url: "/kb/administrator/complain/updateStatus",
-      data: data,
-      success: function(response) {
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-          console.error("AJAX request error:", textStatus, errorThrown);
+        $(iconElement).attr("fill", "#1F9254").attr("stroke", "#1F9254");
       }
-    });
+      const data = {
+        id: id,
+        status: initialStatusValue,
+      };
+      $.ajax({
+          type: "POST",
+          url: "/kb/administrator/complain/updateStatus",
+          data: data,
+          success: function(response) {
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+              console.error("AJAX request error:", textStatus, errorThrown);
+          }
+      });
   });
   // ===========================================================================
 
 
 
-  // ======================= Initiate Open/Close Article =======================
+  // ============ Initiate Open/Close Article & Complain =======================
   $('[id^="case-entries"]').each(function () {
-    var $dropdown = $(this);
-    var selectedValue = $dropdown.val();
-    var iconElement = $dropdown.siblings('svg').find('path');
+    var dropdown = $(this);
+    var selectedValue = dropdown.val();
+    var iconElement = dropdown.siblings('svg').find('path');
     if (selectedValue === "open") {
         $(this)
           .removeClass("bg-close-status text-close-status-text")
@@ -471,7 +475,7 @@ $(document).ready(function () {
 
 
 
-  // ================ Change Condition Open/Close Article ======================
+  // =========== Change Condition Open/Close Article & Complain ================
   $('[id^="case-entries"]').change(function () {
     var initialCaseValue = $(this).val();
     var id = $(this).data("id");
@@ -491,17 +495,30 @@ $(document).ready(function () {
       id: id,
       visibility: initialCaseValue,
     };
-    $.ajax({
-      type: "POST",
-      url: "/kb/administrator/article/updateVisibility",
-      data: data,
-      success: function(response) {
-        console.log(response);
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-          console.error("AJAX request error:", textStatus, errorThrown);
-      }
-    });
+    if(window.location.pathname.includes("/administrator/complain")){
+      $.ajax({
+        type: "POST",
+        url: "/kb/administrator/complain/updateVisibility",
+        data: data,
+        success: function(response) {
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error("AJAX request error:", textStatus, errorThrown);
+        }
+      });
+    }else{
+      $.ajax({
+        type: "POST",
+        url: "/kb/administrator/article/updateVisibility",
+        data: data,
+        success: function(response) {
+          console.log(response);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error("AJAX request error:", textStatus, errorThrown);
+        }
+      });
+    }
   });
   // ===========================================================================
 
@@ -514,7 +531,7 @@ $(document).ready(function () {
       !$(event.target).closest(".delete-checkbox").length
     ) {
       // Only navigate if the clicked element is not a select dropdown
-      window.location = $(this).data("href");
+      // window.location = $(this).data("href");
     }
   });
   // ===========================================================================
