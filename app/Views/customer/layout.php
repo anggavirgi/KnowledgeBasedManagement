@@ -124,9 +124,9 @@
                         <input type="text" id="search-navbar" class="block w-[18rem] lg:w-[30rem] p-2 pl-10 text-sm border border-gray-400 placeholder-gray-400 text-form rounded-2xl outline-main" placeholder="Search...">
                     </div>
                 </div>
-                <div class="buttons grid grid-cols-2 gap-2 me-2 text-center">
-                    <a href="/kb/login" class="p-2 whitespace-nowrap ">Sign In</a>
-                    <a href="/kb/register" class="bg-main text-white rounded-md p-2 whitespace-nowrap">Sign Up</a>
+                <div class="buttons grid grid-cols-2 gap-4 me-2 text-center">
+                    <a href="/kb/login" class="px-4 py-2 whitespace-nowrap hover:text-main">Sign In</a>
+                    <a href="/kb/register" class="bg-main hover:bg-sky-600 text-white rounded-md px-4 py-2 whitespace-nowrap">Sign Up</a>
                 </div>
             <?php endif; ?>
 
