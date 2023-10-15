@@ -89,9 +89,11 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     $routes->get('article/delete/(:num)', 'Article::delete/$1');
     $routes->get('article/detail/(:num)', 'Article::detail/$1');
     $routes->post('article/updateVisibility', 'Article::updateVisibility');
+    $routes->get('article/export', 'Article::exportDataToExcel');
 
     $routes->get('complain', 'Complain::index');
     $routes->get('complain/reply/(:num)', 'Complain::reply/$1');
+    $routes->get('complain/export', 'Complain::exportDataToExcel');
     $routes->post('complain/sendReply', 'Complain::sendReply');
     $routes->post('complain/updateStatus', 'Complain::updateStatus');
     $routes->post('complain/updateVisibility', 'Complain::updateVisibility');

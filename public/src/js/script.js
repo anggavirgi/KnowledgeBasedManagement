@@ -1,43 +1,46 @@
 $(document).ready(function () {
-  // DYNAMICALLY URL
+  
+  // DYNAMICALLY URL 
   var originalURL = window.location.pathname;
   var modifiedURL = new RegExp(originalURL);
 
   // LAYOUT CUSTOMER
   // ======================= Password Visibilty Toggle =========================
   // Password Visibility Toggle
-  $("#password-toggle").click(function () {
-    var passwordInput = $("#password");
-    var passwordToggleIcon = $("#password-toggle");
-    if (passwordInput.attr("type") === "password") {
-      passwordInput.attr("type", "text");
-      passwordToggleIcon.removeClass("bi-eye-slash").addClass("bi-eye");
+  $('#password-toggle').click(function() {
+    var passwordInput = $('#password');
+    var passwordToggleIcon = $('#password-toggle');
+    if (passwordInput.attr('type') === 'password') {
+      passwordInput.attr('type', 'text');
+      passwordToggleIcon.removeClass('bi-eye-slash').addClass('bi-eye');
     } else {
-      passwordInput.attr("type", "password");
-      passwordToggleIcon.removeClass("bi-eye").addClass("bi-eye-slash");
+      passwordInput.attr('type', 'password');
+      passwordToggleIcon.removeClass('bi-eye').addClass('bi-eye-slash');
     }
   });
   // Confirm Password Visibilty Toggle
-  $("#cpassword-toggle").click(function () {
-    var cpasswordInput = $("#pass_confirm");
-    var cpasswordToggleIcon = $("#cpassword-toggle");
-    if (cpasswordInput.attr("type") === "password") {
-      cpasswordInput.attr("type", "text");
-      cpasswordToggleIcon.removeClass("bi-eye-slash").addClass("bi-eye");
+  $('#cpassword-toggle').click(function() {
+    var cpasswordInput = $('#pass_confirm');
+    var cpasswordToggleIcon = $('#cpassword-toggle');
+    if (cpasswordInput.attr('type') === 'password') {
+      cpasswordInput.attr('type', 'text');
+      cpasswordToggleIcon.removeClass('bi-eye-slash').addClass('bi-eye');
     } else {
-      cpasswordInput.attr("type", "password");
-      cpasswordToggleIcon.removeClass("bi-eye").addClass("bi-eye-slash");
+      cpasswordInput.attr('type', 'password');
+      cpasswordToggleIcon.removeClass('bi-eye').addClass('bi-eye-slash');
     }
   });
   // ===========================================================================
 
+
+
   // ================== Select Condition Prject & User Type ====================
-  var statusUserDropdown = $("#status_user");
-  var projectDropdown = $("#id_project");
-  var signupButton = $("#signup_button");
+  var statusUserDropdown = $('#status_user');
+  var projectDropdown = $('#id_project');
+  var signupButton = $('#signup_button');
 
   // Event listener for change project if any change in user type
-  statusUserDropdown.change(function () {
+  statusUserDropdown.change(function() {
     setStatusProject();
   });
 
@@ -45,243 +48,214 @@ $(document).ready(function () {
   setStatusProject();
 
   function setStatusProject() {
-    if (statusUserDropdown.val() === "new_user") {
-      projectDropdown.prop("disabled", true);
-      signupButton.prop("disabled", false);
-    } else if (statusUserDropdown.val() === "") {
-      projectDropdown.prop("disabled", true).val("");
-      signupButton.prop("disabled", true);
+    if (statusUserDropdown.val() === 'new_user') {
+      projectDropdown.prop('disabled', true);
+      signupButton.prop('disabled', false);
+    } else if (statusUserDropdown.val() === '') {
+      projectDropdown.prop('disabled', true).val('');
+      signupButton.prop('disabled', true);
     } else {
-      projectDropdown.prop("disabled", false);
-      signupButton.prop("disabled", false);
+      projectDropdown.prop('disabled', false);
+      signupButton.prop('disabled', false);
     }
   }
   // ===========================================================================
+  
+
 
   // ===================== Dropdown Condition Article =====================
   const category = new URLSearchParams(window.location.search).get("category");
-  const subcategory = new URLSearchParams(window.location.search).get(
-    "subcategory"
-  );
-  var titlesidebar = $(".collapsiblesidebar:contains('" + category + "')");
-  var subtitlesidebar = $(".sidebarcollapse a:contains('" + subcategory + "')");
+  const subcategory = new URLSearchParams(window.location.search).get("subcategory");
+  var titlesidebar = $(".collapsiblesidebar:contains('"+category+"')");
+  var subtitlesidebar = $(".sidebarcollapse a:contains('"+subcategory+"')");
   var iconside = titlesidebar.find(".icon");
-  $("#breadcrumb-category").text(category);
+  $('#breadcrumb-category').text(category);
 
   if (iconside.hasClass("bi-chevron-down")) {
-    var targetside = titlesidebar.attr("data-target");
-    $("#" + targetside).slideToggle();
-    iconside.removeClass("bi-chevron-down").addClass("bi-chevron-up");
-    var titlesidebarId = titlesidebar.attr("data-title");
-    titlesidebarId = "#" + titlesidebarId;
-    $(titlesidebarId).addClass("text-sky-700");
-    $(subtitlesidebar).addClass("text-sky-700");
-  }
-
-  $(".collapsiblesidebar").on("click", function () {
-    var iconside = $(this).find(".icon");
-    var targetside = $(this).attr("data-target");
-
-    if (iconside.hasClass("bi-chevron-down")) {
-      $(".collapsiblesidebar .icon.bi-chevron-up").each(function () {
-        var otherCategory = $(this).closest(".collapsiblesidebar");
-        var otherTarget = otherCategory.attr("data-target");
-        $("#" + otherTarget).slideUp();
-        $(this).removeClass("bi-chevron-up").addClass("bi-chevron-down");
-        var otherTitleId = otherCategory.attr("data-title");
-        otherTitleId = "#" + otherTitleId;
-        $(otherTitleId).removeClass("text-sky-700");
-      });
-      $("#" + targetside).slideDown();
+      var targetside = titlesidebar.attr("data-target");
+      $("#" + targetside).slideToggle();
       iconside.removeClass("bi-chevron-down").addClass("bi-chevron-up");
-      var titlesidebarId = $(this).attr("data-title");
+      var titlesidebarId = titlesidebar.attr("data-title");
       titlesidebarId = "#" + titlesidebarId;
       $(titlesidebarId).addClass("text-sky-700");
-    } else {
+      $(subtitlesidebar).addClass("text-sky-700");
     }
+    
+    $('.collapsiblesidebar').on('click', function () {
+      var iconside = $(this).find(".icon");
+      var targetside = $(this).attr("data-target");
+      
+      if (iconside.hasClass("bi-chevron-down")) {
+        $(".collapsiblesidebar .icon.bi-chevron-up").each(function () {
+          var otherCategory = $(this).closest(".collapsiblesidebar");
+          var otherTarget = otherCategory.attr("data-target");
+             $("#" + otherTarget).slideUp();
+             $(this).removeClass("bi-chevron-up").addClass("bi-chevron-down");
+             var otherTitleId = otherCategory.attr("data-title");
+             otherTitleId = "#" + otherTitleId;
+             $(otherTitleId).removeClass("text-sky-700");
+         });
+         $("#" + targetside).slideDown();
+         iconside.removeClass("bi-chevron-down").addClass("bi-chevron-up");
+         var titlesidebarId = $(this).attr("data-title");
+         titlesidebarId = "#" + titlesidebarId;
+         $(titlesidebarId).addClass("text-sky-700");
+     } else {
+     }
   });
 
-  // ===================== Dropdown General Question Home Page =====================
-  // $(".collapsible").click(function () {
-  //   var icon = $(this).find(".icon");
-  //   console.log(this);
-  //   if (icon.hasClass("bi-chevron-down")) {
-  //     icon.removeClass("bi-chevron-down");
-  //     icon.addClass("bi-chevron-up");
-  //     var title = $(this).attr("data-title");
-  //     var title = "#" + title;
-  //     $(title).addClass("text-main");
-  //   } else if (icon.hasClass("bi-chevron-up")) {
-  //     icon.removeClass("bi-chevron-up");
-  //     icon.addClass("bi-chevron-down");
-  //     var title = $(this).attr("data-title");
-  //     var title = "#" + title;
-  //     $(title).removeClass("text-main");
-  //   }
-  //   var target = $(this).attr("data-target");
-  //   var id = "#" + target;
-  //   $(id).slideToggle();
-  // });
-  // ==================================================================================
-
   // Handle subcategory link clicks when in detail article page
-  if (
-    window.location.href.indexOf(
-      "http://localhost:8080/kb/generalarticle/generalarticledetail"
-    ) === -1
-  ) {
-    $(".subcategory-link").on("click", function (e) {
+  if (window.location.href.indexOf("http://localhost:8080/kb/generalarticle/generalarticledetail") === -1) {
+    $('.subcategory-link').on('click', function (e) {
       e.preventDefault();
-      $(".subcategory-link").removeClass("text-sky-700");
-      const category = $(this).data("category");
-      const subcategory = $(this).data("subcategory");
-      $(this).addClass("text-sky-700");
+      $('.subcategory-link').removeClass('text-sky-700');
+      const category = $(this).data('category');
+      const subcategory = $(this).data('subcategory');
+      $(this).addClass('text-sky-700');
 
       updateContent(category, subcategory);
-      const newUrl =
-        "http://localhost:8080/kb/generalarticle?category=" +
-        category +
-        "&subcategory=" +
-        subcategory;
-      history.pushState({}, "", newUrl);
+      const newUrl = 'http://localhost:8080/kb/generalarticle?category=' + category + '&subcategory=' + subcategory;
+      history.pushState({}, '', newUrl);
     });
 
     function updateContent(category, subcategory) {
-      $.ajax({
-        type: "GET",
-        url:
-          "http://localhost:8080/kb/generalarticle?cateogry=" +
-          category +
-          "&subcategory=" +
-          subcategory,
-        data: { category: category, subcategory: subcategory },
-        success: function (response) {
-          var tempElement = document.createElement("div");
-          tempElement.innerHTML = response;
-          var contentContainer =
-            tempElement.querySelector("#content-container");
+        $.ajax({
+            type: 'GET', 
+            url: 'http://localhost:8080/kb/generalarticle?cateogry='+category+'&subcategory='+subcategory,
+            data: { category: category, subcategory: subcategory },
+            success: function (response) {
+                var tempElement = document.createElement('div');
+                tempElement.innerHTML = response;
+                var contentContainer = tempElement.querySelector('#content-container');
 
-          if (contentContainer) {
-            var contentHTML = contentContainer.innerHTML;
-            $("#content-title").text(subcategory || category);
-            $("#breadcrumb-category").text(category);
-            $("#content-container").html(contentHTML);
-          } else {
-            console.error("#content-container not found in the response");
-          }
-        },
-        error: function (error) {
-          console.error("Error:", error);
-        },
-      });
+                if (contentContainer) {
+                    var contentHTML = contentContainer.innerHTML;
+                    $('#content-title').text(subcategory || category);
+                    $('#breadcrumb-category').text(category);
+                    $('#content-container').html(contentHTML);
+                } else {
+                    console.error('#content-container not found in the response');
+                }
+            },
+            error: function (error) {
+                console.error('Error:', error);
+            }
+        });
     }
   }
   // ===========================================================================
+  
+
 
   // ======================= Update Attribute Content Aja x=====================
   // Update Content Views
-  $(".article-link").on("click", function () {
-    const articleId = $(this).data("article-id");
-    const href = $(this).attr("href");
+  $('.article-link').on('click', function () {
+    const articleId = $(this).data('article-id');
+    const href = $(this).attr('href');
     const data = {
       article: articleId,
-      href: href,
+      href: href
     };
     $.ajax({
-      type: "POST",
-      url: "/kb/generalarticle/generalarticledetail/updateContentviews",
-      data: data,
-      success: function (response) {},
-      error: function (error) {
-        console.error("Error:", error);
-      },
+        type: 'POST', 
+        url: '/kb/generalarticle/generalarticledetail/updateContentviews',
+        data: data,
+        success: function (response) {
+        },
+        error: function (error) {
+            console.error('Error:', error);
+        }
     });
   });
 
   let hasLiked = false;
   let hasDisliked = false;
-  $(".reactions").on("click", "div[id]", function (event) {
-    const id = $(this).data("id");
-    const clickType = $(this).data("type");
-    data = {
-      id: id,
-      type: clickType,
-    };
-    if (clickType === "like" && !hasLiked) {
-      console.log("You liked!");
-      hasLiked = true;
-      hasDisliked = false;
-      $.ajax({
-        type: "POST",
-        url: "/kb/generalarticle/generalarticledetail/updateReaction",
-        data: data,
-        success: function (response) {
-          window.location.reload();
-        },
-        error: function (error) {
-          console.error("Error:", error);
-        },
-      });
-    } else if (clickType === "dislike" && !hasDisliked) {
-      console.log("You disliked!");
-      hasDisliked = true;
-      hasLiked = false;
-      $.ajax({
-        type: "POST",
-        url: "/kb/generalarticle/generalarticledetail/updateReaction",
-        data: data,
-        success: function (response) {
-          window.location.reload();
-        },
-        error: function (error) {
-          console.error("Error:", error);
-        },
-      });
-    }
+  $('.reactions').on('click', 'div[id]', function (event) {
+      const id = $(this).data('id');
+      const clickType = $(this).data('type');
+      data = {
+          id: id,
+          type: clickType
+      }
+      if (clickType === 'like' && !hasLiked) {
+        console.log('You liked!');
+        hasLiked = true;
+        hasDisliked = false;
+        $.ajax({
+          type: 'POST',
+          url: '/kb/generalarticle/generalarticledetail/updateReaction',
+          data: data,
+          success: function (response) {
+            window.location.reload();
+          },
+          error: function (error) {
+            console.error('Error:', error);
+          }
+        });
+      } else if (clickType === 'dislike' && !hasDisliked) {
+        console.log('You disliked!');
+        hasDisliked = true;
+        hasLiked = false;
+        $.ajax({
+          type: 'POST',
+          url: '/kb/generalarticle/generalarticledetail/updateReaction',
+          data: data,
+          success: function (response) {
+            window.location.reload();
+          },
+          error: function (error) {
+              console.error('Error:', error);
+          }
+        });
+      }
   });
   // =========================================================================
-
+  
+  
+  
   // ======================== Reaction Icon Condition ========================
-  $("#likes").hover(
-    function () {
-      $(this).find("svg path").css("fill", "#00d431");
-    },
-    function () {
-      $(this).find("svg path").css("fill", "");
-    }
-  );
-  $("#notlikes").hover(
-    function () {
-      $(this).find("svg path").css("fill", "#d10023");
-    },
-    function () {
-      $(this).find("svg path").css("fill", "");
-    }
-  );
+  $('#likes').hover(function () {
+      $(this).find('svg path').css('fill', '#00d431'); 
+  }, function () {
+      $(this).find('svg path').css('fill', ''); 
+  });
+  $('#notlikes').hover(function () {
+      $(this).find('svg path').css('fill', '#d10023'); 
+  }, function () {
+      $(this).find('svg path').css('fill', ''); 
+  });
   // ===========================================================================
 
+
+  
+  
   // ===================== Open Close Modal Form Complain ======================
   // Select the modal element by its ID or other means
-  const $modalElement = document.querySelector("#authentication-modal");
-  const action = $(".form").attr("action");
+  const $modalElement = document.querySelector('#authentication-modal');
+  const action = $('.form').attr('action');
   // Define the options for the modal
   const modalOptions = {
-    placement: "bottom-right",
-    onHide: () => {},
-    onShow: () => {},
-    onToggle: () => {},
+      placement: 'bottom-right',
+      onHide: () => {
+      },
+      onShow: () => {
+      },
+      onToggle: () => {
+      }
   };
   // Create a new Modal instance
   if (window.location.href === action) {
     const modal = new Modal($modalElement, modalOptions);
     if (fileMessage !== null) {
       modal.show();
-    }
-    $('[data-modal-hide="authentication-modal"]').click(function () {
+    } 
+    $('[data-modal-hide="authentication-modal"]').click(function() {
       modal.hide();
     });
   }
   // ===========================================================================
+
+
 
   // LAYOUT ADMIN
   // =========================== Sidebar Menu Active ===========================
@@ -299,6 +273,8 @@ $(document).ready(function () {
     );
   });
   // ===========================================================================
+
+
 
   // ========================= Delete Single Checkbox ==========================
   $(".delete-checkbox").on("change", function () {
@@ -334,7 +310,7 @@ $(document).ready(function () {
       $(".delete-batch").hide();
     }
   });
-  // Send data delete batch using ajax
+  // Send data delete batch using ajax 
   $(".delete-batch-btn").on("click", function () {
     const url = $(this).attr("data-action");
     let selectedItems = [];
@@ -365,6 +341,8 @@ $(document).ready(function () {
   });
   // ===========================================================================
 
+
+
   // ==================== Sidebar Toggle Expand Mobile View ====================
   var toggleClose = `
   <button type="button" data-drawer-hide="drawer-disabled-backdrop" aria-controls="drawer-disabled-backdrop" class="text-white bg-main rounded-lg text-sm w-14 h-10 absolute top-0 -right-12 inline-flex items-center justify-center">
@@ -376,124 +354,132 @@ $(document).ready(function () {
   `;
   $("button[data-drawer-show='drawer-disabled-backdrop']").click(function () {
     // Append the button to the aside element
-    $("#drawer-disabled-backdrop").append(toggleClose);
+    $('#drawer-disabled-backdrop').append(toggleClose);
   });
-  const aside = $("#drawer-disabled-backdrop");
-  $(aside).on(
-    "click",
-    "button[data-drawer-hide='drawer-disabled-backdrop']",
-    function () {
-      $(aside).removeClass("transform-none");
-      $(aside).addClass("-translate-x-full");
-      $(this).remove();
-    }
-  );
-  // ===========================================================================
+  const aside = $('#drawer-disabled-backdrop');
+  $(aside).on('click', "button[data-drawer-hide='drawer-disabled-backdrop']", function () {
+    $(aside).removeClass('transform-none')
+    $(aside).addClass('-translate-x-full')
+    $(this).remove()
+  });
+  // =========================================================================== 
+
+
 
   // ======================== Initiate Status Complain =========================
-  var initialValue = $("#status-entries").val();
-  const statusComplainElement = $("#status-entries");
-  const ddIconElement = $("#dd-icon svg path");
-  const ddIconPos = $("#dd-icon");
-  if (initialValue === "pending") {
-    $(statusComplainElement)
-      .removeClass("bg-solved-status text-solved-status-text")
-      .removeClass("bg-progress-status text-progress-status-text")
-      .addClass("bg-pending-status text-pending-status-text");
-    $(ddIconPos).addClass("right-[4.5rem]");
-    $(ddIconElement).attr("fill", "#CD6200").attr("stroke", "#CD6200");
-  } else if (initialValue === "progress") {
-    $(statusComplainElement)
-      .removeClass("bg-pending-status text-pending-status-text")
-      .removeClass("bg-solved-status text-solved-status-text")
-      .addClass("bg-progress-status text-progress-status-text");
-    $(ddIconPos).addClass("right-[3.5rem]");
-    $(ddIconElement).attr("fill", "#1F9254").attr("stroke", "#1F9254");
-  } else {
-    $(statusComplainElement)
-      .removeClass("bg-pending-status text-pending-status-text")
-      .removeClass("bg-progress-status text-progress-status-text")
-      .addClass("bg-solved-status text-solved-status-text");
-    $(ddIconPos).addClass("right-[4rem]");
-    $(ddIconElement).attr("fill", "#047FA6").attr("stroke", "#047FA6");
-  }
-  // ===========================================================================
-
-  // ========================= Change Status Complain ==========================
-  statusComplainElement.change(function () {
-    initialValue = $(this).val();
-    const id = $(this).data("id");
-    if (initialValue === "pending") {
-      $(statusComplainElement)
+  $('[id^="status-entries"]').each(function () {
+    var dropdown = $(this);
+    var selectedValue = $(dropdown).val();
+    var iconElement = $(dropdown).siblings('svg').find('path');
+    var iconElementPos = $(dropdown).find('svg');
+    if (selectedValue === "pending") {
+      $(this)
         .removeClass("bg-solved-status text-solved-status-text")
         .removeClass("bg-progress-status text-progress-status-text")
         .addClass("bg-pending-status text-pending-status-text");
-      $(ddIconPos)
-        .removeClass("right-[4.5rem]")
-        .removeClass("right-[4rem]")
-        .addClass("right-[4.5rem]");
-      $(ddIconElement).attr("fill", "#CD6200").attr("stroke", "#CD6200");
-    } else if (initialValue === "progress") {
-      $(statusComplainElement)
+      $(iconElementPos).addClass("right-[4.5rem]");
+      $(iconElement).attr("fill", "#CD6200").attr("stroke", "#CD6200");
+    } else if (selectedValue === "progress") {
+      $(this)
         .removeClass("bg-pending-status text-pending-status-text")
         .removeClass("bg-solved-status text-solved-status-text")
         .addClass("bg-progress-status text-progress-status-text");
-      $(ddIconPos)
-        .removeClass("right-[4.5rem]")
-        .removeClass("right-[4rem]")
-        .addClass("right-[4rem]");
-      $(ddIconElement).attr("fill", "#1F9254").attr("stroke", "#1F9254");
+      $(iconElementPos).addClass("right-[3.5rem]");
+      $(iconElement).attr("fill", "#047FA6").attr("stroke", "#047FA6");
     } else {
-      $(statusComplainElement)
+      $(this)
+      .removeClass("bg-pending-status text-pending-status-text")
+      .removeClass("bg-progress-status text-progress-status-text")
+      .addClass("bg-solved-status text-solved-status-text");
+      $(iconElementPos).addClass("right-[4rem]");
+      $(iconElement).attr("fill", "#1F9254").attr("stroke", "#1F9254");
+    }
+  });
+  // ===========================================================================
+
+
+  // ========================= Change Status Complain ==========================
+  $('[id^="status-entries"]').change(function () {
+    var initialStatusValue = $(this).val();
+    var id = $(this).data("id");
+    var iconElement = $(this).siblings('svg').find('path');
+    var iconElementPos = $(this).find('svg');
+    if (initialStatusValue === "pending") {
+        $(this)
+          .removeClass("bg-solved-status text-solved-status-text")
+          .removeClass("bg-progress-status text-progress-status-text")
+          .addClass("bg-pending-status text-pending-status-text");
+        $(iconElementPos)
+          .removeClass("right-[4.5rem]")
+          .removeClass("right-[4rem]")
+          .addClass("right-[4.5rem]");
+        $(iconElement).attr("fill", "#CD6200").attr("stroke", "#CD6200");
+      } else if (initialStatusValue === "progress") {
+        $(this)
+          .removeClass("bg-pending-status text-pending-status-text")
+          .removeClass("bg-solved-status text-solved-status-text")
+          .addClass("bg-progress-status text-progress-status-text");
+        $(iconElementPos)
+          .removeClass("right-[4.5rem]")
+          .removeClass("right-[4rem]")
+          .addClass("right-[4rem]");
+        $(iconElement).attr("fill", "#047FA6").attr("stroke", "#047FA6");
+      } else {
+        $(this)
         .removeClass("bg-pending-status text-pending-status-text")
         .removeClass("bg-progress-status text-progress-status-text")
         .addClass("bg-solved-status text-solved-status-text");
-      $(ddIconPos)
+        $(iconElementPos)
         .removeClass("right-[4.5rem]")
         .removeClass("right-[4rem]")
         .addClass("right-[4.5rem]");
-      $(ddIconElement).attr("fill", "#047FA6").attr("stroke", "#047FA6");
-    }
-    const data = {
-      id: id,
-      status: initialValue,
-    };
-    $.ajax({
-      type: "POST",
-      url: "/kb/administrator/complain/updateStatus",
-      data: data,
-      success: function (response) {},
-      error: function (jqXHR, textStatus, errorThrown) {
-        console.error("AJAX request error:", textStatus, errorThrown);
-      },
-    });
+        $(iconElement).attr("fill", "#1F9254").attr("stroke", "#1F9254");
+      }
+      const data = {
+        id: id,
+        status: initialStatusValue,
+      };
+      $.ajax({
+          type: "POST",
+          url: "/kb/administrator/complain/updateStatus",
+          data: data,
+          success: function(response) {
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+              console.error("AJAX request error:", textStatus, errorThrown);
+          }
+      });
   });
   // ===========================================================================
 
-  // ======================= Initiate Open/Close Article =======================
+
+
+  // ============ Initiate Open/Close Article & Complain =======================
   $('[id^="case-entries"]').each(function () {
-    var $dropdown = $(this);
-    var selectedValue = $dropdown.val();
-    var iconElement = $dropdown.siblings("svg").find("path");
+    var dropdown = $(this);
+    var selectedValue = dropdown.val();
+    var iconElement = dropdown.siblings('svg').find('path');
     if (selectedValue === "open") {
-      $(this)
-        .removeClass("bg-close-status text-close-status-text")
-        .addClass("bg-solved-status text-solved-status-text");
-      $(iconElement).attr("fill", "#1F9254").attr("stroke", "#1F9254");
-    } else {
-      $(this)
-        .removeClass("bg-solved-status text-solved-status-text")
-        .addClass("bg-close-status text-close-status-text");
-      $(iconElement).attr("fill", "#A30D11").attr("stroke", "#A30D11");
-    }
+        $(this)
+          .removeClass("bg-close-status text-close-status-text")
+          .addClass("bg-solved-status text-solved-status-text");
+        $(iconElement).attr("fill", "#1F9254").attr("stroke", "#1F9254");
+      } else {
+        $(this)
+          .removeClass("bg-solved-status text-solved-status-text")
+          .addClass("bg-close-status text-close-status-text");
+        $(iconElement).attr("fill", "#A30D11").attr("stroke", "#A30D11");
+      }
   });
   // ===========================================================================
 
-  // ================ Change Condition Open/Close Article ======================
+
+
+  // =========== Change Condition Open/Close Article & Complain ================
   $('[id^="case-entries"]').change(function () {
     var initialCaseValue = $(this).val();
     var id = $(this).data("id");
-    var iconElement = $(this).siblings("svg").find("path");
+    var iconElement = $(this).siblings('svg').find('path');
     if (initialCaseValue === "open") {
       $(this)
         .removeClass("bg-close-status text-close-status-text")
@@ -509,31 +495,48 @@ $(document).ready(function () {
       id: id,
       visibility: initialCaseValue,
     };
-    $.ajax({
-      type: "POST",
-      url: "/kb/administrator/article/updateVisibility",
-      data: data,
-      success: function (response) {
-        console.log(response);
-      },
-      error: function (jqXHR, textStatus, errorThrown) {
-        console.error("AJAX request error:", textStatus, errorThrown);
-      },
-    });
+    if(window.location.pathname.includes("/administrator/complain")){
+      $.ajax({
+        type: "POST",
+        url: "/kb/administrator/complain/updateVisibility",
+        data: data,
+        success: function(response) {
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error("AJAX request error:", textStatus, errorThrown);
+        }
+      });
+    }else{
+      $.ajax({
+        type: "POST",
+        url: "/kb/administrator/article/updateVisibility",
+        data: data,
+        success: function(response) {
+          console.log(response);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error("AJAX request error:", textStatus, errorThrown);
+        }
+      });
+    }
   });
   // ===========================================================================
 
-  // ======================= Clickable Row Complain ===========================
+
+  
+  // ======================= Clickable Row Complain =========================== 
   $(".clickable-row").click(function (event) {
     if (
       !$(event.target).closest("select").length &&
       !$(event.target).closest(".delete-checkbox").length
     ) {
       // Only navigate if the clicked element is not a select dropdown
-      window.location = $(this).data("href");
+      // window.location = $(this).data("href");
     }
   });
   // ===========================================================================
+
+
 
   // ======================= Alert notification Message =======================
   const flashSuccessMessage = $(".flash-success-message").data("message");
@@ -574,6 +577,8 @@ $(document).ready(function () {
     });
   }
   // ===========================================================================
+
+
 
   // ========================= Alert Notification CRUD =========================
   const flashSuccess = $(".flash-success").data("flashmessage");
@@ -621,67 +626,65 @@ $(document).ready(function () {
   });
   // ============================================================================
 
+
+
   // =============================== Row Per Page ===============================
-  $("#row-entries").change(function () {
+  $('#row-entries').change(function() {
     var offset = 1;
-    var selectedValue = $(this).val();
+    var selectedValue = $(this).val(); 
     var currentUrl = window.location.href;
     var parts = currentUrl.split("/");
     var lastPart = parts[parts.length - 1];
     var pages = lastPart.split("?")[0];
-    fetchData(selectedValue, offset, pages);
+    fetchData(selectedValue, offset, pages); 
   });
   function fetchData(Data, offset, pages) {
-    if (pages == "subcategory") {
+    if(pages == 'subcategory'){
       const url = new URL(window.location.href);
       const categoryId = url.searchParams.get("category_id");
-      var newUrl =
-        "/kb/administrator/category/" +
-        pages +
-        "?category_id=" +
-        categoryId +
-        "&page=" +
-        offset +
-        "&perPage=" +
-        Data;
+      var newUrl = '/kb/administrator/category/'+pages+'?category_id=' + categoryId + '&page=' + offset + '&perPage=' + Data;
       window.location.href = newUrl;
-    } else {
-      var newUrl =
-        "/kb/administrator/" + pages + "?page=" + offset + "&perPage=" + Data;
+    }else{
+      var newUrl = '/kb/administrator/'+pages+'?page=' + offset + '&perPage=' + Data;
       window.location.href = newUrl;
     }
   }
   // ================================================================================
 
-  // =============== Select Category & Subcategory Condition Article ================
-  $("#categorySelect").change(function () {
-    var selectedCategory = $(this).val();
-    var subcategorySelect = $("#subcategorySelect");
-    subcategorySelect.prop("disabled", true);
-    $("#subcategorySelect option").hide();
 
-    if (selectedCategory === "") {
-      $('#subcategorySelect option[value=""]').show();
-    } else {
-      $("#subcategorySelect option." + selectedCategory).show();
-      if ($("#subcategorySelect option." + selectedCategory).length === 0) {
+
+  // =============== Select Category & Subcategory Condition Article ================
+  $('#categorySelect').change(function() {
+    var selectedCategory = $(this).val();
+    var subcategorySelect = $('#subcategorySelect');
+    subcategorySelect.prop('disabled', true);
+    $('#subcategorySelect option').hide();
+
+    if (selectedCategory === '') {
         $('#subcategorySelect option[value=""]').show();
-      } else {
-        subcategorySelect.prop("disabled", false);
-      }
+    } else {
+        $('#subcategorySelect option.' + selectedCategory).show();
+        if ($('#subcategorySelect option.' + selectedCategory).length === 0) {
+            $('#subcategorySelect option[value=""]').show();
+        } else {
+            subcategorySelect.prop('disabled', false);
+        }
     }
-    subcategorySelect.val("");
+    subcategorySelect.val('');
   });
   // ===================================================================================
 
+
+
   // ========================= Dynamically URL Article Details =========================
   if (modifiedURL.test(window.location.href)) {
-    if ($(".uploadTime").length > 0) {
+    if($('.uploadTime').length > 0){
       const nodes = $(".uploadTime").get();
-      timeago.render(nodes, "en_US");
+      timeago.render(nodes, 'en_US');
     }
   }
   // ===================================================================================
+
 });
 
 // USER
@@ -709,67 +712,67 @@ const $formatsizetext = $("#formatsizetext");
 const $dropzone = $("#dropzone");
 
 // Add an event listener to the file input element
-$fileInput.on("change", function (event) {
-  // Get the selected file
-  const selectedFile = event.target.files[0];
+$fileInput.on("change", function(event) {
+    // Get the selected file
+    const selectedFile = event.target.files[0];
 
-  // Check if a file is selected
-  if (selectedFile) {
-    // Update the text content of the <p> element with the file name
-    $selectedFileName.text(`Selected file: ${selectedFile.name}`);
-    $selectedFileName.addClass("-mt-8");
-    $dragdroptext.removeClass("block md:block");
-    $dropzone.addClass("border-main");
-    $formatsizetext.removeClass("block md:block");
-    $dragdroptext.addClass("hidden");
-    $formatsizetext.addClass("hidden");
-  } else {
-    // If no file is selected, clear the text content
-    $selectedFileName.text("");
-    $selectedFileName.removeClass("-mt-8");
-    $dragdroptext.removeClass("hidden");
-    $dropzone.removeClass("border-main");
-    $formatsizetext.removeClass("hidden");
-    $dragdroptext.addClass("block");
-    $formatsizetext.addClass("block");
-  }
+    // Check if a file is selected
+    if (selectedFile) {
+        // Update the text content of the <p> element with the file name
+        $selectedFileName.text(`Selected file: ${selectedFile.name}`);
+        $selectedFileName.addClass("-mt-8");
+        $dragdroptext.removeClass("block md:block");
+        $dropzone.addClass("border-main");
+        $formatsizetext.removeClass("block md:block");
+        $dragdroptext.addClass("hidden");
+        $formatsizetext.addClass("hidden");
+    } else {
+        // If no file is selected, clear the text content
+        $selectedFileName.text("");
+        $selectedFileName.removeClass("-mt-8");
+        $dragdroptext.removeClass("hidden");
+        $dropzone.removeClass("border-main");
+        $formatsizetext.removeClass("hidden");
+        $dragdroptext.addClass("block");
+        $formatsizetext.addClass("block");
+    }
 });
 
-$dropzone.on("dragover", function (e) {
-  e.preventDefault();
-  $dropzone.addClass("border-main"); // Add a class to highlight the drop area when dragging over it.
+$dropzone.on("dragover", function(e) {
+    e.preventDefault();
+    $dropzone.addClass("border-main"); // Add a class to highlight the drop area when dragging over it.
 });
 
-$dropzone.on("dragleave", function () {
-  $dropzone.removeClass("border-main"); // Remove the highlighting class when dragging leaves the drop area.
+$dropzone.on("dragleave", function() {
+    $dropzone.removeClass("border-main"); // Remove the highlighting class when dragging leaves the drop area.
 });
 
-$dropzone.on("drop", function (e) {
-  e.preventDefault();
-  $dropzone.removeClass("border-main"); // Remove the highlighting class when a file is dropped.
+$dropzone.on("drop", function(e) {
+    e.preventDefault();
+    $dropzone.removeClass("border-main"); // Remove the highlighting class when a file is dropped.
 
-  const files = e.originalEvent.dataTransfer.files;
-  handleFileChange(files);
+    const files = e.originalEvent.dataTransfer.files;
+    handleFileChange(files);
 });
 
 function handleFileChange(files) {
-  if (files.length > 0) {
-    const file = files[0];
-    $selectedFileName.text(`Selected file: ${file.name}`);
-    $selectedFileName.addClass("-mt-8");
-    $dragdroptext.removeClass("block md:block");
-    $dropzone.addClass("border-main");
-    $formatsizetext.removeClass("block md:block");
-    $dragdroptext.addClass("hidden");
-    $formatsizetext.addClass("hidden");
-    $fileInput[0].files = files; // Assign the selected files to the hidden input for form submission.
-  } else {
-    $selectedFileName.text("");
-    $selectedFileName.removeClass("-mt-8");
-    $dragdroptext.removeClass("hidden");
-    $dropzone.removeClass("border-main");
-    $formatsizetext.removeClass("hidden");
-    $dragdroptext.addClass("block");
-    $formatsizetext.addClass("block");
-  }
+    if (files.length > 0) {
+        const file = files[0];
+        $selectedFileName.text(`Selected file: ${file.name}`);
+        $selectedFileName.addClass("-mt-8");
+        $dragdroptext.removeClass("block md:block");
+        $dropzone.addClass("border-main");
+        $formatsizetext.removeClass("block md:block");
+        $dragdroptext.addClass("hidden");
+        $formatsizetext.addClass("hidden");
+        $fileInput[0].files = files; // Assign the selected files to the hidden input for form submission.
+    } else {
+        $selectedFileName.text("");
+        $selectedFileName.removeClass("-mt-8");
+        $dragdroptext.removeClass("hidden");
+        $dropzone.removeClass("border-main");
+        $formatsizetext.removeClass("hidden");
+        $dragdroptext.addClass("block");
+        $formatsizetext.addClass("block");
+    }
 }

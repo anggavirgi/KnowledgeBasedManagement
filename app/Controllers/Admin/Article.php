@@ -9,6 +9,9 @@ use App\Models\Admin\SubCategoryModel;
 use App\Models\Admin\ProjectModel;
 use CodeIgniter\RESTful\ResourceController;
 use Exception;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 
 class Article extends ResourceController
 {
@@ -278,5 +281,60 @@ class Article extends ResourceController
     } else {
       return redirect()->to('kb/administrator/article');
     }
+  }
+
+  public function exportDataToExcel()
+  {
+    $spreadsheet = new Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
+
+    $data = [
+      ['No', 'Title', 'Slug', 'Category', 'Sub Category', 'Project', 'Content', 'Good Insight', 'Bad Insight', 'Content Views', 'Visibility']
+    ];
+    $article = $content = $this->db->table('content a')
+      ->select('a.*, c.name_category AS id_category, d.name_subcategory AS id_sub_category, b.name_project AS id_project')
+      ->join('article e', 'a.id = e.id_content')
+      ->join('categories c', 'a.id_category = c.id')
+      ->join('sub_category d', 'a.id_sub_category = d.id')
+      ->join('project b', 'e.id_project = b.id')
+      ->get()
+      ->getResultArray();
+
+    $i = 1;
+    foreach ($article as $article) {
+      $rowData = [];
+      array_push($rowData, $i, $article['title'], $article['slug'], $article['id_category'], $article['id_sub_category'], $article['id_project'], $article['content'], $article['good_insight'], $article['bad_insight'], $article['content_views'], $article['visibility']);
+
+      array_push($data, $rowData);
+      $i++;
+    }
+
+    // Set data ke dalam spreadsheet
+    $row = 1;
+    foreach ($data as $rowData) {
+      $col = 1;
+      foreach ($rowData as $cellData) {
+        if ($row === 1) {
+          $sheet->getStyleByColumnAndRow($col, $row)->getFont()->setBold(true);
+        }
+        // Atur border untuk sel-sel
+        $style = $sheet->getStyleByColumnAndRow($col, $row);
+        $style->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
+        $sheet->setCellValueByColumnAndRow($col, $row, $cellData);
+        $col++;
+      }
+      $row++;
+    }
+
+    // Membuat file Excel
+    $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+    $filename = 'articles.xlsx';
+
+    // Atur header HTTP untuk menghasilkan file XLSX
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition: attachment; filename="' . $filename . '"');
+
+    // Tulis file Excel ke output
+    $writer->save('php://output');
   }
 }

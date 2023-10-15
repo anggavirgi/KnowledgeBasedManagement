@@ -1,4 +1,8 @@
-<?php echo $this->extend('admin/layout'); ?>
+<?php
+
+use function PHPUnit\Framework\isNull;
+
+echo $this->extend('admin/layout'); ?>
 
 <?php echo $this->section('content'); ?>
 
@@ -22,13 +26,23 @@
                     </svg>
                 </button>
             </div>
-            <a href="#" class="border inline-flex gap-4 border-gray-400 px-6 py-2 rounded-2xl hover:border-green-400 cursor-pointer">
+            <!-- <a href="#" class="border inline-flex gap-4 border-gray-400 px-6 py-2 rounded-2xl hover:border-green-400 cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
                 </svg>
                 <span class="self-center">13/06/2023</span>
-            </a>
-            <a class="border border-gray-400 px-6 py-2 rounded-2xl font-medium hover:border-green-400 cursor-pointer">export</a>
+            </a> -->
+            <form action="" id="dateForm">
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+                        </svg>
+                    </div>
+                    <input type="text" name="dates" id="date-range-picker" class="border border-gray-400 px-6 py-2 rounded-2xl hover:border-green-400 focus:border-green-400 w-full pl-10 p-2.5" placeholder="Select date..">
+                </div>
+            </form>
+            <a href="<?php echo base_url(); ?>kb/administrator/complain/export" class="border border-gray-400 px-6 py-2 rounded-2xl font-medium hover:border-green-400 cursor-pointer ">export</a>
         </div>
     </div>
     <div class="mb-5 flex items-center justify-end text-xs">
@@ -129,20 +143,20 @@
                                     <option value="progress" class="bg-white text-black" <?php if ($complain['status'] === "progress") echo "selected"; ?>>In progres</option>
                                     <option value="solved" class="bg-white text-black" <?php if ($complain['status'] === "solved") echo "selected"; ?>>Solved</option>
                                 </select>
-                                <svg class="w-2 h-2 absolute ml-[58px] text-gray-400" width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg class="w-2 h-2 absolute right-3 text-gray-400" width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M6.97607 0.81897L4.055 5.13429L1.00017 0.9126L6.97607 0.81897Z" fill="#CD6200" stroke="#CD6200" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                             </div>
                         </td>
                         <td class="p-3 text-center">
                             <div class="relative flex justify-center items-center">
-                                <select id="case-entries" name="status_case_entries" class="py-2 pe-9 ps-5 appearance-none cursor-pointer rounded-[15px] text-gray-700" data-id="<?= $complain['id']; ?>">
+                                <select id="case-entries" name="status_case_entries" class="py-2 pe-9 ps-5 appearance-none cursor-pointer rounded-[15px]" data-id="<?= $complain['id']; ?>">
                                     <?php if ($complain['visibility'] == 'closed') : ?>
-                                        <option value="closed" class="block px-4 py-2 bg-white text-black" selected>Close</option>
-                                        <option value="open" class="block px-4 py-2 bg-white text-black">Open</option>
+                                        <option value="closed" class="block px-4 py-2 bg-white text-close-status-text" selected>Close</option>
+                                        <option value="open" class="block px-4 py-2 bg-white text-solved-status-text">Open</option>
                                     <?php else : ?>
-                                        <option value="closed" class="block px-4 py-2 bg-white text-black">Close</option>
-                                        <option value="open" class="block px-4 py-2 bg-white text-black" selected>Open</option>
+                                        <option value="closed" class="block px-4 py-2 bg-white text-close-status-text">Close</option>
+                                        <option value="open" class="block px-4 py-2 bg-white text-solved-status-text" selected>Open</option>
                                     <?php endif; ?>
                                 </select>
                                 <svg class="w-2 h-2 absolute ml-[50px] text-gray-400" width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -167,18 +181,30 @@
                 <ul class="inline-flex -space-x-px text-sm">
                     <?php if (isset($pagination) && $pagination['page'] > 1) : ?>
                         <li>
-                            <a href="<?php echo base_url(); ?>kb/administrator/article?page=<?php echo $pagination['page'] - 1; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 ml-0 leading-tight bg-white border rounded-l-lg hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Previous</a>
+                            <?php if ($dates === NULL) : ?>
+                                <a href="<?php echo base_url(); ?>kb/administrator/complain?page=<?php echo $pagination['page'] - 1; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 ml-0 leading-tight bg-white border rounded-l-lg hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Previous</a>
+                            <?php else : ?>
+                                <a href="<?php echo base_url(); ?>kb/administrator/complain?page=<?php echo $pagination['page'] - 1; ?>&perPage=<?php echo $pagination['perPage']; ?>&dates=<?php echo $dates; ?>" class="flex items-center justify-center px-3 h-8 ml-0 leading-tight bg-white border rounded-l-lg hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Previous</a>
+                            <?php endif; ?>
                         </li>
                     <?php endif; ?>
                     <?php if (isset($pagination)) : ?>
                         <?php for ($i = 1; $i <= $pagination['totalPages']; $i++) : ?>
                             <li>
-                                <a href="<?php echo base_url(); ?>kb/administrator/article?page=<?php echo $i; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 border border-white <?php echo ($i == $pagination['page']) ? 'bg-main text-white' : 'bg-white text-gray-400'; ?> hover:bg-main hover:text-white"><?php echo $i; ?></a>
+                                <?php if ($dates === NULL) : ?>
+                                    <a href="<?php echo base_url(); ?>kb/administrator/complain?page=<?php echo $i; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 border border-white <?php echo ($i == $pagination['page']) ? 'bg-main text-white' : 'bg-white text-gray-400'; ?> hover:bg-main hover:text-white"><?php echo $i; ?></a>
+                                <?php else : ?>
+                                    <a href="<?php echo base_url(); ?>kb/administrator/complain?page=<?php echo $i; ?>&perPage=<?php echo $pagination['perPage']; ?>&dates=<?php echo $dates; ?>" class="flex items-center justify-center px-3 h-8 border border-white <?php echo ($i == $pagination['page']) ? 'bg-main text-white' : 'bg-white text-gray-400'; ?> hover:bg-main hover:text-white"><?php echo $i; ?></a>
+                                <?php endif; ?>
                             </li>
                         <?php endfor; ?>
                         <?php if ($pagination['page'] < $pagination['totalPages']) : ?>
                             <li>
-                                <a href="<?php echo base_url(); ?>kb/administrator/article?page=<?php echo $pagination['page'] + 1; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 leading-tight bg-white border hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Next</a>
+                                <?php if ($dates === NULL) : ?>
+                                    <a href="<?php echo base_url(); ?>kb/administrator/complain?page=<?php echo $pagination['page'] + 1; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 leading-tight bg-white border hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Next</a>
+                                <?php else : ?>
+                                    <a href="<?php echo base_url(); ?>kb/administrator/complain?page=<?php echo $pagination['page'] + 1; ?>&perPage=<?php echo $pagination['perPage']; ?>&dates=<?php echo $dates; ?>" class="flex items-center justify-center px-3 h-8 leading-tight bg-white border hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Next</a>
+                                <?php endif; ?>
                             </li>
                         <?php endif; ?>
                     <?php else : ?>
@@ -189,11 +215,19 @@
                         ?>
                         <?php for ($i = 1; $i <= $pagination['page']; $i++) : ?>
                             <li>
-                                <a href="<?php echo base_url(); ?>kb/administrator/article?page=<?php echo $i; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 border border-white <?php echo ($i == $pagination['page']) ? 'bg-main text-white' : 'bg-white text-gray-400'; ?> hover:bg-main hover:text-white"><?php echo $i; ?></a>
+                                <?php if ($dates === NULL) : ?>
+                                    <a href="<?php echo base_url(); ?>kb/administrator/complain?page=<?php echo $i; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 border border-white <?php echo ($i == $pagination['page']) ? 'bg-main text-white' : 'bg-white text-gray-400'; ?> hover:bg-main hover:text-white"><?php echo $i; ?></a>
+                                <?php else : ?>
+                                    <a href="<?php echo base_url(); ?>kb/administrator/complain?page=<?php echo $i; ?>&perPage=<?php echo $pagination['perPage']; ?>&dates=<?php echo $dates; ?>" class="flex items-center justify-center px-3 h-8 border border-white <?php echo ($i == $pagination['page']) ? 'bg-main text-white' : 'bg-white text-gray-400'; ?> hover:bg-main hover:text-white"><?php echo $i; ?></a>
+                                <?php endif; ?>
                             </li>
                         <?php endfor; ?>
                         <li>
-                            <a href="<?php echo base_url(); ?>kb/administrator/article?page=<?php echo $pagination['page'] + 1; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 leading-tight bg-white border hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Next</a>
+                            <?php if ($dates === NULL) : ?>
+                                <a href="<?php echo base_url(); ?>kb/administrator/complain?page=<?php echo $pagination['page'] + 1; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 leading-tight bg-white border hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Next</a>
+                            <?php else : ?>
+                                <a href="<?php echo base_url(); ?>kb/administrator/complain?page=<?php echo $pagination['page'] + 1; ?>&perPage=<?php echo $pagination['perPage']; ?>&dates=<?php echo $dates; ?>" class="flex items-center justify-center px-3 h-8 leading-tight bg-white border hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Next</a>
+                            <?php endif; ?>
                         </li>
                     <?php endif; ?>
                 </ul>
