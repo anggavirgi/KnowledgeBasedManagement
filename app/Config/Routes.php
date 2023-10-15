@@ -40,10 +40,13 @@ $routes->group('kb', static function ($routes) {
     $routes->get('/', 'Home::index');
     $routes->get('generalarticle', 'Home::generalarticle');
     $routes->get('generalarticle/generalarticledetail', 'Home::generalarticledetail');
+    $routes->post('generalarticle/generalarticledetail/updateContentviews', 'Home::updateContentviews');
+    $routes->post('generalarticle/generalarticledetail/updateReaction', 'Home::updateReaction');
     $routes->get('complain', 'Home::complain');
     $routes->post('complain', 'Home::create');
     $routes->get('history', 'Home::history');
     $routes->get('personalarticle', 'Home::personalarticle');
+    $routes->post('personalarticle', 'Home::create');
     $routes->get('personalarticle/personalarticledetail', 'Home::personalarticledetail');
     $routes->get('complain/reply', 'Home::reply');
 });

@@ -67,7 +67,7 @@
                             <a href="<?php echo base_url(); ?>kb/personalarticle" class="block px-4 py-2 bg-white hover:bg-gray-300 text-black">History</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url(); ?>kb/generalarticle" class="block px-4 py-2 bg-white hover:bg-gray-300 text-black">Article</a>
+                            <a href="<?php echo base_url(); ?>kb/personalarticle" class="block px-4 py-2 bg-white hover:bg-gray-300 text-black">Article</a>
                         </li>
                     </ul>
                     <div class="py-2">

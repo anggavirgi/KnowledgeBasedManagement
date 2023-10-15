@@ -6,23 +6,23 @@
     <div id="faq" class="flex-col justify-center items-center min-h-[40vh] lg:min-h-[80vh] sm:min-h-[70vh] md:min-h-[80vh]">
         <img src="<?php echo base_url(); ?>src/images/waves-hero.png" class="w-[100%] h-[38rem] md:h-[49rem] sm:h-[40rem] lg:h-[49rem] object-cover  absolute z-[-1] top-0" alt="">
         <div class="mt-12">
-            <h1 class="flex gap-3 justify-center text-4xl lg:text-5xl sm:text-4xl font-semibold sm:font-bold">
+            <h1 class="flex gap-3 justify-center text-3xl lg:text-5xl sm:text-4xl font-semibold sm:font-bold">
                 <span class="text-white">Help center</span>
                 <span class="text-[#2562AE]">Virtu</span>
                 <span class="text-[#FFC700]">see</span>
             </h1>
             <div class="flex justify-center" id="search">
                 <form action="" class="relative">
-                    <input type="text" name="email" id="email" placeholder="Search Your question, answer, etc" class="sm:w-[30rem] w-[22rem]  mb-3 px-7 mt-[30px] py-3  rounded-sm border border-gray-400 outline-main">
+                    <input type="text" name="email" id="email" placeholder="Search Your question, answer, etc" class="sm:w-[30rem] w-[20rem]  mb-3 px-7 mt-[30px] py-3  rounded-sm border border-gray-400 outline-main">
                     <button>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search absolute sm:left-[450px] left-[320px] top-[47px] cursor-pointer text-[#919191]" viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search absolute sm:left-[450px] left-[295px] top-[47px] cursor-pointer text-[#919191]" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                         </svg>
                     </button>
                 </form>
             </div>
             <div class="flex justify-center mt-[3px] sm:[5px]">
-                <div class="sm:w-[30rem] w-[22rem] text-justify">
+                <div class="sm:w-[30rem] w-[20rem] text-justify">
                     <p class="text-sm text-white"><span class="text-secondary font-semibold">Search what you want,</span> we will answer your question and you can search anything
                         about the Virtusee Program or technical </p>
                 </div>
@@ -30,7 +30,7 @@
         </div>
         <div id="categories" class="flex flex-wrap justify-center sm:w-3/4 md:w-3/5 mx-auto ">
             <?php foreach ($category as $category) : ?>
-                <div class="m-2 md:m-4 w-1/3 sm:w-1/4 flex justify-center">
+                <div class="m-3 sm:m-4 lg:m-6 w-1/3 sm:w-1/4 flex justify-center">
                     <a href="<?php echo base_url() ?>kb/generalarticle?category=<?= $category['name_category']; ?>">
                         <div class="bg-gray-200 sm:px-[2rem] py-3 rounded-md w-[8rem] h-[5rem] sm:w-[9rem] sm:h-[5rem] md:w-[12rem] md:h-[7rem] flex items-center justify-center cursor-pointer">
                             <div class="flex-col items-center mb-1 text-center">
@@ -244,7 +244,7 @@
                             <span class="sr-only">Close modal</span>
                         </button>
                         <div class="px-6 lg:px-8 w-[95%]">
-                            <form class="space-y-2" action="<?php echo base_url(); ?>" method="post" enctype="multipart/form-data">
+                            <form class="form space-y-2" action="<?php echo base_url(); ?>" method="post" enctype="multipart/form-data">
                                 <?php echo csrf_field(); ?>
                                 <input type="hidden" name="id_user" value="<?= user()->id_user; ?>">
                                 <input type="hidden" name="id_project" value="<?= user()->id_project; ?>">
