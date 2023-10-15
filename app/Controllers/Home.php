@@ -32,6 +32,12 @@ class Home extends BaseController
     {
         $category =  $this->categoryModel->findAll();
         $file_message = session('errors.file');
+        $content = $this->db->table('content a')
+            ->select('a.*, b.name_category AS name_category, c.name_subcategory AS name_subcategory')
+            ->join('categories b', 'a.id_category = b.id')
+            ->join('sub_category c', 'a.id_sub_category = c.id')
+            ->get()
+            ->getResultArray();
         if (logged_in()) {
             $project =  $this->projectModel->find(user()->id_project);
         } else {
@@ -41,6 +47,7 @@ class Home extends BaseController
             'title' => 'Virtusee | Knowledge Based',
             'file_message' => $file_message,
             'category' => $category,
+            'contents' => $content,
             'project' => $project
         ];
         return view('customer/index', $data);

@@ -3,17 +3,19 @@
 <?php echo $this->section('content'); ?>
 <section id="main">
 
-    <div id="faq" class="flex-col justify-center items-center min-h-[40vh] lg:min-h-[80vh] sm:min-h-[70vh] md:min-h-[80vh]">
-        <img src="<?php echo base_url(); ?>src/images/waves-hero.png" class="w-[100%] h-[38rem] md:h-[49rem] sm:h-[40rem] lg:h-[49rem] object-cover  absolute z-[-1] top-0" alt="">
+    <div id="faq" class="flex-col justify-center items-center min-h-[40vh] lg:min-h-[80vh] sm:min-h-[70vh] md:min-h-[80vh] 2xl:min-h-[71vh]">
+        <img src="<?php echo base_url(); ?>src/images/waves-hero.png" class="w-full h-[38rem] md:h-[49rem] sm:h-[40rem] lg:h-[49rem] 2xl:h-[62rem] object-cover absolute z-[-1] top-0 2xl:-top-20" alt="">
         <div class="mt-12">
             <h1 class="flex gap-3 justify-center text-3xl lg:text-5xl sm:text-4xl font-semibold sm:font-bold">
                 <span class="text-white">Help center</span>
-                <span class="text-[#2562AE]">Virtu</span>
-                <span class="text-[#FFC700]">see</span>
+                <div class="flex">
+                    <span class="text-[#2562AE]">Virtu</span>
+                    <span class="text-[#FFC700]">see</span>
+                </div>
             </h1>
             <div class="flex justify-center" id="search">
                 <form action="" class="relative">
-                    <input type="text" name="email" id="email" placeholder="Search Your question, answer, etc" class="sm:w-[30rem] w-[20rem]  mb-3 px-7 mt-[30px] py-3  rounded-sm border border-gray-400 outline-main">
+                    <input type="text" name="search" id="search" placeholder="Search Your question, answer, etc" class="sm:w-[30rem] w-[20rem]  mb-2 px-7 mt-[30px] py-3 border border-gray-400 outline-main rounded-md">
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search absolute sm:left-[450px] left-[295px] top-[47px] cursor-pointer text-[#919191]" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
@@ -21,16 +23,16 @@
                     </button>
                 </form>
             </div>
-            <div class="flex justify-center mt-[3px] sm:[5px]">
+            <div class="flex justify-center sm:[5px]">
                 <div class="sm:w-[30rem] w-[20rem] text-justify">
                     <p class="text-sm text-white"><span class="text-secondary font-semibold">Search what you want,</span> we will answer your question and you can search anything
                         about the Virtusee Program or technical </p>
                 </div>
             </div>
         </div>
-        <div id="categories" class="flex flex-wrap justify-center sm:w-3/4 md:w-3/5 mx-auto ">
+        <div id="categories" class="flex flex-wrap justify-center sm:w-3/4 md:w-3/5 mx-auto mt-3">
             <?php foreach ($category as $category) : ?>
-                <div class="m-3 sm:m-4 lg:m-6 w-1/3 sm:w-1/4 flex justify-center">
+                <div class="m-3 sm:m-4 lg:m-6 w-1/3 sm:w-1/4 2xl:w-1/6 flex justify-center">
                     <a href="<?php echo base_url() ?>kb/generalarticle?category=<?= $category['name_category']; ?>">
                         <div class="bg-gray-200 sm:px-[2rem] py-3 rounded-md w-[8rem] h-[5rem] sm:w-[9rem] sm:h-[5rem] md:w-[12rem] md:h-[7rem] flex items-center justify-center cursor-pointer">
                             <div class="flex-col items-center mb-1 text-center">
@@ -44,63 +46,50 @@
         </div>
     </div>
     <!-- </div> -->
-    <div id="general_question" class="px-10 mt-16 sm:mt-[5rem] md:mt-[10rem] lg:[10rem]">
+    <div id="general_question" class="px-10 mt-10 sm:mt-[5rem] md:mt-[10rem] lg:mt-[12rem]">
         <div class=" w-full mb-2 text-center">
-            <h4 class="text-[#18A8D8] font-bold text-3xl">General Question</h4>
+            <h4 class="text-[#18A8D8] font-bold text-4xl">General Question</h4>
         </div>
         <div class="flex justify-center">
             <div class="lg:w-5/12 md:flex hidden">
-                <img src="<?php echo base_url(); ?>src/images/Question.png" alt="Question.png" class="mx-auto w-[30rem] object-cover">
+                <img src="<?php echo base_url(); ?>src/images/Question.png" alt="Question.png" class="mx-auto w-[26rem] object-cover collapsible">
             </div>
             <div id="question" class="mt-7 w-full lg:w-6/12 md:w-10/12 self-center">
-                <div class="border-solid border-2 border-[#919191] rounded-md p-4 ps-10 mb-3">
-                    <div class="flex justify-between">
-                        <p class="text-md" id="title1">How I can buy the programs ? </p>
-                        <p class="text-xl cursor-pointer collapsible" data-target="collapse1" data-title="title1">
-                            <i class="bi bi-chevron-down icon"></i>
-                        </p>
-                    </div>
-                    <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse1">
-                        <p class="text-[14px]">Search what you want, we will answer your question and you can search anything about the Virtusee Progran or technical <a href="" class="text-[#18A8D8]">more .. </a></p>
-                    </div>
-                </div>
-                <div class="border-solid border-2 border-[#919191] rounded-[10px] p-4 ps-10 mb-3">
-                    <div class="flex justify-between">
-                        <p class="text-[16px]" id="title1">How I can buy the programs ? </p>
-                        <p class="text-xl cursor-pointer collapsible" data-target="collapse2" data-title="title1">
-                            <i class="bi bi-chevron-down icon"></i>
-                        </p>
-                    </div>
-                    <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse2">
-                        <p class="text-[14px]">Search what you want, we will answer your question and you can search anything about the Virtusee Progran or technical <a href="" class="text-[#18A8D8]">more .. </a></p>
-                    </div>
-                </div>
-                <div class="border-solid border-2 border-[#919191] rounded-[10px] p-4 ps-10 mb-3">
-                    <div class="flex justify-between">
-                        <p class="text-[16px]" id="title1">How I can buy the programs ? </p>
-                        <p class="text-xl cursor-pointer collapsible" data-target="collapse3" data-title="title1">
-                            <i class="bi bi-chevron-down icon"></i>
-                        </p>
-                    </div>
-                    <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse3">
-                        <p class="text-[14px]">Search what you want, we will answer your question and you can search anything about the Virtusee Progran or technical <a href="" class="text-[#18A8D8]">more .. </a></p>
-                    </div>
-                </div>
-                <div class="border-solid border-2 border-[#919191] rounded-[10px] p-4 ps-10 mb-3">
-                    <div class="flex justify-between">
-                        <p class="text-[16px]" id="title1">How I can buy the programs ? </p>
-                        <p class="text-xl cursor-pointer collapsible" data-target="collapse4" data-title="title1">
-                            <i class="bi bi-chevron-down icon"></i>
-                        </p>
-                    </div>
-                    <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse4">
-                        <p class="text-[14px]">Search what you want, we will answer your question and you can search anything about the Virtusee Progran or technical <a href="" class="text-[#18A8D8]">more .. </a></p>
-                    </div>
-                </div>
+                <?php $count = 1; ?>
+                <?php foreach($contents as $content){ ?>
+                    <!-- <div class="border-solid border-2 border-[#919191] rounded-xl py-4 px-6 mb-3">
+                        <div class="flex justify-between">
+                            <p class="text-md" id="title<?php echo $count ?>"><?php echo $content['title'] ?></p>
+                            <p class="text-xl cursor-pointer collapsible" data-target="collapse<?php echo $count ?>" data-title="title<?php echo $count ?>">
+                                <i class="bi bi-chevron-down icon"></i>
+                            </p>
+                        </div>
+                        <div class="hidden" id="collapse<?php echo $count ?>">
+                            <div class="flex gap-2 mt-3">
+                                <div class="max-w-sm md:max-w-lg whitespace-nowrap overflow-hidden" >
+                                    <p class="text-sm"><?php echo $content['content'] ?></p>
+                                </div>
+                                <a href="" class="text-[#18A8D8] hover:text-sky-600 text-sm">more .. </a>
+                            </div>
+                        </div>
+                    </div> -->
+                    <a href="<?= base_url('kb/generalarticle/generalarticledetail?category=' . $content['name_category'] . '&subcategory=' . $content['name_subcategory'] . '&article=' . $content['slug']) ?>">
+                        <div class="py-4 px-5 hover:bg-main hover:text-white text-md rounded font-semibold">
+                            <?php echo $content['title'] ?>
+                        </div>
+                    </a>
+                    <hr>
+                    <?php 
+                        if($count == 6){ 
+                            break;
+                        }    
+                    ?>
+                    <?php $count++ ?>
+                <?php } ?>
             </div>
         </div>
     </div>
-    <div id="customer_complain" class="flex flex-col justify-center items-center w-full bg-[#F8F8F8] pt-12 mt-10 relative">
+    <div id="customer_complain" class="flex flex-col justify-center items-center w-full bg-[#F8F8F8] pt-12 mt-24 relative">
         <div id="customer_complain" class="mb-2 p-5 w-10/12">
             <h4 class="font-bold text-4xl text-center mb-10">General Complain User</h4>
             <div class="grid lg:grid-cols-2 md:grid-cols-1 gap-12 gap-y-4">
@@ -228,7 +217,7 @@
 
         </div>
     </div>
-    <div id="question" class="flex flex-col justify-center items-center mb-28 xl:mt-20 lg:mt-16 md:mt-2 relative">
+    <div id="question" class="flex flex-col justify-center items-center mb-28 xl:mt-20 lg:mt-16 md:mt-2 relative 2xl:mb-56">
         <p class="text-[24px] font-medium">Do you have any question?</p>
         <div class="mt-8 whitespace-nowrap">
             <?php if (logged_in()) : ?>

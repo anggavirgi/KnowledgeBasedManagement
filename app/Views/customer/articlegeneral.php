@@ -32,7 +32,7 @@
                     </ul>
                 </li>
                 <li>
-                    <button type="button" class="flex items-center w-full p-2 text-base text-white text-sm transition duration-75 rounded-lg hover:text-sky-800" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+                    <button type="button" class="flex items-center w-full p-2 text-white text-sm transition duration-75 rounded-lg hover:text-sky-800" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                         <span class="flex-1  text-left whitespace-nowrap">E-commerce</span>
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
@@ -51,7 +51,7 @@
                     </ul>
                 </li>
                 <li>
-                    <button type="button" class="flex items-center w-full p-2 text-base text-white text-sm transition duration-75 rounded-lg hover:text-sky-800" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+                    <button type="button" class="flex items-center w-full p-2 text-white text-sm transition duration-75 rounded-lg hover:text-sky-800" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                         <span class="flex-1  text-left whitespace-nowrap">E-commerce</span>
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
@@ -112,7 +112,7 @@
             <span> / </span>
             <span id="breadcrumb-category">Category</span>
         </div>
-        <div class="mt-8">
+        <div class="mt-9">
             <h4 class="text-2xl font-bold ps-3 mb-2" id="content-title"><?= isset($subcategory_title) ? $subcategory_title : $category_title; ?></h4>
             <div id="content-container">
                 <?php foreach ($content as $content) :
