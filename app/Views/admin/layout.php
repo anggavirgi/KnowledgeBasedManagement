@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="<?php echo base_url(); ?>src/images/favicon.png" type="image/x-icon">
   <title><?php echo $title; ?></title>
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>node_modules/daterangepicker/daterangepicker.css" />
   <link rel="stylesheet" href="<?php echo base_url(); ?>src/css/style.css">
 </head>
 
@@ -104,6 +105,8 @@
   <script src="<?php echo base_url(); ?>node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
   <script src="<?php echo base_url(); ?>node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
   <script src="<?php echo base_url(); ?>node_modules/timeago.js/dist/timeago.min.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>node_modules/daterangepicker/moment.min.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>node_modules/daterangepicker/daterangepicker.js"></script>
   <script src="<?php echo base_url(); ?>/src/js/dataTables.js"></script>
   <script src="<?php echo base_url(); ?>/src/js/script.js"></script>
   <script>
@@ -116,6 +119,16 @@
       })
       .then(editor => {})
       .catch((error) => {});
+  </script>
+  <script>
+    $(document).ready(function() {
+      $('#date-range-picker').daterangepicker();
+      $('#date-range-picker').on("change", function() {
+        const form = $("#dateForm");
+        form.submit();
+      })
+
+    });
   </script>
 
 </body>
