@@ -16,9 +16,6 @@ module.exports = {
         'close-status' : '#FBD9D9',
         'close-status-text' : '#A30D11',
         },
-      screens: {
-        // 'xm': '413px',
-        },
     },
   },
   plugins: [

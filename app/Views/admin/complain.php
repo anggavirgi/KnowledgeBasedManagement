@@ -129,20 +129,20 @@
                                     <option value="progress" class="bg-white text-black" <?php if ($complain['status'] === "progress") echo "selected"; ?>>In progres</option>
                                     <option value="solved" class="bg-white text-black" <?php if ($complain['status'] === "solved") echo "selected"; ?>>Solved</option>
                                 </select>
-                                <svg class="w-2 h-2 absolute ml-[58px] text-gray-400" width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg class="w-2 h-2 absolute right-3 text-gray-400" width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M6.97607 0.81897L4.055 5.13429L1.00017 0.9126L6.97607 0.81897Z" fill="#CD6200" stroke="#CD6200" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                             </div>
                         </td>
                         <td class="p-3 text-center">
                             <div class="relative flex justify-center items-center">
-                                <select id="case-entries" name="status_case_entries" class="py-2 pe-9 ps-5 appearance-none cursor-pointer rounded-[15px] text-gray-700" data-id="<?= $complain['id']; ?>">
+                                <select id="case-entries" name="status_case_entries" class="py-2 pe-9 ps-5 appearance-none cursor-pointer rounded-[15px]" data-id="<?= $complain['id']; ?>">
                                     <?php if ($complain['visibility'] == 'closed') : ?>
-                                        <option value="closed" class="block px-4 py-2 bg-white text-black" selected>Close</option>
-                                        <option value="open" class="block px-4 py-2 bg-white text-black">Open</option>
+                                        <option value="closed" class="block px-4 py-2 bg-white text-close-status-text" selected>Close</option>
+                                        <option value="open" class="block px-4 py-2 bg-white text-solved-status-text">Open</option>
                                     <?php else : ?>
-                                        <option value="closed" class="block px-4 py-2 bg-white text-black">Close</option>
-                                        <option value="open" class="block px-4 py-2 bg-white text-black" selected>Open</option>
+                                        <option value="closed" class="block px-4 py-2 bg-white text-close-status-text">Close</option>
+                                        <option value="open" class="block px-4 py-2 bg-white text-solved-status-text" selected>Open</option>
                                     <?php endif; ?>
                                 </select>
                                 <svg class="w-2 h-2 absolute ml-[50px] text-gray-400" width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
