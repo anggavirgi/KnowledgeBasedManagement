@@ -1,5 +1,9 @@
 $(document).ready(function () {
   
+  // DYNAMICALLY URL 
+  var originalURL = window.location.pathname;
+  var modifiedURL = new RegExp(originalURL);
+
   // LAYOUT CUSTOMER
   // ======================= Password Visibilty Toggle =========================
   // Password Visibility Toggle
@@ -173,7 +177,6 @@ $(document).ready(function () {
           id: id,
           type: clickType
       }
-      
       if (clickType === 'like' && !hasLiked) {
         console.log('You liked!');
         hasLiked = true;
@@ -221,12 +224,6 @@ $(document).ready(function () {
   }, function () {
       $(this).find('svg path').css('fill', ''); 
   });
-  var urlPattern = /http:\/\/localhost:8080\/kb\/generalarticle\/generalarticledetail\?.+/;
-  // Check if the current page URL matches the pattern run Timeago.js
-  if (urlPattern.test(window.location.href)) {
-    const nodes = $(".uploadTime").get();
-    timeago.render(nodes, 'en_US');
-  }
   // ===========================================================================
 
 
@@ -663,11 +660,11 @@ $(document).ready(function () {
 
 
   // ========================= Dynamically URL Article Details =========================
-  var urlPattern = /http:\/\/localhost:8080\/kb\/administrator\/article\/detail\/\d+/;
-  // Check if the current page URL matches the pattern run Timeago.js
-  if (urlPattern.test(window.location.href)) {
-    const nodes = $(".uploadTime").get();
-    timeago.render(nodes, 'en_US');
+  if (modifiedURL.test(window.location.href)) {
+    if($('.uploadTime').length > 0){
+      const nodes = $(".uploadTime").get();
+      timeago.render(nodes, 'en_US');
+    }
   }
   // ===================================================================================
 

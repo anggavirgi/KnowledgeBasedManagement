@@ -14,8 +14,6 @@
                     </svg>
                     <p class="hidden lg:block">Make a Question</p>
                 </div>
-                <?php echo $file_message; ?>
-
 
                 <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 bottom-0 z-50 p-4 overflow-x-hidden overflow-y-auto hidden">
                     <!-- Modal content -->
@@ -97,19 +95,18 @@
             <?php endif; ?>
 
 
-            <?= d($content); ?>
             <?php foreach ($content as $content) : ?>
                 <div class="pb-3 flex flex-col">
-                    <a href="" class="py-3 font-semibold text-xl text-orange-600">phpp</a>
+                    <a href="<?= base_url('kb/personalarticle/personalarticledetail?category=' . $content['name_category'] . '&subcategory=' . $content['name_subcategory'] . '&article=' . $content['slug']) ?>" data-article-id="<?= $content['id']; ?>" class="article-link py-3 font-semibold text-xl text-orange-600"><?= $content['title']; ?></a>
                     <div class="font-medium text-sm border-b-2 pb-3">
-                        <span>Category</span>
+                        <span><?= $content['name_category']; ?></span>
                         <span> / </span>
-                        <span>Sub Category</span>
+                        <span><?= $content['name_subcategory']; ?></span>
                         <span> / </span>
-                        <span>Project</span>
+                        <span><?= $content['name_project']; ?></span>
                     </div>
                     <span class="text-ellipsis pt-3 text-sm overflow-hidden text-justify whitespace-nowrap">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. At illum ab aspernatur voluptatem enim ipsa ex dolore, adipisci amet eius optio fugiat, dolorem magni aliquam nam, eum repellat rerum fuga! Laudantium aut dolorem itaque facere, dolore et, impedit similique laboriosam vel nesciunt excepturi corporis ab repellendus sint. Quibusdam velit error enim dolor exercitationem iste, debitis asperiores placeat facere, sint minima autem numquam! Deleniti, earum. Inventore magnam vel, tenetur non nam minus exercitationem odit odio libero reiciendis sapiente repellendus porro temporibus accusamus labore, laboriosam dolorum sint laudantium enim magni suscipit fugit pariatur consequatur incidunt. Eum, aspernatur consequuntur modi quisquam corporis assumenda!Deleniti, earum. Inventore magnam vel, tenetur non nam minus exercitationem odit odio libero reiciendis sapiente repellendus porro temporibus accusamus labore, laboriosam dolorum sint laudantium enim magni suscipit fugit pariatur consequatur incidunt. Eum, aspernatur consequuntur modi quisquam corporis assumenda!Deleniti, earum. Inventore magnam vel, tenetur non nam minus exercitationem odit odio libero reiciendis sapiente repellendus porro temporibus accusamus labore, laboriosam dolorum sint laudantium enim magni suscipit fugit pariatur consequatur incidunt. Eum, aspernatur consequuntur modi quisquam corporis assumenda!
+                        <?= $content['content']; ?>
                     </span>
                 </div>
             <?php endforeach; ?>

@@ -162,12 +162,18 @@ class Home extends BaseController
 
     public function complain()
     {
+        if (logged_in()) {
+            $project =  $this->projectModel->find(user()->id_project);
+        } else {
+            $project = "";
+        }
         $file_message = session('errors.file');
-        $project =  $this->projectModel->find(user()->id_project);
+        $complain = $this->complainModel->find(user()->id);
         $data = [
             'title' => 'Virtusee | complain',
             'file_message' => $file_message,
-            'project' => $project
+            'project' => $project,
+            'complain' => $complain
         ];
         return view('customer/complain', $data);
     }
@@ -213,16 +219,35 @@ class Home extends BaseController
 
     public function history()
     {
+        $file_message = session('errors.file');
+        if (logged_in()) {
+            $project =  $this->projectModel->find(user()->id_project);
+        } else {
+            $project = "";
+        }
+        $complain = $this->db->table('complains')
+            ->select('*')
+            ->where('id_user', user()->id)
+            ->get()
+            ->getResultArray();
         $data = [
-            'title' => 'Virtusee | history complain'
+            'title' => 'Virtusee | history complain',
+            'file_message' => $file_message,
+            'project' => $project,
+            'complain' => $complain
+
         ];
         return view('customer/historycomplain', $data);
     }
 
     public function personalarticle()
     {
+        if (logged_in()) {
+            $project =  $this->projectModel->find(user()->id_project);
+        } else {
+            $project = "";
+        }
         $file_message = session('errors.file');
-        $project =  $this->projectModel->find(user()->id_project);
         $content = $this->db->table('content a')
             ->select('a.*, b.id_project AS id_project, c.name_project AS name_project, d.name_category AS name_category, e.name_subcategory AS name_subcategory')
             ->join('article b', 'a.id = b.id_content')
@@ -231,7 +256,7 @@ class Home extends BaseController
             ->join('sub_category e', 'a.id_sub_category = e.id')
             ->where('b.id_project', user()->id_project)
             ->get()
-            ->getResult();
+            ->getResultArray();
         $data = [
             'title' => 'Virtusee | article',
             'file_message' => $file_message,
@@ -243,15 +268,47 @@ class Home extends BaseController
 
     public function personalarticledetail()
     {
+        if (logged_in()) {
+            $project =  $this->projectModel->find(user()->id_project);
+        } else {
+            $project = "";
+        }
+        $category = $this->request->getVar('category');
+        $subcategory = $this->request->getVar('subcategory');
+        $id = $this->request->getVar('article');
+        $categories =  $this->categoryModel->findAll();
+        $subcategories =  $this->subCategoryModel->findAll();
+        $content = $this->db->table('content a')
+            ->select('a.*, b.name_category AS name_category, c.name_subcategory AS name_subcategory')
+            ->join('categories b', 'a.id_category = b.id')
+            ->join('sub_category c', 'a.id_sub_category = c.id')
+            ->where('b.name_category', $category)
+            ->where('c.name_subcategory', $subcategory)
+            ->where('a.slug', $id)
+            ->get()
+            ->getRow();
         $data = [
-            'title' => 'Virtusee | article detail'
+            'title' => 'Virtusee | article detail',
+            'category_title' => $category,
+            'subcategory_title' => $subcategory,
+            'categories' => $categories,
+            'subcategories' => $subcategories,
+            'content' => $content,
+            'project' => $project
         ];
         return view('customer/articledetailpersonal', $data);
     }
     public function reply()
     {
+        $slug = $this->request->getVar('complainId');
+        if (logged_in()) {
+            $project =  $this->projectModel->find(user()->id_project);
+        } else {
+            $project = "";
+        }
         $data = [
-            'title' => 'Virtusee | article reply'
+            'title' => 'Virtusee | article reply',
+            'project' => $project
         ];
         return view('customer/replycomplain', $data);
     }
