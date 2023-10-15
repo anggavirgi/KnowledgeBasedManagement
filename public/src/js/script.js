@@ -1,5 +1,9 @@
 $(document).ready(function () {
   
+  // DYNAMICALLY URL 
+  var originalURL = window.location.pathname;
+  var modifiedURL = new RegExp(originalURL);
+
   // LAYOUT CUSTOMER
   // ======================= Password Visibilty Toggle =========================
   // Password Visibility Toggle
@@ -100,91 +104,126 @@ $(document).ready(function () {
      }
   });
 
-  // Handle subcategory link clicks
-  $('.subcategory-link').on('click', function (e) {
-    e.preventDefault();
-    $('.subcategory-link').removeClass('text-sky-700');
-    const category = $(this).data('category');
-    const subcategory = $(this).data('subcategory');
-    $(this).addClass('text-sky-700');
+  // Handle subcategory link clicks when in detail article page
+  if (window.location.href.indexOf("http://localhost:8080/kb/generalarticle/generalarticledetail") === -1) {
+    $('.subcategory-link').on('click', function (e) {
+      e.preventDefault();
+      $('.subcategory-link').removeClass('text-sky-700');
+      const category = $(this).data('category');
+      const subcategory = $(this).data('subcategory');
+      $(this).addClass('text-sky-700');
 
-    updateContent(category, subcategory);
-    const newUrl = 'http://localhost:8080/kb/generalarticle?category=' + category + '&subcategory=' + subcategory;
-    history.pushState({}, '', newUrl);
+      updateContent(category, subcategory);
+      const newUrl = 'http://localhost:8080/kb/generalarticle?category=' + category + '&subcategory=' + subcategory;
+      history.pushState({}, '', newUrl);
+    });
+
+    function updateContent(category, subcategory) {
+        $.ajax({
+            type: 'GET', 
+            url: 'http://localhost:8080/kb/generalarticle?cateogry='+category+'&subcategory='+subcategory,
+            data: { category: category, subcategory: subcategory },
+            success: function (response) {
+                var tempElement = document.createElement('div');
+                tempElement.innerHTML = response;
+                var contentContainer = tempElement.querySelector('#content-container');
+
+                if (contentContainer) {
+                    var contentHTML = contentContainer.innerHTML;
+                    $('#content-title').text(subcategory || category);
+                    $('#breadcrumb-category').text(category);
+                    $('#content-container').html(contentHTML);
+                } else {
+                    console.error('#content-container not found in the response');
+                }
+            },
+            error: function (error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+  }
+  // ===========================================================================
+  
+
+
+  // ======================= Update Attribute Content Aja x=====================
+  // Update Content Views
+  $('.article-link').on('click', function () {
+    const articleId = $(this).data('article-id');
+    const href = $(this).attr('href');
+    const data = {
+      article: articleId,
+      href: href
+    };
+    $.ajax({
+        type: 'POST', 
+        url: '/kb/generalarticle/generalarticledetail/updateContentviews',
+        data: data,
+        success: function (response) {
+        },
+        error: function (error) {
+            console.error('Error:', error);
+        }
+    });
   });
 
-  function updateContent(category, subcategory) {
-      $.ajax({
-          type: 'GET', 
-          url: 'http://localhost:8080/kb/generalarticle?cateogry='+category+'&subcategory='+subcategory,
-          data: { category: category, subcategory: subcategory },
+  let hasLiked = false;
+  let hasDisliked = false;
+  $('.reactions').on('click', 'div[id]', function (event) {
+      const id = $(this).data('id');
+      const clickType = $(this).data('type');
+      data = {
+          id: id,
+          type: clickType
+      }
+      if (clickType === 'like' && !hasLiked) {
+        console.log('You liked!');
+        hasLiked = true;
+        hasDisliked = false;
+        $.ajax({
+          type: 'POST',
+          url: '/kb/generalarticle/generalarticledetail/updateReaction',
+          data: data,
           success: function (response) {
-              var tempElement = document.createElement('div');
-              tempElement.innerHTML = response;
-              var contentContainer = tempElement.querySelector('#content-container');
-
-              if (contentContainer) {
-                  var contentHTML = contentContainer.innerHTML;
-                  $('#content-title').text(subcategory || category);
-                  $('#breadcrumb-category').text(category);
-                  $('#content-container').html(contentHTML);
-              } else {
-                  console.error('#content-container not found in the response');
-              }
+            window.location.reload();
+          },
+          error: function (error) {
+            console.error('Error:', error);
+          }
+        });
+      } else if (clickType === 'dislike' && !hasDisliked) {
+        console.log('You disliked!');
+        hasDisliked = true;
+        hasLiked = false;
+        $.ajax({
+          type: 'POST',
+          url: '/kb/generalarticle/generalarticledetail/updateReaction',
+          data: data,
+          success: function (response) {
+            window.location.reload();
           },
           error: function (error) {
               console.error('Error:', error);
           }
-      });
-  }
-  // ===========================================================================
+        });
+      }
+  });
+  // =========================================================================
   
   
   
-  // ======================== Reaction Icon Condition =========================
+  // ======================== Reaction Icon Condition ========================
   $('#likes').hover(function () {
       $(this).find('svg path').css('fill', '#00d431'); 
   }, function () {
       $(this).find('svg path').css('fill', ''); 
   });
-  $('#likeButton').on('click', function () {
-      // Get the current URL parameters
-      const urlParams = new URLSearchParams(window.location.search);
-      const category = urlParams.get('category');
-      const subcategory = urlParams.get('subcategory');
-      const articleId = urlParams.get('articleId');
-
-      // Make an AJAX request to increment the like count
-      $.ajax({
-          type: 'POST', // Adjust the request type if needed
-          url: 'http://localhost:8080/kb/generalarticle/generalarticledetail?category='+category+'&subcategory='+subcategory+'&articleId='+articleId+'', // Replace with your server endpoint
-          data: {
-              category: category,
-              subcategory: subcategory,
-              articleId: articleId
-          },
-          success: function (response) {
-              // Handle success response, e.g., update the UI
-              console.log('Like sent successfully');
-          },
-          error: function (error) {
-              // Handle error, e.g., show an error message
-              console.error('Error:', error);
-          }
-      });
-  });
-
   $('#notlikes').hover(function () {
       $(this).find('svg path').css('fill', '#d10023'); 
   }, function () {
       $(this).find('svg path').css('fill', ''); 
   });
-  var urlPattern = /http:\/\/localhost:8080\/kb\/generalarticle\/generalarticledetail\?.+/;
-  // Check if the current page URL matches the pattern run Timeago.js
-  if (urlPattern.test(window.location.href)) {
-    const nodes = $(".uploadTime").get();
-    timeago.render(nodes, 'en_US');
-  }
   // ===========================================================================
 
 
@@ -193,6 +232,7 @@ $(document).ready(function () {
   // ===================== Open Close Modal Form Complain ======================
   // Select the modal element by its ID or other means
   const $modalElement = document.querySelector('#authentication-modal');
+  const action = $('.form').attr('action');
   // Define the options for the modal
   const modalOptions = {
       placement: 'bottom-right',
@@ -204,8 +244,7 @@ $(document).ready(function () {
       }
   };
   // Create a new Modal instance
-  if (window.location.href === 'http://localhost:8080/kb/complain') {
-  // This code will run only when the URL matches 'http://localhost:8080/kb/complain'
+  if (window.location.href === action) {
     const modal = new Modal($modalElement, modalOptions);
     if (fileMessage !== null) {
       modal.show();
@@ -400,8 +439,12 @@ $(document).ready(function () {
       type: "POST",
       url: "/kb/administrator/complain/updateStatus",
       data: data,
+      success: function(response) {
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+          console.error("AJAX request error:", textStatus, errorThrown);
+      }
     });
-    location.reload();
   });
   // ===========================================================================
 
@@ -448,12 +491,12 @@ $(document).ready(function () {
       id: id,
       visibility: initialCaseValue,
     };
-    console.log(data);
     $.ajax({
       type: "POST",
       url: "/kb/administrator/article/updateVisibility",
       data: data,
       success: function(response) {
+        console.log(response);
       },
       error: function(jqXHR, textStatus, errorThrown) {
           console.error("AJAX request error:", textStatus, errorThrown);
@@ -617,11 +660,11 @@ $(document).ready(function () {
 
 
   // ========================= Dynamically URL Article Details =========================
-  var urlPattern = /http:\/\/localhost:8080\/kb\/administrator\/article\/detail\/\d+/;
-  // Check if the current page URL matches the pattern run Timeago.js
-  if (urlPattern.test(window.location.href)) {
-    const nodes = $(".uploadTime").get();
-    timeago.render(nodes, 'en_US');
+  if (modifiedURL.test(window.location.href)) {
+    if($('.uploadTime').length > 0){
+      const nodes = $(".uploadTime").get();
+      timeago.render(nodes, 'en_US');
+    }
   }
   // ===================================================================================
 

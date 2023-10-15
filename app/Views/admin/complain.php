@@ -136,9 +136,14 @@
                         </td>
                         <td class="p-3 text-center">
                             <div class="relative flex justify-center items-center">
-                                <select id="case-entries" name="status_case_entries" class="py-2 pe-9 ps-5 appearance-none cursor-pointer rounded-2xl text-gray-700 focus:outline-none focus:border-blue-500" data-id="<?php echo $complain['id'] ?>">
-                                    <option value="closed" class="block px-4 py-5 bg-white text-black" <?php if ($complain['visibility'] === "closed") echo "selected"; ?>>Close</option>
-                                    <option value="open" class="block px-4 py-5 bg-white text-black" <?php if ($complain['visibility'] === "open") echo "selected"; ?>>Open</option>
+                                <select id="case-entries" name="status_case_entries" class="py-2 pe-9 ps-5 appearance-none cursor-pointer rounded-[15px] text-gray-700" data-id="<?= $complain['id']; ?>">
+                                    <?php if ($complain['visibility'] == 'closed') : ?>
+                                        <option value="closed" class="block px-4 py-2 bg-white text-black" selected>Close</option>
+                                        <option value="open" class="block px-4 py-2 bg-white text-black">Open</option>
+                                    <?php else : ?>
+                                        <option value="closed" class="block px-4 py-2 bg-white text-black">Close</option>
+                                        <option value="open" class="block px-4 py-2 bg-white text-black" selected>Open</option>
+                                    <?php endif; ?>
                                 </select>
                                 <svg class="w-2 h-2 absolute ml-[50px] text-gray-400" width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M6.97607 0.81897L4.055 5.13429L1.00017 0.9126L6.97607 0.81897Z" fill="#A30D11" stroke="#A30D11" stroke-linecap="round" stroke-linejoin="round" />

@@ -117,7 +117,7 @@
             <div id="content-container">
                 <?php foreach ($content as $content) :
                     if ($content['name_category'] === $category_title && !isset($subcategory_title) || $content['name_subcategory'] === $subcategory_title) : ?>
-                        <a href="<?Php echo base_url() ?>kb/generalarticle/generalarticledetail?category=<?= $content['name_category'] ?>&subcategory=<?= $content['name_subcategory']; ?>&articleId=<?= $content['id']; ?>" class="block px-3 py-5 text-base hover:bg-gray-100">
+                        <a href="<?= base_url('kb/generalarticle/generalarticledetail?category=' . $content['name_category'] . '&subcategory=' . $content['name_subcategory'] . '&article=' . $content['slug']) ?>" data-article-id="<?= $content['id']; ?>" class="article-link block px-3 py-5 text-base hover:bg-gray-100">
                             <?= $content['title']; ?>
                         </a>
                         <hr>

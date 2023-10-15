@@ -31,8 +31,8 @@ class Article extends ResourceController
 
   public function index()
   {
-    $page = $this->request->getGet('page') ?? 1;
-    $perPage = $this->request->getGet('perPage') ?? 10;
+    $page = $this->request->getVar('page') ?? 1;
+    $perPage = $this->request->getVar('perPage') ?? 10;
 
     $offset = ($page - 1) * $perPage;
 
@@ -68,7 +68,7 @@ class Article extends ResourceController
 
   public function new()
   {
-    $categorySelected = $this->request->getGet('category') ?? 0;
+    $categorySelected = $this->request->getVar('category') ?? 0;
     $category = $this->categoryModel->findAll();
     $sub_category = $this->subCategoryModel->findAll();
     $project = $this->projectModel->findAll();

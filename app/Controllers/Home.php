@@ -32,7 +32,11 @@ class Home extends BaseController
     {
         $category =  $this->categoryModel->findAll();
         $file_message = session('errors.file');
-        $project =  $this->projectModel->find(user()->id_project);
+        if (logged_in()) {
+            $project =  $this->projectModel->find(user()->id_project);
+        } else {
+            $project = "";
+        }
         $data = [
             'title' => 'Virtusee | Knowledge Based',
             'file_message' => $file_message,
@@ -44,8 +48,8 @@ class Home extends BaseController
 
     public function generalarticle()
     {
-        $category = $this->request->getGet('category') ?? 'Category';
-        $subcategory = $this->request->getGet('subcategory') ?? null;
+        $category = $this->request->getVar('category');
+        $subcategory = $this->request->getVar('subcategory');
         $categories =  $this->categoryModel->findAll();
         $subcategories =  $this->subCategoryModel->findAll();
         $content = $this->db->table('content a')
@@ -54,7 +58,11 @@ class Home extends BaseController
             ->join('sub_category c', 'a.id_sub_category = c.id')
             ->get()
             ->getResultArray();
-        $project =  $this->projectModel->find(user()->id_project);
+        if (logged_in()) {
+            $project =  $this->projectModel->find(user()->id_project);
+        } else {
+            $project = "";
+        }
         $data = [
             'title' => 'Virtusee | article',
             'category_title' => $category,
@@ -69,9 +77,9 @@ class Home extends BaseController
 
     public function generalarticledetail()
     {
-        $category = $this->request->getGet('category') ?? 'Category';
-        $subcategory = $this->request->getGet('subcategory') ?? 'Subcategory';
-        $id = $this->request->getGet('articleId') ?? '1';
+        $category = $this->request->getVar('category');
+        $subcategory = $this->request->getVar('subcategory');
+        $id = $this->request->getVar('article');
         $categories =  $this->categoryModel->findAll();
         $subcategories =  $this->subCategoryModel->findAll();
         $content = $this->db->table('content a')
@@ -80,10 +88,14 @@ class Home extends BaseController
             ->join('sub_category c', 'a.id_sub_category = c.id')
             ->where('b.name_category', $category)
             ->where('c.name_subcategory', $subcategory)
-            ->where('a.id', $id)
+            ->where('a.slug', $id)
             ->get()
-            ->getResult();
-        $project =  $this->projectModel->find(user()->id_project);
+            ->getRow();
+        if (logged_in()) {
+            $project =  $this->projectModel->find(user()->id_project);
+        } else {
+            $project = "";
+        }
         $data = [
             'title' => 'Virtusee | article detail',
             'category_title' => $category,
@@ -96,14 +108,72 @@ class Home extends BaseController
         return view('customer/articledetailgeneral', $data);
     }
 
+    public function updateReaction()
+    {
+        $id = $this->request->getVar('id');
+        $type = $this->request->getVar('type');
+        if ($type === 'like') {
+            $content = $this->contentModel
+                ->where('id', $id)
+                ->first();
+            if ($content) {
+                $good_insight = $content['good_insight'] + 1;
+                $this->contentModel
+                    ->where('id', $content['id'])
+                    ->set('good_insight', $good_insight);
+            }
+        } else {
+            $content = $this->contentModel
+                ->where('id', $id)
+                ->first();
+            if ($content) {
+                $bad_insight = $content['bad_insight'] + 1;
+                $this->contentModel
+                    ->where('id', $content['id'])
+                    ->set('bad_insight', $bad_insight);
+            }
+        }
+        if (!$this->contentModel->update()) {
+            return redirect()->to(current_url())->with('error', "Terimakasih feedback-nya");
+        } else {
+            return redirect()->to(current_url())->with('success', "Terimakasih feedback-nya")->with('' . $type . '', $type);
+        }
+    }
+
+    public function updateContentviews()
+    {
+        $id = $this->request->getVar('article');
+        $href = $this->request->getVar('href');
+        $content = $this->contentModel
+            ->where('id', $id)
+            ->first();
+        if ($content) {
+            $content_views = $content['content_views'] + 1;
+            $this->contentModel
+                ->where('id', $content['id'])
+                ->set('content_views', $content_views);
+        }
+        if (!$this->contentModel->update()) {
+            return redirect()->to($href);
+        } else {
+            return redirect()->to($href);
+        }
+    }
+
     public function complain()
     {
+        if (logged_in()) {
+            $project =  $this->projectModel->find(user()->id_project);
+        } else {
+            $project = "";
+        }
         $file_message = session('errors.file');
-        $project =  $this->projectModel->find(user()->id_project);
+        $complain = $this->complainModel->find(user()->id);
         $data = [
             'title' => 'Virtusee | complain',
             'file_message' => $file_message,
-            'project' => $project
+            'project' => $project,
+            'complain' => $complain
         ];
         return view('customer/complain', $data);
     }
@@ -116,7 +186,7 @@ class Home extends BaseController
         ];
 
         if (!$this->validate($rules)) {
-            return redirect()->route('kb/complain')->withInput()->with('errors', $this->validator->getErrors());
+            return redirect()->to(previous_url())->withInput()->with('errors', $this->validator->getErrors());
         } else {
             $id_project = $this->request->getVar('id_project');
             $id_user = $this->request->getVar('id_user');
@@ -149,35 +219,96 @@ class Home extends BaseController
 
     public function history()
     {
+        $file_message = session('errors.file');
+        if (logged_in()) {
+            $project =  $this->projectModel->find(user()->id_project);
+        } else {
+            $project = "";
+        }
+        $complain = $this->db->table('complains')
+            ->select('*')
+            ->where('id_user', user()->id)
+            ->get()
+            ->getResultArray();
         $data = [
-            'title' => 'Virtusee | history complain'
+            'title' => 'Virtusee | history complain',
+            'file_message' => $file_message,
+            'project' => $project,
+            'complain' => $complain
+
         ];
         return view('customer/historycomplain', $data);
     }
 
     public function personalarticle()
     {
+        if (logged_in()) {
+            $project =  $this->projectModel->find(user()->id_project);
+        } else {
+            $project = "";
+        }
         $file_message = session('errors.file');
-        $project =  $this->projectModel->find(user()->id_project);
+        $content = $this->db->table('content a')
+            ->select('a.*, b.id_project AS id_project, c.name_project AS name_project, d.name_category AS name_category, e.name_subcategory AS name_subcategory')
+            ->join('article b', 'a.id = b.id_content')
+            ->join('project c', 'b.id_project = c.id')
+            ->join('categories d', 'a.id_category = d.id')
+            ->join('sub_category e', 'a.id_sub_category = e.id')
+            ->where('b.id_project', user()->id_project)
+            ->get()
+            ->getResultArray();
         $data = [
             'title' => 'Virtusee | article',
             'file_message' => $file_message,
-            'project' => $project
+            'project' => $project,
+            'content' => $content
         ];
         return view('customer/articlepersonal', $data);
     }
 
     public function personalarticledetail()
     {
+        if (logged_in()) {
+            $project =  $this->projectModel->find(user()->id_project);
+        } else {
+            $project = "";
+        }
+        $category = $this->request->getVar('category');
+        $subcategory = $this->request->getVar('subcategory');
+        $id = $this->request->getVar('article');
+        $categories =  $this->categoryModel->findAll();
+        $subcategories =  $this->subCategoryModel->findAll();
+        $content = $this->db->table('content a')
+            ->select('a.*, b.name_category AS name_category, c.name_subcategory AS name_subcategory')
+            ->join('categories b', 'a.id_category = b.id')
+            ->join('sub_category c', 'a.id_sub_category = c.id')
+            ->where('b.name_category', $category)
+            ->where('c.name_subcategory', $subcategory)
+            ->where('a.slug', $id)
+            ->get()
+            ->getRow();
         $data = [
-            'title' => 'Virtusee | article detail'
+            'title' => 'Virtusee | article detail',
+            'category_title' => $category,
+            'subcategory_title' => $subcategory,
+            'categories' => $categories,
+            'subcategories' => $subcategories,
+            'content' => $content,
+            'project' => $project
         ];
         return view('customer/articledetailpersonal', $data);
     }
     public function reply()
     {
+        $slug = $this->request->getVar('complainId');
+        if (logged_in()) {
+            $project =  $this->projectModel->find(user()->id_project);
+        } else {
+            $project = "";
+        }
         $data = [
-            'title' => 'Virtusee | article reply'
+            'title' => 'Virtusee | article reply',
+            'project' => $project
         ];
         return view('customer/replycomplain', $data);
     }
