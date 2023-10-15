@@ -7,6 +7,10 @@ use App\Database\Migrations\ComplainReply;
 use App\Models\Admin\ComplainModel;
 use App\Models\Admin\ComplainReplyModel;
 use PhpParser\Node\Expr\FuncCall;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+
 
 class Complain extends BaseController
 {
@@ -22,10 +26,18 @@ class Complain extends BaseController
 
   public function index()
   {
+    $dates = $this->request->getGet('dates');
     $page = $this->request->getGet('page') ?? 1;
     $perPage = $this->request->getGet('perPage') ?? 10;
 
     $offset = ($page - 1) * $perPage;
+
+    if (!empty($dates)) {
+      list($start_date, $end_date) = explode("-", $dates);
+      $start_date = date('Y-m-d', strtotime($start_date));
+      $end_date = date('Y-m-d', strtotime($end_date));
+      $this->complainModel->where("created_at >=", $start_date)->where("created_at <=", $end_date);
+    }
 
     $complain =  $this->complainModel->findAll($perPage, $offset);
 
@@ -43,7 +55,8 @@ class Complain extends BaseController
     $data = [
       'title'     => 'Complain',
       'complains' => $complain,
-      'pagination' => $pagination
+      'pagination' => $pagination,
+      'dates'     => $dates
     ];
 
     return view('admin/complain', $data);
@@ -104,5 +117,53 @@ class Complain extends BaseController
     } else {
       return redirect()->to('kb/administrator/complain/reply/' . $id_complain)->with('successMessage', "Pesan telah terkirim");
     }
+  }
+
+  function exportDataToExcel()
+  {
+
+    $spreadsheet = new Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
+
+    $data = [
+      ['No', 'Email', 'Complain', 'Status', 'Open / Close']
+    ];
+    $complains = $this->complainModel->findAll();
+    $i = 1;
+    foreach ($complains as $complains) {
+      $rowData = [];
+      array_push($rowData, $i, $complains['email'], $complains['description'], $complains['status'], $complains['visibility']);
+
+      array_push($data, $rowData);
+      $i++;
+    }
+
+    // Set data ke dalam spreadsheet
+    $row = 1;
+    foreach ($data as $rowData) {
+      $col = 1;
+      foreach ($rowData as $cellData) {
+        if ($row === 1) {
+          $sheet->getStyleByColumnAndRow($col, $row)->getFont()->setBold(true);
+        }
+        // Atur border untuk sel-sel
+        $style = $sheet->getStyleByColumnAndRow($col, $row);
+        $style->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
+        $sheet->setCellValueByColumnAndRow($col, $row, $cellData);
+        $col++;
+      }
+      $row++;
+    }
+
+    // Membuat file Excel
+    $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+    $filename = 'complains.xlsx';
+
+    // Atur header HTTP untuk menghasilkan file XLSX
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition: attachment; filename="' . $filename . '"');
+
+    // Tulis file Excel ke output
+    $writer->save('php://output');
   }
 }
