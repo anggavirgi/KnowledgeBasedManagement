@@ -22,21 +22,33 @@
     </div>
   </div>
   <div class="flex mt-6 gap-3">
-    <h2 class="font-bold text-xl">Subject Complain</h2>
-    <div class="rounded-[15px] bg-progress-status text-progress-status-text py-1 px-3 text-xs">
-      In Progress
-    </div>
+    <h2 class="font-bold text-xl"><?= $complain['subject']; ?></h2>
+    <?php if ($complain['status'] === 'pending') : ?>
+      <div class="rounded-[15px] bg-pending-status text-pending-status-text py-1 px-3 text-xs">
+        <?= $complain['status']; ?>
+      </div>
+    <?php elseif ($complain['status'] === 'progress') : ?>
+      <div class="rounded-[15px] bg-progress-status text-progress-status-text py-1 px-3 text-xs">
+        <?= $complain['status']; ?>
+      </div>
+    <?php else : ?>
+      <div class="rounded-[15px] bg-solved-status text-solved-status-text py-1 px-3 text-xs">
+        <?= $complain['status']; ?>
+      </div>
+    <?php endif; ?>
+
   </div>
   <div class="font-bold py-1">
-    Nebula <span class="ps-5 text-form font-medium">&lt;NebulaWithOrion@gmail.com&gt;</span>
+    <?= $complain['username']; ?> <span class="ps-5 text-form font-medium">&lt;<?= $complain['email']; ?>&gt;</span>
   </div>
-  <div class="date text-form font-normal">Sat 30 Dec 2023, 21.20</div>
+
+  <div class="date text-form font-normal"><?= date("D d M Y, H:i", strtotime($complain['created_at'])); ?></div>
 
   <div class="h-[17rem] overflow-y-auto mt-3">
     <div class="px-4 flex flex-wrap text-sm">
-      <?php if ($complain['id_user'] === user_id()) : ?>
+      <?php if ($complain['id_user'] !== user_id()) : ?>
         <div class="w-full flex justify-end gap-1">
-          <div class="text-[0.6rem] text-form flex items-end pb-2">1 sept, 2.31 pm</div>
+          <div class="text-[0.6rem] text-form flex items-end pb-2"><?= date('j M, g.i a', strtotime($complain['created_at'])); ?></div>
           <div class="bg-indigo-100 text-gray-800 p-2 rounded-lg mb-2 relative w-fit">
             <div class="py-0 px-2"><?= $complain['description'] ?></div>
             <div class="absolute right-0 top-3 transform translate-x-1/2 rotate-45 w-2 h-2 bg-indigo-100"></div>
@@ -48,13 +60,13 @@
             <div class="py-0 px-2 "><?= $complain['description'] ?></div>
             <div class="absolute left-0 top-3 transform -translate-x-1/2 rotate-45 w-2 h-2 bg-slate-200"></div>
           </div>
-          <div class="text-[0.6rem] text-form flex items-end pb-2">1 sept, 2.31 pm</div>
+          <div class="text-[0.6rem] text-form flex items-end pb-2"><?= date('j M, g.i a', strtotime($complain['created_at'])); ?></div>
         </div>
       <?php endif; ?>
       <?php foreach ($complainReply as $complainReply) : ?>
         <?php if ($complainReply['id_user'] === user_id()) : ?>
           <div class="w-full flex justify-end gap-1">
-            <div class="text-[0.6rem] text-form flex items-end pb-2">1 sept, 2.31 pm</div>
+            <div class="text-[0.6rem] text-form flex items-end pb-2"><?= date('j M, g.i a', strtotime($complainReply['created_at'])); ?></div>
             <div class="bg-indigo-100 text-gray-800 p-2 rounded-lg mb-2 relative w-fit">
               <div class="py-0 px-2"><?= $complainReply['description'] ?></div>
               <div class="absolute right-0 top-3 transform translate-x-1/2 rotate-45 w-2 h-2 bg-indigo-100"></div>
@@ -66,7 +78,7 @@
               <div class="py-0 px-2 "><?= $complainReply['description'] ?></div>
               <div class="absolute left-0 top-3 transform -translate-x-1/2 rotate-45 w-2 h-2 bg-slate-200"></div>
             </div>
-            <div class="text-[0.6rem] text-form flex items-end pb-2">1 sept, 2.31 pm</div>
+            <div class="text-[0.6rem] text-form flex items-end pb-2"><?= date('j M, g.i a', strtotime($complainReply['created_at'])); ?></div>
           </div>
         <?php endif; ?>
       <?php endforeach; ?>
