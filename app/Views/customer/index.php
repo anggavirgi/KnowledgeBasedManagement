@@ -14,7 +14,7 @@
                 </div>
             </h1>
             <div class="flex justify-center" id="search">
-                <form action="" class="relative">
+                <form action="<?php echo base_url() ?>kb/search" method="post" class="relative">
                     <input type="text" name="search" id="search" placeholder="Search Your question, answer, etc" class="sm:w-[30rem] w-[20rem]  mb-2 px-7 mt-[30px] py-3 border border-gray-400 outline-main rounded-md">
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search absolute sm:left-[450px] left-[295px] top-[47px] cursor-pointer text-[#919191]" viewBox="0 0 16 16">
@@ -48,7 +48,7 @@
     <!-- </div> -->
     <div id="general_question" class="px-10 mt-10 sm:mt-[5rem] md:mt-[10rem] lg:mt-[12rem]">
         <div class=" w-full mb-2 text-center">
-            <h4 class="text-[#18A8D8] font-bold text-4xl">General Question</h4>
+            <h4 class="text-[#18A8D8] font-bold text-4xl">Frequently Ask Questions</h4>
         </div>
         <div class="flex justify-center">
             <div class="lg:w-5/12 md:flex hidden">
@@ -93,123 +93,37 @@
         <div id="customer_complain" class="mb-2 p-5 w-10/12">
             <h4 class="font-bold text-4xl text-center mb-10">General Complain User</h4>
             <div class="grid lg:grid-cols-2 md:grid-cols-1 gap-12 gap-y-4">
-                <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
-                    <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
-                        <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
-                        <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
-                    </svg>
+                <?php $count_complain = 1; ?>
+                <?php foreach ($complains as $complain){ ?>
+                    <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
+                        <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
+                            <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
+                            <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
+                        </svg>
 
-                    <div class="flex justify-between">
-                        <div class="gap-2">
-                            <h4 class="font-bold text-2xl">title of complain</h4>
-                            <h4 class="sm:text-sm text-[14px] sm:mt-2 mt-3">User9012230 / PRJ-0998123 </h4>
+                        <div class="flex justify-between">
+                            <div class="gap-2">
+                                <h4 class="font-bold text-2xl"><?php echo $complain['subject'] ?></h4>
+                                <h4 class="sm:text-sm text-[14px] sm:mt-2 mt-3"><span><?php echo $complain['email'] ?></span> / <span><?php echo $complain['name_project'] ?></span> </h4>
+                            </div>
+                            <div>
+                                <h4 class="font-bold sm:text-sm text-[10px] text-[#1F9254] sm:mt-2 mt-3 py-2 px-8 bg-[#CFF2DE] rounded-[15px]">Solved</h4>
+                            </div>
                         </div>
-                        <div>
-                            <h4 class="font-bold sm:text-sm text-[10px] text-[#1F9254] sm:mt-2 mt-3 py-2 px-8 bg-[#CFF2DE] rounded-[15px]">Solved</h4>
-                        </div>
-                    </div>
-                    <div class="max-w-4xl text-sm mt-4">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at</p>
-                    </div>
-                </div>
-                <div class="border-solid bg-white border-2 border-[#b4b1b1] rounded-[10px] p-5 pl-10 mb-7 relative">
-                    <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
-                        <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
-                        <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
-                    </svg>
-
-                    <div class="flex justify-between">
-                        <div class="gap-2">
-                            <h4 class="font-bold text-2xl">title of complain</h4>
-                            <h4 class="sm:text-sm text-[14px] sm:mt-2 mt-3">User9012230 / PRJ-0998123 </h4>
-                        </div>
-                        <div>
-                            <h4 class="font-bold sm:text-sm text-[10px] text-[#1F9254] sm:mt-2 mt-3 py-2 px-8 bg-[#CFF2DE] rounded-[15px]">Solved</h4>
+                        <div class="max-w-4xl text-sm mt-4">
+                            <p><?php echo $complain['description'] ?></p>
                         </div>
                     </div>
-                    <div class="max-w-4xl text-sm mt-4">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at.</p>
-                    </div>
-                </div>
-                <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
-                    <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
-                        <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
-                        <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
-                    </svg>
-
-                    <div class="flex justify-between">
-                        <div class="gap-2">
-                            <h4 class="font-bold text-2xl">title of complain</h4>
-                            <h4 class="sm:text-sm text-[14px] sm:mt-2 mt-3">User9012230 / PRJ-0998123 </h4>
-                        </div>
-                        <div>
-                            <h4 class="font-bold sm:text-sm text-[10px] text-[#1F9254] sm:mt-2 mt-3 py-2 px-8 bg-[#CFF2DE] rounded-[15px]">Solved</h4>
-                        </div>
-                    </div>
-                    <div class="max-w-4xl text-sm mt-4">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at</p>
-                    </div>
-                </div>
-                <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
-                    <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
-                        <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
-                        <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
-                    </svg>
-
-                    <div class="flex justify-between">
-                        <div class="gap-2">
-                            <h4 class="font-bold text-2xl">title of complain</h4>
-                            <h4 class="sm:text-sm text-[14px] sm:mt-2 mt-3">User9012230 / PRJ-0998123 </h4>
-                        </div>
-                        <div>
-                            <h4 class="font-bold sm:text-sm text-[10px] text-[#1F9254] sm:mt-2 mt-3 py-2 px-8 bg-[#CFF2DE] rounded-[15px]">Solved</h4>
-                        </div>
-                    </div>
-                    <div class="max-w-4xl text-sm mt-4">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at.</p>
-                    </div>
-                </div>
-                <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
-                    <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
-                        <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
-                        <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
-                    </svg>
-
-                    <div class="flex justify-between">
-                        <div class="gap-2">
-                            <h4 class="font-bold text-2xl">title of complain</h4>
-                            <h4 class="sm:text-sm text-[14px] sm:mt-2 mt-3">User9012230 / PRJ-0998123 </h4>
-                        </div>
-                        <div>
-                            <h4 class="font-bold sm:text-sm text-[10px] text-[#1F9254] sm:mt-2 mt-3 py-2 px-8 bg-[#CFF2DE] rounded-[15px]">Solved</h4>
-                        </div>
-                    </div>
-                    <div class="max-w-4xl text-sm mt-4">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at</p>
-                    </div>
-                </div>
-                <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
-                    <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
-                        <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
-                        <path d="M13 1.41431L13 18.5564L1.92893 9.98537L13 1.41431Z" fill="white" />
-                    </svg>
-
-                    <div class="flex justify-between">
-                        <div class="gap-2">
-                            <h4 class="font-bold text-2xl">title of complain</h4>
-                            <h4 class="sm:text-sm text-[14px] sm:mt-2 mt-3">User9012230 / PRJ-0998123 </h4>
-                        </div>
-                        <div>
-                            <h4 class="font-bold sm:text-sm text-[10px] text-[#1F9254] sm:mt-2 mt-3 py-2 px-8 bg-[#CFF2DE] rounded-[15px]">Solved</h4>
-                        </div>
-                    </div>
-                    <div class="max-w-4xl text-sm mt-4">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas. At auctor urna nunc id cursus metus. Aliquet sagittis id consectetur purus ut. Risus feugiat in ante metus dictum at.</p>
-                    </div>
-                </div>
+                    <?php 
+                        if($count_complain == 6) {
+                            break;
+                        }    
+                    ?>
+                    <?php $count_complain++ ?>
+                <?php } ?>
             </div>
             <p class="text-center mb-10 mt-10">
-                <a href="" class="text-white p-3 rounded-[10px] bg-[#18A8D8] font-bold">Read More <i class="bi bi-chevron-double-right"></i></a>
+                <a href="<?php echo base_url() ?>kb/allcomplain" class="text-white p-3 rounded-[10px] bg-[#18A8D8] font-bold">Read More <i class="bi bi-chevron-double-right"></i></a>
             </p>
         </div>
         <div class="absolute top-[100%] left-0 right-0 z-0 w-full">
@@ -294,7 +208,7 @@
                     </div>
                 </div>
             <?php else : ?>
-                <a href="/kb/register" class="p-2 py-4 bg-[#FFC700] rounded-[15px] cursor-pointer"><i class="bi bi-envelope-fill "></i> Report a Problem</a>
+                <a href="/kb/login" class="p-2 py-4 bg-[#FFC700] rounded-[15px] cursor-pointer"><i class="bi bi-envelope-fill "></i> Report a Problem</a>
             <?php endif; ?>
         </div>
         <?php if (session()->has('success')) : ?>

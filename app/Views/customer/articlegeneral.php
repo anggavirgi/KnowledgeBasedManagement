@@ -106,7 +106,7 @@
         </div>
     </div>
 
-    <div class="w-full md:w-9/12 px-4 2xl:ps-4 2xl:pe-32">
+    <div class="w-full md:w-9/12 px-4 2xl:ps-4 2xl:pe-32 mt-2">
         <div class="font-medium px-3 text-sm">
             <a href="<?php echo base_url(); ?>kb" class="text-main hover:text-sky-600">Home</a>
             <span> / </span>
