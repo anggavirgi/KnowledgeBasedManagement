@@ -133,7 +133,7 @@ echo $this->extend('admin/layout'); ?>
                         <td class="p-3 font-medium text-gray-900 whitespace-nowrap cursor-pointer">
                             <?= $complain['email'] ?>
                         </td>
-                        <td class="p-3">
+                        <td class="p-3 max-w-[320px] text-ellipsis overflow-hidden whitespace-nowrap">
                             <?= $complain['description'] ?>
                         </td>
                         <td class="p-3 text-center">

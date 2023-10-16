@@ -46,7 +46,7 @@
 
   <div class="h-[17rem] overflow-y-auto mt-3">
     <div class="px-4 flex flex-wrap text-sm">
-      <?php if ($complain['id_user'] !== user_id()) : ?>
+      <?php if ($complain['level'] === "admin") : ?>
         <div class="w-full flex justify-end gap-1">
           <div class="text-[0.6rem] text-form flex items-end pb-2"><?= date('j M, g.i a', strtotime($complain['created_at'])); ?></div>
           <div class="bg-indigo-100 text-gray-800 p-2 rounded-lg mb-2 relative w-fit">
@@ -64,7 +64,7 @@
         </div>
       <?php endif; ?>
       <?php foreach ($complainReply as $complainReply) : ?>
-        <?php if ($complainReply['id_user'] === user_id()) : ?>
+        <?php if ($complainReply['level'] === "admin") : ?>
           <div class="w-full flex justify-end gap-1">
             <div class="text-[0.6rem] text-form flex items-end pb-2"><?= date('j M, g.i a', strtotime($complainReply['created_at'])); ?></div>
             <div class="bg-indigo-100 text-gray-800 p-2 rounded-lg mb-2 relative w-fit">

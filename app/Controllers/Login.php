@@ -25,6 +25,7 @@ class Login extends BaseController
   public function proses()
   {
     $token = $this->googleClient->fetchAccessTokenWithAuthCode($this->request->getVar('code'));
+    dd($token);
     if (!isset($token['error'])) {
       $this->googleClient->setAccessToken($token['access_token']);
       $googleService = new \Google_Service_Oauth2($this->googleClient);
