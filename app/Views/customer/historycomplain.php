@@ -93,7 +93,13 @@
                     <span class="border-b-2 pb-3 border-slate-200 font-semibold text-xl"><?= date("F Y", strtotime($complain['created_at'])); ?></span>
                     <div class="flex">
                         <a href="<?= base_url('kb/complain/reply?complainId=' . $complain['slug']) ?>" class="py-3 font-semibold text-xl text-orange-600"><?= $complain['subject']; ?></a>
-                        <div class="font-medium ms-3 text-[10px] text-progress-status-text bg-progress-status w-fit h-fit self-center py-1 px-4 appearance-none cursor-pointer rounded-[15px] focus:outline-none focus:border-blue-500"><?= $complain['status']; ?></div>
+                        <?php if ($complain['status'] === 'pending') : ?>
+                            <div class="font-medium ms-3 text-[10px] text-pending-status-text bg-pending-status w-fit h-fit self-center py-1 px-4 appearance-none cursor-pointer rounded-[15px] focus:outline-none focus:border-blue-500"><?= $complain['status']; ?></div>
+                        <?php elseif ($complain['status'] === 'progress') : ?>
+                            <div class="font-medium ms-3 text-[10px] text-progress-status-text bg-progress-status w-fit h-fit self-center py-1 px-4 appearance-none cursor-pointer rounded-[15px] focus:outline-none focus:border-blue-500"><?= $complain['status']; ?></div>
+                        <?php else : ?>
+                            <div class="font-medium ms-3 text-[10px] text-solved-status-text bg-solved-status w-fit h-fit self-center py-1 px-4 appearance-none cursor-pointer rounded-[15px] focus:outline-none focus:border-blue-500"><?= $complain['status']; ?></div>
+                        <?php endif; ?>
                     </div>
                     <span class="text-ellipsis pt-3 text-sm overflow-hidden text-justify whitespace-nowrap">
                         <?= $complain['description']; ?>
