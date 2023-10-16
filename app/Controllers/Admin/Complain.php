@@ -93,7 +93,7 @@ class Complain extends BaseController
   public function reply($id)
   {
     $complain = $this->db->table('complains a')
-      ->select('a.*, b.username AS username')
+      ->select('a.*, b.username AS username, b.level')
       ->join('users b', 'a.id_user = b.id')
       ->where('a.id', $id)
       ->get()
@@ -101,8 +101,10 @@ class Complain extends BaseController
     $data = [
       'title'         => 'Reply Complain',
       'complain'      => $complain,
-      'complainReply' => $this->complainReplyModel->select('*')->where("id_complain", $id)->findAll()
+      'complainReply' => $this->db->table('complain_reply')->select('complain_reply.*, users.level')->join("users", "complain_reply.id_user = users.id")->where("complain_reply.id_complain", $id)->orderBy('complain_reply.created_at', 'ASC')->get()->getResultArray()
     ];
+
+    // dd($data['complainReply']);
 
     return view('admin/replycomplain', $data);
   }

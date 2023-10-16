@@ -147,7 +147,6 @@ class AuthController extends Controller
         ]);
     }
 
-
     /**
      * Attempt to register a new user.
      */
@@ -187,6 +186,7 @@ class AuthController extends Controller
         $allowedPostFields = array_merge(['password'], $this->config->validFields, $this->config->personalFields);
         $user              = new User(array_merge($this->request->getPost($allowedPostFields), ['id_project' => $idProject]));
 
+
         $this->config->requireActivation === null ? $user->activate() : $user->generateActivateHash();
 
         // Ensure default group gets assigned if set
@@ -213,7 +213,6 @@ class AuthController extends Controller
         // Success!
         return redirect()->route('login')->with('message', lang('Auth.registerSuccess'));
     }
-
 
     //--------------------------------------------------------------------
     // Forgot Password

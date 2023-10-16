@@ -51,6 +51,7 @@ $routes->group('kb', static function ($routes) {
     $routes->get('complain/reply', 'Home::reply');
     $routes->get('allcomplain', 'Home::allcomplain');
     $routes->post('search', 'Home::searchresult');
+    $routes->get('proses', 'Login::proses');
 });
 
 // ROUTE ADMIN
