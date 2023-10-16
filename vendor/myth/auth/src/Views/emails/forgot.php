@@ -1,3 +1,4 @@
+
 <div style="text-align: center;">
     <figure>
         <img src="<?php echo base_url(); ?>src/images/logo-vsee.png" alt="">

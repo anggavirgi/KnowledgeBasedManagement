@@ -7,6 +7,7 @@ use CodeIgniter\Session\Session;
 use Myth\Auth\Config\Auth as AuthConfig;
 use Myth\Auth\Entities\User;
 use Myth\Auth\Models\UserModel;
+use App\Models\Admin\ProjectModel;
 
 class AuthController extends Controller
 {
@@ -22,6 +23,9 @@ class AuthController extends Controller
      */
     protected $session;
 
+    protected $projectModel;
+    protected $user;
+
     public function __construct()
     {
         // Most services in this controller require
@@ -30,6 +34,8 @@ class AuthController extends Controller
 
         $this->config = config('Auth');
         $this->auth   = service('authentication');
+        $this->projectModel = new ProjectModel();
+        $this->user = $this->auth->user();
     }
 
     //--------------------------------------------------------------------
@@ -93,7 +99,7 @@ class AuthController extends Controller
             return redirect()->to(route_to('reset-password') . '?token=' . $this->auth->user()->reset_hash)->withCookies();
         }
 
-        $redirectURL = session('redirect_url') ?? site_url('/');
+        $redirectURL = session('redirect_url') ?? site_url('/kb');
         unset($_SESSION['redirect_url']);
 
         return redirect()->to($redirectURL)->withCookies()->with('message', lang('Auth.loginSuccess'));
@@ -130,7 +136,15 @@ class AuthController extends Controller
             return redirect()->back()->withInput()->with('error', lang('Auth.registerDisabled'));
         }
 
-        return $this->_render($this->config->views['register'], ['config' => $this->config, 'title' => 'Virtusee | Register']);
+        // Load your project data
+        $project = $this->projectModel->findAll();
+
+        // Pass data to the view
+        return $this->_render($this->config->views['register'], [
+            'config' => $this->config,
+            'title' => 'Virtusee | Register',
+            'project' => $project
+        ]);
     }
 
     /**
@@ -165,9 +179,13 @@ class AuthController extends Controller
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
+        // Set id_project to "0" for new users
+        $idProject = $this->request->getPost('status_user') === 'new_user' ? '0' : $this->request->getPost('id_project');
+
         // Save the user
         $allowedPostFields = array_merge(['password'], $this->config->validFields, $this->config->personalFields);
-        $user              = new User($this->request->getPost($allowedPostFields));
+        $user              = new User(array_merge($this->request->getPost($allowedPostFields), ['id_project' => $idProject]));
+
 
         $this->config->requireActivation === null ? $user->activate() : $user->generateActivateHash();
 

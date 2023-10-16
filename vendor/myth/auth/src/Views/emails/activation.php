@@ -1,3 +1,4 @@
+
 <div style="text-align: center;">
     <figure>
         <img src="cid:<?php echo $image ?>" alt="">
