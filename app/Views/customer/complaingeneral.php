@@ -7,14 +7,15 @@
         <div class="m-7 md:mx-12 mb-20">
 
             <div class="flex justify-end">
-
-                <div data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="fixed lg:absolute bottom-4 lg:bottom-0 lg:left-16 right-4 lg:right-0 lg:top-32 md:right-8 bg-main text-white drop-shadow-md flex items-center border-2 font-medium text-xs rounded-full px-1 lg:px-3 py-2 w-fit h-fit cursor-pointer">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 md:w-11 lg:w-7 h-8 md:h-9 lg:h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
-                    </svg>
-                    <p class="hidden lg:block">Make a Question</p>
-                </div>
-
+            <?php if (logged_in()) : ?>
+                <a data-modal-target="authentication-modal" data-modal-toggle="authentication-modal">
+                  <div class="fixed lg:absolute bottom-4 lg:bottom-0 lg:left-16 right-4 lg:right-0 lg:top-32 md:right-8 bg-main text-white drop-shadow-md flex items-center border-2 font-medium text-xs rounded-full px-1 lg:px-3 py-2 w-fit h-fit cursor-pointer">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 md:w-11 lg:w-7 h-8 md:h-9 lg:h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+                      </svg>
+                      <p class="hidden lg:block">Make a Question</p>
+                  </div>
+                </a>
 
                 <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 bottom-0 z-50 p-4 overflow-x-hidden overflow-y-auto hidden">
                     <!-- Modal content -->
@@ -26,7 +27,7 @@
                             <span class="sr-only">Close modal</span>
                         </button>
                         <div class="px-6 lg:px-8 w-[95%]">
-                            <form class="form space-y-2" action="<?php echo base_url(); ?>kb/complain" method="post" enctype="multipart/form-data">
+                            <form class="form space-y-2" action="<?php echo base_url(); ?>" method="post" enctype="multipart/form-data">
                                 <?php echo csrf_field(); ?>
                                 <input type="hidden" name="id_user" value="<?= user()->id_user; ?>">
                                 <input type="hidden" name="id_project" value="<?= user()->id_project; ?>">
@@ -86,6 +87,16 @@
                         </div>
                     </div>
                 </div>
+            <?php else : ?>
+              <a href="/kb/login">
+                <div class="fixed lg:absolute bottom-4 lg:bottom-0 lg:left-16 right-4 lg:right-0 lg:top-32 md:right-8 bg-main text-white drop-shadow-md flex items-center border-2 font-medium text-xs rounded-full px-1 lg:px-3 py-2 w-fit h-fit cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 md:w-11 lg:w-7 h-8 md:h-9 lg:h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+                    </svg>
+                    <p class="hidden lg:block">Make a Question</p>
+                </div>
+              </a>
+            <?php endif; ?>
             </div>
 
 

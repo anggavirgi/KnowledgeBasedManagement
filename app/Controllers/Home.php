@@ -43,11 +43,19 @@ class Home extends BaseController
         } else {
             $project = "";
         }
+        $complain = $this->db->table('complains')
+            ->select('complains.*, project.name_project')
+            ->join('project', 'project.id = complains.id_project')
+            ->where(['complains.visibility' => 'open', 'complains.status' => 'solved'])
+            ->get()
+            ->getResultArray();
+
         $data = [
             'title' => 'Virtusee | Knowledge Based',
             'file_message' => $file_message,
             'category' => $category,
             'contents' => $content,
+            'complains' => $complain,
             'project' => $project
         ];
         return view('customer/index', $data);
@@ -305,6 +313,7 @@ class Home extends BaseController
         ];
         return view('customer/articledetailpersonal', $data);
     }
+
     public function reply()
     {
         $slug = $this->request->getVar('complainId');
@@ -318,5 +327,42 @@ class Home extends BaseController
             'project' => $project
         ];
         return view('customer/replycomplain', $data);
+    }
+
+    public function allcomplain()
+    {
+        if (logged_in()) {
+            $project =  $this->projectModel->find(user()->id_project);
+        } else {
+            $project = "";
+        }
+        $file_message = session('errors.file');
+        $complain = $this->complainModel->findAll();
+        $data = [
+            'title' => 'Virtusee | complain',
+            'file_message' => $file_message,
+            'project' => $project,
+            'complain' => $complain
+        ];
+        return view('customer/complaingeneral', $data);
+    }
+
+    public function searchresult()
+    {
+        $search = $this->request->getVar('search');
+        // if (logged_in()) {
+        //     $project =  $this->projectModel->find(user()->id_project);
+        // } else {
+        //     $project = "";
+        // }
+        // $file_message = session('errors.file');
+        // $complain = $this->complainModel->findAll();
+        // $data = [
+        //     'title' => 'Virtusee | complain',
+        //     'file_message' => $file_message,
+        //     'project' => $project,
+        //     'complain' => $complain
+        // ];
+        // return view('customer/searchresult', $data);
     }
 }
