@@ -56,7 +56,7 @@
             </div>
             <div id="question" class="mt-7 w-full lg:w-6/12 md:w-10/12 self-center">
                 <?php $count = 1; ?>
-                <?php foreach($contents as $content){ ?>
+                <?php foreach ($contents as $content) { ?>
                     <!-- <div class="border-solid border-2 border-[#919191] rounded-xl py-4 px-6 mb-3">
                         <div class="flex justify-between">
                             <p class="text-md" id="title<?php echo $count ?>"><?php echo $content['title'] ?></p>
@@ -79,10 +79,10 @@
                         </div>
                     </a>
                     <hr>
-                    <?php 
-                        if($count == 6){ 
-                            break;
-                        }    
+                    <?php
+                    if ($count == 6) {
+                        break;
+                    }
                     ?>
                     <?php $count++ ?>
                 <?php } ?>
@@ -149,7 +149,7 @@
                         <div class="px-6 lg:px-8 w-[95%]">
                             <form class="form space-y-2" action="<?php echo base_url(); ?>" method="post" enctype="multipart/form-data">
                                 <?php echo csrf_field(); ?>
-                                <input type="hidden" name="id_user" value="<?= user()->id_user; ?>">
+                                <input type="hidden" name="id_user" value="<?= user()->id; ?>">
                                 <input type="hidden" name="id_project" value="<?= user()->id_project; ?>">
                                 <script>
                                     var fileMessage = <?php echo json_encode($file_message); ?>;

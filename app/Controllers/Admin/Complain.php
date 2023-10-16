@@ -17,11 +17,13 @@ class Complain extends BaseController
 
   protected $complainModel;
   protected $complainReplyModel;
+  protected $db;
 
   public function __construct()
   {
     $this->complainModel = new ComplainModel();
     $this->complainReplyModel = new ComplainReplyModel();
+    $this->db = db_connect();
   }
 
   public function index()
@@ -90,9 +92,15 @@ class Complain extends BaseController
 
   public function reply($id)
   {
+    $complain = $this->db->table('complains a')
+      ->select('a.*, b.username AS username')
+      ->join('users b', 'a.id_user = b.id')
+      ->where('a.id', $id)
+      ->get()
+      ->getRowArray();
     $data = [
       'title'         => 'Reply Complain',
-      'complain'      => $this->complainModel->find($id),
+      'complain'      => $complain,
       'complainReply' => $this->complainReplyModel->select('*')->where("id_complain", $id)->findAll()
     ];
 
