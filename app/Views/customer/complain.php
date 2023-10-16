@@ -95,14 +95,15 @@
                 <div class="flash-error" data-flashmessage="<?php echo session('error') ?>"></div>
             <?php endif; ?>
 
-            <div class="pb-3 flex flex-col">
-                <span class=" border-slate-200 font-semibold text-xl">August 2023</span>
-                <a href="" class="py-3 border-b-2 pb-3 font-semibold text-xl text-orange-600">How to maintenance server down</a>
-                <span class="text-ellipsis pt-3 text-sm overflow-hidden text-justify whitespace-nowrap">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. At illum ab aspernatur voluptatem enim ipsa ex dolore, adipisci amet eius optio fugiat, dolorem magni aliquam nam, eum repellat rerum fuga! Laudantium aut dolorem itaque facere, dolore et, impedit similique laboriosam vel nesciunt excepturi corporis ab repellendus sint. Quibusdam velit error enim dolor exercitationem iste, debitis asperiores placeat facere, sint minima autem numquam! Deleniti, earum. Inventore magnam vel, tenetur non nam minus exercitationem odit odio libero reiciendis sapiente repellendus porro temporibus accusamus labore, laboriosam dolorum sint laudantium enim magni suscipit fugit pariatur consequatur incidunt. Eum, aspernatur consequuntur modi quisquam corporis assumenda!Deleniti, earum. Inventore magnam vel, tenetur non nam minus exercitationem odit odio libero reiciendis sapiente repellendus porro temporibus accusamus labore, laboriosam dolorum sint laudantium enim magni suscipit fugit pariatur consequatur incidunt. Eum, aspernatur consequuntur modi quisquam corporis assumenda!Deleniti, earum. Inventore magnam vel, tenetur non nam minus exercitationem odit odio libero reiciendis sapiente repellendus porro temporibus accusamus labore, laboriosam dolorum sint laudantium enim magni suscipit fugit pariatur consequatur incidunt. Eum, aspernatur consequuntur modi quisquam corporis assumenda!
-                </span>
-            </div>
-
+            <?php foreach ($complain as $complain) : ?>
+                <div class="pb-3 flex flex-col">
+                    <span class=" border-slate-200 font-semibold text-xl"><?= date("F Y", strtotime($complain['created_at'])); ?></span>
+                    <a href="<?= base_url('kb/complain/reply?complainId=' . $complain['slug']) ?>" class="py-3 border-b-2 pb-3 font-semibold text-xl text-orange-600"><?= $complain['subject']; ?></a>
+                    <span class="text-ellipsis pt-3 text-sm overflow-hidden text-justify whitespace-nowrap">
+                        <?= $complain['description']; ?>
+                    </span>
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>

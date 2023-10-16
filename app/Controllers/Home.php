@@ -175,7 +175,11 @@ class Home extends BaseController
             $project = "";
         }
         $file_message = session('errors.file');
-        $complain = $this->complainModel->find(user()->id);
+        $complain = $this->db->table('complains')
+            ->select('*')
+            ->where('status', 'solved')
+            ->get()
+            ->getResultArray();
         $data = [
             'title' => 'Virtusee | complain',
             'file_message' => $file_message,
