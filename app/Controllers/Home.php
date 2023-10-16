@@ -354,19 +354,23 @@ class Home extends BaseController
     public function searchresult()
     {
         $search = $this->request->getVar('search');
-        // if (logged_in()) {
-        //     $project =  $this->projectModel->find(user()->id_project);
-        // } else {
-        //     $project = "";
-        // }
-        // $file_message = session('errors.file');
-        // $complain = $this->complainModel->findAll();
-        // $data = [
-        //     'title' => 'Virtusee | complain',
-        //     'file_message' => $file_message,
-        //     'project' => $project,
-        //     'complain' => $complain
-        // ];
-        // return view('customer/searchresult', $data);
+
+        $content = $this->db->table('content')
+        ->select('*')
+        ->like('title', $search, 'both')
+        ->get()
+        ->getResultArray();
+
+        $complain = $this->db->table('complains')
+        ->select('*')
+        ->like('subject', $search, 'both')
+        ->get()
+        ->getResultArray();
+        
+        $data = [
+            'title' => 'Virtusee | complain',
+            'results' => $result
+        ];
+        return view('customer/searchresult', $data);
     }
 }
