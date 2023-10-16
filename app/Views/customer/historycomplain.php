@@ -28,7 +28,7 @@
                         <div class="px-6 lg:px-8 w-[95%]">
                             <form class="form space-y-2" action="<?php echo base_url(); ?>kb/complain" method="post" enctype="multipart/form-data">
                                 <?php echo csrf_field(); ?>
-                                <input type="hidden" name="id_user" value="<?= user()->id_user; ?>">
+                                <input type="hidden" name="id_user" value="<?= user()->id; ?>">
                                 <input type="hidden" name="id_project" value="<?= user()->id_project; ?>">
                                 <script>
                                     var fileMessage = <?php echo json_encode($file_message); ?>;
@@ -87,6 +87,12 @@
                     </div>
                 </div>
             </div>
+
+            <?php if (session()->has('success')) : ?>
+                <div class="flash-success" data-flashmessage="<?php echo session('success') ?>"></div>
+            <?php else : ?>
+                <div class="flash-error" data-flashmessage="<?php echo session('error') ?>"></div>
+            <?php endif; ?>
 
             <?php foreach ($complain as $complain) : ?>
                 <div class="pb-10 flex flex-col">
