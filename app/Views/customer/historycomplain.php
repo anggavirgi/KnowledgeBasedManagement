@@ -95,7 +95,7 @@
             <?php endif; ?>
 
             <?php foreach ($complain as $complain) : ?>
-                <div class="pb-10 flex flex-col">
+                <div class="pb-10 flex flex-col hover:bg-slate-100">
                     <span class="border-b-2 pb-3 border-slate-200 font-semibold text-xl"><?= date("F Y", strtotime($complain['created_at'])); ?></span>
                     <div class="flex">
                         <a href="<?= base_url('kb/complain/reply?complainId=' . $complain['slug']) ?>" class="py-3 font-semibold text-xl text-orange-600"><?= $complain['subject']; ?></a>
