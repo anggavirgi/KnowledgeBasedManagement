@@ -83,7 +83,8 @@ phpunit
 #-------------------------
 # Composer
 #-------------------------
-vendor/
+/vendor/*
+!/vendor/myth/
 
 #-------------------------
 # IDE / Development Files
@@ -128,4 +129,3 @@ nb-configuration.xml
 # Node Modules
 public/node_modules
 public/src/css/style.css
-
