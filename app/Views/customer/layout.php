@@ -29,15 +29,15 @@
                         <span class="sr-only">Search</span>
                     </button>
 
-                    <div class="relative hidden" id="navbar-layout">
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <form action="<?php echo base_url() ?>kb/search" method="post" class="relative hidden" id="navbar-layout">
+                        <button class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                             </svg>
                             <span class="sr-only">Search icon</span>
-                        </div>
-                        <input type="text" id="search-navbar" class="block w-[18rem] lg:w-[30rem] p-2 pl-10 text-sm border border-gray-400 placeholder-gray-400 text-form rounded-2xl outline-main" placeholder="Search...">
-                    </div>
+                        </button>
+                        <input name="search" type="text" id="search-navbar" class="block w-[18rem] lg:w-[30rem] p-2 pl-10 text-sm border border-gray-400 placeholder-gray-400 text-form rounded-2xl outline-main" placeholder="Search...">
+                    </form>
 
                     <button data-collapse-toggle="navbar-search" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-gray-200 text-gray-400  " aria-controls="navbar-search" aria-expanded="false">
                         <span class="sr-only">Open main menu</span>
@@ -76,14 +76,14 @@
                 </div>
 
                 <div class="items-center justify-between hidden w-full p-5" id="navbar-search">
-                    <div class="relative mt-3 md:hidden flex justify-center items-center">
-                        <div class="absolute inset-y-0 left-2 flex items-center pl-3 pointer-events-none">
+                    <form action="<?php echo base_url() ?>kb/search" method="post" class="relative mt-3 md:hidden flex justify-center items-center">
+                        <button class="absolute inset-y-0 left-2 flex items-center pl-3 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                             </svg>
-                        </div>
-                        <input type="text" id="search-navbar" class="block w-full p-2 pl-10  text-sm border border-gray-400 placeholder-gray-400 text-form rounded-2xl outline-main" placeholder="Search...">
-                    </div>
+                        </button>
+                        <input name="search" type="text" id="search-navbar" class="block w-full p-2 pl-10  text-sm border border-gray-400 placeholder-gray-400 text-form rounded-2xl outline-main" placeholder="Search...">
+                    </form>
 
                     <!-- After Login -->
                     <ul class="flex flex-col p-4 md:p-0 md:hidden mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white ">
@@ -114,15 +114,15 @@
             <?php else : ?>
                 <!-- Element Before Login -->
                 <div>
-                    <div class="relative hidden" id="navbar-layout">
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <form action="<?php echo base_url() ?>kb/search" method="post" class="relative hidden" id="navbar-layout">
+                        <button class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                             </svg>
                             <span class="sr-only">Search icon</span>
-                        </div>
-                        <input type="text" id="search-navbar" class="block w-[18rem] lg:w-[30rem] p-2 pl-10 text-sm border border-gray-400 placeholder-gray-400 text-form rounded-2xl outline-main" placeholder="Search...">
-                    </div>
+                        </button>
+                        <input name="search" type="text" id="search-navbar" class="block w-[18rem] lg:w-[30rem] p-2 pl-10 text-sm border border-gray-400 placeholder-gray-400 text-form rounded-2xl outline-main" placeholder="Search...">
+                    </form>
                 </div>
                 <div class="buttons grid grid-cols-2 gap-4 me-2 text-center">
                     <a href="/kb/login" class="px-4 py-2 whitespace-nowrap hover:text-main">Sign In</a>

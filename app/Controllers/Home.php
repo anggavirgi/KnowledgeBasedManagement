@@ -36,6 +36,7 @@ class Home extends BaseController
             ->select('a.*, b.name_category AS name_category, c.name_subcategory AS name_subcategory')
             ->join('categories b', 'a.id_category = b.id')
             ->join('sub_category c', 'a.id_sub_category = c.id')
+            ->where('a.visibility', 'open')
             ->get()
             ->getResultArray();
         if (logged_in()) {
@@ -341,12 +342,17 @@ class Home extends BaseController
             $project = "";
         }
         $file_message = session('errors.file');
-        $complain = $this->complainModel->findAll();
+        $complain = $this->db->table('complains')
+        ->select('complains.*, project.name_project')
+        ->join('project', 'project.id = complains.id_project')
+        ->where(['visibility' => 'open', 'status' => 'solved'])
+        ->get()
+        ->getResultArray();
         $data = [
             'title' => 'Virtusee | complain',
             'file_message' => $file_message,
             'project' => $project,
-            'complain' => $complain
+            'complains' => $complain
         ];
         return view('customer/complaingeneral', $data);
     }
@@ -355,21 +361,36 @@ class Home extends BaseController
     {
         $search = $this->request->getVar('search');
 
-        $content = $this->db->table('content')
+        $content = $this->db->table('content a')
         ->select('*')
-        ->like('title', $search, 'both')
+        ->join('article b', 'a.id = b.id_content')
+        ->join('project c', 'b.id_project = c.id')
+        ->join('categories d', 'a.id_category = d.id')
+        ->join('sub_category e', 'a.id_sub_category = e.id')
+        ->like('a.title', $search, 'both')
+        ->where('a.visibility', 'open')
         ->get()
         ->getResultArray();
 
         $complain = $this->db->table('complains')
         ->select('*')
         ->like('subject', $search, 'both')
+        ->where(['visibility' => 'open', 'status' => 'solved'])
         ->get()
         ->getResultArray();
+
+        if (logged_in()) {
+            $project =  $this->projectModel->find(user()->id_project);
+        } else {
+            $project = "";
+        }
         
         $data = [
             'title' => 'Virtusee | complain',
-            'results' => $result
+            'contents' => $content,
+            'complains' => $complain,
+            'project' => $project,
+            'keyword' => $search
         ];
         return view('customer/searchresult', $data);
     }

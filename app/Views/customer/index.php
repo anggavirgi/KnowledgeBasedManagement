@@ -34,7 +34,7 @@
             <?php foreach ($category as $category) : ?>
                 <div class="m-3 sm:m-4 lg:m-6 w-1/3 sm:w-1/4 2xl:w-1/6 flex justify-center">
                     <a href="<?php echo base_url() ?>kb/generalarticle?category=<?= $category['name_category']; ?>">
-                        <div class="bg-gray-200 sm:px-[2rem] py-3 rounded-md w-[8rem] h-[5rem] sm:w-[9rem] sm:h-[5rem] md:w-[12rem] md:h-[7rem] flex items-center justify-center cursor-pointer">
+                        <div class="bg-gray-200 hover:bg-gray-300 sm:px-[2rem] py-3 rounded-md w-[8rem] h-[5rem] sm:w-[9rem] sm:h-[5rem] md:w-[12rem] md:h-[7rem] flex items-center justify-center cursor-pointer">
                             <div class="flex-col items-center mb-1 text-center">
                                 <img src="<?php echo base_url() ?>src/images/icon/<?php echo $category['icon'] ?>" alt="" class="mx-auto w-8 h-8 object-cover">
                                 <h4 class="whitespace-nowrap text-sm md:text-md text-center mt-1"><?= $category['name_category']; ?></h4>
@@ -123,7 +123,7 @@
                 <?php } ?>
             </div>
             <p class="text-center mb-10 mt-10">
-                <a href="<?php echo base_url() ?>kb/allcomplain" class="text-white p-3 rounded-[10px] bg-[#18A8D8] font-bold">Read More <i class="bi bi-chevron-double-right"></i></a>
+                <a href="<?php echo base_url() ?>kb/allcomplain" class="text-white p-3 rounded-[10px] bg-[#18A8D8] hover:bg-sky-600 font-bold">Read More <i class="bi bi-chevron-double-right"></i></a>
             </p>
         </div>
         <div class="absolute top-[100%] left-0 right-0 z-0 w-full">
@@ -135,7 +135,7 @@
         <p class="text-[24px] font-medium">Do you have any question?</p>
         <div class="mt-8 whitespace-nowrap">
             <?php if (logged_in()) : ?>
-                <a data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="p-2 py-4 bg-[#FFC700] rounded-[15px] cursor-pointer"><i class="bi bi-envelope-fill "></i> Report a Problem</a>
+                <a data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="p-4 bg-[#FFC700] hover:bg-yellow-500 rounded-[15px] cursor-pointer"><i class="bi bi-envelope-fill "></i> Report a Problem</a>
 
                 <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 bottom-0 z-50 p-4 overflow-x-hidden overflow-y-auto hidden">
                     <!-- Modal content -->
@@ -208,7 +208,7 @@
                     </div>
                 </div>
             <?php else : ?>
-                <a href="/kb/login" class="p-2 py-4 bg-[#FFC700] rounded-[15px] cursor-pointer"><i class="bi bi-envelope-fill "></i> Report a Problem</a>
+                <a href="/kb/login" class="p-4 bg-[#FFC700] hover:bg-yellow-500 rounded-[15px] cursor-pointer"><i class="bi bi-envelope-fill "></i> Report a Problem</a>
             <?php endif; ?>
         </div>
         <?php if (session()->has('success')) : ?>

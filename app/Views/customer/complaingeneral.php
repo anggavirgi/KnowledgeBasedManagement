@@ -9,7 +9,7 @@
             <div class="flex justify-end">
             <?php if (logged_in()) : ?>
                 <a data-modal-target="authentication-modal" data-modal-toggle="authentication-modal">
-                  <div class="fixed lg:absolute bottom-4 lg:bottom-0 lg:left-16 right-4 lg:right-0 lg:top-32 md:right-8 bg-main text-white drop-shadow-md flex items-center border-2 font-medium text-xs rounded-full px-1 lg:px-3 py-2 w-fit h-fit cursor-pointer">
+                  <div class="fixed lg:absolute bottom-4 lg:bottom-0 lg:left-16 right-4 lg:right-0 lg:top-32 md:right-8 bg-main hover:bg-sky-600 text-white drop-shadow-md flex items-center border-2 font-medium text-xs rounded-full px-1 lg:px-3 py-2 w-fit h-fit cursor-pointer">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 md:w-11 lg:w-7 h-8 md:h-9 lg:h-6">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
                       </svg>
@@ -106,13 +106,21 @@
                 <div class="flash-error" data-flashmessage="<?php echo session('error') ?>"></div>
             <?php endif; ?>
 
-            <div class="pb-3 flex flex-col mt-5">
-                <span class=" border-slate-200 font-semibold text-xl">August 2023</span>
-                <a href="" class="py-3 border-b-2 pb-3 font-semibold text-xl text-orange-600">How to maintenance server down</a>
-                <span class="text-ellipsis pt-3 text-sm overflow-hidden text-justify whitespace-nowrap">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. At illum ab aspernatur voluptatem enim ipsa ex dolore, adipisci amet eius optio fugiat, dolorem magni aliquam nam, eum repellat rerum fuga! Laudantium aut dolorem itaque facere, dolore et, impedit similique laboriosam vel nesciunt excepturi corporis ab repellendus sint. Quibusdam velit error enim dolor exercitationem iste, debitis asperiores placeat facere, sint minima autem numquam! Deleniti, earum. Inventore magnam vel, tenetur non nam minus exercitationem odit odio libero reiciendis sapiente repellendus porro temporibus accusamus labore, laboriosam dolorum sint laudantium enim magni suscipit fugit pariatur consequatur incidunt. Eum, aspernatur consequuntur modi quisquam corporis assumenda!Deleniti, earum. Inventore magnam vel, tenetur non nam minus exercitationem odit odio libero reiciendis sapiente repellendus porro temporibus accusamus labore, laboriosam dolorum sint laudantium enim magni suscipit fugit pariatur consequatur incidunt. Eum, aspernatur consequuntur modi quisquam corporis assumenda!Deleniti, earum. Inventore magnam vel, tenetur non nam minus exercitationem odit odio libero reiciendis sapiente repellendus porro temporibus accusamus labore, laboriosam dolorum sint laudantium enim magni suscipit fugit pariatur consequatur incidunt. Eum, aspernatur consequuntur modi quisquam corporis assumenda!
-                </span>
-            </div>
+            <?php foreach ($complains as $complain){ ?>
+                <a href="" class="">
+                    <div class="pb-3 flex flex-col mt-4 hover:shadow-md hover:shadow-gray-200 px-2">
+                        <div class="py-2 pb-1 font-semibold text-xl text-orange-600"><?php echo $complain['subject'] ?></div>
+                        <div class="flex gap-3 text-xs font-semibold pb-2">
+                            <span><?= date("F Y", strtotime($complain['created_at'])); ?></span>
+                            <span><?php echo $complain['name_project'] ?></span>
+                        </div>
+                        <hr>
+                        <span class="text-ellipsis pt-2 text-sm overflow-hidden text-justify whitespace-nowrap">
+                            <?php echo $complain['description'] ?>
+                        </span>
+                    </div>
+                </a>
+            <?php } ?>
 
         </div>
     </div>
