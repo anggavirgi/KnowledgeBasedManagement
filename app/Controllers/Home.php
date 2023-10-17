@@ -72,6 +72,8 @@ class Home extends BaseController
             ->select('a.*, b.name_category AS name_category, c.name_subcategory AS name_subcategory')
             ->join('categories b', 'a.id_category = b.id')
             ->join('sub_category c', 'a.id_sub_category = c.id')
+            ->orderBy('a.content_views', 'DESC')
+            ->limit(5)
             ->get()
             ->getResultArray();
         if (logged_in()) {
@@ -186,7 +188,8 @@ class Home extends BaseController
         $file_message = session('errors.file');
         $complain = $this->db->table('complains')
             ->select('*')
-            ->where('status', 'solved')
+            ->where('id_user', user()->id)
+            ->whereNotIn('status', ['solved'])
             ->get()
             ->getResultArray();
         $data = [
@@ -248,6 +251,7 @@ class Home extends BaseController
         $complain = $this->db->table('complains')
             ->select('*')
             ->where('id_user', user()->id)
+            ->where('status', 'solved')
             ->get()
             ->getResultArray();
         $data = [

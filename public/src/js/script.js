@@ -63,7 +63,31 @@ $(document).ready(function () {
   
 
 
-  // ===================== Dropdown Condition Article =====================
+  // ======================== Dropdown Condition Article =======================
+  $(".collapsible").click(function () {
+    var icon = $(this).find(".icon");
+    if (icon.hasClass("bi-chevron-down")) {
+      icon.removeClass("bi-chevron-down");
+      icon.addClass("bi-chevron-up");
+      var title = $(this).attr("data-title");
+      var title = "#" + title;
+      $(title).addClass("text-sky-700");
+    } else if (icon.hasClass("bi-chevron-up")) {
+      icon.removeClass("bi-chevron-up");
+      icon.addClass("bi-chevron-down");
+      var title = $(this).attr("data-title");
+      var title = "#" + title;
+      $(title).removeClass("text-sky-700");
+    }
+    var target = $(this).attr("data-target");
+    var id = "#" + target;
+    $(id).slideToggle();
+  });
+  // ===========================================================================
+
+
+
+  // ======================== Dropdown Condition Article =======================
   const category = new URLSearchParams(window.location.search).get("category");
   const subcategory = new URLSearchParams(window.location.search).get("subcategory");
   var titlesidebar = $(".collapsiblesidebar:contains('"+category+"')");

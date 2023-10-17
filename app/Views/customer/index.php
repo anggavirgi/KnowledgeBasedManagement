@@ -45,42 +45,33 @@
             <?php endforeach; ?>
         </div>
     </div>
+
     <!-- </div> -->
-    <div id="general_question" class="px-10 mt-10 sm:mt-[5rem] md:mt-[10rem] lg:mt-[12rem]">
+    <div id="general_question" class="px-10 mt-16 sm:mt-[5rem] md:mt-[10rem] lg:[10rem]">
         <div class=" w-full mb-2 text-center">
-            <h4 class="text-[#18A8D8] font-bold text-4xl">Frequently Ask Questions</h4>
+            <h4 class="text-[#18A8D8] font-bold text-3xl">General Question</h4>
         </div>
         <div class="flex justify-center">
             <div class="lg:w-5/12 md:flex hidden">
-                <img src="<?php echo base_url(); ?>src/images/Question.png" alt="Question.png" class="mx-auto w-[26rem] object-cover collapsible">
+                <img src="<?php echo base_url(); ?>src/images/Question.png" alt="Question.png" class="mx-auto w-[30rem] object-cover">
             </div>
             <div id="question" class="mt-7 w-full lg:w-6/12 md:w-10/12 self-center">
                 <?php $count = 1; ?>
                 <?php foreach ($contents as $content) { ?>
-                    <!-- <div class="border-solid border-2 border-[#919191] rounded-xl py-4 px-6 mb-3">
+                    <div class="border-solid border-2 border-[#919191] rounded-md p-4 ps-10 mb-3">
                         <div class="flex justify-between">
-                            <p class="text-md" id="title<?php echo $count ?>"><?php echo $content['title'] ?></p>
-                            <p class="text-xl cursor-pointer collapsible" data-target="collapse<?php echo $count ?>" data-title="title<?php echo $count ?>">
+                            <p class="text-md" id="title<?= $count; ?>"><?= $content['title']; ?></p>
+                            <p class="text-xl cursor-pointer collapsible" data-target="collapse<?= $count; ?>" data-title="title<?= $count; ?>">
                                 <i class="bi bi-chevron-down icon"></i>
                             </p>
                         </div>
-                        <div class="hidden" id="collapse<?php echo $count ?>">
-                            <div class="flex gap-2 mt-3">
-                                <div class="max-w-sm md:max-w-lg whitespace-nowrap overflow-hidden" >
-                                    <p class="text-sm"><?php echo $content['content'] ?></p>
-                                </div>
-                                <a href="" class="text-[#18A8D8] hover:text-sky-600 text-sm">more .. </a>
-                            </div>
+                        <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse<?= $count; ?>">
+                            <p class="text-[14px] line-clamp-1"><?= strip_tags($content['content']); ?></p>
+                            <a href="<?= base_url('kb/generalarticle/generalarticledetail?category=' . $content['name_category'] . '&subcategory=' . $content['name_subcategory'] . '&article=' . $content['slug']) ?>" class="text-[#18A8D8]"> more... </a>
                         </div>
-                    </div> -->
-                    <a href="<?= base_url('kb/generalarticle/generalarticledetail?category=' . $content['name_category'] . '&subcategory=' . $content['name_subcategory'] . '&article=' . $content['slug']) ?>">
-                        <div class="py-4 px-5 hover:bg-main hover:text-white text-md rounded font-semibold">
-                            <?php echo $content['title'] ?>
-                        </div>
-                    </a>
-                    <hr>
+                    </div>
                     <?php
-                    if ($count == 6) {
+                    if ($count == 5) {
                         break;
                     }
                     ?>
@@ -89,12 +80,13 @@
             </div>
         </div>
     </div>
-    <div id="customer_complain" class="flex flex-col justify-center items-center w-full bg-[#F8F8F8] pt-12 mt-24 relative">
+
+    <div id="customer_complain" class="flex flex-col justify-center items-center w-full bg-[#F8F8F8] pt-12 mt-10 relative">
         <div id="customer_complain" class="mb-2 p-5 w-10/12">
             <h4 class="font-bold text-4xl text-center mb-10">General Complain User</h4>
             <div class="grid lg:grid-cols-2 md:grid-cols-1 gap-12 gap-y-4">
                 <?php $count_complain = 1; ?>
-                <?php foreach ($complains as $complain){ ?>
+                <?php foreach ($complains as $complain) { ?>
                     <div class="border-solid bg-white border-2 border-[#919191] rounded-[10px] p-5 pl-10 mb-7 relative">
                         <svg width="30" height="30" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-25px] bg-[#F8F8F8]">
                             <path d="M13 0L13 19.9706L0.514719 9.98528L13 0Z" fill="#919191" />
@@ -103,21 +95,22 @@
 
                         <div class="flex justify-between">
                             <div class="gap-2">
-                                <h4 class="font-bold text-2xl"><?php echo $complain['subject'] ?></h4>
-                                <h4 class="sm:text-sm text-[14px] sm:mt-2 mt-3"><span><?php echo $complain['email'] ?></span> / <span><?php echo $complain['name_project'] ?></span> </h4>
+                                <h4 class="font-bold text-2xl"><?= $complain['subject'] ?></h4>
+                                <h4 class="sm:text-sm text-[14px] sm:mt-2 mt-3"><?= $complain['email'] ?></span> / <span><?= $complain['name_project'] ?></span> </h4>
+                                </h4>
                             </div>
                             <div>
                                 <h4 class="font-bold sm:text-sm text-[10px] text-[#1F9254] sm:mt-2 mt-3 py-2 px-8 bg-[#CFF2DE] rounded-[15px]">Solved</h4>
                             </div>
                         </div>
-                        <div class="max-w-4xl text-sm mt-4">
+                        <div class="max-w-4xl text-sm mt-4 line-clamp-2">
                             <p><?php echo $complain['description'] ?></p>
                         </div>
                     </div>
-                    <?php 
-                        if($count_complain == 6) {
-                            break;
-                        }    
+                    <?php
+                    if ($count_complain == 6) {
+                        break;
+                    }
                     ?>
                     <?php $count_complain++ ?>
                 <?php } ?>
@@ -128,9 +121,9 @@
         </div>
         <div class="absolute top-[100%] left-0 right-0 z-0 w-full">
             <img src="<?php echo base_url(); ?>src/images/background.png" class="w-[100%]" alt="">
-
         </div>
     </div>
+
     <div id="question" class="flex flex-col justify-center items-center mb-28 xl:mt-20 lg:mt-16 md:mt-2 relative 2xl:mb-56">
         <p class="text-[24px] font-medium">Do you have any question?</p>
         <div class="mt-8 whitespace-nowrap">
