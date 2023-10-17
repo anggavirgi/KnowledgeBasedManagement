@@ -187,9 +187,10 @@ class Home extends BaseController
         }
         $file_message = session('errors.file');
         $complain = $this->db->table('complains')
-            ->select('*')
-            ->where('id_user', user()->id)
-            ->whereNotIn('status', ['solved'])
+            ->select('complains.*, project.name_project')
+            ->join('project', 'project.id = complains.id_project')
+            ->where('complains.id_user', user()->id)
+            ->whereNotIn('complains.status', ['solved'])
             ->get()
             ->getResultArray();
         $data = [
@@ -249,9 +250,10 @@ class Home extends BaseController
             $project = "";
         }
         $complain = $this->db->table('complains')
-            ->select('*')
-            ->where('id_user', user()->id)
-            ->where('status', 'solved')
+            ->select('complains.*, project.name_project')
+            ->join('project', 'project.id = complains.id_project')
+            ->where('complains.id_user', user()->id)
+            ->where('complains.status', 'solved')
             ->get()
             ->getResultArray();
         $data = [
@@ -377,9 +379,10 @@ class Home extends BaseController
         ->getResultArray();
 
         $complain = $this->db->table('complains')
-        ->select('*')
-        ->like('subject', $search, 'both')
-        ->where(['visibility' => 'open', 'status' => 'solved'])
+        ->select('complains.*, project.name_project')
+        ->join('project', 'project.id = complains.id_project')
+        ->like('complains.subject', $search, 'both')
+        ->where(['complains.visibility' => 'open', 'complains.status' => 'solved'])
         ->get()
         ->getResultArray();
 

@@ -47,35 +47,28 @@
     </div>
 
     <!-- </div> -->
-    <div id="general_question" class="px-10 mt-16 sm:mt-[5rem] md:mt-[10rem] lg:[10rem]">
+    <div id="general_question" class="px-10 mt-10 sm:mt-[5rem] md:mt-[10rem] lg:mt-[12rem]">
         <div class=" w-full mb-2 text-center">
-            <h4 class="text-[#18A8D8] font-bold text-3xl">General Question</h4>
+            <h4 class="text-[#18A8D8] font-bold text-3xl md:text-4xl">Frequently Ask Questions</h4>
         </div>
         <div class="flex justify-center">
             <div class="lg:w-5/12 md:flex hidden">
-                <img src="<?php echo base_url(); ?>src/images/Question.png" alt="Question.png" class="mx-auto w-[30rem] object-cover">
+                <img src="<?php echo base_url(); ?>src/images/Question.png" alt="Question.png" class="mx-auto w-[26rem] object-cover collapsible">
             </div>
             <div id="question" class="mt-7 w-full lg:w-6/12 md:w-10/12 self-center">
                 <?php $count = 1; ?>
                 <?php foreach ($contents as $content) { ?>
-                    <div class="border-solid border-2 border-[#919191] rounded-md p-4 ps-10 mb-3">
-                        <div class="flex justify-between">
-                            <p class="text-md" id="title<?= $count; ?>"><?= $content['title']; ?></p>
-                            <p class="text-xl cursor-pointer collapsible" data-target="collapse<?= $count; ?>" data-title="title<?= $count; ?>">
-                                <i class="bi bi-chevron-down icon"></i>
-                            </p>
+                    <a href="<?= base_url('kb/generalarticle/generalarticledetail?category=' . $content['name_category'] . '&subcategory=' . $content['name_subcategory'] . '&article=' . $content['slug']) ?>">
+                        <div class="py-4 px-5 hover:bg-main hover:text-white text-md rounded font-semibold">
+                            <?php echo $content['title'] ?>
                         </div>
-                        <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse<?= $count; ?>">
-                            <p class="text-[14px] line-clamp-1"><?= strip_tags($content['content']); ?></p>
-                            <a href="<?= base_url('kb/generalarticle/generalarticledetail?category=' . $content['name_category'] . '&subcategory=' . $content['name_subcategory'] . '&article=' . $content['slug']) ?>" class="text-[#18A8D8]"> more... </a>
-                        </div>
-                    </div>
+                    </a>
+                    <hr>
                     <?php
-                    if ($count == 5) {
+                    if ($count == 6) {
                         break;
                     }
                     ?>
-                    <?php $count++ ?>
                 <?php } ?>
             </div>
         </div>
@@ -83,7 +76,7 @@
 
     <div id="customer_complain" class="flex flex-col justify-center items-center w-full bg-[#F8F8F8] pt-12 mt-10 relative">
         <div id="customer_complain" class="mb-2 p-5 w-10/12">
-            <h4 class="font-bold text-4xl text-center mb-10">General Complain User</h4>
+            <h4 class="font-bold text-3xl md:text-4xl text-center mb-10">General Complain User</h4>
             <div class="grid lg:grid-cols-2 md:grid-cols-1 gap-12 gap-y-4">
                 <?php $count_complain = 1; ?>
                 <?php foreach ($complains as $complain) { ?>

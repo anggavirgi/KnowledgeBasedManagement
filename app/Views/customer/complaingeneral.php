@@ -107,15 +107,15 @@
             <?php endif; ?>
 
             <?php foreach ($complains as $complain){ ?>
-                <a href="" class="">
-                    <div class="pb-3 flex flex-col mt-4 hover:shadow-md hover:shadow-gray-200 px-2">
-                        <div class="py-2 pb-1 font-semibold text-xl text-orange-600"><?php echo $complain['subject'] ?></div>
-                        <div class="flex gap-3 text-xs font-semibold pb-2">
+                <a href="<?= base_url('kb/complain/reply?complainId=' . $complain['slug']) ?>">
+                    <div class="pb-3 flex flex-col mb-4 hover:shadow-md hover:shadow-gray-200 px-2">
+                        <div class="py-2 pb-2 font-semibold text-xl text-orange-600"><?php echo $complain['subject'] ?></div>
+                        <div class="flex gap-3 text-sm font-semibold">
                             <span><?= date("F Y", strtotime($complain['created_at'])); ?></span>
                             <span><?php echo $complain['name_project'] ?></span>
                         </div>
-                        <hr>
-                        <span class="text-ellipsis pt-2 text-sm overflow-hidden text-justify whitespace-nowrap">
+                        <hr class="mb-2 mt-3">
+                        <span class="text-ellipsis text-sm overflow-hidden text-justify whitespace-nowrap">
                             <?php echo $complain['description'] ?>
                         </span>
                     </div>
