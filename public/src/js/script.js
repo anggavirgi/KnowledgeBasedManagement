@@ -33,7 +33,7 @@ $(document).ready(function () {
   // ===========================================================================
 
 
-
+  
   // ================== Select Condition Prject & User Type ====================
   var statusUserDropdown = $('#status_user');
   var projectDropdown = $('#id_project');

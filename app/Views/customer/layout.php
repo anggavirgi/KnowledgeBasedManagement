@@ -52,7 +52,7 @@
                     <span class="sr-only">Open user menu</span>
                     <img class="w-12 h-12 mr-2 rounded-full" src="<?php echo base_url(); ?>src/images/profilepic.png" alt="user photo">
                     <div class="flex flex-col text-left">
-                        <?= user()->username; ?>
+                        <?= user()->name; ?>
                         <span class="text-form text-xs truncate w-32"><?= $project['name_project']; ?></span>
                     </div>
                 </button>
@@ -92,7 +92,7 @@
                                 <span class="sr-only">Open user menu</span>
                                 <img class="w-12 h-12 mr-2 rounded-full" src="<?php echo base_url(); ?>src/images/profilepic.png" alt="user photo">
                                 <div class="flex flex-col text-left ">
-                                    <?= user()->username; ?>
+                                    <?= user()->name; ?>
                                     <span class="text-form text-xs truncate w-44"><?= $project['name_project']; ?></span>
                                 </div>
                             </button>

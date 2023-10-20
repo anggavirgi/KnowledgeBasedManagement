@@ -40,6 +40,11 @@ class Home extends BaseController
             ->getResultArray();
         if (logged_in()) {
             $project =  $this->projectModel->find(user()->id_project);
+            if ($project === null) {
+                $project = [
+                    'name_project' => 'virtusee'
+                ];
+            }
         } else {
             $project = "";
         }
@@ -49,7 +54,6 @@ class Home extends BaseController
             ->where(['complains.visibility' => 'open', 'complains.status' => 'solved'])
             ->get()
             ->getResultArray();
-
         $data = [
             'title' => 'Virtusee | Knowledge Based',
             'file_message' => $file_message,
@@ -77,6 +81,11 @@ class Home extends BaseController
             ->getResultArray();
         if (logged_in()) {
             $project =  $this->projectModel->find(user()->id_project);
+            if ($project === null) {
+                $project = [
+                    'name_project' => 'virtusee'
+                ];
+            }
         } else {
             $project = "";
         }
@@ -110,6 +119,11 @@ class Home extends BaseController
             ->getRow();
         if (logged_in()) {
             $project =  $this->projectModel->find(user()->id_project);
+            if ($project === null) {
+                $project = [
+                    'name_project' => 'virtusee'
+                ];
+            }
         } else {
             $project = "";
         }
@@ -244,6 +258,11 @@ class Home extends BaseController
         $file_message = session('errors.file');
         if (logged_in()) {
             $project =  $this->projectModel->find(user()->id_project);
+            if ($project === null) {
+                $project = [
+                    'name_project' => 'virtusee'
+                ];
+            }
         } else {
             $project = "";
         }
@@ -267,6 +286,11 @@ class Home extends BaseController
     {
         if (logged_in()) {
             $project =  $this->projectModel->find(user()->id_project);
+            if ($project === null) {
+                $project = [
+                    'name_project' => 'virtusee'
+                ];
+            }
         } else {
             $project = "";
         }
@@ -293,6 +317,11 @@ class Home extends BaseController
     {
         if (logged_in()) {
             $project =  $this->projectModel->find(user()->id_project);
+            if ($project === null) {
+                $project = [
+                    'name_project' => 'virtusee'
+                ];
+            }
         } else {
             $project = "";
         }
@@ -327,6 +356,11 @@ class Home extends BaseController
         $slug = $this->request->getVar('complainId');
         if (logged_in()) {
             $project =  $this->projectModel->find(user()->id_project);
+            if ($project === null) {
+                $project = [
+                    'name_project' => 'virtusee'
+                ];
+            }
         } else {
             $project = "";
         }
@@ -341,6 +375,11 @@ class Home extends BaseController
     {
         if (logged_in()) {
             $project =  $this->projectModel->find(user()->id_project);
+            if ($project === null) {
+                $project = [
+                    'name_project' => 'virtusee'
+                ];
+            }
         } else {
             $project = "";
         }

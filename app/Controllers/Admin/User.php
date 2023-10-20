@@ -43,9 +43,14 @@ class User extends ResourceController
         foreach ($dataUser as &$user) {
             $project = $this->projectModel->find($user['id_project']);
             if ($user['id_project'] !== 0) {
-                $user['id_project'] = $project['name_project'];
+                if ($project !== null) {
+                    $user['id_project'] = $project['name_project'];
+                } else {
+                    $user['id_project'] = 'virtusee';
+                }
             }
         }
+
 
         $pagination = [
             'page' => $page,

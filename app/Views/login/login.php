@@ -26,7 +26,7 @@
     </div>
 
     <!-- LOGIN CARD -->
-    <div class="absolute w-[80%] md:w-[55%] lg:w-[43%] xl:w-[38%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white h-auto py-10 px-10 rounded-3xl drop-shadow-lg">
+    <div class="absolute w-[85%] md:w-[55%] lg:w-[43%] xl:w-[38%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white h-auto py-10 px-10 rounded-3xl drop-shadow-lg">
       <div>Welcome, please login to your account.</div>
       <div class="text-[#18A8D8] text-[2.1rem] font-bold mt-2 mb-5">Sign in</div>
       <?php if (session()->has('message')) : ?>
@@ -62,14 +62,14 @@
           <hr class="h-[1px] w-full ml-4">
         </div>
 
-        <a href="<?= $link; ?>" target="_blank" class="flex justify-center py-2 rounded-md bg-[#FFF4E3] hover:bg-[#f7ead5]">
-          <div class="mr-2"><img src="<?php echo base_url(); ?>src/images/google.png" alt="" class="w-[83%]"></div>
-          <div>Sign in with Google</div>
-        </a>
       </form>
+
+      <div id="g_id_onload" data-client_id="68235445122-vho58k8ute13dv50g1s2m8jbcc5ufga5.apps.googleusercontent.com" data-context="signin" data-ux_mode="popup" data-login_uri="http://localhost:8080/kb/login" data-itp_support="true"></div>
+
+      <div class="g_id_signin flex justify-center" data-type="standard" data-shape="rectangular" data-theme="filled_blue" data-text="signin_with" data-size="large" data-locale="en" data-logo_alignment="left"></div>
     </div>
   </div>
-
+  <script src="https://accounts.google.com/gsi/client" async></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="<?php echo base_url(); ?>/src/js/script.js"></script>
 </body>

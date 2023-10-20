@@ -2,7 +2,6 @@
 
 <?php echo $this->section('content'); ?>
 <section id="main">
-
     <div id="faq" class="flex-col justify-center items-center min-h-[40vh] lg:min-h-[80vh] sm:min-h-[70vh] md:min-h-[80vh] 2xl:min-h-[71vh]">
         <img src="<?php echo base_url(); ?>src/images/waves-hero.png" class="w-full h-[38rem] md:h-[49rem] sm:h-[40rem] lg:h-[49rem] 2xl:h-[62rem] object-cover absolute z-[-1] top-0 2xl:-top-20" alt="">
         <div class="mt-12">
