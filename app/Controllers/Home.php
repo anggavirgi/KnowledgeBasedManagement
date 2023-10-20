@@ -195,6 +195,11 @@ class Home extends BaseController
     {
         if (logged_in()) {
             $project =  $this->projectModel->find(user()->id_project);
+            if ($project === null) {
+                $project = [
+                    'name_project' => 'virtusee'
+                ];
+            }
         } else {
             $project = "";
         }
@@ -296,12 +301,15 @@ class Home extends BaseController
         }
         $file_message = session('errors.file');
         $content = $this->db->table('content a')
-            ->select('a.*, b.id_project AS id_project, c.name_project AS name_project, d.name_category AS name_category, e.name_subcategory AS name_subcategory')
+            ->select('a.*, 
+        CASE WHEN b.id_project = 0 THEN "virtusee" ELSE c.name_project END AS name_project, 
+        d.name_category AS name_category, e.name_subcategory AS name_subcategory', FALSE)
             ->join('article b', 'a.id = b.id_content')
-            ->join('project c', 'b.id_project = c.id')
+            ->join('project c', 'b.id_project = c.id', 'left')
             ->join('categories d', 'a.id_category = d.id')
             ->join('sub_category e', 'a.id_sub_category = e.id')
             ->where('b.id_project', user()->id_project)
+            ->where('visibility', 'open')
             ->get()
             ->getResultArray();
         $data = [
