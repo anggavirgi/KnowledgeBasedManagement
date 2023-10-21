@@ -60,6 +60,25 @@ $(document).ready(function () {
     }
   }
   // ===========================================================================
+
+
+
+  // ======================== Dropdown Condition Article =======================
+  $(".dropdown-button").click(function() {
+    const dropdownId = $(this).data("collapse-toggle");
+    const dropdown = $("#" + dropdownId);
+
+    // Change the SVG icon for the specific button that was clicked
+    const dropdownIcon = $(this).find(".dropdown-icon");
+    if (dropdown.hasClass("hidden")) {
+        // Dropdown is collapsed
+        dropdownIcon.html('<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />');
+    } else {
+        // Dropdown is expanded
+        dropdownIcon.html('<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 5 4-4 4 4" />');
+    }
+  });
+  // ===========================================================================
   
 
 
@@ -84,7 +103,7 @@ $(document).ready(function () {
     $(id).slideToggle();
   });
   // ===========================================================================
-
+  
 
 
   // ======================== Dropdown Condition Article =======================
@@ -128,8 +147,9 @@ $(document).ready(function () {
      }
   });
 
+  
   // Handle subcategory link clicks when in detail article page
-  if (window.location.href.indexOf("http://localhost:8080/kb/generalarticle/generalarticledetail") === -1) {
+  if (window.location.pathname  !== '/kb/generalarticle/generalarticledetail') {
     $('.subcategory-link').on('click', function (e) {
       e.preventDefault();
       $('.subcategory-link').removeClass('text-sky-700');
@@ -137,15 +157,21 @@ $(document).ready(function () {
       const subcategory = $(this).data('subcategory');
       $(this).addClass('text-sky-700');
 
-      updateContent(category, subcategory);
-      const newUrl = 'http://localhost:8080/kb/generalarticle?category=' + category + '&subcategory=' + subcategory;
-      history.pushState({}, '', newUrl);
+      const origin = window.location.origin; // Get the origin (protocol, hostname, and port)
+      const pathname = window.location.pathname; // Get the pathname (path and filename)
+      const search = window.location.search; // Get the search part (query parameters)
+      const fullURL = origin + pathname + search; // Combine them to get the full URL
+      
+      updateContent(category, subcategory, origin, pathname, search);
+      
+      // const newUrl = 'http://localhost:8080/kb/generalarticle?category=' + category + '&subcategory=' + subcategory;
+      history.pushState({}, '', fullURL);
     });
 
-    function updateContent(category, subcategory) {
+    function updateContent(category, subcategory, origin, pathname, search) {
         $.ajax({
             type: 'GET', 
-            url: 'http://localhost:8080/kb/generalarticle?cateogry='+category+'&subcategory='+subcategory,
+            url: origin + pathname + search,
             data: { category: category, subcategory: subcategory },
             success: function (response) {
                 var tempElement = document.createElement('div');
@@ -171,7 +197,7 @@ $(document).ready(function () {
   
 
 
-  // ======================= Update Attribute Content Aja x=====================
+  // ======================= Update Attribute Content Ajax =====================
   // Update Content Views
   $('.article-link').on('click', function () {
     const articleId = $(this).data('article-id');
@@ -369,7 +395,7 @@ $(document).ready(function () {
 
   // ==================== Sidebar Toggle Expand Mobile View ====================
   var toggleClose = `
-  <button type="button" data-drawer-hide="drawer-disabled-backdrop" aria-controls="drawer-disabled-backdrop" class="text-white bg-main rounded-lg text-sm w-14 h-10 absolute top-0 -right-12 inline-flex items-center justify-center">
+  <button type="button" data-drawer-hide="drawer-disabled-backdrop" aria-controls="drawer-disabled-backdrop" class="text-white bg-main rounded-lg text-sm w-14 h-10 fixed top-[5rem] right-[6rem] inline-flex items-center justify-center">
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-white">
   <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
   </svg>
@@ -379,6 +405,7 @@ $(document).ready(function () {
   $("button[data-drawer-show='drawer-disabled-backdrop']").click(function () {
     // Append the button to the aside element
     $('#drawer-disabled-backdrop').append(toggleClose);
+    $('body').removeClass('overflow-hidden');
   });
   const aside = $('#drawer-disabled-backdrop');
   $(aside).on('click', "button[data-drawer-hide='drawer-disabled-backdrop']", function () {

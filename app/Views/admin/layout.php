@@ -120,7 +120,7 @@
       .then(editor => {})
       .catch((error) => {});
   </script>
-  <script>
+  <!-- <script>
     $(document).ready(function() {
       $('#date-range-picker').daterangepicker();
       $('#date-range-picker').on("change", function() {
@@ -129,7 +129,7 @@
       })
 
     });
-  </script>
+  </script> -->
 
 </body>
 
