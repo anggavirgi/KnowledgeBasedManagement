@@ -61,7 +61,6 @@
           <span>OR</span>
           <hr class="h-[1px] w-full ml-4">
         </div>
-
       </form>
 
       <div id="g_id_onload" data-client_id="68235445122-vho58k8ute13dv50g1s2m8jbcc5ufga5.apps.googleusercontent.com" data-context="signin" data-ux_mode="popup" data-login_uri="http://localhost:8080/kb/login" data-itp_support="true"></div>

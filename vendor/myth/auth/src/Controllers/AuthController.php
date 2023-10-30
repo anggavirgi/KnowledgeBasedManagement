@@ -29,6 +29,7 @@ class AuthController extends Controller
     protected $googleClient;
     protected $userDB;
 
+
     public function __construct()
     {
         // Most services in this controller require
@@ -46,11 +47,13 @@ class AuthController extends Controller
         $this->googleClient->setRedirectUri('http://localhost:8080/kb/authorization');
         $this->googleClient->addScope('email');
         $this->googleClient->addScope('profile');
+
     }
 
     //--------------------------------------------------------------------
     // Login/out
     //--------------------------------------------------------------------
+
     /**
      * Displays the login form, or redirects
      * the user to their destination/home if
@@ -65,6 +68,7 @@ class AuthController extends Controller
             unset($_SESSION['redirect_url']);
             return redirect()->to($redirectURL);
         }
+
         // Set a return URL if none is specified
         $_SESSION['redirect_url'] = session('redirect_url') ?? previous_url() ?? site_url('/');
 
@@ -183,7 +187,6 @@ class AuthController extends Controller
         }
     }
 
-
     /**
      * Attempt to register a new user.
      */
@@ -195,7 +198,6 @@ class AuthController extends Controller
         }
 
         $users = model(UserModel::class);
-
 
         if (session('userprofiles') === null) {
             // Validate basics first since some password rules rely on these fields
@@ -299,7 +301,6 @@ class AuthController extends Controller
             return redirect()->to($redirectURL)->withCookies()->with('message', lang('Auth.loginSuccess'));
         }
     }
-
 
     //--------------------------------------------------------------------
     // Forgot Password

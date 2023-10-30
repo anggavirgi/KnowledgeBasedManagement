@@ -8,7 +8,7 @@
 
             <div class="flex justify-end">
 
-                <div data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="fixed lg:absolute bottom-4 lg:bottom-0 lg:left-16 right-4 lg:right-0 lg:top-32 md:right-8 bg-main text-white drop-shadow-md flex items-center border-2 font-medium text-xs rounded-full px-1 lg:px-3 py-2 w-fit h-fit cursor-pointer">
+                <div data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="fixed lg:absolute bottom-4 lg:bottom-0 lg:left-16 right-4 lg:right-0 lg:top-32 md:right-8 bg-main hover:bg-sky-600 text-white drop-shadow-md flex items-center border-2 font-medium text-xs rounded-full px-1 lg:px-3 py-2 w-fit h-fit cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 md:w-11 lg:w-7 h-8 md:h-9 lg:h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
                     </svg>
@@ -108,19 +108,21 @@
 
 
             <?php foreach ($content as $content) : ?>
-                <div class="pb-3 flex flex-col">
-                    <a href="<?= base_url('kb/personalarticle/personalarticledetail?category=' . $content['name_category'] . '&subcategory=' . $content['name_subcategory'] . '&article=' . $content['slug']) ?>" data-article-id="<?= $content['id']; ?>" class="article-link py-3 font-semibold text-xl text-orange-600"><?= $content['title']; ?></a>
-                    <div class="font-medium text-sm border-b-2 pb-3">
-                        <span><?= $content['name_category']; ?></span>
-                        <span> / </span>
-                        <span><?= $content['name_subcategory']; ?></span>
-                        <span> / </span>
-                        <span><?= $content['name_project']; ?></span>
+                <a href="<?= base_url('kb/personalarticle/personalarticledetail?category=' . $content['name_category'] . '&subcategory=' . $content['name_subcategory'] . '&article=' . $content['slug']) ?>">
+                    <div class="pb-3 flex flex-col px-2 hover:shadow-md hover:shadow-gray-200">
+                        <div data-article-id="<?= $content['id']; ?>" class="article-link pt-3 pb-2 font-semibold text-xl text-orange-600"><?= $content['title']; ?></div>
+                        <div class="font-medium text-sm border-b-2 pb-3">
+                            <span><?= $content['name_category']; ?></span>
+                            <span> / </span>
+                            <span><?= $content['name_subcategory']; ?></span>
+                            <span> / </span>
+                            <span><?= $content['name_project']; ?></span>
+                        </div>
+                        <span class="flex text-ellipsis pt-3 text-sm overflow-hidden text-justify whitespace-nowrap">
+                            <?= $content['content']; ?>
+                        </span>
                     </div>
-                    <span class="text-ellipsis pt-3 text-sm overflow-hidden text-justify whitespace-nowrap">
-                        <?= $content['content']; ?>
-                    </span>
-                </div>
+                </a>
             <?php endforeach; ?>
 
         </div>

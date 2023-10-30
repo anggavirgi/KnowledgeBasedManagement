@@ -33,7 +33,7 @@
             <?php foreach ($category as $category) : ?>
                 <div class="m-3 sm:m-4 lg:m-6 w-1/3 sm:w-1/4 2xl:w-1/6 flex justify-center">
                     <a href="<?php echo base_url() ?>kb/generalarticle?category=<?= $category['name_category']; ?>">
-                        <div class="bg-gray-200 sm:px-[2rem] py-3 rounded-md w-[8rem] h-[5rem] sm:w-[9rem] sm:h-[5rem] md:w-[12rem] md:h-[7rem] flex items-center justify-center cursor-pointer">
+                        <div class="bg-gray-200 hover:bg-gray-300 sm:px-[2rem] py-3 rounded-md w-[8rem] h-[5rem] sm:w-[9rem] sm:h-[5rem] md:w-[12rem] md:h-[7rem] flex items-center justify-center cursor-pointer">
                             <div class="flex-col items-center mb-1 text-center">
                                 <img src="<?php echo base_url() ?>src/images/icon/<?php echo $category['icon'] ?>" alt="" class="mx-auto w-8 h-8 object-cover">
                                 <h4 class="whitespace-nowrap text-sm md:text-md text-center mt-1"><?= $category['name_category']; ?></h4>
@@ -46,35 +46,28 @@
     </div>
 
     <!-- </div> -->
-    <div id="general_question" class="px-10 mt-16 sm:mt-[5rem] md:mt-[10rem] lg:[10rem]">
+    <div id="general_question" class="px-10 mt-10 sm:mt-[5rem] md:mt-[10rem] lg:mt-[12rem]">
         <div class=" w-full mb-2 text-center">
-            <h4 class="text-[#18A8D8] font-bold text-3xl">General Question</h4>
+            <h4 class="text-[#18A8D8] font-bold text-3xl md:text-4xl">Frequently Ask Questions</h4>
         </div>
         <div class="flex justify-center">
             <div class="lg:w-5/12 md:flex hidden">
-                <img src="<?php echo base_url(); ?>src/images/Question.png" alt="Question.png" class="mx-auto w-[30rem] object-cover">
+                <img src="<?php echo base_url(); ?>src/images/Question.png" alt="Question.png" class="mx-auto w-[26rem] object-cover collapsible">
             </div>
             <div id="question" class="mt-7 w-full lg:w-6/12 md:w-10/12 self-center">
                 <?php $count = 1; ?>
                 <?php foreach ($contents as $content) { ?>
-                    <div class="border-solid border-2 border-[#919191] rounded-md p-4 ps-10 mb-3">
-                        <div class="flex justify-between">
-                            <p class="text-md" id="title<?= $count; ?>"><?= $content['title']; ?></p>
-                            <p class="text-xl cursor-pointer collapsible" data-target="collapse<?= $count; ?>" data-title="title<?= $count; ?>">
-                                <i class="bi bi-chevron-down icon"></i>
-                            </p>
+                    <a href="<?= base_url('kb/generalarticle/generalarticledetail?category=' . $content['name_category'] . '&subcategory=' . $content['name_subcategory'] . '&article=' . $content['slug']) ?>">
+                        <div class="py-4 px-5 hover:bg-main hover:text-white text-md rounded font-semibold">
+                            <?php echo $content['title'] ?>
                         </div>
-                        <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse<?= $count; ?>">
-                            <p class="text-[14px] line-clamp-1"><?= strip_tags($content['content']); ?></p>
-                            <a href="<?= base_url('kb/generalarticle/generalarticledetail?category=' . $content['name_category'] . '&subcategory=' . $content['name_subcategory'] . '&article=' . $content['slug']) ?>" class="text-[#18A8D8]"> more... </a>
-                        </div>
-                    </div>
+                    </a>
+                    <hr>
                     <?php
-                    if ($count == 5) {
+                    if ($count == 6) {
                         break;
                     }
                     ?>
-                    <?php $count++ ?>
                 <?php } ?>
             </div>
         </div>
@@ -82,7 +75,7 @@
 
     <div id="customer_complain" class="flex flex-col justify-center items-center w-full bg-[#F8F8F8] pt-12 mt-10 relative">
         <div id="customer_complain" class="mb-2 p-5 w-10/12">
-            <h4 class="font-bold text-4xl text-center mb-10">General Complain User</h4>
+            <h4 class="font-bold text-3xl md:text-4xl text-center mb-10">General Complain User</h4>
             <div class="grid lg:grid-cols-2 md:grid-cols-1 gap-12 gap-y-4">
                 <?php $count_complain = 1; ?>
                 <?php foreach ($complains as $complain) { ?>
@@ -115,7 +108,7 @@
                 <?php } ?>
             </div>
             <p class="text-center mb-10 mt-10">
-                <a href="<?php echo base_url() ?>kb/allcomplain" class="text-white p-3 rounded-[10px] bg-[#18A8D8] font-bold">Read More <i class="bi bi-chevron-double-right"></i></a>
+                <a href="<?php echo base_url() ?>kb/allcomplain" class="text-white p-3 rounded-[10px] bg-[#18A8D8] hover:bg-sky-600 font-bold">Read More <i class="bi bi-chevron-double-right"></i></a>
             </p>
         </div>
         <div class="absolute top-[100%] left-0 right-0 z-0 w-full">
@@ -127,7 +120,7 @@
         <p class="text-[24px] font-medium">Do you have any question?</p>
         <div class="mt-8 whitespace-nowrap">
             <?php if (logged_in()) : ?>
-                <a data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="p-2 py-4 bg-[#FFC700] rounded-[15px] cursor-pointer"><i class="bi bi-envelope-fill "></i> Report a Problem</a>
+                <a data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="p-4 bg-[#FFC700] hover:bg-yellow-500 rounded-[15px] cursor-pointer"><i class="bi bi-envelope-fill "></i> Report a Problem</a>
 
                 <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 bottom-0 z-50 p-4 overflow-x-hidden overflow-y-auto hidden">
                     <!-- Modal content -->
@@ -212,7 +205,7 @@
                     </div>
                 </div>
             <?php else : ?>
-                <a href="/kb/login" class="p-2 py-4 bg-[#FFC700] rounded-[15px] cursor-pointer"><i class="bi bi-envelope-fill "></i> Report a Problem</a>
+                <a href="/kb/login" class="p-4 bg-[#FFC700] hover:bg-yellow-500 rounded-[15px] cursor-pointer"><i class="bi bi-envelope-fill "></i> Report a Problem</a>
             <?php endif; ?>
         </div>
         <?php if (session()->has('success')) : ?>

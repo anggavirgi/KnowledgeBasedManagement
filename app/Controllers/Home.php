@@ -36,6 +36,7 @@ class Home extends BaseController
             ->select('a.*, b.name_category AS name_category, c.name_subcategory AS name_subcategory')
             ->join('categories b', 'a.id_category = b.id')
             ->join('sub_category c', 'a.id_sub_category = c.id')
+            ->where('a.visibility', 'open')
             ->get()
             ->getResultArray();
         if (logged_in()) {
@@ -204,9 +205,10 @@ class Home extends BaseController
         }
 
         $complain = $this->db->table('complains')
-            ->select('*')
-            ->where('id_user', user()->id)
-            ->whereNotIn('status', ['solved'])
+            ->select('complains.*, project.name_project')
+            ->join('project', 'project.id = complains.id_project')
+            ->where('complains.id_user', user()->id)
+            ->whereNotIn('complains.status', ['solved'])
             ->get()
             ->getResultArray();
         $data = [
@@ -273,9 +275,10 @@ class Home extends BaseController
             $project = "";
         }
         $complain = $this->db->table('complains')
-            ->select('*')
-            ->where('id_user', user()->id)
-            ->where('status', 'solved')
+            ->select('complains.*, project.name_project')
+            ->join('project', 'project.id = complains.id_project')
+            ->where('complains.id_user', user()->id)
+            ->where('complains.status', 'solved')
             ->get()
             ->getResultArray();
         $data = [
@@ -392,15 +395,15 @@ class Home extends BaseController
         }
 
         $complain = $this->db->table('complains')
-            ->select('*')
-            ->where('status', 'solved')
-            ->whereNotIn('id_user', [user()->id])
-            ->get()
-            ->getResultArray();
+        ->select('complains.*, project.name_project')
+        ->join('project', 'project.id = complains.id_project')
+        ->where(['visibility' => 'open', 'status' => 'solved'])
+        ->get()
+        ->getResultArray();
         $data = [
             'title' => 'Virtusee | complain',
             'project' => $project,
-            'complain' => $complain
+            'complains' => $complain
         ];
         return view('customer/complaingeneral', $data);
     }

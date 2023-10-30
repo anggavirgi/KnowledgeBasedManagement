@@ -8,7 +8,7 @@
 
             <div class="flex justify-end">
 
-                <div data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="fixed lg:absolute bottom-4 lg:bottom-0 lg:left-16 right-4 lg:right-0 lg:top-32 md:right-8 bg-main text-white drop-shadow-md flex items-center border-2 font-medium text-xs rounded-full px-1 lg:px-3 py-2 w-fit h-fit cursor-pointer">
+                <div data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="fixed lg:absolute bottom-4 lg:bottom-0 lg:left-16 right-4 lg:right-0 lg:top-32 md:right-8 bg-main hover:bg-sky-600 text-white drop-shadow-md flex items-center border-2 font-medium text-xs rounded-full px-1 lg:px-3 py-2 w-fit h-fit cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 md:w-11 lg:w-7 h-8 md:h-9 lg:h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
                     </svg>
@@ -107,22 +107,28 @@
             <?php endif; ?>
 
             <?php foreach ($complain as $complain) : ?>
-                <div class="pb-10 flex flex-col hover:bg-slate-100">
-                    <span class="border-b-2 pb-3 border-slate-200 font-semibold text-xl"><?= date("F Y", strtotime($complain['created_at'])); ?></span>
-                    <div class="flex">
-                        <a href="<?= base_url('kb/complain/reply?complainId=' . $complain['slug']) ?>" class="py-3 font-semibold text-xl text-orange-600"><?= $complain['subject']; ?></a>
-                        <?php if ($complain['status'] === 'pending') : ?>
-                            <div class="font-medium ms-3 text-[10px] text-pending-status-text bg-pending-status w-fit h-fit self-center py-1 px-4 appearance-none cursor-pointer rounded-[15px] focus:outline-none focus:border-blue-500"><?= $complain['status']; ?></div>
-                        <?php elseif ($complain['status'] === 'progress') : ?>
-                            <div class="font-medium ms-3 text-[10px] text-progress-status-text bg-progress-status w-fit h-fit self-center py-1 px-4 appearance-none cursor-pointer rounded-[15px] focus:outline-none focus:border-blue-500"><?= $complain['status']; ?></div>
-                        <?php else : ?>
-                            <div class="font-medium ms-3 text-[10px] text-solved-status-text bg-solved-status w-fit h-fit self-center py-1 px-4 appearance-none cursor-pointer rounded-[15px] focus:outline-none focus:border-blue-500"><?= $complain['status']; ?></div>
-                        <?php endif; ?>
+                <a href="<?= base_url('kb/complain/reply?complainId=' . $complain['slug']) ?>">
+                    <div class="pb-3 flex flex-col mb-4 hover:shadow-md hover:shadow-gray-200 px-2">
+                        <div class="flex gap-2 items-center pb-1">
+                            <div class="py-2 pb-1 font-semibold text-xl text-orange-600"><?php echo $complain['subject'] ?></div>
+                            <?php if ($complain['status'] === 'pending') : ?>
+                                <div class="font-medium ms-3 text-[10px] text-pending-status-text bg-pending-status w-fit h-fit self-center py-1 px-4 appearance-none cursor-pointer rounded-[15px] focus:outline-none focus:border-blue-500"><?= $complain['status']; ?></div>
+                            <?php elseif ($complain['status'] === 'progress') : ?>
+                                <div class="font-medium ms-3 text-[10px] text-progress-status-text bg-progress-status w-fit h-fit self-center py-1 px-4 appearance-none cursor-pointer rounded-[15px] focus:outline-none focus:border-blue-500"><?= $complain['status']; ?></div>
+                            <?php else : ?>
+                                <div class="font-medium ms-3 text-[10px] text-solved-status-text bg-solved-status w-fit h-fit self-center py-1 px-4 appearance-none cursor-pointer rounded-[15px] focus:outline-none focus:border-blue-500"><?= $complain['status']; ?></div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="flex gap-3 text-sm font-semibold">
+                            <span><?= date("F Y", strtotime($complain['created_at'])); ?></span>
+                            <span><?php echo $complain['name_project'] ?></span>
+                        </div>
+                        <hr class="mb-2 mt-3">
+                        <span class="text-ellipsis text-sm overflow-hidden text-justify whitespace-nowrap">
+                            <?php echo $complain['description'] ?>
+                        </span>
                     </div>
-                    <span class="text-ellipsis pt-3 text-sm overflow-hidden text-justify whitespace-nowrap">
-                        <?= $complain['description']; ?>
-                    </span>
-                </div>
+                </a>
             <?php endforeach; ?>
 
         </div>

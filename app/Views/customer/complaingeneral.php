@@ -7,15 +7,15 @@
         <div class="m-7 md:mx-12 mb-20">
 
             <div class="flex justify-end">
-                <?php if (logged_in()) : ?>
-                    <a data-modal-target="authentication-modal" data-modal-toggle="authentication-modal">
-                        <div class="fixed lg:absolute bottom-4 lg:bottom-0 lg:left-16 right-4 lg:right-0 lg:top-32 md:right-8 bg-main text-white drop-shadow-md flex items-center border-2 font-medium text-xs rounded-full px-1 lg:px-3 py-2 w-fit h-fit cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 md:w-11 lg:w-7 h-8 md:h-9 lg:h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
-                            </svg>
-                            <p class="hidden lg:block">Make a Question</p>
-                        </div>
-                    </a>
+            <?php if (logged_in()) : ?>
+                <a data-modal-target="authentication-modal" data-modal-toggle="authentication-modal">
+                  <div class="fixed lg:absolute bottom-4 lg:bottom-0 lg:left-16 right-4 lg:right-0 lg:top-32 md:right-8 bg-main hover:bg-sky-600 text-white drop-shadow-md flex items-center border-2 font-medium text-xs rounded-full px-1 lg:px-3 py-2 w-fit h-fit cursor-pointer">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 md:w-11 lg:w-7 h-8 md:h-9 lg:h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+                      </svg>
+                      <p class="hidden lg:block">Make a Question</p>
+                  </div>
+                </a>
 
                     <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 bottom-0 z-50 p-4 overflow-x-hidden overflow-y-auto hidden">
                         <!-- Modal content -->
@@ -118,15 +118,22 @@
                 <div class="flash-error" data-flashmessage="<?php echo session('error') ?>"></div>
             <?php endif; ?>
 
-            <?php foreach ($complain as $complain) : ?>
-                <div class="pb-3 flex flex-col hover:bg-slate-100">
-                    <span class=" border-slate-200 font-semibold text-xl"><?= date("F Y", strtotime($complain['created_at'])); ?></span>
-                    <a href="<?= base_url('kb/complain/reply?complainId=' . $complain['slug']) ?>" class="py-3 border-b-2 pb-3 font-semibold text-xl text-orange-600"><?= $complain['subject']; ?></a>
-                    <span class="text-ellipsis pt-3 text-sm overflow-hidden text-justify whitespace-nowrap">
-                        <?= $complain['description']; ?>
-                    </span>
-                </div>
-            <?php endforeach; ?>
+            <?php foreach ($complains as $complain){ ?>
+                <a href="<?= base_url('kb/complain/reply?complainId=' . $complain['slug']) ?>">
+                    <div class="pb-3 flex flex-col mb-4 hover:shadow-md hover:shadow-gray-200 px-2">
+                        <div class="py-2 pb-2 font-semibold text-xl text-orange-600"><?php echo $complain['subject'] ?></div>
+                        <div class="flex gap-3 text-sm font-semibold">
+                            <span><?= date("F Y", strtotime($complain['created_at'])); ?></span>
+                            <span><?php echo $complain['name_project'] ?></span>
+                        </div>
+                        <hr class="mb-2 mt-3">
+                        <span class="text-ellipsis text-sm overflow-hidden text-justify whitespace-nowrap">
+                            <?php echo $complain['description'] ?>
+                        </span>
+                    </div>
+                </a>
+            <?php } ?>
+
         </div>
     </div>
 </section>
