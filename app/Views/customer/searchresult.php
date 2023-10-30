@@ -6,7 +6,7 @@
 
         <div class="m-7 md:mx-12 mb-20">
             <h2 class="font-bold text-2xl mb-5">Search Result for "<?php echo $keyword; ?>"</h2>
-            <?php if($contents != null){ ?>
+            <?php if ($contents != null) { ?>
                 <div class="flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="currentColor" class="w-4 h-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
@@ -31,7 +31,7 @@
                     </a>
                 <?php endforeach; ?>
             <?php } ?>
-            <?php if($complains != null){ ?>
+            <?php if ($complains != null) { ?>
                 <div class="flex items-center gap-2 mt-5">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="currentColor" class="w-4 h-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
