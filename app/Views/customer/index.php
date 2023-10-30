@@ -139,18 +139,22 @@
                                 <script>
                                     var fileMessage = <?php echo json_encode(session('errors')); ?>;
                                 </script>
-                                <div>
-                                    <label for="username" class="block mb-2 text-xs font-medium text-form">username</label>
-                                    <input type="username" name="username" id="username" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="Username" value="<?= user()->username; ?>" required readonly>
+                                <div class="flex gap-2">
+                                    <div class="w-full">
+                                        <label for="username" class="block mb-2 text-xs font-medium text-form">username</label>
+                                        <input type="username" name="username" id="username" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="Username" value="<?= user()->username; ?>" required readonly>
+                                    </div>
+                                    <div class="w-full">
+                                        <label for="email" class="block mb-2 text-xs font-medium text-form">Your email</label>
+                                        <input type="email" name="email" id="email" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" value="<?= user()->email; ?>" required readonly>
+                                    </div>
                                 </div>
+
                                 <div>
                                     <label for="subject" class="block mb-2 text-xs font-medium text-form">subject <span class="text-red-600">*</span></label>
                                     <input type="subject" name="subject" id="subject" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="Subject" value="<?= old('subject'); ?>" required>
                                 </div>
-                                <div>
-                                    <label for="email" class="block mb-2 text-xs font-medium text-form">Your email</label>
-                                    <input type="email" name="email" id="email" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" value="<?= user()->email; ?>" required readonly>
-                                </div>
+
                                 <div>
                                     <label for="method" class="block mb-2 text-xs font-medium text-form">Method</label>
                                     <select id="method" name="method" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main <?php if (session('errors.method')) : ?>border-red-600<?php endif ?>">

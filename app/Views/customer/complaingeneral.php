@@ -7,15 +7,15 @@
         <div class="m-7 md:mx-12 mb-20">
 
             <div class="flex justify-end">
-            <?php if (logged_in()) : ?>
-                <a data-modal-target="authentication-modal" data-modal-toggle="authentication-modal">
-                  <div class="fixed lg:absolute bottom-4 lg:bottom-0 lg:left-16 right-4 lg:right-0 lg:top-32 md:right-8 bg-main hover:bg-sky-600 text-white drop-shadow-md flex items-center border-2 font-medium text-xs rounded-full px-1 lg:px-3 py-2 w-fit h-fit cursor-pointer">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 md:w-11 lg:w-7 h-8 md:h-9 lg:h-6">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
-                      </svg>
-                      <p class="hidden lg:block">Make a Question</p>
-                  </div>
-                </a>
+                <?php if (logged_in()) : ?>
+                    <a data-modal-target="authentication-modal" data-modal-toggle="authentication-modal">
+                        <div class="fixed lg:absolute bottom-4 lg:bottom-0 lg:left-16 right-4 lg:right-0 lg:top-32 md:right-8 bg-main hover:bg-sky-600 text-white drop-shadow-md flex items-center border-2 font-medium text-xs rounded-full px-1 lg:px-3 py-2 w-fit h-fit cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 md:w-11 lg:w-7 h-8 md:h-9 lg:h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+                            </svg>
+                            <p class="hidden lg:block">Make a Question</p>
+                        </div>
+                    </a>
 
                     <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 bottom-0 z-50 p-4 overflow-x-hidden overflow-y-auto hidden">
                         <!-- Modal content -->
@@ -34,18 +34,21 @@
                                     <script>
                                         var fileMessage = <?php echo json_encode(session('errors')); ?>;
                                     </script>
-                                    <div>
-                                        <label for="username" class="block mb-2 text-xs font-medium text-form">username</label>
-                                        <input type="username" name="username" id="username" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="Username" value="<?= user()->username; ?>" required readonly>
+                                    <div class="flex gap-2">
+                                        <div class="w-full">
+                                            <label for="username" class="block mb-2 text-xs font-medium text-form">username</label>
+                                            <input type="username" name="username" id="username" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="Username" value="<?= user()->username; ?>" required readonly>
+                                        </div>
+                                        <div class="w-full">
+                                            <label for="email" class="block mb-2 text-xs font-medium text-form">Your email</label>
+                                            <input type="email" name="email" id="email" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" value="<?= user()->email; ?>" required readonly>
+                                        </div>
                                     </div>
                                     <div>
                                         <label for="subject" class="block mb-2 text-xs font-medium text-form">subject <span class="text-red-600">*</span></label>
                                         <input type="subject" name="subject" id="subject" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="Subject" value="<?= old('subject'); ?>" required>
                                     </div>
-                                    <div>
-                                        <label for="email" class="block mb-2 text-xs font-medium text-form">Your email</label>
-                                        <input type="email" name="email" id="email" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" value="<?= user()->email; ?>" required readonly>
-                                    </div>
+
                                     <div>
                                         <label for="method" class="block mb-2 text-xs font-medium text-form">Method</label>
                                         <select id="method" name="method" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main <?php if (session('errors.method')) : ?>border-red-600<?php endif ?>">
@@ -118,7 +121,7 @@
                 <div class="flash-error" data-flashmessage="<?php echo session('error') ?>"></div>
             <?php endif; ?>
 
-            <?php foreach ($complains as $complain){ ?>
+            <?php foreach ($complains as $complain) { ?>
                 <a href="<?= base_url('kb/complain/reply?complainId=' . $complain['slug']) ?>">
                     <div class="pb-3 flex flex-col mb-4 hover:shadow-md hover:shadow-gray-200 px-2">
                         <div class="py-2 pb-2 font-semibold text-xl text-orange-600"><?php echo $complain['subject'] ?></div>
