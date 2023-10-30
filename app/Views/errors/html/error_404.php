@@ -13,7 +13,9 @@
 <body>
     <section class="navbar bg-white py-5 sm:px-[100px] px-[10px] drop-shadow-md">
         <div class="flex justify-between">
-            <img src="<?php echo base_url(); ?>src/images/logo.png" alt="" class="nav-brand w-40">
+            <a href="<?php echo base_url() ?>">
+                <img src="<?php echo base_url(); ?>src/images/logo.png" alt="" class="nav-brand w-40">
+            </a>
             <div class="buttons grid grid-cols-2 gap-2">
                 <a href="/kb/login" class="p-2 whitespace-nowrap">Sign In</a>
                 <a href="/kb/register" class="bg-main text-white rounded-md p-2 whitespace-nowrap">Sign Up</a>
