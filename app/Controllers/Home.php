@@ -31,7 +31,7 @@ class Home extends BaseController
     public function index()
     {
         $category =  $this->categoryModel->findAll();
-        $file_message = session('errors.file');
+
         $content = $this->db->table('content a')
             ->select('a.*, b.name_category AS name_category, c.name_subcategory AS name_subcategory')
             ->join('categories b', 'a.id_category = b.id')
@@ -41,6 +41,11 @@ class Home extends BaseController
             ->getResultArray();
         if (logged_in()) {
             $project =  $this->projectModel->find(user()->id_project);
+            if ($project === null) {
+                $project = [
+                    'name_project' => 'virtusee'
+                ];
+            }
         } else {
             $project = "";
         }
@@ -50,10 +55,8 @@ class Home extends BaseController
             ->where(['complains.visibility' => 'open', 'complains.status' => 'solved'])
             ->get()
             ->getResultArray();
-
         $data = [
             'title' => 'Virtusee | Knowledge Based',
-            'file_message' => $file_message,
             'category' => $category,
             'contents' => $content,
             'complains' => $complain,
@@ -78,6 +81,11 @@ class Home extends BaseController
             ->getResultArray();
         if (logged_in()) {
             $project =  $this->projectModel->find(user()->id_project);
+            if ($project === null) {
+                $project = [
+                    'name_project' => 'virtusee'
+                ];
+            }
         } else {
             $project = "";
         }
@@ -111,6 +119,11 @@ class Home extends BaseController
             ->getRow();
         if (logged_in()) {
             $project =  $this->projectModel->find(user()->id_project);
+            if ($project === null) {
+                $project = [
+                    'name_project' => 'virtusee'
+                ];
+            }
         } else {
             $project = "";
         }
@@ -182,10 +195,15 @@ class Home extends BaseController
     {
         if (logged_in()) {
             $project =  $this->projectModel->find(user()->id_project);
+            if ($project === null) {
+                $project = [
+                    'name_project' => 'virtusee'
+                ];
+            }
         } else {
             $project = "";
         }
-        $file_message = session('errors.file');
+
         $complain = $this->db->table('complains')
             ->select('complains.*, project.name_project')
             ->join('project', 'project.id = complains.id_project')
@@ -195,7 +213,6 @@ class Home extends BaseController
             ->getResultArray();
         $data = [
             'title' => 'Virtusee | complain',
-            'file_message' => $file_message,
             'project' => $project,
             'complain' => $complain
         ];
@@ -206,7 +223,8 @@ class Home extends BaseController
     {
         $rules = [
             'message'      => 'required|alpha_numeric_space',
-            'file'          => 'uploaded[file]|max_size[file,1024]|is_image[file]|mime_in[file,image/jpg,image/jpeg,image/png,image/svg,image/webp]'
+            'file'          => 'uploaded[file]|max_size[file,1024]|is_image[file]|mime_in[file,image/jpg,image/jpeg,image/png,image/svg,image/webp]',
+            'method'          => 'required',
         ];
 
         if (!$this->validate($rules)) {
@@ -217,6 +235,7 @@ class Home extends BaseController
             $email = $this->request->getVar('email');
             $subject = $this->request->getVar('subject');
             $message = $this->request->getVar('message');
+            $method = $this->request->getVar('method');
 
             $picture_file = $this->request->getFile('file');
             $picture_name = $picture_file->getRandomName();
@@ -230,6 +249,7 @@ class Home extends BaseController
                 'email' => $email,
                 'subject' => $subject,
                 'description' => $message,
+                'method' => $method,
                 'file'  => $picture_name,
                 'slug' => $slug
             ];
@@ -243,9 +263,14 @@ class Home extends BaseController
 
     public function history()
     {
-        $file_message = session('errors.file');
+
         if (logged_in()) {
             $project =  $this->projectModel->find(user()->id_project);
+            if ($project === null) {
+                $project = [
+                    'name_project' => 'virtusee'
+                ];
+            }
         } else {
             $project = "";
         }
@@ -258,7 +283,6 @@ class Home extends BaseController
             ->getResultArray();
         $data = [
             'title' => 'Virtusee | history complain',
-            'file_message' => $file_message,
             'project' => $project,
             'complain' => $complain
 
@@ -270,22 +294,29 @@ class Home extends BaseController
     {
         if (logged_in()) {
             $project =  $this->projectModel->find(user()->id_project);
+            if ($project === null) {
+                $project = [
+                    'name_project' => 'virtusee'
+                ];
+            }
         } else {
             $project = "";
         }
-        $file_message = session('errors.file');
+
         $content = $this->db->table('content a')
-            ->select('a.*, b.id_project AS id_project, c.name_project AS name_project, d.name_category AS name_category, e.name_subcategory AS name_subcategory')
+            ->select('a.*, 
+        CASE WHEN b.id_project = 0 THEN "virtusee" ELSE c.name_project END AS name_project, 
+        d.name_category AS name_category, e.name_subcategory AS name_subcategory', FALSE)
             ->join('article b', 'a.id = b.id_content')
-            ->join('project c', 'b.id_project = c.id')
+            ->join('project c', 'b.id_project = c.id', 'left')
             ->join('categories d', 'a.id_category = d.id')
             ->join('sub_category e', 'a.id_sub_category = e.id')
             ->where('b.id_project', user()->id_project)
+            ->where('visibility', 'open')
             ->get()
             ->getResultArray();
         $data = [
             'title' => 'Virtusee | article',
-            'file_message' => $file_message,
             'project' => $project,
             'content' => $content
         ];
@@ -296,6 +327,11 @@ class Home extends BaseController
     {
         if (logged_in()) {
             $project =  $this->projectModel->find(user()->id_project);
+            if ($project === null) {
+                $project = [
+                    'name_project' => 'virtusee'
+                ];
+            }
         } else {
             $project = "";
         }
@@ -330,6 +366,11 @@ class Home extends BaseController
         $slug = $this->request->getVar('complainId');
         if (logged_in()) {
             $project =  $this->projectModel->find(user()->id_project);
+            if ($project === null) {
+                $project = [
+                    'name_project' => 'virtusee'
+                ];
+            }
         } else {
             $project = "";
         }
@@ -344,10 +385,15 @@ class Home extends BaseController
     {
         if (logged_in()) {
             $project =  $this->projectModel->find(user()->id_project);
+            if ($project === null) {
+                $project = [
+                    'name_project' => 'virtusee'
+                ];
+            }
         } else {
             $project = "";
         }
-        $file_message = session('errors.file');
+
         $complain = $this->db->table('complains')
         ->select('complains.*, project.name_project')
         ->join('project', 'project.id = complains.id_project')
@@ -356,7 +402,6 @@ class Home extends BaseController
         ->getResultArray();
         $data = [
             'title' => 'Virtusee | complain',
-            'file_message' => $file_message,
             'project' => $project,
             'complains' => $complain
         ];
@@ -366,39 +411,19 @@ class Home extends BaseController
     public function searchresult()
     {
         $search = $this->request->getVar('search');
-
-        $content = $this->db->table('content a')
-        ->select('*')
-        ->join('article b', 'a.id = b.id_content')
-        ->join('project c', 'b.id_project = c.id')
-        ->join('categories d', 'a.id_category = d.id')
-        ->join('sub_category e', 'a.id_sub_category = e.id')
-        ->like('a.title', $search, 'both')
-        ->where('a.visibility', 'open')
-        ->get()
-        ->getResultArray();
-
-        $complain = $this->db->table('complains')
-        ->select('complains.*, project.name_project')
-        ->join('project', 'project.id = complains.id_project')
-        ->like('complains.subject', $search, 'both')
-        ->where(['complains.visibility' => 'open', 'complains.status' => 'solved'])
-        ->get()
-        ->getResultArray();
-
-        if (logged_in()) {
-            $project =  $this->projectModel->find(user()->id_project);
-        } else {
-            $project = "";
-        }
-        
-        $data = [
-            'title' => 'Virtusee | complain',
-            'contents' => $content,
-            'complains' => $complain,
-            'project' => $project,
-            'keyword' => $search
-        ];
-        return view('customer/searchresult', $data);
+        // if (logged_in()) {
+        //     $project =  $this->projectModel->find(user()->id_project);
+        // } else {
+        //     $project = "";
+        // }
+        // 
+        // $complain = $this->complainModel->findAll();
+        // $data = [
+        //     'title' => 'Virtusee | complain',
+        //     'file_message' => $file_message,
+        //     'project' => $project,
+        //     'complain' => $complain
+        // ];
+        // return view('customer/searchresult', $data);
     }
 }

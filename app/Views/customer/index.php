@@ -2,7 +2,6 @@
 
 <?php echo $this->section('content'); ?>
 <section id="main">
-
     <div id="faq" class="flex-col justify-center items-center min-h-[40vh] lg:min-h-[80vh] sm:min-h-[70vh] md:min-h-[80vh] 2xl:min-h-[71vh]">
         <img src="<?php echo base_url(); ?>src/images/waves-hero.png" class="w-full h-[38rem] md:h-[49rem] sm:h-[40rem] lg:h-[49rem] 2xl:h-[62rem] object-cover absolute z-[-1] top-0 2xl:-top-20" alt="">
         <div class="mt-12">
@@ -138,7 +137,7 @@
                                 <input type="hidden" name="id_user" value="<?= user()->id; ?>">
                                 <input type="hidden" name="id_project" value="<?= user()->id_project; ?>">
                                 <script>
-                                    var fileMessage = <?php echo json_encode($file_message); ?>;
+                                    var fileMessage = <?php echo json_encode(session('errors')); ?>;
                                 </script>
                                 <div>
                                     <label for="username" class="block mb-2 text-xs font-medium text-form">username</label>
@@ -151,6 +150,18 @@
                                 <div>
                                     <label for="email" class="block mb-2 text-xs font-medium text-form">Your email</label>
                                     <input type="email" name="email" id="email" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" value="<?= user()->email; ?>" required readonly>
+                                </div>
+                                <div>
+                                    <label for="method" class="block mb-2 text-xs font-medium text-form">Method</label>
+                                    <select id="method" name="method" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main <?php if (session('errors.method')) : ?>border-red-600<?php endif ?>">
+                                        <option value="">Choose a method</option>
+                                        <option value="request" <?php if (old('method') == "request") {
+                                                                    echo "selected";
+                                                                } ?>>Request</option>
+                                        <option value="complain" <?php if (old('method') == "complain") {
+                                                                        echo "selected";
+                                                                    } ?>>Complain</option>
+                                    </select>
                                 </div>
                                 <div class="flex gap-2">
                                     <?php if (user()->id_project !== 0) : ?>

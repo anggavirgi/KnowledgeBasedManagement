@@ -1,5 +1,17 @@
 
-<div style="text-align: center;">
+<p>Someone requested a password reset at this email address for <?= site_url() ?>.</p>
+
+<p>To reset the password use this code or URL and follow the instructions.</p>
+
+<p>Your Code: <?= $hash ?></p>
+
+<p>Visit the <a href="<?= url_to('reset-password') . '?token=' . $hash ?>">Reset Form</a>.</p>
+
+<br>
+
+<p>If you did not request a password reset, you can safely ignore this email.</p>
+
+<!-- <div style="text-align: center;">
     <figure>
         <img src="<?php echo base_url(); ?>src/images/logo-vsee.png" alt="">
     </figure>
@@ -32,4 +44,4 @@
             in touch with us.
         </div>
     </div>
-</div>
+</div> -->
