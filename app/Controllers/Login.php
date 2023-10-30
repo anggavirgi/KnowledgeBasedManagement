@@ -24,8 +24,14 @@ class Login extends BaseController
 
   public function proses()
   {
+    // $ch = curl_init();
+    // d(curl_setopt($ch, CURLOPT_URL, 'https://example.com'));
+    // d(curl_setopt($ch, CURLOPT_RETURNTRANSFER, true));
+
+    // // Set the path to the CA bundle file for SSL certificate verification
+    // d(curl_setopt($ch, CURLOPT_CAINFO, 'path/to/ca-bundle.crt'));
+    // dd($this->googleClient);
     $token = $this->googleClient->fetchAccessTokenWithAuthCode($this->request->getVar('code'));
-    dd($token);
     if (!isset($token['error'])) {
       $this->googleClient->setAccessToken($token['access_token']);
       $googleService = new \Google_Service_Oauth2($this->googleClient);

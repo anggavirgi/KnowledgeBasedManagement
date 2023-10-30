@@ -8,6 +8,7 @@ use Myth\Auth\Config\Auth as AuthConfig;
 use Myth\Auth\Entities\User;
 use Myth\Auth\Models\UserModel;
 use App\Models\Admin\ProjectModel;
+use Google_Client;
 
 class AuthController extends Controller
 {
@@ -36,6 +37,12 @@ class AuthController extends Controller
         $this->auth   = service('authentication');
         $this->projectModel = new ProjectModel();
         $this->user = $this->auth->user();
+        $this->googleClient = new Google_Client();
+        $this->googleClient->setClientId('68235445122-s9tfb97u83qbr80v023b9qriurtuquds.apps.googleusercontent.com');
+        $this->googleClient->setClientSecret('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');
+        $this->googleClient->setRedirectUri('http://localhost:8080/kb/proses');
+        $this->googleClient->addScope('email');
+        $this->googleClient->addScope('profile');
     }
 
     //--------------------------------------------------------------------
@@ -61,7 +68,7 @@ class AuthController extends Controller
         // Set a return URL if none is specified
         $_SESSION['redirect_url'] = session('redirect_url') ?? previous_url() ?? site_url('/');
 
-        return $this->_render($this->config->views['login'], ['config' => $this->config, 'title' => 'Virtusee | Login']);
+        return $this->_render($this->config->views['login'], ['config' => $this->config, 'title' => 'Virtusee | Login', 'link' => $this->googleClient->createAuthUrl()]);
     }
 
     /**
