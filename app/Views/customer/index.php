@@ -13,7 +13,7 @@
                 </div>
             </h1>
             <div class="flex justify-center" id="search">
-                <form action="<?php echo base_url() ?>kb/search" method="post" class="relative">
+                <form action="<?php echo base_url() ?>kb/search" method="get" class="relative">
                     <input type="text" name="search" id="search" placeholder="Search Your question, answer, etc" class="sm:w-[30rem] w-[20rem]  mb-2 px-7 mt-[30px] py-3 border border-gray-400 outline-main rounded-md">
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search absolute sm:left-[450px] left-[295px] top-[47px] cursor-pointer text-[#919191]" viewBox="0 0 16 16">

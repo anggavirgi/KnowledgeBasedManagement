@@ -50,7 +50,7 @@ $routes->group('kb', static function ($routes) {
     $routes->get('personalarticle/personalarticledetail', 'Home::personalarticledetail');
     $routes->get('complain/reply', 'Home::reply');
     $routes->get('allcomplain', 'Home::allcomplain');
-    $routes->post('search', 'Home::searchresult');
+    $routes->get('search', 'Home::searchresult');
 });
 
 // ROUTE ADMIN
