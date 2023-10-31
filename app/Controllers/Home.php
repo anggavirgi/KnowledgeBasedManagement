@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\Admin\Complain;
 use App\Models\Admin\ComplainModel;
+use App\Models\Admin\ComplainReplyModel;
 use App\Models\Admin\CategoryModel;
 use App\Models\Admin\SubCategoryModel;
 use App\Models\Admin\ContentModel;
@@ -12,6 +13,7 @@ use App\Models\Admin\projectModel;
 class Home extends BaseController
 {
     protected $complainModel;
+    protected $complainReplyModel;
     protected $categoryModel;
     protected $subCategoryModel;
     protected $contentModel;
@@ -21,6 +23,7 @@ class Home extends BaseController
     public function __construct()
     {
         $this->complainModel = new ComplainModel();
+        $this->complainReplyModel = new ComplainReplyModel();
         $this->categoryModel = new categoryModel();
         $this->subCategoryModel = new subcategoryModel();
         $this->contentModel = new contentModel();
@@ -340,6 +343,27 @@ class Home extends BaseController
         return view('customer/replycomplain', $data);
     }
 
+    public function sendReply()
+    {
+        $id_complain = $this->request->getVar('id_complain');
+        $id_user = $this->request->getVar('id_user');
+        $slug = $this->request->getVar('slug');
+        $message = $this->request->getVar('message');
+
+        $data = [
+            'id_complain' => $id_complain,
+            'id_user'     => $id_user,
+            'description' => $message,
+            'is_read'     => 0
+        ];
+
+        if (!$this->complainReplyModel->save($data)) {
+            return redirect()->to('kb/complain/reply?complainId=' . $slug)->with('errorMessage', "Pesan gagal terkirim");
+        } else {
+            return redirect()->to('kb/complain/reply?complainId=' . $slug)->with('successMessage', "Pesan telah terkirim");
+        }
+    }
+
     public function allcomplain()
     {
         if (logged_in()) {
@@ -349,11 +373,12 @@ class Home extends BaseController
         }
         $file_message = session('errors.file');
         $complain = $this->db->table('complains')
-        ->select('complains.*, project.name_project')
-        ->join('project', 'project.id = complains.id_project')
-        ->where(['visibility' => 'open', 'status' => 'solved'])
-        ->get()
-        ->getResultArray();
+            ->select('complains.*, project.name_project')
+            ->join('project', 'project.id = complains.id_project')
+            ->where(['visibility' => 'open', 'status' => 'solved'])
+            ->orderBy('complains.created_at', 'DESC')
+            ->get()
+            ->getResultArray();
         $data = [
             'title' => 'Virtusee | complain',
             'file_message' => $file_message,
@@ -368,30 +393,30 @@ class Home extends BaseController
         $search = $this->request->getVar('search');
 
         $content = $this->db->table('content a')
-        ->select('*')
-        ->join('article b', 'a.id = b.id_content')
-        ->join('project c', 'b.id_project = c.id')
-        ->join('categories d', 'a.id_category = d.id')
-        ->join('sub_category e', 'a.id_sub_category = e.id')
-        ->like('a.title', $search, 'both')
-        ->where('a.visibility', 'open')
-        ->get()
-        ->getResultArray();
+            ->select('*')
+            ->join('article b', 'a.id = b.id_content')
+            ->join('project c', 'b.id_project = c.id')
+            ->join('categories d', 'a.id_category = d.id')
+            ->join('sub_category e', 'a.id_sub_category = e.id')
+            ->like('a.title', $search, 'both')
+            ->where('a.visibility', 'open')
+            ->get()
+            ->getResultArray();
 
         $complain = $this->db->table('complains')
-        ->select('complains.*, project.name_project')
-        ->join('project', 'project.id = complains.id_project')
-        ->like('complains.subject', $search, 'both')
-        ->where(['complains.visibility' => 'open', 'complains.status' => 'solved'])
-        ->get()
-        ->getResultArray();
+            ->select('complains.*, project.name_project')
+            ->join('project', 'project.id = complains.id_project')
+            ->like('complains.subject', $search, 'both')
+            ->where(['complains.visibility' => 'open', 'complains.status' => 'solved'])
+            ->get()
+            ->getResultArray();
 
         if (logged_in()) {
             $project =  $this->projectModel->find(user()->id_project);
         } else {
             $project = "";
         }
-        
+
         $data = [
             'title' => 'Virtusee | complain',
             'contents' => $content,

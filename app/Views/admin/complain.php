@@ -8,7 +8,7 @@ echo $this->extend('admin/layout'); ?>
 
 
 <div class="border-2 border-gray-200 bg-white p-7 rounded shadow-md text-sm">
-    <h2 class="font-bold text-xl">List Complain</h2>
+    <h2 class="font-bold text-xl">List Inbox</h2>
     <div class="flex items-center justify-between mt-5 mb-3" id="search">
         <form method="" class="relative flex justify-end items-center">
             <input type="text" id="searchInput" placeholder="search" class="px-5 py-2 w-64 rounded-2xl border border-gray-400 outline-main">
@@ -20,7 +20,7 @@ echo $this->extend('admin/layout'); ?>
         </form>
         <div class="flex gap-3">
             <div class="delete-batch hidden">
-                <button type="button" class="delete-batch-btn px-2 inline-block" data-action="/kb/administrator/category/deleteBatch">
+                <button type="button" class="delete-batch-btn px-2 inline-block" data-action="/kb/administrator/complain/deleteBatch">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-5 h-5 stroke-red-500 hover:stroke-red-700">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                     </svg>
@@ -32,15 +32,20 @@ echo $this->extend('admin/layout'); ?>
                 </svg>
                 <span class="self-center">13/06/2023</span>
             </a> -->
-            <form action="" id="dateForm">
+            <form action="" id="filterForm" class="flex gap-3">
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3.5">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
                         </svg>
                     </div>
-                    <input type="text" name="dates" id="date-range-picker" class="border border-gray-400 px-6 py-2 rounded-2xl hover:border-green-400 focus:border-green-400 w-full pl-10 p-2.5" placeholder="Select date..">
+                    <input type="text" name="dates" id="date-range-picker" class="border border-gray-400 px-6 py-2 rounded-2xl hover:border-green-400 focus:border-green-400 w-full pl-10 p-2.5" placeholder="Select date.." value=<?= $dates; ?>>
                 </div>
+                <select name="methodFilter" id="methodFilter" class="border border-gray-400 py-2 rounded-2xl hover:border-green-400 focus:border-green-400 p-2.5">
+                    <option value="">Choose inbox type</option>
+                    <option value="request" <?php if ($methodFilter === "request") echo "selected" ?>>Request</option>
+                    <option value="complain" <?php if ($methodFilter === "complain") echo "selected" ?>>Complain</option>
+                </select>
             </form>
             <a href="<?php echo base_url(); ?>kb/administrator/complain/export" class="border border-gray-400 px-6 py-2 rounded-2xl font-medium hover:border-green-400 cursor-pointer ">export</a>
         </div>
@@ -101,6 +106,15 @@ echo $this->extend('admin/layout'); ?>
                     </th>
                     <th scope="col" class="p-3">
                         <div class="flex items-center justify-center">
+                            Method
+                            <a href="#">
+                                <svg class="w-3 h-3 ml-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                                </svg>
+                            </a>
+                        </div>
+                    <th scope="col" class="p-3">
+                        <div class="flex items-center justify-center">
                             Status
                             <a href="#">
                                 <svg class="w-3 h-3 ml-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -126,15 +140,18 @@ echo $this->extend('admin/layout'); ?>
             </thead>
             <tbody>
                 <?php foreach ($complains as $complain) : ?>
-                    <tr class="clickable-row cursor-pointer border-b hover:bg-gray-50 dark:hover:bg-sky-50" data-href="<?php echo base_url(); ?>kb/administrator/complain/reply/<?php echo $complain['id'] ?>">
+                    <tr class="clickable-row cursor-pointer border-b <?php if ($complain['is_read'] == 0) echo "bg-gray-50 dark:bg-sky-50" ?> hover:bg-gray-50 dark:hover:bg-sky-50" data-href="<?php echo base_url(); ?>kb/administrator/complain/reply/<?php echo $complain['id'] ?>">
                         <td class="p-3" data-id="<?php echo $complain['id'] ?>">
                             <input type="checkbox" class="cursor-pointer delete-checkbox" name="" id="">
                         </td>
-                        <td class="p-3 font-medium text-gray-900 whitespace-nowrap cursor-pointer">
+                        <td class="p-3 font-medium text-gray-900 whitespace-nowrap cursor-pointer <?php if ($complain['is_read'] == 0) echo "font-bold" ?>">
                             <?= $complain['email'] ?>
                         </td>
-                        <td class="p-3 max-w-[320px] text-ellipsis overflow-hidden whitespace-nowrap">
+                        <td class="my-5 max-w-[320px] line-clamp-1 <?php if ($complain['is_read'] == 0) echo "font-bold" ?>">
                             <?= $complain['description'] ?>
+                        </td>
+                        <td class="p-3 <?php if ($complain['is_read'] == 0) echo "font-bold" ?>">
+                            <?= $complain['method'] ?>
                         </td>
                         <td class="p-3 text-center">
                             <div class="relative flex justify-center items-center">
@@ -181,30 +198,72 @@ echo $this->extend('admin/layout'); ?>
                 <ul class="inline-flex -space-x-px text-sm">
                     <?php if (isset($pagination) && $pagination['page'] > 1) : ?>
                         <li>
-                            <?php if ($dates === NULL) : ?>
-                                <a href="<?php echo base_url(); ?>kb/administrator/complain?page=<?php echo $pagination['page'] - 1; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 ml-0 leading-tight bg-white border rounded-l-lg hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Previous</a>
-                            <?php else : ?>
-                                <a href="<?php echo base_url(); ?>kb/administrator/complain?page=<?php echo $pagination['page'] - 1; ?>&perPage=<?php echo $pagination['perPage']; ?>&dates=<?php echo $dates; ?>" class="flex items-center justify-center px-3 h-8 ml-0 leading-tight bg-white border rounded-l-lg hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Previous</a>
-                            <?php endif; ?>
+                            <?php
+
+                            $base_url = base_url() . 'kb/administrator/complain';
+                            $params = [
+                                'page' => $pagination['page'] - 1,
+                                'perPage' => $pagination['perPage'],
+                            ];
+
+                            if ($dates !== NULL) {
+                                $params['dates'] = $dates;
+                            }
+
+                            if ($methodFilter !== NULL) {
+                                $params['methodFilter'] = $methodFilter;
+                            }
+
+                            $url = $base_url . '?' . http_build_query($params);
+                            ?>
+                            <a href="<?php echo $url ?>" class="flex items-center justify-center px-3 h-8 ml-0 leading-tight bg-white border rounded-l-lg hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Previous</a>
                         </li>
                     <?php endif; ?>
                     <?php if (isset($pagination)) : ?>
                         <?php for ($i = 1; $i <= $pagination['totalPages']; $i++) : ?>
                             <li>
-                                <?php if ($dates === NULL) : ?>
-                                    <a href="<?php echo base_url(); ?>kb/administrator/complain?page=<?php echo $i; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 border border-white <?php echo ($i == $pagination['page']) ? 'bg-main text-white' : 'bg-white text-gray-400'; ?> hover:bg-main hover:text-white"><?php echo $i; ?></a>
-                                <?php else : ?>
-                                    <a href="<?php echo base_url(); ?>kb/administrator/complain?page=<?php echo $i; ?>&perPage=<?php echo $pagination['perPage']; ?>&dates=<?php echo $dates; ?>" class="flex items-center justify-center px-3 h-8 border border-white <?php echo ($i == $pagination['page']) ? 'bg-main text-white' : 'bg-white text-gray-400'; ?> hover:bg-main hover:text-white"><?php echo $i; ?></a>
-                                <?php endif; ?>
+                                <?php
+
+                                $base_url = base_url() . 'kb/administrator/complain';
+                                $params = [
+                                    'page' => $i,
+                                    'perPage' => $pagination['perPage'],
+                                ];
+
+                                if ($dates !== NULL) {
+                                    $params['dates'] = $dates;
+                                }
+
+                                if ($methodFilter !== NULL) {
+                                    $params['methodFilter'] = $methodFilter;
+                                }
+
+                                $url = $base_url . '?' . http_build_query($params);
+                                ?>
+                                <a href="<?php echo $url; ?>" class="flex items-center justify-center px-3 h-8 border border-white <?php echo ($i == $pagination['page']) ? 'bg-main text-white' : 'bg-white text-gray-400'; ?> hover:bg-main hover:text-white"><?php echo $i; ?></a>
                             </li>
                         <?php endfor; ?>
                         <?php if ($pagination['page'] < $pagination['totalPages']) : ?>
                             <li>
-                                <?php if ($dates === NULL) : ?>
-                                    <a href="<?php echo base_url(); ?>kb/administrator/complain?page=<?php echo $pagination['page'] + 1; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 leading-tight bg-white border hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Next</a>
-                                <?php else : ?>
-                                    <a href="<?php echo base_url(); ?>kb/administrator/complain?page=<?php echo $pagination['page'] + 1; ?>&perPage=<?php echo $pagination['perPage']; ?>&dates=<?php echo $dates; ?>" class="flex items-center justify-center px-3 h-8 leading-tight bg-white border hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Next</a>
-                                <?php endif; ?>
+                                <?php
+
+                                $base_url = base_url() . 'kb/administrator/complain';
+                                $params = [
+                                    'page' => $pagination['page'] + 1,
+                                    'perPage' => $pagination['perPage'],
+                                ];
+
+                                if ($dates !== NULL) {
+                                    $params['dates'] = $dates;
+                                }
+
+                                if ($methodFilter !== NULL) {
+                                    $params['methodFilter'] = $methodFilter;
+                                }
+
+                                $url = $base_url . '?' . http_build_query($params);
+                                ?>
+                                <a href="<?php echo $url; ?>" class="flex items-center justify-center px-3 h-8 border border-white <?php echo ($i == $pagination['page']) ? 'bg-main text-white' : 'bg-white text-gray-400'; ?> hover:bg-main hover:text-white">Next</a>
                             </li>
                         <?php endif; ?>
                     <?php else : ?>
@@ -215,19 +274,47 @@ echo $this->extend('admin/layout'); ?>
                         ?>
                         <?php for ($i = 1; $i <= $pagination['page']; $i++) : ?>
                             <li>
-                                <?php if ($dates === NULL) : ?>
-                                    <a href="<?php echo base_url(); ?>kb/administrator/complain?page=<?php echo $i; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 border border-white <?php echo ($i == $pagination['page']) ? 'bg-main text-white' : 'bg-white text-gray-400'; ?> hover:bg-main hover:text-white"><?php echo $i; ?></a>
-                                <?php else : ?>
-                                    <a href="<?php echo base_url(); ?>kb/administrator/complain?page=<?php echo $i; ?>&perPage=<?php echo $pagination['perPage']; ?>&dates=<?php echo $dates; ?>" class="flex items-center justify-center px-3 h-8 border border-white <?php echo ($i == $pagination['page']) ? 'bg-main text-white' : 'bg-white text-gray-400'; ?> hover:bg-main hover:text-white"><?php echo $i; ?></a>
-                                <?php endif; ?>
+                                <?php
+
+                                $base_url = base_url() . 'kb/administrator/complain';
+                                $params = [
+                                    'page' => $i,
+                                    'perPage' => $pagination['perPage'],
+                                ];
+
+                                if ($dates !== NULL) {
+                                    $params['dates'] = $dates;
+                                }
+
+                                if ($methodFilter !== NULL) {
+                                    $params['methodFilter'] = $methodFilter;
+                                }
+
+                                $url = $base_url . '?' . http_build_query($params);
+                                ?>
+                                <a href="<?php echo $url; ?>" class="flex items-center justify-center px-3 h-8 border border-white <?php echo ($i == $pagination['page']) ? 'bg-main text-white' : 'bg-white text-gray-400'; ?> hover:bg-main hover:text-white">Next</a>
                             </li>
                         <?php endfor; ?>
                         <li>
-                            <?php if ($dates === NULL) : ?>
-                                <a href="<?php echo base_url(); ?>kb/administrator/complain?page=<?php echo $pagination['page'] + 1; ?>&perPage=<?php echo $pagination['perPage']; ?>" class="flex items-center justify-center px-3 h-8 leading-tight bg-white border hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Next</a>
-                            <?php else : ?>
-                                <a href="<?php echo base_url(); ?>kb/administrator/complain?page=<?php echo $pagination['page'] + 1; ?>&perPage=<?php echo $pagination['perPage']; ?>&dates=<?php echo $dates; ?>" class="flex items-center justify-center px-3 h-8 leading-tight bg-white border hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Next</a>
-                            <?php endif; ?>
+                            <?php
+
+                            $base_url = base_url() . 'kb/administrator/complain';
+                            $params = [
+                                'page' => $pagination['page'] + 1,
+                                'perPage' => $pagination['perPage'],
+                            ];
+
+                            if ($dates !== NULL) {
+                                $params['dates'] = $dates;
+                            }
+
+                            if ($methodFilter !== NULL) {
+                                $params['methodFilter'] = $methodFilter;
+                            }
+
+                            $url = $base_url . '?' . http_build_query($params);
+                            ?>
+                            <a href="<?php echo $url ?>" class="flex items-center justify-center px-3 h-8 leading-tight bg-white border hover:bg-gray-100 hover:text-gray-700 border-white dark:text-gray-400">Next</a>
                         </li>
                     <?php endif; ?>
                 </ul>

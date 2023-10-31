@@ -151,12 +151,16 @@ class Category extends ResourceController
         if (!$this->categoryModel->delete($id)) {
           return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
         } else {
+          $this->subCategoryModel->where("id_category", $id);
+          $this->subCategoryModel->delete();
           return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
         }
       } else {
         if (!$this->categoryModel->delete($id)) {
           return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
         } else {
+          $this->subCategoryModel->where("id_category", $id);
+          $this->subCategoryModel->delete();
           return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
         }
       }

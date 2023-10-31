@@ -49,6 +49,7 @@ $routes->group('kb', static function ($routes) {
     $routes->post('personalarticle', 'Home::create');
     $routes->get('personalarticle/personalarticledetail', 'Home::personalarticledetail');
     $routes->get('complain/reply', 'Home::reply');
+    $routes->post('complain/sendReply', 'Home::sendReply');
     $routes->get('allcomplain', 'Home::allcomplain');
     $routes->post('search', 'Home::searchresult');
     $routes->get('proses', 'Login::proses');
@@ -58,6 +59,14 @@ $routes->group('kb', static function ($routes) {
 $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], static function ($routes) {
 
     $routes->get('dashboard', 'Admin::index');
+
+    $routes->get('project', 'Project::index');
+    $routes->get('project/new', 'Project::new');
+    $routes->post('project', 'Project::create');
+    $routes->get('project/edit/(:num)', 'Project::edit/$1');
+    $routes->post('project/(:num)', 'Project::update/$1');
+    $routes->get('project/delete/(:num)', 'Project::delete/$1');
+    $routes->post('project/deleteBatch', "Project::deleteBatchProject");
 
     $routes->get('user', 'User::index');
     $routes->get('user/new', 'User::new');
@@ -100,6 +109,7 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     $routes->post('complain/sendReply', 'Complain::sendReply');
     $routes->post('complain/updateStatus', 'Complain::updateStatus');
     $routes->post('complain/updateVisibility', 'Complain::updateVisibility');
+    $routes->post('complain/deleteBatch', "Complain::deleteBatch");
 });
 
 

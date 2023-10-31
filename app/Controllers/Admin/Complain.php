@@ -29,6 +29,7 @@ class Complain extends BaseController
   public function index()
   {
     $dates = $this->request->getGet('dates');
+    $methodFilter = $this->request->getGet('methodFilter');
     $page = $this->request->getGet('page') ?? 1;
     $perPage = $this->request->getGet('perPage') ?? 10;
 
@@ -39,6 +40,10 @@ class Complain extends BaseController
       $start_date = date('Y-m-d', strtotime($start_date));
       $end_date = date('Y-m-d', strtotime($end_date));
       $this->complainModel->where("created_at >=", $start_date)->where("created_at <=", $end_date);
+    }
+
+    if (!empty($methodFilter)) {
+      $this->complainModel->where("method", $methodFilter);
     }
 
     $complain =  $this->complainModel->findAll($perPage, $offset);
@@ -58,7 +63,8 @@ class Complain extends BaseController
       'title'     => 'Complain',
       'complains' => $complain,
       'pagination' => $pagination,
-      'dates'     => $dates
+      'dates'     => $dates,
+      'methodFilter'     => $methodFilter
     ];
 
     return view('admin/complain', $data);

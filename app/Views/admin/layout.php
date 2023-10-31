@@ -127,7 +127,9 @@
         const form = $("#dateForm");
         form.submit();
       })
-
+      $("#methodFilter").on("change", function() {
+        document.getElementById("dateForm").submit();
+      });
     });
   </script>
 
