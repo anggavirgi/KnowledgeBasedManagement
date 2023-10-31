@@ -69,7 +69,7 @@
                                     <?php endif; ?>
                                     <div class="w-full">
                                         <label for="project" class="block mb-2 text-xs font-medium text-form">Project</label>
-                                        <input type="id_project" name="id_project" id="id_project" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" value="<?= $project['name_project']; ?>" required readonly>
+                                        <input type="name_project" name="name_project" id="name_project" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" value="<?= $project['name_project']; ?>" required readonly>
                                     </div>
                                 </div>
                                 <div>

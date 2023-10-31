@@ -52,22 +52,29 @@
         </div>
         <div class="flex justify-center">
             <div class="lg:w-5/12 md:flex hidden">
-                <img src="<?php echo base_url(); ?>src/images/Question.png" alt="Question.png" class="mx-auto w-[26rem] object-cover collapsible">
+                <img src="<?php echo base_url(); ?>src/images/Question.png" alt="Question.png" class="mx-auto w-[30rem] object-cover">
             </div>
             <div id="question" class="mt-7 w-full lg:w-6/12 md:w-10/12 self-center">
                 <?php $count = 1; ?>
                 <?php foreach ($contents as $content) { ?>
-                    <a href="<?= base_url('kb/generalarticle/generalarticledetail?category=' . $content['name_category'] . '&subcategory=' . $content['name_subcategory'] . '&article=' . $content['slug']) ?>">
-                        <div class="py-4 px-5 hover:bg-main hover:text-white text-md rounded font-semibold">
-                            <?php echo $content['title'] ?>
+                    <div class="border-solid border-2 border-[#919191] rounded-md p-4 ps-10 mb-3">
+                        <div class="flex justify-between">
+                            <p class="text-md" id="title<?= $count; ?>"><?= $content['title']; ?></p>
+                            <p class="text-xl cursor-pointer collapsible" data-target="collapse<?= $count; ?>" data-title="title<?= $count; ?>">
+                                <i class="bi bi-chevron-down icon"></i>
+                            </p>
                         </div>
-                    </a>
-                    <hr>
+                        <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse<?= $count; ?>">
+                            <p class="text-[14px] line-clamp-1"><?= strip_tags($content['content']); ?></p>
+                            <a href="<?= base_url('kb/generalarticle/generalarticledetail?category=' . $content['name_category'] . '&subcategory=' . $content['name_subcategory'] . '&article=' . $content['slug']) ?>" class="article-link text-[#18A8D8]"> more... </a>
+                        </div>
+                    </div>
                     <?php
-                    if ($count == 6) {
+                    if ($count == 5) {
                         break;
                     }
                     ?>
+                    <?php $count++ ?>
                 <?php } ?>
             </div>
         </div>
@@ -149,7 +156,6 @@
                                         <input type="email" name="email" id="email" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" value="<?= user()->email; ?>" required readonly>
                                     </div>
                                 </div>
-
                                 <div>
                                     <label for="subject" class="block mb-2 text-xs font-medium text-form">subject <span class="text-red-600">*</span></label>
                                     <input type="subject" name="subject" id="subject" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="Subject" value="<?= old('subject'); ?>" required>
@@ -168,15 +174,13 @@
                                     </select>
                                 </div>
                                 <div class="flex gap-2">
-                                    <?php if (user()->id_project !== 0) : ?>
-                                        <div class="w-full">
-                                            <label for="user" class="block mb-2 text-xs font-medium text-form">User member</label>
-                                            <input type="user" name="user" id="user" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" value="Old user" readonly>
-                                        </div>
-                                    <?php endif; ?>
+                                    <div class="w-full">
+                                        <label for="user" class="block mb-2 text-xs font-medium text-form">User member</label>
+                                        <input type="user" name="user" id="user" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" value="<?php echo (user()->id_project === 0) ? "new user" : "old user"; ?>" readonly>
+                                    </div>
                                     <div class="w-full">
                                         <label for="project" class="block mb-2 text-xs font-medium text-form">Project</label>
-                                        <input type="id_project" name="id_project" id="id_project" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" value="<?= $project['name_project']; ?>" required readonly>
+                                        <input type="text" name="name_project" id="name_project" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" value="<?= $project['name_project']; ?>" required readonly>
                                     </div>
                                 </div>
                                 <div>
