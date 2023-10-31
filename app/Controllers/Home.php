@@ -336,9 +336,19 @@ class Home extends BaseController
         } else {
             $project = "";
         }
+        $complain = $this->db->table('complains a')
+            ->select('a.*, b.username AS username, b.level')
+            ->join('users b', 'a.id_user = b.id')
+            ->where('a.slug', $slug)
+            ->get()
+            ->getRowArray();
+        $id_complain = $complain["id"];
         $data = [
             'title' => 'Virtusee | article reply',
-            'project' => $project
+            'project' => $project,
+            'complain' => $complain,
+            'complainReply' => $this->db->table('complain_reply')->select('complain_reply.*, users.level')->join("users", "complain_reply.id_user = users.id")->where("complain_reply.id_complain", $id_complain)->orderBy('complain_reply.created_at', 'ASC')->get()->getResultArray(),
+            "slug" => $slug
         ];
         return view('customer/replycomplain', $data);
     }
@@ -360,6 +370,7 @@ class Home extends BaseController
         if (!$this->complainReplyModel->save($data)) {
             return redirect()->to('kb/complain/reply?complainId=' . $slug)->with('errorMessage', "Pesan gagal terkirim");
         } else {
+            $this->complainModel->set("is_read", 0)->where("id", $id_complain)->update();
             return redirect()->to('kb/complain/reply?complainId=' . $slug)->with('successMessage', "Pesan telah terkirim");
         }
     }

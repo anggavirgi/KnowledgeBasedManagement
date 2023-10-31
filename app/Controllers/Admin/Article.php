@@ -12,6 +12,7 @@ use Exception;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Border;
+use App\Models\Admin\ComplainModel;
 
 class Article extends ResourceController
 {
@@ -20,6 +21,7 @@ class Article extends ResourceController
   protected $categoryModel;
   protected $subCategoryModel;
   protected $projectModel;
+  protected $complainModel;
   protected $db;
 
   public function __construct()
@@ -29,6 +31,7 @@ class Article extends ResourceController
     $this->categoryModel = new CategoryModel();
     $this->subCategoryModel = new SubCategoryModel();
     $this->projectModel = new ProjectModel();
+    $this->complainModel = new ComplainModel();
     $this->db = db_connect();
   }
 
@@ -65,7 +68,8 @@ class Article extends ResourceController
       'title' => 'article',
       'articles' => $dataArticle,
       'contents' => $content,
-      'pagination' => $pagination
+      'pagination' => $pagination,
+      'notification' => count($this->complainModel->select("*")->where("is_read", 0)->findAll())
     ]);
   }
 
@@ -82,6 +86,7 @@ class Article extends ResourceController
       'sub_category' => $sub_category,
       'categorySelected' => $categorySelected,
       'project' => $project,
+      'notification' => count($this->complainModel->select("*")->where("is_read", 0)->findAll())
     ];
     return view('admin/addarticle', $data);
   }
@@ -168,6 +173,7 @@ class Article extends ResourceController
       'category'  => $category,
       'subcategory'  => $subcategory,
       'project'  => $project,
+      'notification' => count($this->complainModel->select("*")->where("is_read", 0)->findAll())
     ];
 
     return view('admin/editarticle', $data);
@@ -264,7 +270,8 @@ class Article extends ResourceController
     $data = [
       'title'     => 'Detail Article',
       'articles'  => $article,
-      'contents'   => $content
+      'contents'   => $content,
+      'notification' => count($this->complainModel->select("*")->where("is_read", 0)->findAll())
     ];
 
     return view('admin/detailarticle', $data);

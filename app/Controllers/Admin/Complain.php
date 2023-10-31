@@ -64,7 +64,8 @@ class Complain extends BaseController
       'complains' => $complain,
       'pagination' => $pagination,
       'dates'     => $dates,
-      'methodFilter'     => $methodFilter
+      'methodFilter'     => $methodFilter,
+      'notification' => count($this->complainModel->select("*")->where("is_read", 0)->findAll())
     ];
 
     return view('admin/complain', $data);
@@ -98,6 +99,9 @@ class Complain extends BaseController
 
   public function reply($id)
   {
+
+    $this->complainModel->set('is_read', 1)->where('id', $id)->update();
+
     $complain = $this->db->table('complains a')
       ->select('a.*, b.username AS username, b.level')
       ->join('users b', 'a.id_user = b.id')
@@ -107,7 +111,8 @@ class Complain extends BaseController
     $data = [
       'title'         => 'Reply Complain',
       'complain'      => $complain,
-      'complainReply' => $this->db->table('complain_reply')->select('complain_reply.*, users.level')->join("users", "complain_reply.id_user = users.id")->where("complain_reply.id_complain", $id)->orderBy('complain_reply.created_at', 'ASC')->get()->getResultArray()
+      'complainReply' => $this->db->table('complain_reply')->select('complain_reply.*, users.level')->join("users", "complain_reply.id_user = users.id")->where("complain_reply.id_complain", $id)->orderBy('complain_reply.created_at', 'ASC')->get()->getResultArray(),
+      'notification' => count($this->complainModel->select("*")->where("is_read", 0)->findAll())
     ];
 
     // dd($data['complainReply']);
