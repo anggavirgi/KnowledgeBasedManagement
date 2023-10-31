@@ -29,7 +29,7 @@
                         <span class="sr-only">Search</span>
                     </button>
 
-                    <form action="<?php echo base_url() ?>kb/search" method="post" class="relative hidden" id="navbar-layout">
+                    <form action="<?php echo base_url() ?>kb/search" method="get" class="relative hidden" id="navbar-layout">
                         <button class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
@@ -76,7 +76,7 @@
                 </div>
 
                 <div class="items-center justify-between hidden w-full p-5" id="navbar-search">
-                    <form action="<?php echo base_url() ?>kb/search" method="post" class="relative mt-3 md:hidden flex justify-center items-center">
+                    <form action="<?php echo base_url() ?>kb/search" method="get" class="relative mt-3 md:hidden flex justify-center items-center">
                         <button class="absolute inset-y-0 left-2 flex items-center pl-3 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
@@ -114,7 +114,7 @@
             <?php else : ?>
                 <!-- Element Before Login -->
                 <div>
-                    <form action="<?php echo base_url() ?>kb/search" method="post" class="relative hidden" id="navbar-layout">
+                    <form action="<?php echo base_url() ?>kb/search" method="get" class="relative hidden" id="navbar-layout">
                         <button class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
