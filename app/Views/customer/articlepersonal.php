@@ -109,9 +109,9 @@
 
 
             <?php foreach ($content as $content) : ?>
-                <a href="<?= base_url('kb/personalarticle/personalarticledetail?category=' . $content['name_category'] . '&subcategory=' . $content['name_subcategory'] . '&article=' . $content['slug']) ?>">
-                    <div class="pb-3 flex flex-col px-2 hover:shadow-md hover:shadow-gray-200">
-                        <div data-article-id="<?= $content['id']; ?>" class="article-link pt-3 pb-2 font-semibold text-xl text-orange-600"><?= $content['title']; ?></div>
+                <a href="<?= base_url('kb/personalarticle/personalarticledetail?category=' . $content['name_category'] . '&subcategory=' . $content['name_subcategory'] . '&article=' . $content['slug']) ?>" data-article-id="<?= $content['id']; ?>" class="article-link">
+                    <div class=" pb-3 flex flex-col px-2 hover:shadow-md hover:shadow-gray-200">
+                        <div class="pt-3 pb-2 font-semibold text-xl text-orange-600"><?= $content['title']; ?></div>
                         <div class="font-medium text-sm border-b-2 pb-3">
                             <span><?= $content['name_category']; ?></span>
                             <span> / </span>

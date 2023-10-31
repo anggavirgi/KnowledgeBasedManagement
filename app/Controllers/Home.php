@@ -205,12 +205,13 @@ class Home extends BaseController
         }
 
         $complain = $this->db->table('complains')
-            ->select('complains.*, project.name_project')
-            ->join('project', 'project.id = complains.id_project')
+            ->select('complains.*,CASE WHEN complains.id_project = 0 THEN "virtusee" ELSE project.name_project END AS name_project', FALSE)
+            ->join('project', 'complains.id_project = project.id', 'left')
             ->where('complains.id_user', user()->id)
             ->whereNotIn('complains.status', ['solved'])
             ->get()
             ->getResultArray();
+
         $data = [
             'title' => 'Virtusee | complain',
             'project' => $project,
@@ -275,8 +276,8 @@ class Home extends BaseController
             $project = "";
         }
         $complain = $this->db->table('complains')
-            ->select('complains.*, project.name_project')
-            ->join('project', 'project.id = complains.id_project')
+            ->select('complains.*, CASE WHEN complains.id_project = 0 THEN "virtusee" ELSE project.name_project END AS name_project', FALSE)
+            ->join('project', 'project.id = complains.id_project', 'left')
             ->where('complains.id_user', user()->id)
             ->where('complains.status', 'solved')
             ->get()
@@ -395,11 +396,11 @@ class Home extends BaseController
         }
 
         $complain = $this->db->table('complains')
-        ->select('complains.*, project.name_project')
-        ->join('project', 'project.id = complains.id_project')
-        ->where(['visibility' => 'open', 'status' => 'solved'])
-        ->get()
-        ->getResultArray();
+            ->select('complains.*, project.name_project')
+            ->join('project', 'project.id = complains.id_project')
+            ->where(['visibility' => 'open', 'status' => 'solved'])
+            ->get()
+            ->getResultArray();
         $data = [
             'title' => 'Virtusee | complain',
             'project' => $project,

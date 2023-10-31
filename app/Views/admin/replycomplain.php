@@ -62,6 +62,20 @@
           </div>
           <div class="text-[0.6rem] text-form flex items-end pb-2"><?= date('j M, g.i a', strtotime($complain['created_at'])); ?></div>
         </div>
+        <div class="w-full flex justify-start gap-1">
+          <div class="bg-slate-200 text-form p-2 rounded-lg mb-2 relative max-w-[90%]">
+            <div class="py-0 px-2 cursor-pointer">
+              <a href="<?php echo base_url(); ?>/src/images/prove/<?= $complain['file']; ?>" download="<?= $complain['file'] ?>">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                </svg>
+              </a>
+            </div>
+            <div class="absolute left-0 top-3 transform -translate-x-1/2 rotate-45 w-2 h-2 bg-slate-200"></div>
+          </div>
+          <div class="text-[0.6rem] text-form flex items-end pb-2"><?= date('j M, g.i a', strtotime($complain['created_at'])); ?></div>
+        </div>
+
       <?php endif; ?>
       <?php foreach ($complainReply as $complainReply) : ?>
         <?php if ($complainReply['level'] === "admin") : ?>
