@@ -168,12 +168,10 @@
                                     </select>
                                 </div>
                                 <div class="flex gap-2">
-                                    <?php if (user()->id_project !== 0) : ?>
-                                        <div class="w-full">
-                                            <label for="user" class="block mb-2 text-xs font-medium text-form">User member</label>
-                                            <input type="user" name="user" id="user" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" value="Old user" readonly>
-                                        </div>
-                                    <?php endif; ?>
+                                    <div class="w-full">
+                                        <label for="user" class="block mb-2 text-xs font-medium text-form">User member</label>
+                                        <input type="user" name="user" id="user" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" value="<?php echo user()->id_project != 0 ? "Old user" : "New user" ?>" readonly>
+                                    </div>
                                     <div class="w-full">
                                         <label for="project" class="block mb-2 text-xs font-medium text-form">Project</label>
                                         <input type="id_project" name="id_project" id="id_project" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" value="<?= $project['name_project']; ?>" required readonly>

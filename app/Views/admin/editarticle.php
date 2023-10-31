@@ -20,57 +20,57 @@
       <div>
         <label for="title" class="block mb-2 font-medium text-gray-800">Title article</label>
         <input type="text" id="title" value="<?php echo $content['title'] ?>" name="title" class="bg-gray-50 border text-gray-800 rounded-lg  focus:ring-main focus:outline-none focus:border-main w-full p-3 <?php if (session('errors.title')) : ?>border-red-600<?php endif ?>" placeholder="Category name">
+        <?php if (session('errors.title')) : ?>
+          <div class="mt-1">
+            <small class=" text-red-600 text-sm"><?= session('errors.title'); ?></small>
+          </div>
+        <?php endif; ?>
       </div>
-      <?php if (session('errors.title')) : ?>
-        <div class="mt-1">
-          <small class=" text-red-600 text-sm"><?= session('errors.title'); ?></small>
-        </div>
-      <?php endif; ?>
       <div class="flex justify-between gap-5 mt-4">
         <div class="select-category w-full">
-          <label for="category" class="block mb-2 font-medium text-gray-800">Category</label>
-          <select id="category" name="category" class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-800 rounded-lg focus:ring-main focus:outline-none focus:border-main block w-full p-3 <?php if (session('errors.category')) : ?>border-red-600<?php endif ?>">
-            <option selected>Select category</option>
+          <label for="categorySelect" class="block mb-2 font-medium text-gray-800">Category</label>
+          <select id="categorySelect" name="category" class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-800 rounded-lg focus:ring-main focus:outline-none focus:border-main block w-full p-3 <?php if (session('errors.category')) : ?>border-red-600<?php endif ?>">
+            <option value="">Select category</option>
             <?php foreach ($category as $category) : ?>
               <option value="<?= $category['id'] ?>" <?php echo $category['id'] == $content['id_category'] ? "selected" : "" ?>><?= $category['name_category'] ?></option>
             <?php endforeach; ?>
           </select>
+          <?php if (session('errors.category')) : ?>
+            <div class="mt-1">
+              <small class=" text-red-600 text-sm"><?= session('errors.category'); ?></small>
+            </div>
+          <?php endif; ?>
         </div>
-        <?php if (session('errors.category')) : ?>
-          <div class="mt-1">
-            <small class=" text-red-600 text-sm"><?= session('errors.category'); ?></small>
-          </div>
-        <?php endif; ?>
         <div class="select-category w-full">
-          <label for="subcategory" class="block mb-2 font-medium text-gray-800">Select sub category</label>
-          <select id="subcategory" name="subcategory" class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-800 rounded-lg focus:ring-main focus:outline-none focus:border-main block w-full p-3 <?php if (session('errors.subcategory')) : ?>border-red-600<?php endif ?>">
-            <option selected>Select Sub category</option>
+          <label for="subcategorySelect" class="block mb-2 font-medium text-gray-800">Select sub category</label>
+          <select id="subcategorySelect" name="subcategory" class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-800 rounded-lg focus:ring-main focus:outline-none focus:border-main block w-full p-3 <?php if (session('errors.subcategory')) : ?>border-red-600<?php endif ?>">
+            <option value="">Select Sub category</option>
             <?php foreach ($subcategory as $subcategory) : ?>
-              <option value="<?= $subcategory['id'] ?>" <?php echo $subcategory['id'] == $content['id_sub_category'] ? "selected" : "" ?>><?= $subcategory['name_subcategory'] ?></option>
+              <option class="<?= $subcategory['id_category'] ?>" value="<?= $subcategory['id'] ?>" <?php echo $subcategory['id'] == $content['id_sub_category'] ? "selected" : "" ?>><?= $subcategory['name_subcategory'] ?></option>
             <?php endforeach; ?>
           </select>
+          <?php if (session('errors.subcategory')) : ?>
+            <div class="mt-1">
+              <small class=" text-red-600 text-sm"><?= session('errors.subcategory'); ?></small>
+            </div>
+          <?php endif; ?>
         </div>
-        <?php if (session('errors.subcategory')) : ?>
-          <div class="mt-1">
-            <small class=" text-red-600 text-sm"><?= session('errors.subcategory'); ?></small>
-          </div>
-        <?php endif; ?>
         <div class="select-category w-full">
           <label for="project" class="block mb-2 font-medium text-gray-800">Select project</label>
           <select id="project" name="project" class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-800 rounded-lg focus:ring-main focus:outline-none focus:border-main block w-full p-3 <?php if (session('errors.project')) : ?>border-red-600<?php endif ?>">
-            <option selected>Select project</option>
+            <!-- <option selected>Select project</option> -->
             <?php foreach ($article as $article) : ?>
               <?php foreach ($project as $project) : ?>
                 <option value="<?= $project['id'] ?>" <?php echo $project['id'] == $article['id_project'] ? "selected" : "" ?>><?= $project['name_project'] ?></option>
               <?php endforeach; ?>
             <?php endforeach; ?>
           </select>
+          <?php if (session('errors.project')) : ?>
+            <div class="mt-1">
+              <small class=" text-red-600 text-sm"><?= session('errors.project'); ?></small>
+            </div>
+          <?php endif; ?>
         </div>
-        <?php if (session('errors.project')) : ?>
-          <div class="mt-1">
-            <small class=" text-red-600 text-sm"><?= session('errors.project'); ?></small>
-          </div>
-        <?php endif; ?>
       </div>
 
       <div class="mt-5">
