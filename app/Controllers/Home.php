@@ -411,19 +411,38 @@ class Home extends BaseController
     public function searchresult()
     {
         $search = $this->request->getVar('search');
-        // if (logged_in()) {
-        //     $project =  $this->projectModel->find(user()->id_project);
-        // } else {
-        //     $project = "";
-        // }
-        // 
-        // $complain = $this->complainModel->findAll();
-        // $data = [
-        //     'title' => 'Virtusee | complain',
-        //     'file_message' => $file_message,
-        //     'project' => $project,
-        //     'complain' => $complain
-        // ];
-        // return view('customer/searchresult', $data);
+        $content = $this->db->table('content a')
+        ->select('*')
+        ->join('article b', 'a.id = b.id_content')
+        ->join('project c', 'b.id_project = c.id')
+        ->join('categories d', 'a.id_category = d.id')
+        ->join('sub_category e', 'a.id_sub_category = e.id')
+        ->like('a.title', $search, 'both')
+        ->where('a.visibility', 'open')
+        ->get()
+        ->getResultArray();
+
+        $complain = $this->db->table('complains')
+        ->select('complains.*, project.name_project')
+        ->join('project', 'project.id = complains.id_project')
+        ->like('complains.subject', $search, 'both')
+        ->where(['complains.visibility' => 'open', 'complains.status' => 'solved'])
+        ->get()
+        ->getResultArray();
+
+        if (logged_in()) {
+            $project =  $this->projectModel->find(user()->id_project);
+        } else {
+            $project = "";
+        }
+
+        $data = [
+            'title' => 'Virtusee | complain',
+            'contents' => $content,
+            'complains' => $complain,
+            'project' => $project,
+            'keyword' => $search
+        ];
+        return view('customer/searchresult', $data);
     }
 }
