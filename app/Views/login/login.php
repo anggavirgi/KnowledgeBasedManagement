@@ -61,13 +61,9 @@
           <span>OR</span>
           <hr class="h-[1px] w-full ml-4">
         </div>
-        <a href="<?= $link; ?>" target="_blank" class="flex justify-center py-2 rounded-md bg-[#FFF4E3] hover:bg-[#f7ead5]">
-          <div class="mr-2"><img src="<?php echo base_url(); ?>src/images/google.png" alt="" class="w-[83%]"></div>
-          <div>Sign in with Google</div>
-        </a>
       </form>
 
-      <div id="g_id_onload" data-client_id="68235445122-vho58k8ute13dv50g1s2m8jbcc5ufga5.apps.googleusercontent.com" data-context="signin" data-ux_mode="popup" data-login_uri="http://localhost:8080/kb/login" data-itp_support="true"></div>
+      <div id="g_id_onload" data-client_id="<?php echo getenv('GOOGLE_CLIENT') ?>" data-context="signin" data-ux_mode="popup" data-login_uri="http://localhost:8080/kb/login" data-itp_support="true"></div>
 
       <div class="g_id_signin flex justify-center" data-type="standard" data-shape="rectangular" data-theme="filled_blue" data-text="signin_with" data-size="large" data-locale="en" data-logo_alignment="left"></div>
     </div>

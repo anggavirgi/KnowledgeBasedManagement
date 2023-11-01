@@ -59,7 +59,7 @@
                 </button>
                 <!-- Element After Login -->
                 <!-- Dropdown Profile -->
-                <div id="dropdownAvatarName" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 ">
+                <div id="dropdownAvatarName" class="z-99 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 ">
                     <ul class="py-2 text-sm text-black" aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
                         <li>
                             <?php if (user()->level === "admin") : ?>
@@ -211,12 +211,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="<?php echo base_url(); ?>node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>node_modules/aos/dist/aos.js"></script>
-    <script src="<?php echo base_url(); ?>/src/js/script.js"></script>
     <script src="<?php echo base_url(); ?>node_modules/flowbite/dist/flowbite.min.js"></script>
     <script src="<?php echo base_url(); ?>node_modules/timeago.js/dist/timeago.min.js"></script>
     <script>
         AOS.init();
     </script>
+    <script src="<?php echo base_url(); ?>/src/js/script.js"></script>
 
 </body>
 

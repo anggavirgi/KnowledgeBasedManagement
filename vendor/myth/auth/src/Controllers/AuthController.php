@@ -9,7 +9,6 @@ use Myth\Auth\Config\Auth as AuthConfig;
 use Myth\Auth\Entities\User;
 use Myth\Auth\Models\UserModel;
 use App\Models\Admin\ProjectModel;
-use Google_Client;
 
 class AuthController extends Controller
 {
