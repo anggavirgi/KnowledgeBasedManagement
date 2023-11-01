@@ -469,6 +469,11 @@ class Home extends BaseController
 
         if (logged_in()) {
             $project =  $this->projectModel->find(user()->id_project);
+            if ($project === null) {
+                $project = [
+                    'name_project' => 'virtusee'
+                ];
+            }
         } else {
             $project = "";
         }
