@@ -5,14 +5,14 @@
     <div id="faq" class="flex-col justify-center items-center min-h-[40vh] lg:min-h-[80vh] sm:min-h-[70vh] md:min-h-[80vh] 2xl:min-h-[71vh]">
         <img src="<?php echo base_url(); ?>src/images/waves-hero.png" class="w-full h-[38rem] md:h-[49rem] sm:h-[40rem] lg:h-[49rem] 2xl:h-[62rem] object-cover absolute z-[-1] top-0 2xl:-top-20" alt="" data-aos="fade-down" data-aos-duration="500" data-aos-once="true" data-aos-delay="500">
         <div class="mt-12">
-            <h1 class="flex gap-3 justify-center text-3xl lg:text-5xl sm:text-4xl font-semibold sm:font-bold" data-aos="fade-down" data-aos-duration="500" data-aos-once="true" data-aos-delay="750">
+            <h1 class="flex gap-3 justify-center text-3xl lg:text-5xl sm:text-4xl font-semibold sm:font-bold w-fit mx-auto" data-aos="fade-down" data-aos-duration="500" data-aos-once="true" data-aos-delay="750">
                 <span class="text-white">Help center</span>
                 <div class="flex">
                     <span class="text-[#2562AE]">Virtu</span>
                     <span class="text-[#FFC700]">see</span>
                 </div>
             </h1>
-            <div class="flex justify-center" id="search" data-aos="fade-down" data-aos-duration="500" data-aos-once="true" data-aos-delay="1000">
+            <div class="flex w-fit mx-auto" id="search" data-aos="fade-down" data-aos-duration="500" data-aos-once="true" data-aos-delay="1000">
                 <form action="<?php echo base_url() ?>kb/search" method="get" class="relative">
                     <input type="text" name="search" id="search" placeholder="Search Your question, answer, etc" class="sm:w-[30rem] w-[20rem]  mb-2 px-7 mt-[30px] py-3 border border-gray-400 outline-main rounded-md">
                     <button>
@@ -141,10 +141,10 @@
         </div>
 
         <div id="question" class="flex flex-col justify-center items-center mb-28 xl:mt-20 lg:mt-16 md:mt-2 relative 2xl:mb-56">
-            <p class="text-[24px] font-medium" data-aos="fade-down" data-aos-duration="500" data-aos-once="true" data-aos-delay="750">Do you have any question?</p>
-            <div class="mt-8 whitespace-nowrap" data-aos="fade-up" data-aos-duration="500" data-aos-once="true" data-aos-delay="1000">
-                <?php if (logged_in()) : ?>
-                    <a data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="p-4 bg-[#FFC700] hover:bg-yellow-500 rounded-[15px] cursor-pointer"><i class="bi bi-envelope-fill "></i> Report a Problem</a>
+        <p class="text-[24px] font-medium">Do you have any question?</p>
+        <div class="mt-8 whitespace-nowrap">
+            <?php if (logged_in()) : ?>
+                <a data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="p-4 bg-[#FFC700] hover:bg-yellow-500 rounded-[15px] cursor-pointer"><i class="bi bi-envelope-fill "></i> Report a Problem</a>
 
                 <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 bottom-0 z-50 p-4 overflow-x-hidden overflow-y-auto hidden">
                     <!-- Modal content -->
@@ -160,6 +160,7 @@
                                 <?php echo csrf_field(); ?>
                                 <input type="hidden" name="id_user" value="<?= user()->id; ?>">
                                 <input type="hidden" name="id_project" value="<?= user()->id_project; ?>">
+                                <input type="hidden" name="error" id="error" value="<?= session('errors.file') ?>">
                                 <script>
                                     var fileMessage = <?php echo json_encode(session('errors')); ?>;
                                 </script>
@@ -199,45 +200,46 @@
                                         <label for="project" class="block mb-2 text-xs font-medium text-form">Project</label>
                                         <input type="text" name="name_project" id="name_project" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" value="<?= $project['name_project']; ?>" required readonly>
                                     </div>
-                                    <div>
-                                        <label for="message" class="block mb-2 text-xs font-medium text-form">Description</label>
-                                        <textarea id="message" name="message" rows="5" class="border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="Write your thoughts here..."><?= old('message'); ?></textarea>
-                                    </div>
-                                    <div>
-                                        <label for="dropzone-file" id="dropzone" class="flex flex-col items-center justify-center w-28 md:w-40 lg:w-72 h-12 md:h-20 lg:h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 <?php if (session('errors.file')) : ?>border-red-600<?php endif ?>">
-                                            <div class="flex flex-col items-center justify-center md:pt-5 lg:pb-8 md:pb-6">
-                                                <svg class="w-6 md:w-6 lg:w-8 h-6 md:h-6 lg:h-8 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                                </svg>
-                                                <p class="mb-2 md:text-[8px] lg:text-xs text-gray-500 hidden md:block" id="dragdroptext"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                                                <p class=" text-gray-500 md:text-[8px] lg:text-xs hidden md:block" id="formatsizetext">SVG, PNG, JPG, or GIF (MAX. 800x400px)</p>
-                                            </div>
-                                            <input id="dropzone-file" type="file" class="hidden" name="file" onchange="handleFileChange(this.files)" accept=".svg, .png, .jpg, .gif" />
-                                            <p id="selected-file-name" class="mb-2 text-[8px] md:text-sm font-semibold text-center text-main"></p>
-                                        </label>
-                                        <div class="text-[8px] md:text-xs w-max mt-2">
-                                            <?php if (session('errors.file')) : ?>
-                                                <p class="text-red-500 absolute"><?= session('errors.file'); ?></p>
-                                            <?php endif; ?>
-                                            <p class="text-red-500 lg:hidden">* SVG, PNG, JPG, or GIF (MAX. 800x400px)</p>
+                                </div>
+                                <div>
+                                    <label for="message" class="block mb-2 text-xs font-medium text-form">Description</label>
+                                    <textarea id="message" name="message" rows="5" class="border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="Write your thoughts here..."><?= old('message'); ?></textarea>
+                                </div>
+                                <div>
+                                    <label for="dropzone-file" id="dropzone" class="flex flex-col items-center justify-center w-28 md:w-40 lg:w-72 h-12 md:h-20 lg:h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 <?php if (session('errors.file')) : ?>border-red-600<?php endif ?>">
+                                        <div class="flex flex-col items-center justify-center md:pt-5 lg:pb-8 md:pb-6">
+                                            <svg class="w-6 md:w-6 lg:w-8 h-6 md:h-6 lg:h-8 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                            </svg>
+                                            <p class="mb-2 md:text-[8px] lg:text-xs text-gray-500 hidden md:block" id="dragdroptext"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                                            <p class=" text-gray-500 md:text-[8px] lg:text-xs hidden md:block" id="formatsizetext">SVG, PNG, JPG, or GIF (MAX. 800x400px)</p>
                                         </div>
+                                        <input id="dropzone-file" type="file" class="hidden" name="file" onchange="handleFileChange(this.files)" accept=".svg, .png, .jpg, .gif" />
+                                        <p id="selected-file-name" class="mb-2 text-[8px] md:text-sm font-semibold text-center text-main"></p>
+                                    </label>
+                                    <div class="text-[8px] md:text-xs w-max mt-2">
+                                        <?php if (session('errors.file')) : ?>
+                                            <p class="text-red-500 absolute"><?= session('errors.file'); ?></p>
+                                        <?php endif; ?>
+                                        <p class="text-red-500 lg:hidden">* SVG, PNG, JPG, or GIF (MAX. 800x400px)</p>
                                     </div>
+                                </div>
 
-                                    <button type="submit" class=" text-white float-right bg-main focus:ring-2 focus:outline-none rounded-lg text-sm px-5 py-2.5 text-center hover:bg-[#179CC8] ">Submit</button>
-                                </form>
-                            </div>
+                                <button type="submit" class=" text-white float-right bg-main focus:ring-2 focus:outline-none rounded-lg text-sm px-5 py-2.5 text-center hover:bg-[#179CC8] ">Submit</button>
+                            </form>
                         </div>
                     </div>
-                <?php else : ?>
-                    <a href="/kb/login" class="p-4 bg-[#FFC700] hover:bg-yellow-500 rounded-[15px] cursor-pointer"><i class="bi bi-envelope-fill "></i> Report a Problem</a>
-                <?php endif; ?>
-            </div>
-            <?php if (session()->has('success')) : ?>
-                <div class="flash-success" data-flashmessage="<?php echo session('success') ?>"></div>
+                </div>
             <?php else : ?>
-                <div class="flash-error" data-flashmessage="<?php echo session('error') ?>"></div>
+                <a href="/kb/login" class="p-4 bg-[#FFC700] hover:bg-yellow-500 rounded-[15px] cursor-pointer"><i class="bi bi-envelope-fill "></i> Report a Problem</a>
             <?php endif; ?>
         </div>
+        <?php if (session()->has('success')) : ?>
+            <div class="flash-success" data-flashmessage="<?php echo session('success') ?>"></div>
+        <?php else : ?>
+            <div class="flash-error" data-flashmessage="<?php echo session('error') ?>"></div>
+        <?php endif; ?>
+    </div>
 </section>
 
 <?php echo $this->endSection(); ?>
