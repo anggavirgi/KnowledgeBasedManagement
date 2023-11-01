@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Models\Admin\ProjectModel;
 use App\Models\Admin\UserModel;
+use App\Models\Admin\ComplainModel;
 use CodeIgniter\RESTful\ResourceController;
 use Exception;
 use Myth\Auth\Password;
@@ -20,11 +21,13 @@ class User extends ResourceController
 
     protected $userModel;
     protected $projectModel;
+    protected $complainModel;
 
     public function __construct()
     {
         $this->userModel = new UserModel();
         $this->projectModel = new ProjectModel();
+        $this->complainModel = new ComplainModel();
     }
 
     public function index()
@@ -61,7 +64,8 @@ class User extends ResourceController
         return view('admin/user', [
             'title' => 'User',
             'users' => $dataUser,
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'notification' => count($this->complainModel->select("*")->where("is_read", 0)->findAll())
         ]);
     }
 
@@ -86,7 +90,8 @@ class User extends ResourceController
         $dataProject = $this->projectModel->find();
         $data = [
             'title' => 'Add User',
-            'projects' => $dataProject
+            'projects' => $dataProject,
+            'notification' => count($this->complainModel->select("*")->where("is_read", 0)->findAll())
         ];
 
         return view('admin/adduser', $data);
@@ -149,7 +154,8 @@ class User extends ResourceController
         $data = [
             'title' => 'Edit User',
             'user'  => $this->userModel->find($id),
-            'projects' => $dataProject
+            'projects' => $dataProject,
+            'notification' => count($this->complainModel->select("*")->where("is_read", 0)->findAll())
         ];
 
         return view('admin/edituser', $data);
@@ -231,7 +237,8 @@ class User extends ResourceController
 
         $data = [
             'title' => 'Detail User',
-            'user' => $dataUser
+            'user' => $dataUser,
+            'notification' => count($this->complainModel->select("*")->where("is_read", 0)->findAll())
         ];
 
         return view('admin/detailuser', $data);

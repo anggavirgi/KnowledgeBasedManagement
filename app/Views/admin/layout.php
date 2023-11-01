@@ -14,6 +14,8 @@
 
   <!-- HEADER -->
   <div class="flex">
+    <?php //zdd($notification); 
+    ?>
 
     <!-- LEFT SIDE -->
     <!-- SIDEBAR -->
@@ -27,6 +29,12 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
           </svg>
           <span class="pl-6">Dashboard</span>
+        </a>
+        <a href="<?php echo base_url(); ?>kb/administrator/project" class="flex items-center py-3 px-5 hover:rounded-md hover:bg-main hover:text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-folder" viewBox="0 0 16 16">
+            <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4H2.19zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z" />
+          </svg>
+          <span class="pl-6">Project</span>
         </a>
         <a href="<?php echo base_url(); ?>kb/administrator/user" class="flex items-center py-3 px-5 hover:rounded-md hover:bg-main hover:text-white">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -58,7 +66,7 @@
           </svg>
           <span class="pl-6">Inbox</span>
         </a>
-        <a href="<?php echo base_url() ?>kb/administrator/logout" class="flex items-center py-3 px-5 hover:rounded-md hover:bg-main hover:text-white">
+        <a href="<?php echo base_url() ?>kb/logout" class="flex items-center py-3 px-5 hover:rounded-md hover:bg-main hover:text-white">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
           </svg>
@@ -78,11 +86,16 @@
         </div>
 
         <div class="flex mr-10">
-          <div class="mr-8">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-            </svg>
-          </div>
+          <a href="<?php echo base_url(); ?>kb/administrator/complain">
+            <div class="mr-8 relative">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+              </svg>
+              <?php if ($notification > 0) : ?>
+                <div class="p-1 flex justify-center bg-red-600 text-white rounded-[50%] text-[10px] absolute top-0 right-0"></div>
+              <?php endif; ?>
+            </div>
+          </a>
 
           <div class="flex">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -130,10 +143,12 @@
     $(document).ready(function() {
       $('#date-range-picker').daterangepicker();
       $('#date-range-picker').on("change", function() {
-        const form = $("#dateForm");
+        const form = $("#filterForm");
         form.submit();
       })
-
+      $("#methodFilter").on("change", function() {
+        document.getElementById("filterForm").submit();
+      });
     });
   </script> -->
 

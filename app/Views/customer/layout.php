@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="<?php echo base_url(); ?>src/images/favicon.png" type="image/x-icon">
     <title><?php echo $title; ?></title>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>node_modules/aos/dist/aos.css" />
     <link rel="stylesheet" href="<?php echo base_url(); ?>src/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
@@ -61,7 +62,11 @@
                 <div id="dropdownAvatarName" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 ">
                     <ul class="py-2 text-sm text-black" aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
                         <li>
-                            <a href="<?php echo base_url('kb/complain'); ?>" class="block px-4 py-2 bg-white hover:bg-gray-300 text-black">Dashboard</a>
+                            <?php if (user()->level === "admin") : ?>
+                                <a href="<?php echo base_url('kb/administrator/dashboard'); ?>" class="block px-4 py-2 bg-white hover:bg-gray-300 text-black">Dashboard</a>
+                            <?php else : ?>
+                                <a href="<?php echo base_url('kb/complain'); ?>" class="block px-4 py-2 bg-white hover:bg-gray-300 text-black">Dashboard</a>
+                            <?php endif; ?>
                         </li>
                         <li>
                             <a href="<?php echo base_url('kb/history'); ?>" class="block px-4 py-2 bg-white hover:bg-gray-300 text-black">History</a>
@@ -98,7 +103,11 @@
                             </button>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('kb/complain'); ?>" class="block py-2 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0  ">Dashboard</a>
+                            <?php if (user()->level === "admin") : ?>
+                                <a href="<?php echo base_url('kb/administrator/dashboard'); ?>" class="block py-2 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0  ">Dashboard</a>
+                            <?php else : ?>
+                                <a href="<?php echo base_url('kb/complain'); ?>" class="block py-2 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0  ">Dashboard</a>
+                            <?php endif; ?>
                         </li>
                         <li>
                             <a href="<?php echo base_url('kb/history'); ?>" class="block py-2 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0  ">History</a>
@@ -201,9 +210,13 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="<?php echo base_url(); ?>node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>node_modules/aos/dist/aos.js"></script>
     <script src="<?php echo base_url(); ?>/src/js/script.js"></script>
     <script src="<?php echo base_url(); ?>node_modules/flowbite/dist/flowbite.min.js"></script>
     <script src="<?php echo base_url(); ?>node_modules/timeago.js/dist/timeago.min.js"></script>
+    <script>
+        AOS.init();
+    </script>
 
 </body>
 

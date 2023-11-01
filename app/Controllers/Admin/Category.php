@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Models\Admin\CategoryModel;
 use App\Models\Admin\SubCategoryModel;
+use App\Models\Admin\ComplainModel;
 use CodeIgniter\RESTful\ResourceController;
 use Exception;
 use CodeIgniter\Database\Exceptions\DatabaseException;
@@ -12,6 +13,7 @@ class Category extends ResourceController
 {
   protected $categoryModel;
   protected $subCategoryModel;
+  protected $complainModel;
   protected $db;
 
 
@@ -19,6 +21,7 @@ class Category extends ResourceController
   {
     $this->categoryModel = new CategoryModel();
     $this->subCategoryModel = new SubCategoryModel();
+    $this->complainModel = new ComplainModel();
     $this->db = db_connect();
   }
 
@@ -51,14 +54,16 @@ class Category extends ResourceController
       'title' => 'Category',
       'categories' => $dataCategory,
       'subCategory' => $countByCategory,
-      'pagination' => $pagination
+      'pagination' => $pagination,
+      'notification' => count($this->complainModel->select("*")->where("is_read", 0)->findAll())
     ]);
   }
 
   public function new()
   {
     $data = [
-      'title' => 'Add Category'
+      'title' => 'Add Category',
+      'notification' => count($this->complainModel->select("*")->where("is_read", 0)->findAll())
     ];
 
     return view('admin/addcategory', $data);
@@ -98,7 +103,8 @@ class Category extends ResourceController
   {
     $data = [
       'title' => 'Edit Category',
-      'category'  => $this->categoryModel->find($id)
+      'category'  => $this->categoryModel->find($id),
+      'notification' => count($this->complainModel->select("*")->where("is_read", 0)->findAll())
     ];
 
     return view('admin/editcategory', $data);
@@ -151,12 +157,16 @@ class Category extends ResourceController
         if (!$this->categoryModel->delete($id)) {
           return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
         } else {
+          $this->subCategoryModel->where("id_category", $id);
+          $this->subCategoryModel->delete();
           return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
         }
       } else {
         if (!$this->categoryModel->delete($id)) {
           return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
         } else {
+          $this->subCategoryModel->where("id_category", $id);
+          $this->subCategoryModel->delete();
           return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
         }
       }
@@ -213,7 +223,8 @@ class Category extends ResourceController
       'title' => 'Category',
       'subcategory' => $subCategory,
       'category' => $category,
-      'pagination' => $pagination
+      'pagination' => $pagination,
+      'notification' => count($this->complainModel->select("*")->where("is_read", 0)->findAll())
     ]);
   }
 
@@ -224,7 +235,8 @@ class Category extends ResourceController
     $data = [
       'title' => 'Add Sub-Category',
       'category' => $idCategory,
-      'categoryId' => $categoryId
+      'categoryId' => $categoryId,
+      'notification' => count($this->complainModel->select("*")->where("is_read", 0)->findAll())
     ];
     return view('admin/addsubcategory', $data);
   }
@@ -267,7 +279,8 @@ class Category extends ResourceController
     $data = [
       'title'       => 'Edit Sub-Category',
       'categories'  => $this->categoryModel->findAll(),
-      'subcategory' => $this->subCategoryModel->find($id)
+      'subcategory' => $this->subCategoryModel->find($id),
+      'notification' => count($this->complainModel->select("*")->where("is_read", 0)->findAll())
     ];
 
     return view('admin/editsubcategory', $data);
