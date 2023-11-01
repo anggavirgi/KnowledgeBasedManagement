@@ -18,6 +18,7 @@
 
     <form action="<?php echo base_url(); ?>kb/administrator/user/<?= $user['id']; ?>" method="post">
         <?php echo csrf_field(); ?>
+        <input type="hidden" name="id_project" value="<?php echo $user['id_project'] ?>">
         <div class="grid grid-cols-2 gap-4 py-10">
             <div class="mb-4">
                 <label for="name" class="block mb-2 text-sm font-medium text-form">Name</label>
@@ -75,22 +76,11 @@
             </div>
             <div class="mb-4 relative">
                 <label for="id_project" class="block mb-2 text-sm font-medium text-form">Project Name</label>
-                <select id="id_project" name="id_project" class="bg-gray-50 border appearance-none border-gray-300 text-sm rounded-lg block w-full p-2.5 placeholder-gray-400 text-form <?php if (session('errors.id_project')) : ?>border-red-600<?php endif ?>">
-                    <option selected>Choose project id</option>
-                    <?php foreach ($projects as $project) : ?>
-                        <option value="<?= $project['id'] ?>" <?php if ($user['id_project'] == $project['id']) echo "selected" ?>><?= $project['name_project'] ?></option>
-                    <?php endforeach; ?>
-                </select>
-                <div class="absolute inset-y-0 right-0 top-7 flex items-center pr-3 pointer-events-none">
-                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </div>
-                <?php if (session('errors.id_project')) : ?>
-                    <div class="mt-1">
-                        <small class=" text-red-600 text-sm"><?= session('errors.id_project'); ?></small>
-                    </div>
-                <?php endif; ?>
+                <?php foreach ($projects as $project) : ?>
+                    <?php if ($user['id_project'] == $project['id']){ ?>
+                        <input type="text" placeholder="<?= $project['name_project'] ?>" class="bg-gray-50 border appearance-none border-gray-300 text-sm rounded-lg block w-full p-2.5 placeholder-gray-400 text-form" disabled>
+                    <?php } ?>
+                <?php endforeach; ?>
             </div>
         </div>
         <div class="flex justify-end grid-cols-2 gap-8 pt-12">

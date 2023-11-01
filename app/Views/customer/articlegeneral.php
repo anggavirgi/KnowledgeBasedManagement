@@ -3,72 +3,41 @@
 <?php echo $this->section('content'); ?>
 
 <div class="relative">
-    <button data-drawer-target="drawer-disabled-backdrop" data-drawer-show="drawer-disabled-backdrop" data-drawer-backdrop="false" aria-controls="drawer-disabled-backdrop" type="button" class="inline-flex items-center text-sm text-gray-500 rounded-r-lg sm:hidden p-1 mt-3 bg-main">
+    <button data-drawer-target="drawer-disabled-backdrop" data-drawer-show="drawer-disabled-backdrop" data-drawer-backdrop="false" aria-controls="drawer-disabled-backdrop" type="button" class="fixed transform -translate-y-1/2 inline-flex items-center text-sm text-gray-500 rounded-r-lg sm:hidden p-1 mt-8 bg-main">
         <span class="sr-only">Open sidebar</span>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-white">
             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
         </svg>
     </button>
-    <aside id="drawer-disabled-backdrop" class="absolute top-0 sm:hidden left-0 z-50 w-44 h-screen transition-transform -translate-x-full sm:translate-x-0 " aria-label="Sidebar">
-        <div id="drawer-disabled-backdrop" class="h-full px-3 py-4 overflow-y-auto bg-gray-50 bg-main">
+    <aside id="drawer-disabled-backdrop" class="fixed transform top-20 sm:hidden left-0 w-44 h-[30rem] transition-transform -translate-x-full sm:translate-x-0 " aria-label="Sidebar">
+        <div id="drawer-disabled-backdrop" class="h-[30rem] px-3 py-4 overflow-y-auto bg-gray-50 bg-main">
             <ul class="space-y-2 font-bold text-lg">
-                <li>
-                    <button type="button" class="flex items-center w-full p-2 text-base text-white text-sm transition duration-75 rounded-lg hover:text-sky-800" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
-                        <span class="flex-1  text-left whitespace-nowrap">E-commerce</span>
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
-                        </svg>
-                    </button>
-                    <ul id="dropdown-example" class="hidden py-2 space-y-2">
-                        <li>
-                            <a href="#" class="flex items-center w-full p-2 text-white text-sm transition duration-75 rounded-lg pl-4 hover:text-sky-800">Products</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center w-full p-2 text-white text-sm transition duration-75 rounded-lg pl-4 hover:text-sky-800">Billing</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center w-full p-2 text-white text-sm transition duration-75 rounded-lg pl-4 hover:text-sky-800">Invoice</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <button type="button" class="flex items-center w-full p-2 text-white text-sm transition duration-75 rounded-lg hover:text-sky-800" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
-                        <span class="flex-1  text-left whitespace-nowrap">E-commerce</span>
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
-                        </svg>
-                    </button>
-                    <ul id="dropdown-example" class="hidden py-2 space-y-2">
-                        <li>
-                            <a href="#" class="flex items-center w-full p-2 text-white text-sm transition duration-75 rounded-lg pl-4 hover:text-sky-800">Products</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center w-full p-2 text-white text-sm transition duration-75 rounded-lg pl-4 hover:text-sky-800">Billing</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center w-full p-2 text-white text-sm transition duration-75 rounded-lg pl-4 hover:text-sky-800">Invoice</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <button type="button" class="flex items-center w-full p-2 text-white text-sm transition duration-75 rounded-lg hover:text-sky-800" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
-                        <span class="flex-1  text-left whitespace-nowrap">E-commerce</span>
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
-                        </svg>
-                    </button>
-                    <ul id="dropdown-example" class="hidden py-2 space-y-2">
-                        <li>
-                            <a href="#" class="flex items-center w-full p-2 text-white text-sm transition duration-75 rounded-lg pl-4 hover:text-sky-800">Products</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center w-full p-2 text-white text-sm transition duration-75 rounded-lg pl-4 hover:text-sky-800">Billing</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center w-full p-2 text-white text-sm transition duration-75 rounded-lg pl-4 hover:text-sky-800">Invoice</a>
-                        </li>
-                    </ul>
-                </li>
+                <?php
+                $i = 1;
+                foreach ($categories as $category) : ?>
+                    <li>
+                        <button type="button" class="flex items-center w-full p-2 text-white text-sm transition duration-75 rounded-lg hover:text-sky-800 dropdown-button" aria-controls="dropdown-example<?= $i; ?>" data-collapse-toggle="dropdown-example<?= $i; ?>">
+                            <span class="flex-1  text-left whitespace-nowrap"><?= $category['name_category']; ?></span>
+                            <svg class="w-3 h-3 dropdown-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                            </svg>
+                        </button>
+                        <ul id="dropdown-example<?= $i; ?>" class="hidden py-2 space-y-2">
+                            <?php foreach ($subcategories as $subcategory) :
+                                if ($subcategory['id_category'] == $category['id']) :
+                            ?>
+                                    <li>
+                                        <a href="javascript:void(0);" class="subcategory-link flex items-center w-full p-2 text-white text-sm transition duration-75 rounded-lg pl-4 hover:text-sky-800" data-category="<?= $category['name_category']; ?>" data-subcategory="<?= $subcategory['name_subcategory']; ?>"><?= $subcategory['name_subcategory']; ?></a>
+                                    </li>
+                            <?php
+                                endif;
+                            endforeach; ?>
+                        </ul>
+                    </li>
+
+                <?php $i++;
+                endforeach;
+                ?>
 
             </ul>
         </div>

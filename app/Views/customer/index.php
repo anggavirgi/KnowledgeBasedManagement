@@ -2,7 +2,6 @@
 
 <?php echo $this->section('content'); ?>
 <section id="main">
-
     <div id="faq" class="flex-col justify-center items-center min-h-[40vh] lg:min-h-[80vh] sm:min-h-[70vh] md:min-h-[80vh] 2xl:min-h-[71vh]">
         <img src="<?php echo base_url(); ?>src/images/waves-hero.png" class="w-full h-[38rem] md:h-[49rem] sm:h-[40rem] lg:h-[49rem] 2xl:h-[62rem] object-cover absolute z-[-1] top-0 2xl:-top-20" alt="" data-aos="fade-down" data-aos-duration="500" data-aos-once="true" data-aos-delay="500">
         <div class="mt-12">
@@ -14,7 +13,7 @@
                 </div>
             </h1>
             <div class="flex justify-center" id="search" data-aos="fade-down" data-aos-duration="500" data-aos-once="true" data-aos-delay="1000">
-                <form action="<?php echo base_url() ?>kb/search" method="post" class="relative">
+                <form action="<?php echo base_url() ?>kb/search" method="get" class="relative">
                     <input type="text" name="search" id="search" placeholder="Search Your question, answer, etc" class="sm:w-[30rem] w-[20rem]  mb-2 px-7 mt-[30px] py-3 border border-gray-400 outline-main rounded-md">
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search absolute sm:left-[450px] left-[295px] top-[47px] cursor-pointer text-[#919191]" viewBox="0 0 16 16">
@@ -62,22 +61,29 @@
         </div>
         <div class="flex justify-center">
             <div class="lg:w-5/12 md:flex hidden" data-aos="fade-right" data-aos-duration="500" data-aos-once="true" data-aos-delay="750">
-                <img src="<?php echo base_url(); ?>src/images/Question.png" alt="Question.png" class="mx-auto w-[26rem] object-cover collapsible">
+                <img src="<?php echo base_url(); ?>src/images/Question.png" alt="Question.png" class="mx-auto w-[30rem] object-cover">
             </div>
             <div id="question" class="mt-7 w-full lg:w-6/12 md:w-10/12 self-center" data-aos="fade-left" data-aos-duration="500" data-aos-once="true" data-aos-delay="1000">
                 <?php $count = 1; ?>
                 <?php foreach ($contents as $content) { ?>
-                    <a href="<?= base_url('kb/generalarticle/generalarticledetail?category=' . $content['name_category'] . '&subcategory=' . $content['name_subcategory'] . '&article=' . $content['slug']) ?>">
-                        <div class="py-4 px-5 hover:bg-main hover:text-white text-md rounded font-semibold">
-                            <?php echo $content['title'] ?>
+                    <div class="border-solid border-2 border-[#919191] rounded-md p-4 ps-10 mb-3">
+                        <div class="flex justify-between">
+                            <p class="text-md" id="title<?= $count; ?>"><?= $content['title']; ?></p>
+                            <p class="text-xl cursor-pointer collapsible" data-target="collapse<?= $count; ?>" data-title="title<?= $count; ?>">
+                                <i class="bi bi-chevron-down icon"></i>
+                            </p>
                         </div>
-                    </a>
-                    <hr>
+                        <div class="max-w-sm md:max-w-xl mt-4 hidden" id="collapse<?= $count; ?>">
+                            <p class="text-[14px] line-clamp-1"><?= strip_tags($content['content']); ?></p>
+                            <a href="<?= base_url('kb/generalarticle/generalarticledetail?category=' . $content['name_category'] . '&subcategory=' . $content['name_subcategory'] . '&article=' . $content['slug']) ?>" class="article-link text-[#18A8D8]"> more... </a>
+                        </div>
+                    </div>
                     <?php
-                    if ($count == 6) {
+                    if ($count == 5) {
                         break;
                     }
                     ?>
+                    <?php $count++ ?>
                 <?php } ?>
             </div>
         </div>
@@ -140,46 +146,58 @@
                 <?php if (logged_in()) : ?>
                     <a data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="p-4 bg-[#FFC700] hover:bg-yellow-500 rounded-[15px] cursor-pointer"><i class="bi bi-envelope-fill "></i> Report a Problem</a>
 
-                    <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 bottom-0 z-50 p-4 overflow-x-hidden overflow-y-auto hidden">
-                        <!-- Modal content -->
-                        <div class="absolute inset-0 bg-white flex items-center justify-center w-full md:w-[55%] lg:w-[40%] h-full md:h-[97%] md:rounded-md my-auto mx-auto">
-                            <button type="button" class="absolute top-3 flex justify-center right-2.5 text-gray-400 bg-transparent hover:bg-slate-200  rounded-lg text-sm w-8 h-8 ml-auto items-center hover:text-form" data-modal-hide="authentication-modal">
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                </svg>
-                                <span class="sr-only">Close modal</span>
-                            </button>
-                            <div class="px-6 lg:px-8 w-[95%]">
-                                <form class="form space-y-2" action="<?php echo base_url(); ?>" method="post" enctype="multipart/form-data">
-                                    <?php echo csrf_field(); ?>
-                                    <input type="hidden" name="id_user" value="<?= user()->id; ?>">
-                                    <input type="hidden" name="id_project" value="<?= user()->id_project; ?>">
-                                    <script>
-                                        var fileMessage = <?php echo json_encode($file_message); ?>;
-                                    </script>
-                                    <div>
+                <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 bottom-0 z-50 p-4 overflow-x-hidden overflow-y-auto hidden">
+                    <!-- Modal content -->
+                    <div class="absolute inset-0 bg-white flex items-center justify-center w-full md:w-[55%] lg:w-[40%] h-full md:h-[97%] md:rounded-md my-auto mx-auto">
+                        <button type="button" class="absolute top-3 flex justify-center right-2.5 text-gray-400 bg-transparent hover:bg-slate-200  rounded-lg text-sm w-8 h-8 ml-auto items-center hover:text-form" data-modal-hide="authentication-modal">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                        <div class="px-6 lg:px-8 w-[95%]">
+                            <form class="form space-y-2" action="<?php echo base_url(); ?>" method="post" enctype="multipart/form-data">
+                                <?php echo csrf_field(); ?>
+                                <input type="hidden" name="id_user" value="<?= user()->id; ?>">
+                                <input type="hidden" name="id_project" value="<?= user()->id_project; ?>">
+                                <script>
+                                    var fileMessage = <?php echo json_encode(session('errors')); ?>;
+                                </script>
+                                <div class="flex gap-2">
+                                    <div class="w-full">
                                         <label for="username" class="block mb-2 text-xs font-medium text-form">username</label>
                                         <input type="username" name="username" id="username" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="Username" value="<?= user()->username; ?>" required readonly>
                                     </div>
-                                    <div>
-                                        <label for="subject" class="block mb-2 text-xs font-medium text-form">subject <span class="text-red-600">*</span></label>
-                                        <input type="subject" name="subject" id="subject" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="Subject" value="<?= old('subject'); ?>" required>
-                                    </div>
-                                    <div>
+                                    <div class="w-full">
                                         <label for="email" class="block mb-2 text-xs font-medium text-form">Your email</label>
                                         <input type="email" name="email" id="email" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" value="<?= user()->email; ?>" required readonly>
                                     </div>
-                                    <div class="flex gap-2">
-                                        <?php if (user()->id_project !== 0) : ?>
-                                            <div class="w-full">
-                                                <label for="user" class="block mb-2 text-xs font-medium text-form">User member</label>
-                                                <input type="user" name="user" id="user" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" value="Old user" readonly>
-                                            </div>
-                                        <?php endif; ?>
-                                        <div class="w-full">
-                                            <label for="project" class="block mb-2 text-xs font-medium text-form">Project</label>
-                                            <input type="id_project" name="id_project" id="id_project" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" value="<?= $project['name_project']; ?>" required readonly>
-                                        </div>
+                                </div>
+                                <div>
+                                    <label for="subject" class="block mb-2 text-xs font-medium text-form">subject <span class="text-red-600">*</span></label>
+                                    <input type="subject" name="subject" id="subject" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="Subject" value="<?= old('subject'); ?>" required>
+                                </div>
+
+                                <div>
+                                    <label for="method" class="block mb-2 text-xs font-medium text-form">Method</label>
+                                    <select id="method" name="method" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main <?php if (session('errors.method')) : ?>border-red-600<?php endif ?>">
+                                        <option value="">Choose a method</option>
+                                        <option value="request" <?php if (old('method') == "request") {
+                                                                    echo "selected";
+                                                                } ?>>Request</option>
+                                        <option value="complain" <?php if (old('method') == "complain") {
+                                                                        echo "selected";
+                                                                    } ?>>Complain</option>
+                                    </select>
+                                </div>
+                                <div class="flex gap-2">
+                                    <div class="w-full">
+                                        <label for="user" class="block mb-2 text-xs font-medium text-form">User member</label>
+                                        <input type="user" name="user" id="user" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" value="<?php echo user()->id_project != 0 ? "Old user" : "New user" ?>" readonly>
+                                    </div>
+                                    <div class="w-full">
+                                        <label for="project" class="block mb-2 text-xs font-medium text-form">Project</label>
+                                        <input type="text" name="name_project" id="name_project" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" value="<?= $project['name_project']; ?>" required readonly>
                                     </div>
                                     <div>
                                         <label for="message" class="block mb-2 text-xs font-medium text-form">Description</label>

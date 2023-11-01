@@ -2,13 +2,11 @@
 
 namespace App\Controllers;
 
-use Google_Client;
 use App\Models\Admin\ProjectModel;
 
 class Login extends BaseController
 {
 
-  protected $googleClient;
   protected $projectModel;
 
   public function __construct()
