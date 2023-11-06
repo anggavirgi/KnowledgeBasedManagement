@@ -285,16 +285,14 @@ $(document).ready(function () {
     onShow: () => {},
     onToggle: () => {},
   };
-
   // Create a new Modal instance
-  const modal = new Modal($modalElement, modalOptions);
-  if (fileMessage !== null) {
-    modal.show();
-    console.log("ada error");
-  }
-  $('[data-modal-hide="authentication-modal"]').click(function () {
-    modal.hide();
-  });
+  // const modal = new Modal($modalElement, modalOptions);
+  // if (fileMessage !== null) {
+  //   modal.show();
+  // }
+  // $('[data-modal-hide="authentication-modal"]').click(function () {
+  //   modal.hide();
+  // });
   // ===========================================================================
 
   // LAYOUT ADMIN

@@ -23,14 +23,14 @@
             <div class="h-[17rem] overflow-y-auto mt-3">
                 <div class="px-4 flex flex-wrap text-sm">
                     <?php if ($complain['level'] === "user") : ?>
-                        <div class="w-full flex justify-end gap-1">
+                        <div class="w-full flex justify-end gap-1 -z-10">
                             <div class="text-[0.6rem] text-form flex items-end pb-2"><?= date('j M, g.i a', strtotime($complain['created_at'])); ?></div>
                             <div class="bg-indigo-100 text-gray-800 p-2 rounded-lg mb-2 relative w-fit">
                                 <div class="py-0 px-2"><?= $complain['description'] ?></div>
                                 <div class="absolute right-0 top-3 transform translate-x-1/2 rotate-45 w-2 h-2 bg-indigo-100"></div>
                             </div>
                         </div>
-                        <div class="w-full flex justify-end gap-1">
+                        <div class="w-full flex justify-end gap-1 -z-10">
                             <div class="text-[0.6rem] text-form flex items-end pb-2"><?= date('j M, g.i a', strtotime($complain['created_at'])); ?></div>
                             <div class="bg-indigo-100 text-gray-800 p-2 rounded-lg mb-2 relative w-fit">
                             <a href="<?php echo base_url(); ?>/src/images/prove/<?= $complain['file']; ?>" download="<?= $complain['file'] ?>">
