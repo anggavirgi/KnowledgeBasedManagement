@@ -33,11 +33,11 @@
                         <div class="w-full flex justify-end gap-1 -z-10">
                             <div class="text-[0.6rem] text-form flex items-end pb-2"><?= date('j M, g.i a', strtotime($complain['created_at'])); ?></div>
                             <div class="bg-indigo-100 text-gray-800 p-2 rounded-lg mb-2 relative w-fit">
-                            <a href="<?php echo base_url(); ?>/src/images/prove/<?= $complain['file']; ?>" download="<?= $complain['file'] ?>">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-                                </svg>
-                            </a>
+                                <a href="<?php echo base_url(); ?>/src/images/prove/<?= $complain['file']; ?>" download="<?= $complain['file'] ?>">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                    </svg>
+                                </a>
                                 <div class="absolute right-0 top-3 transform translate-x-1/2 rotate-45 w-2 h-2 bg-indigo-100"></div>
                             </div>
                         </div>
@@ -72,17 +72,17 @@
                 </div>
             </div>
 
-
-            <form action="<?php echo base_url(); ?>kb/complain/sendReply" method="post">
-                <input type="hidden" id="id_complain" name="id_complain" value="<?= $complain['id'] ?>">
-                <input type="hidden" id="id_user" name="id_user" value="<?= user_id(); ?>">
-                <input type="hidden" id="slug" name="slug" value="<?= $slug; ?>">
-                <textarea id="message" name="message" rows="4" class="block p-2.5 w-full my-3 text-gray-800 bg-gray-50 rounded-lg border border-gray-300 focus:outline-none focus:ring-main focus:border-main " placeholder="Leave a comment..."></textarea>
-                <div class="text-right">
-                    <button type="submit" class="text-white bg-main hover:bg-main focus:ring-3 focus:outline-none font-medium rounded-lg sm:w-auto px-6 py-2.5 text-center">Submit</button>
-                </div>
-            </form>
-
+            <?php if ($complain['status'] !== "solved") : ?>
+                <form action="<?php echo base_url(); ?>kb/complain/sendReply" method="post">
+                    <input type="hidden" id="id_complain" name="id_complain" value="<?= $complain['id'] ?>">
+                    <input type="hidden" id="id_user" name="id_user" value="<?= user_id(); ?>">
+                    <input type="hidden" id="slug" name="slug" value="<?= $slug; ?>">
+                    <textarea id="message" name="message" rows="4" class="block p-2.5 w-full my-3 text-gray-800 bg-gray-50 rounded-lg border border-gray-300 focus:outline-none focus:ring-main focus:border-main " placeholder="Leave a comment..."></textarea>
+                    <div class="text-right">
+                        <button type="submit" class="text-white bg-main hover:bg-main focus:ring-3 focus:outline-none font-medium rounded-lg sm:w-auto px-6 py-2.5 text-center">Submit</button>
+                    </div>
+                </form>
+            <?php endif; ?>
         </div>
     </div>
 </section>

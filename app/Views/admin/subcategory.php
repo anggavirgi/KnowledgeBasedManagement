@@ -72,7 +72,9 @@
   <?php else : ?>
     <div class="flash-error" data-flashmessage="<?php echo session('error') ?>"></div>
   <?php endif; ?>
-
+  <?php if (session()->has('errorData')) : ?>
+    <p class="p-3 rounded-[5px] bg-[#F8D7DA] text-[#721C24]"><?php echo session('errorData'); ?></p>
+  <?php endif ?>
   <table class="w-full text-center" id="myTable">
     <thead class="border-b">
       <tr>

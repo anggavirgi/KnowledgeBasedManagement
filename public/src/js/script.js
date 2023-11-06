@@ -286,13 +286,24 @@ $(document).ready(function () {
     onToggle: () => {},
   };
   // Create a new Modal instance
-  // const modal = new Modal($modalElement, modalOptions);
-  // if (fileMessage !== null) {
-  //   modal.show();
-  // }
-  // $('[data-modal-hide="authentication-modal"]').click(function () {
-  //   modal.hide();
-  // });
+  const formModal = $("#authentication-modal").attr("data-modal");
+
+  $(".tab-pane").on("click", function () {
+    const target = $(this).attr("data-target");
+    const method = $(target).attr("data-method");
+    $("#method").val(method);
+  });
+
+  // Create a new Modal instance
+  if (formModal) {
+    const modal = new Modal($modalElement, modalOptions);
+    if (fileMessage !== null) {
+      modal.show();
+    }
+    $('[data-modal-hide="authentication-modal"]').click(function () {
+      modal.hide();
+    });
+  }
   // ===========================================================================
 
   // LAYOUT ADMIN
@@ -660,6 +671,7 @@ $(document).ready(function () {
     var pages = lastPart.split("?")[0];
     fetchData(selectedValue, offset, pages);
   });
+
   function fetchData(Data, offset, pages) {
     if (pages == "subcategory") {
       const url = new URL(window.location.href);
