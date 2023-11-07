@@ -230,10 +230,9 @@ $(document).ready(function () {
         url: "/kb/generalarticle/generalarticledetail/updateReaction",
         data: data,
         success: function (response) {
-          window.location.reload();
         },
         error: function (error) {
-          console.error("Error:", error);
+          window.location.reload();
         },
       });
     } else if (clickType === "dislike" && !hasDisliked) {
@@ -245,10 +244,9 @@ $(document).ready(function () {
         url: "/kb/generalarticle/generalarticledetail/updateReaction",
         data: data,
         success: function (response) {
-          window.location.reload();
         },
         error: function (error) {
-          console.error("Error:", error);
+          window.location.reload();
         },
       });
     }
@@ -276,23 +274,28 @@ $(document).ready(function () {
 
   // ===================== Open Close Modal Form Complain ======================
   // Select the modal element by its ID or other means
-  const $modalElement = document.querySelector("#authentication-modal");
-  const action = $(".form").attr("action");
+  const $modalElement = document.querySelector('#authentication-modal');
+  const action = $('.form').attr('action');
   // Define the options for the modal
   const modalOptions = {
-    placement: "bottom-right",
-    onHide: () => {},
-    onShow: () => {},
-    onToggle: () => {},
+      placement: 'bottom-right',
+      onHide: () => {
+      },
+      onShow: () => {
+      },
+      onToggle: () => {
+      }
   };
   // Create a new Modal instance
-  // const modal = new Modal($modalElement, modalOptions);
-  // if (fileMessage !== null) {
-  //   modal.show();
-  // }
-  // $('[data-modal-hide="authentication-modal"]').click(function () {
-  //   modal.hide();
-  // });
+  if (window.location.href === action) {
+    const modal = new Modal($modalElement, modalOptions);
+    if (fileMessage !== null) {
+      modal.show();
+    } 
+    $('[data-modal-hide="authentication-modal"]').click(function() {
+      modal.hide();
+    });
+  }
   // ===========================================================================
 
   // LAYOUT ADMIN
@@ -542,7 +545,7 @@ $(document).ready(function () {
         url: "/kb/administrator/article/updateVisibility",
         data: data,
         success: function (response) {
-          console.log(response);
+          console.log("success");
         },
         error: function (jqXHR, textStatus, errorThrown) {
           console.error("AJAX request error:", textStatus, errorThrown);
@@ -685,8 +688,6 @@ $(document).ready(function () {
   // =============== Select Category & Subcategory Condition Article ================
   var categorySelect = $("#categorySelect");
   var subcategorySelect = $("#subcategorySelect");
-  console.log(categorySelect.val());
-  console.log(subcategorySelect.val());
   if (categorySelect.val() === null) {
     subcategorySelect.prop("disabled", true);
   } else if (categorySelect.val() !== "") {

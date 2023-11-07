@@ -45,12 +45,14 @@ $routes->group('kb', static function ($routes) {
     $routes->get('complain', 'Home::complain');
     $routes->post('complain', 'Home::create');
     $routes->get('history', 'Home::history');
+    $routes->post('history', 'Home::create');
     $routes->get('personalarticle', 'Home::personalarticle');
     $routes->post('personalarticle', 'Home::create');
     $routes->get('personalarticle/personalarticledetail', 'Home::personalarticledetail');
     $routes->get('complain/reply', 'Home::reply');
     $routes->post('complain/sendReply', 'Home::sendReply');
     $routes->get('allcomplain', 'Home::allcomplain');
+    $routes->post('complaingeneral', 'Home::create');
     $routes->get('search', 'Home::searchresult');
 });
 

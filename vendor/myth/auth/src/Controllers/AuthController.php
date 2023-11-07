@@ -109,8 +109,13 @@ class AuthController extends Controller
             }
 
             $redirectURL = session('redirect_url') ?? site_url('/kb');
+            $redirectURLAdm = site_url('/kb/administrator/dashboard');
             unset($_SESSION['redirect_url']);
-            return redirect()->to($redirectURL)->withCookies()->with('message', lang('Auth.loginSuccess'));
+            if (user()->level === "admin") {
+                return redirect()->to($redirectURLAdm)->withCookies()->with('message', lang('Auth.loginSuccess'));
+            } else {
+                return redirect()->to($redirectURL)->withCookies()->with('message', lang('Auth.loginSuccess'));
+            }
         } else {
             $credential = $this->request->getVar('credential');
             $userprofiles = $this->googleClient->verifyIdToken($credential);
@@ -124,13 +129,18 @@ class AuthController extends Controller
                 $remember = (bool) $this->request->getPost('remember');
                 $type = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
                 $redirectURL = session('redirect_url') ?? site_url('/kb');
+                $redirectURLAdm = site_url('/kb/administrator/dashboard');
                 unset($_SESSION['redirect_url']);
 
                 // Try to log them in...
                 if (!$this->auth->attempt([$type => $login, 'password' => $password], $remember)) {
                     return redirect()->back()->withInput()->with('error', $this->auth->error() ?? lang('Auth.badAttempt'));
                 }
-                return redirect()->to($redirectURL)->withCookies()->with('message', lang('Auth.loginSuccess'));
+                if (user()->level === "admin") {
+                    return redirect()->to($redirectURLAdm)->withCookies()->with('message', lang('Auth.loginSuccess'));
+                } else {
+                    return redirect()->to($redirectURL)->withCookies()->with('message', lang('Auth.loginSuccess'));
+                }
             }
         }
     }
