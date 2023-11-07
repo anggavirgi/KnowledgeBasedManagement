@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 use App\Models\Admin\CategoryModel;
 use App\Models\Admin\SubCategoryModel;
 use App\Models\Admin\ComplainModel;
+use App\Models\Admin\ContentModel;
 use CodeIgniter\RESTful\ResourceController;
 use Exception;
 use CodeIgniter\Database\Exceptions\DatabaseException;
@@ -14,6 +15,7 @@ class Category extends ResourceController
   protected $categoryModel;
   protected $subCategoryModel;
   protected $complainModel;
+  protected $contentModel;
   protected $db;
 
 
@@ -22,6 +24,7 @@ class Category extends ResourceController
     $this->categoryModel = new CategoryModel();
     $this->subCategoryModel = new SubCategoryModel();
     $this->complainModel = new ComplainModel();
+    $this->contentModel = new ContentModel();
     $this->db = db_connect();
   }
 
@@ -148,35 +151,42 @@ class Category extends ResourceController
 
   public function delete($id = null)
   {
-    $dataCategory = $this->categoryModel->find($id);
-    $icon = $dataCategory['icon'];
 
-    try {
-      if (file_exists('src/images/icon/' . $icon)) {
-        unlink('src/images/icon/' . $icon);
-        if (!$this->categoryModel->delete($id)) {
-          return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
+    $contents = $this->contentModel->select("*")->where("id_category", $id)->findAll();
+
+    if ($contents) {
+      return redirect()->to('kb/administrator/category')->with('errorData', "Data category gagal dihapus! Category masih terikat dengan article");
+    } else {
+      $dataCategory = $this->categoryModel->find($id);
+      $icon = $dataCategory['icon'];
+
+      try {
+        if (file_exists('src/images/icon/' . $icon)) {
+          unlink('src/images/icon/' . $icon);
+          if (!$this->categoryModel->delete($id)) {
+            return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
+          } else {
+            $this->subCategoryModel->where("id_category", $id);
+            $this->subCategoryModel->delete();
+            return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
+          }
         } else {
-          $this->subCategoryModel->where("id_category", $id);
-          $this->subCategoryModel->delete();
-          return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
+          if (!$this->categoryModel->delete($id)) {
+            return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
+          } else {
+            $this->subCategoryModel->where("id_category", $id);
+            $this->subCategoryModel->delete();
+            return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
+          }
         }
-      } else {
-        if (!$this->categoryModel->delete($id)) {
-          return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
+      } catch (DatabaseException $e) {
+        if (strpos($e->getMessage(), 'Cannot delete or update a parent row') !== false) {
+          // Handle foreign key constraint violation error
+          return redirect()->to('kb/administrator/category')->with('error', "Cannot delete the category as it is referenced by other records.");
         } else {
-          $this->subCategoryModel->where("id_category", $id);
-          $this->subCategoryModel->delete();
-          return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
+          // Handle other database errors
+          return redirect()->to('kb/administrator/category')->with('error', "An error occurred: " . $e->getMessage());
         }
-      }
-    } catch (DatabaseException $e) {
-      if (strpos($e->getMessage(), 'Cannot delete or update a parent row') !== false) {
-        // Handle foreign key constraint violation error
-        return redirect()->to('kb/administrator/category')->with('error', "Cannot delete the category as it is referenced by other records.");
-      } else {
-        // Handle other database errors
-        return redirect()->to('kb/administrator/category')->with('error', "An error occurred: " . $e->getMessage());
       }
     }
   }
@@ -184,17 +194,22 @@ class Category extends ResourceController
   public function deleteBatch()
   {
     $id_categories = $this->request->getVar("ids");
-    for ($i = 0; $i < count($id_categories); $i++) {
-      $id = $id_categories[$i];
+    $contents = $this->contentModel->select("*")->whereIn("id_category", $id_categories)->findAll();
+    if ($contents) {
+      return redirect()->to('kb/administrator/category')->with('errorData', "Data category gagal dihapus! Category masih terikat dengan article");
+    } else {
+      for ($i = 0; $i < count($id_categories); $i++) {
+        $id = $id_categories[$i];
 
-      $dataCategory = $this->categoryModel->find($id);
-      unlink('src/images/icon/' . $dataCategory['icon']);
+        $dataCategory = $this->categoryModel->find($id);
+        unlink('src/images/icon/' . $dataCategory['icon']);
 
-      $this->categoryModel->delete($id);
-      $this->subCategoryModel->where('id_category', $id)->delete();
+        $this->categoryModel->delete($id);
+        $this->subCategoryModel->where('id_category', $id)->delete();
+      }
+
+      return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
     }
-
-    return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
   }
 
   public function subcategory($id)
@@ -322,21 +337,31 @@ class Category extends ResourceController
 
   public function deleteSubCategory($id = null)
   {
-    if (!$this->subCategoryModel->delete($id)) {
-      return redirect()->to('kb/administrator/category/subcategory')->with('error', "Data sub category gagal hapus");
+    $contents = $this->contentModel->select("*")->where("id_sub_category", $id)->findAll();
+    if ($contents) {
+      return redirect()->to('kb/administrator/category/subcategory')->with('errorData', "Data sub category gagal dihapus! Sub Category masih terikat dengan article");
     } else {
-      return redirect()->to('kb/administrator/category/subcategory')->with('success', "Data sub category berhasil dihapus");
+      if (!$this->subCategoryModel->delete($id)) {
+        return redirect()->to('kb/administrator/category/subcategory')->with('error', "Data sub category gagal hapus");
+      } else {
+        return redirect()->to('kb/administrator/category/subcategory')->with('success', "Data sub category berhasil dihapus");
+      }
     }
   }
 
   public function deleteBatchSubCategory()
   {
     $id_sub_categories = $this->request->getVar("ids");
-    for ($i = 0; $i < count($id_sub_categories); $i++) {
-      $id = $id_sub_categories[$i];
-      $this->subCategoryModel->delete($id);
-    }
+    $contents = $this->contentModel->select("*")->whereIn("id_sub_category", $id_sub_categories)->findAll();
+    if ($contents) {
+      return redirect()->to('kb/administrator/category/subcategory')->with('errorData', "Data sub category gagal dihapus! Sub Category masih terikat dengan article");
+    } else {
+      for ($i = 0; $i < count($id_sub_categories); $i++) {
+        $id = $id_sub_categories[$i];
+        $this->subCategoryModel->delete($id);
+      }
 
-    return redirect()->to('kb/administrator/category/subcategory')->with('success', "Data sub category berhasil dihapus");
+      return redirect()->to('kb/administrator/category/subcategory')->with('success', "Data sub category berhasil dihapus");
+    }
   }
 }

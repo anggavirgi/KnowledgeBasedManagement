@@ -16,7 +16,7 @@
                 </div>
 
 
-                <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 bottom-0 z-50 p-4 overflow-x-hidden overflow-y-auto hidden">
+                <div id="authentication-modal" data-modal="formModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 bottom-0 z-50 p-4 overflow-x-hidden overflow-y-auto hidden">
                     <!-- Modal content -->
                     <div class="absolute inset-0 bg-white flex items-center justify-center w-full md:w-[55%] lg:w-[40%] h-full md:h-[97%] md:rounded-md my-auto mx-auto">
                         <button type="button" class="absolute top-3 flex justify-center right-2.5 text-gray-400 bg-transparent hover:bg-slate-200  rounded-lg text-sm w-8 h-8 ml-auto items-center hover:text-form" data-modal-hide="authentication-modal">
@@ -26,7 +26,7 @@
                             <span class="sr-only">Close modal</span>
                         </button>
                         <div class="px-6 lg:px-8 w-[95%]">
-                            <form class="form space-y-2" action="<?php echo base_url(); ?>" method="post" enctype="multipart/form-data">
+                            <form class="form space-y-2" action="<?php echo base_url(); ?>kb/complain" method="post" enctype="multipart/form-data">
                                 <?php echo csrf_field(); ?>
                                 <input type="hidden" name="id_user" value="<?= user()->id; ?>">
                                 <input type="hidden" name="id_project" value="<?= user()->id_project; ?>">
@@ -66,8 +66,8 @@
                                         <input type="user" name="user" id="user" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" value="<?php echo user()->id_project != 0 ? "Old user" : "New user" ?>" readonly>
                                     </div>
                                     <div class="w-full">
-                                        <label for="project" class="block mb-2 text-xs font-medium text-form">Project</label>
-                                        <input type="id_project" name="id_project" id="id_project" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" value="<?= $project['name_project']; ?>" required readonly>
+                                        <label for="name_project" class="block mb-2 text-xs font-medium text-form">Project</label>
+                                        <input type="text" name="name_project" id="name_project" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" value="<?= $project['name_project']; ?>" required readonly>
                                     </div>
                                 </div>
                                 <div>
