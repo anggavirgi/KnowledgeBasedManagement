@@ -92,6 +92,38 @@ class Article extends ResourceController
     return view('admin/addarticle', $data);
   }
 
+  public function uploadImage()
+  {
+    $validate = $this->validate([
+      'upload' => [
+        'uploaded[upload]',
+        'mime_in[upload,image/jpg,image/png,image/png]',
+        'max_size[upload,1024]',
+      ],
+    ]);
+    if ($validate) {
+      $file =  $this->request->getFile('upload');
+      $fileName = $file->getRandomName();
+      $writePath = FCPATH . 'src/images/articleThreads';
+      $file->move($writePath, $fileName);
+      $filePath = 'src/images/articleThreads/' . $fileName;
+      $fileUrl = base_url($filePath);
+      $data = [
+        "uploaded" => true,
+        "url" =>  $fileUrl,
+      ];
+    } else {
+      $data = [
+        "uploaded" => false,
+        "error" => [
+          "messages" => $file
+        ],
+      ];
+    }
+
+    return $this->response->setJSON($data);
+  }
+
   public function create()
   {
     $rules = [

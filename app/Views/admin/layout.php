@@ -127,7 +127,7 @@
     ClassicEditor
       .create(document.querySelector("#editor"), {
         ckfinder: {
-          uploadUrl: 'https://ckeditor.com/apps/ckfinder/3.5.0/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
+          uploadUrl: "<?= $uploadurl ?>"
         }
       })
       .then(editor => {})

@@ -40,6 +40,7 @@ class Home extends BaseController
             ->join('categories b', 'a.id_category = b.id')
             ->join('sub_category c', 'a.id_sub_category = c.id')
             ->where('a.visibility', 'open')
+            ->orderBy('a.content_views', 'DESC')
             ->get()
             ->getResultArray();
         if (logged_in()) {
@@ -222,6 +223,7 @@ class Home extends BaseController
             ->where('complains.id_user', user()->id)
             ->where('complains.method', 'request')
             ->whereNotIn('complains.status', ['solved'])
+            ->orderBy('complains.id', 'DESC')
             ->get()
             ->getResultArray();
 

@@ -14,9 +14,20 @@
 
             <div class="flex mt-6 gap-3">
                 <h2 class="font-bold text-xl"><?= $complain["subject"] ?></h2>
-                <div class="rounded-[15px] bg-progress-status text-progress-status-text py-1 px-3 text-xs">
-                    <?= $complain["status"] ?>
-                </div>
+                <?php if ($complain["status"] === 'pending') : ?>
+                    <div class="rounded-[15px] bg-pending-status text-pending-status-text py-1 px-3 text-xs">
+                        <?= $complain["status"] ?>
+                    </div>
+                <?php elseif ($complain["status"] === 'progress') : ?>
+                    <div class="rounded-[15px] bg-progress-status text-progress-status-text py-1 px-3 text-xs">
+                        <?= $complain["status"] ?>
+                    </div>
+                <?php else : ?>
+                    <div class="rounded-[15px] bg-solved-status text-solved-status-text py-1 px-3 text-xs">
+                        <?= $complain["status"] ?>
+                    </div>
+                <?php endif; ?>
+
             </div>
             <div class="date text-form font-normal"><?= date("D d M Y, H:i", strtotime($complain['created_at'])); ?></div>
 
@@ -71,16 +82,17 @@
                     <?php endforeach; ?>
                 </div>
             </div>
-
-            <?php if ($complain['status'] !== "solved") : ?>
+            <?php if ($complain['id_user'] === user_id()) : ?>
                 <form action="<?php echo base_url(); ?>kb/complain/sendReply" method="post">
                     <input type="hidden" id="id_complain" name="id_complain" value="<?= $complain['id'] ?>">
                     <input type="hidden" id="id_user" name="id_user" value="<?= user_id(); ?>">
                     <input type="hidden" id="slug" name="slug" value="<?= $slug; ?>">
-                    <textarea id="message" name="message" rows="4" class="block p-2.5 w-full my-3 text-gray-800 bg-gray-50 rounded-lg border border-gray-300 focus:outline-none focus:ring-main focus:border-main " placeholder="Leave a comment..."></textarea>
-                    <div class="text-right">
-                        <button type="submit" class="text-white bg-main hover:bg-main focus:ring-3 focus:outline-none font-medium rounded-lg sm:w-auto px-6 py-2.5 text-center">Submit</button>
-                    </div>
+                    <textarea id="message" name="message" rows="4" class="block p-2.5 w-full my-3 text-gray-800 bg-gray-50 rounded-lg border border-gray-300 focus:outline-none focus:ring-main focus:border-main " placeholder="Leave a comment..." <?= ($complain['status'] !== 'solved') ? 'enabled' : 'disabled' ?? 'disabled' ?>></textarea>
+                    <?php if ($complain['status'] !== 'solved') : ?>
+                        <div class="text-right">
+                            <button type="submit" class="text-white bg-main hover:bg-main focus:ring-3 focus:outline-none font-medium rounded-lg sm:w-auto px-6 py-2.5 text-center">Submit</button>
+                        </div>
+                    <?php endif; ?>
                 </form>
             <?php endif; ?>
         </div>

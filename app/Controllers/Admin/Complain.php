@@ -39,6 +39,9 @@ class Complain extends BaseController
       list($start_date, $end_date) = explode("-", $dates);
       $start_date = date('Y-m-d', strtotime($start_date));
       $end_date = date('Y-m-d', strtotime($end_date));
+      if ($end_date === $start_date) {
+        $end_date = date('Y-m-d', strtotime($end_date . ' +1 day'));
+      }
       $this->complainModel->where("created_at >=", $start_date)->where("created_at <=", $end_date);
     }
 
