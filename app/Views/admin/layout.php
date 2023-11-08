@@ -117,7 +117,6 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="<?php echo base_url(); ?>node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
   <script src="<?php echo base_url(); ?>node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
-  <script src="<?php echo base_url(); ?>node_modules/ckfinder/ckfinder.js"></script>
   <script src="<?php echo base_url(); ?>node_modules/timeago.js/dist/timeago.min.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>node_modules/daterangepicker/moment.min.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>node_modules/daterangepicker/daterangepicker.js"></script>
@@ -128,7 +127,7 @@
     ClassicEditor
       .create(document.querySelector("#editor"), {
         ckfinder: {
-          uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
+          uploadUrl: "<?= $uploadurl ?>"
         }
       })
       .then(editor => {})

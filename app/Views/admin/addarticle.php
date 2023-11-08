@@ -78,7 +78,7 @@
     </div>
 
     <div>
-      <textarea id="editor" name="description"></textarea>
+      <textarea id="editor" name="description"><?= old('description') ?></textarea>
     </div>
 
     <div class="mt-5">

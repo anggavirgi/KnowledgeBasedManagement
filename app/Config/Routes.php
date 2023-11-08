@@ -97,6 +97,7 @@ $routes->group('/kb/administrator', ['namespace' => 'App\Controllers\Admin'], st
     $routes->get('article', 'Article::index');
     $routes->get('article/new', 'Article::new');
     $routes->post('article', 'Article::create');
+    $routes->post('article/create', 'Article::uploadImage');
     $routes->get('article/edit/(:num)', 'Article::edit/$1');
     $routes->post('article/(:num)', 'Article::update/$1');
     $routes->get('article/delete/(:num)', 'Article::delete/$1');
