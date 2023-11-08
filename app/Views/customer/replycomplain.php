@@ -82,8 +82,6 @@
                     <?php endforeach; ?>
                 </div>
             </div>
-
-
             <?php if ($complain['id_user'] === user_id()) : ?>
                 <form action="<?php echo base_url(); ?>kb/complain/sendReply" method="post">
                     <input type="hidden" id="id_complain" name="id_complain" value="<?= $complain['id'] ?>">
@@ -97,7 +95,6 @@
                     <?php endif; ?>
                 </form>
             <?php endif; ?>
-
         </div>
     </div>
 </section>

@@ -5,17 +5,23 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Models\Admin\ProjectModel;
 use App\Models\Admin\ComplainModel;
+use App\Models\Admin\UserModel;
+use App\Models\Admin\ArticleModel;
 
 class Project extends BaseController
 {
 
     protected $projectModel;
     protected $complainModel;
+    protected $userModel;
+    protected $articleModel;
 
     public function __construct()
     {
         $this->projectModel = new ProjectModel();
         $this->complainModel = new ComplainModel();
+        $this->userModel = new UserModel();
+        $this->articleModel = new ArticleModel();
     }
 
     public function index()
@@ -116,21 +122,55 @@ class Project extends BaseController
 
     public function delete($id = null)
     {
-        if (!$this->projectModel->delete($id)) {
-            return redirect()->to('kb/administrator/project')->with('error', "Data project gagal hapus");
+
+        $complains = $this->complainModel->select("*")->where("id_project", $id)->findAll();
+        $users = $this->userModel->select("*")->where("id_project", $id)->findAll();
+        $articles = $this->articleModel->select("*")->where("id_project", $id)->findAll();
+
+        if ($complains) {
+            return redirect()->to('kb/administrator/project')->with('errorData', "Data project gagal hapus! Project masih terikat dengan complain user");
         } else {
-            return redirect()->to('kb/administrator/project')->with('success', "Data project berhasil dihapus");
+            if ($users) {
+                return redirect()->to('kb/administrator/project')->with('errorData', "Data project gagal hapus! Project masih terikat dengan user");
+            } else {
+                if ($articles) {
+                    return redirect()->to('kb/administrator/project')->with('errorData', "Data project gagal hapus! Project masih terikat dengan article");
+                } else {
+
+                    if (!$this->projectModel->delete($id)) {
+                        return redirect()->to('kb/administrator/project')->with('error', "Data project gagal hapus");
+                    } else {
+                        return redirect()->to('kb/administrator/project')->with('success', "Data project berhasil dihapus");
+                    }
+                }
+            }
         }
     }
 
     public function deleteBatchProject()
     {
         $id_project = $this->request->getVar("ids");
-        for ($i = 0; $i < count($id_project); $i++) {
-            $id = $id_project[$i];
-            $this->projectModel->delete($id);
-        }
+        $complains = $this->complainModel->select("*")->whereIn("id_project", $id_project)->findAll();
+        $users = $this->userModel->select("*")->whereIn("id_project", $id_project)->findAll();
+        $articles = $this->articleModel->select("*")->whereIn("id_project", $id_project)->findAll();
+        if ($complains) {
+            return redirect()->to('kb/administrator/project')->with('errorData', "Data project gagal hapus! Project masih terikat dengan complain user");
+        } else {
+            if ($users) {
+                return redirect()->to('kb/administrator/project')->with('errorData', "Data project gagal hapus! Project masih terikat dengan user");
+            } else {
+                if ($articles) {
+                    return redirect()->to('kb/administrator/project')->with('errorData', "Data project gagal hapus! Project masih terikat dengan article");
+                } else {
 
-        return redirect()->to('kb/administrator/project')->with('success', "Data project berhasil dihapus");
+                    for ($i = 0; $i < count($id_project); $i++) {
+                        $id = $id_project[$i];
+                        $this->projectModel->delete($id);
+                    }
+
+                    return redirect()->to('kb/administrator/project')->with('success', "Data project berhasil dihapus");
+                }
+            }
+        }
     }
 }

@@ -208,10 +208,20 @@ class Home extends BaseController
             $project = "";
         }
 
-        $complain = $this->db->table('complains')
+        $complains = $this->db->table('complains')
             ->select('complains.*,CASE WHEN complains.id_project = 0 THEN "virtusee" ELSE project.name_project END AS name_project', FALSE)
             ->join('project', 'complains.id_project = project.id', 'left')
             ->where('complains.id_user', user()->id)
+            ->where('complains.method', 'complain')
+            ->whereNotIn('complains.status', ['solved'])
+            ->get()
+            ->getResultArray();
+
+        $request = $this->db->table('complains')
+            ->select('complains.*,CASE WHEN complains.id_project = 0 THEN "virtusee" ELSE project.name_project END AS name_project', FALSE)
+            ->join('project', 'complains.id_project = project.id', 'left')
+            ->where('complains.id_user', user()->id)
+            ->where('complains.method', 'request')
             ->whereNotIn('complains.status', ['solved'])
             ->orderBy('complains.id', 'DESC')
             ->get()
@@ -220,7 +230,8 @@ class Home extends BaseController
         $data = [
             'title' => 'Virtusee | complain',
             'project' => $project,
-            'complain' => $complain
+            'request' => $request,
+            'complain' => $complains
         ];
         return view('customer/complain', $data);
     }

@@ -143,6 +143,22 @@ class Complain extends BaseController
     }
   }
 
+  public function deleteBatch()
+  {
+    $id_complain = $this->request->getVar("ids");
+    for ($i = 0; $i < count($id_complain); $i++) {
+      $id = $id_complain[$i];
+
+      $dataComplain = $this->complainModel->find($id);
+      unlink('src/images/prove/' . $dataComplain['file']);
+
+      $this->complainModel->delete($id);
+      $this->complainReplyModel->where('id_complain', $id)->delete();
+    }
+
+    return redirect()->to('kb/administrator/complain')->with('success', "Data complain berhasil dihapus");
+  }
+
   function exportDataToExcel()
   {
 

@@ -16,7 +16,7 @@
                 </div>
 
 
-                <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 bottom-0 z-50 p-4 overflow-x-hidden overflow-y-auto hidden">
+                <div id="authentication-modal" data-modal="formModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 bottom-0 z-50 p-4 overflow-x-hidden overflow-y-auto hidden">
                     <!-- Modal content -->
                     <div class="absolute inset-0 bg-white flex items-center justify-center w-full md:w-[55%] lg:w-[40%] h-full md:h-[97%] md:rounded-md my-auto mx-auto">
                         <button type="button" class="absolute top-3 flex justify-center right-2.5 text-gray-400 bg-transparent hover:bg-slate-200  rounded-lg text-sm w-8 h-8 ml-auto items-center hover:text-form" data-modal-hide="authentication-modal">
@@ -30,6 +30,7 @@
                                 <?php echo csrf_field(); ?>
                                 <input type="hidden" name="id_user" value="<?= user()->id; ?>">
                                 <input type="hidden" name="id_project" value="<?= user()->id_project; ?>">
+                                <!-- <input type="hidden" name="method" id="method" value="request"> -->
                                 <script>
                                     var fileMessage = <?php echo json_encode(session('errors')); ?>;
                                 </script>
@@ -47,8 +48,12 @@
                                     <label for="subject" class="block mb-2 text-xs font-medium text-form">subject <span class="text-red-600">*</span></label>
                                     <input type="subject" name="subject" id="subject" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="Subject" value="<?= old('subject'); ?>" required>
                                 </div>
-
                                 <div>
+                                    <label for="method" class="block mb-2 text-xs font-medium text-form">method</label>
+                                    <input type="text" name="method" id="method" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="Method" value="request" required readonly>
+                                </div>
+
+                                <!-- <div>
                                     <label for="method" class="block mb-2 text-xs font-medium text-form">Method</label>
                                     <select id="method" name="method" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main <?php if (session('errors.method')) : ?>border-red-600<?php endif ?>">
                                         <option value="">Choose a method</option>
@@ -59,14 +64,14 @@
                                                                         echo "selected";
                                                                     } ?>>Complain</option>
                                     </select>
-                                </div>
+                                </div> -->
                                 <div class="flex gap-2">
                                     <div class="w-full">
                                         <label for="user" class="block mb-2 text-xs font-medium text-form">User member</label>
                                         <input type="user" name="user" id="user" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" value="<?php echo user()->id_project != 0 ? "Old user" : "New user" ?>" readonly>
                                     </div>
                                     <div class="w-full">
-                                        <label for="project" class="block mb-2 text-xs font-medium text-form">Project</label>
+                                        <label for="name_project" class="block mb-2 text-xs font-medium text-form">Project</label>
                                         <input type="name_project" name="name_project" id="name_project" class=" border text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-500 placeholder-gray-400 text-form outline-main" placeholder="name@company.com" value="<?= $project['name_project']; ?>" required readonly>
                                     </div>
                                 </div>
@@ -90,7 +95,7 @@
                                         <?php if (session('errors.file')) : ?>
                                             <p class="text-red-500 absolute"><?= session('errors.file'); ?></p>
                                         <?php endif; ?>
-                                        <p class="text-red-500 lg:hidden">* SVG, PNG, JPG, or GIF (MAX. 800x400px)</p>
+                                        <!-- <p class="text-red-500 lg:hidden">* SVG, PNG, JPG, or GIF (MAX. 800x400px)</p> -->
                                     </div>
                                 </div>
 
@@ -108,21 +113,55 @@
                 <div class="flash-error" data-flashmessage="<?php echo session('error') ?>"></div>
             <?php endif; ?>
 
-            <?php foreach ($complain as $complain) : ?>
-                <a href="<?= base_url('kb/complain/reply?complainId=' . $complain['slug']) ?>">
-                    <div class="pb-3 flex flex-col mb-4 hover:shadow-md hover:shadow-gray-200 px-2">
-                        <div class="py-2 pb-2 font-semibold text-xl text-orange-600"><?php echo $complain['subject'] ?></div>
-                        <div class="flex gap-3 text-sm font-semibold">
-                            <span><?= date("F Y", strtotime($complain['created_at'])); ?></span>
-                            <span><?php echo $complain['name_project'] ?></span>
-                        </div>
-                        <hr class="mb-2 mt-3">
-                        <span class="text-ellipsis text-sm overflow-hidden text-justify whitespace-nowrap">
-                            <?php echo $complain['description'] ?>
-                        </span>
-                    </div>
-                </a>
-            <?php endforeach; ?>
+
+            <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab" data-tabs-toggle="#inbox-tab-content" role="tablist">
+                    <li class="mr-2" role="presentation">
+                        <button class="inline-block p-4 border-b-2 rounded-t-lg tab-pane" id="request-tab" data-tabs-target="#request" data-target="#method-request" type="button" role="tab" aria-controls="request" aria-selected="false">Request</button>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                        <button class="inline-block p-4 border-b-2 rounded-t-lg tab-pane hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="complain-tab" data-tabs-target="#complain" data-target="#method-complain" type="button" role="tab" aria-controls="complain" aria-selected="false">Complain</button>
+                    </li>
+                </ul>
+            </div>
+            <div id="inbox-tab-content">
+                <div class="hidden p-4" id="request" role="tabpanel" aria-labelledby="request-tab">
+                    <div id="method-request" data-method="request"></div>
+                    <?php foreach ($request as $request) : ?>
+                        <a href="<?= base_url('kb/complain/reply?complainId=' . $request['slug']) ?>">
+                            <div class="pb-3 flex flex-col mb-4 hover:shadow-md hover:shadow-gray-200 px-2">
+                                <div class="py-2 pb-2 font-semibold text-xl text-orange-600"><?php echo $request['subject'] ?></div>
+                                <div class="flex gap-3 text-sm font-semibold">
+                                    <span><?= date("F Y", strtotime($request['created_at'])); ?></span>
+                                    <span><?php echo $request['name_project'] ?></span>
+                                </div>
+                                <hr class="mb-2 mt-3">
+                                <span class="text-ellipsis text-sm overflow-hidden text-justify whitespace-nowrap">
+                                    <?php echo $request['description'] ?>
+                                </span>
+                            </div>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
+                <div class="hidden p-4" id="complain" role="tabpanel" aria-labelledby="complain-tab">
+                    <div id="method-complain" data-method="complain"></div>
+                    <?php foreach ($complain as $complain) : ?>
+                        <a href="<?= base_url('kb/complain/reply?complainId=' . $complain['slug']) ?>">
+                            <div class="pb-3 flex flex-col mb-4 hover:shadow-md hover:shadow-gray-200 px-2">
+                                <div class="py-2 pb-2 font-semibold text-xl text-orange-600"><?php echo $complain['subject'] ?></div>
+                                <div class="flex gap-3 text-sm font-semibold">
+                                    <span><?= date("F Y", strtotime($complain['created_at'])); ?></span>
+                                    <span><?php echo $complain['name_project'] ?></span>
+                                </div>
+                                <hr class="mb-2 mt-3">
+                                <span class="text-ellipsis text-sm overflow-hidden text-justify whitespace-nowrap">
+                                    <?php echo $complain['description'] ?>
+                                </span>
+                            </div>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
+            </div>
         </div>
     </div>
 </section>

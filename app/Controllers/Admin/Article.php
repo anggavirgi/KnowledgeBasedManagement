@@ -283,16 +283,24 @@ class Article extends ResourceController
 
   public function delete($id = null)
   {
-    $article = $this->articleModel->where('id_content', $id)->findAll();
-    $id_article = $article[0]['id'];
-
-    $this->articleModel->delete($id_article);
-
     if (!$this->contentModel->delete($id)) {
-      return redirect()->to('kb/administrator/category')->with('error', "Data category gagal hapus");
+      return redirect()->to('kb/administrator/article')->with('error', "Data article gagal hapus");
     } else {
-      return redirect()->to('kb/administrator/category')->with('success', "Data category berhasil dihapus");
+      $this->articleModel->where("id_content", $id)->delete();
+      return redirect()->to('kb/administrator/article')->with('success', "Data article berhasil dihapus");
     }
+  }
+
+  public function deleteBatchArticle()
+  {
+    $id_contents = $this->request->getVar("ids");
+    for ($i = 0; $i < count($id_contents); $i++) {
+      $id = $id_contents[$i];
+
+      $this->articleModel->where("id_content", $id)->delete();
+      $this->contentModel->delete($id);
+    }
+    return redirect()->to('kb/administrator/article')->with('success', "Data article berhasil dihapus");
   }
 
   public function detail($id = null)
