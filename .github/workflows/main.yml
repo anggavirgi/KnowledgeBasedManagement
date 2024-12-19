@@ -1,0 +1,49 @@
+name: Upgrade CKEditor5 Dependencies
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  upgrade-dependencies:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16' 
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Update CKEditor5 to 43.1.1 or higher
+        run: |
+          npm install @ckeditor/ckeditor5-build-decoupled-document@^43.1.1 @ckeditor/ckeditor5-build-classic@^43.1.1
+
+      - name: Check for outdated dependencies
+        run: npm outdated
+
+      - name: Fix vulnerabilities
+        run: npm audit fix --force  
+
+      - name: Verify dependencies
+        run: |
+          npm install
+          npm run test  
+
+      - name: Commit updated dependencies (if needed)
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add package.json package-lock.json
+          git commit -m "Upgrade CKEditor5 dependencies to version 43.1.1"
+          git push
